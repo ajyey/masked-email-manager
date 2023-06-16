@@ -1,10 +1,11 @@
 import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import makeManifest from './utils/plugins/make-manifest';
-import buildContentScript from './utils/plugins/build-content-script';
+
 import { outputFolderName } from './utils/constants';
- 
+import buildContentScript from './utils/plugins/build-content-script';
+import makeManifest from './utils/plugins/make-manifest';
+
 const root = resolve(__dirname, 'src');
 const pagesDir = resolve(root, 'pages');
 const assetsDir = resolve(root, 'assets');
@@ -16,8 +17,8 @@ export default defineConfig({
     alias: {
       '@src': root,
       '@assets': assetsDir,
-      '@pages': pagesDir,
-    },
+      '@pages': pagesDir
+    }
   },
   plugins: [react(), makeManifest(), buildContentScript()],
   publicDir,
@@ -32,11 +33,11 @@ export default defineConfig({
         background: resolve(pagesDir, 'background', 'index.ts'),
         popup: resolve(pagesDir, 'popup', 'index.html'),
         newtab: resolve(pagesDir, 'newtab', 'index.html'),
-        options: resolve(pagesDir, 'options', 'index.html'),
+        options: resolve(pagesDir, 'options', 'index.html')
       },
       output: {
-        entryFileNames: (chunk) => `src/pages/${chunk.name}/index.js`,
-      },
-    },
-  },
+        entryFileNames: (chunk) => `src/pages/${chunk.name}/index.js`
+      }
+    }
+  }
 });
