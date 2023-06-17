@@ -1,6 +1,6 @@
 {
   "name": "masked-email-manager",
-  "displayName": "Masked Email Manager",
+  "displayName": "Fastmail Masked Email Manager",
   "version": "0.0.1",
   "description": "A web extension to manage your fastmail masked emails",
   "license": "MIT",
