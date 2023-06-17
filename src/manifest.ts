@@ -15,10 +15,12 @@ const manifest: Manifest.WebExtensionManifest = {
   },
   action: {
     default_popup: 'src/pages/popup/index.html',
-    default_icon: 'icon-34.png'
+    default_icon: 'icon34.png'
   },
   icons: {
-    '128': 'icon-128.png'
+    '34': 'icon34.png',
+    '48': 'icon48.png',
+    '128': 'icon128.png'
   },
   permissions: ['activeTab'],
   content_scripts: [
@@ -31,7 +33,12 @@ const manifest: Manifest.WebExtensionManifest = {
   devtools_page: 'src/pages/devtools/index.html',
   web_accessible_resources: [
     {
-      resources: ['contentStyle.css', 'icon-128.png', 'icon-34.png'],
+      resources: [
+        'contentStyle.css',
+        'icon128.png',
+        'icon34.png',
+        'icon48.png'
+      ],
       matches: []
     }
   ]
