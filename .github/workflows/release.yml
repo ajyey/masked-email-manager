@@ -13,11 +13,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'npm'
+          cache: 'yarn'
       - name: Installing dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: Running linting and tests
-        run: npm run fix
+        run: yarn fix
   release:
     runs-on: ubuntu-latest
     permissions:
@@ -34,11 +34,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'npm'
+          cache: 'yarn'
       - name: Installing dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: Building extension
-        run: npm run build
+        run: yarn build
       - name: Releasing
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
