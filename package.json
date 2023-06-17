@@ -10,7 +10,8 @@
   },
   "type": "module",
   "scripts": {
-    "build": "vite build",
+  	"build": "run-s fix build:*",
+    "build:production": "vite build",
     "fix": "run-s fix:*",
     "fix:lint": "eslint src --ext .ts,.tsx --fix",
     "dev": "nodemon",
