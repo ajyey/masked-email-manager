@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2023-06-17)
+
+
+### Bug Fixes
+
+* make popup window larger ([8eb981b](https://github.com/ajyey/masked-email-manager/commit/8eb981bf2ce235b2bb30395244d3e1640482f53a))
+
 # 1.0.0-beta.1 (2023-06-17)
 
 
