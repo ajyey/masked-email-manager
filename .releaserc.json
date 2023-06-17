@@ -41,7 +41,20 @@
 				"npmPublish": false
 			}
 		],
-		"@semantic-release/github",
+		[
+			"semantic-release-chrome",
+			{
+				"extensionId": "bckfnibflpdgifdfkfoooidpblaembga",
+				"target": "${{ env.CHROME_TARGET }}",
+				"asset": "masked-email-manager_v${nextRelease.version}.zip"
+			}
+		],
+		[
+			"@semantic-release/github",
+			{
+				"assets": ["masked-email-manager_v${nextRelease.version}.zip"]
+			}
+		],
 		[
 			"@semantic-release/git",
 			{
