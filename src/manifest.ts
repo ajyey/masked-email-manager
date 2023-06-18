@@ -22,7 +22,7 @@ const manifest: Manifest.WebExtensionManifest = {
     '48': 'icon48.png',
     '128': 'icon128.png'
   },
-  permissions: ['activeTab'],
+  permissions: ['activeTab', 'storage'],
   content_scripts: [
     {
       matches: ['http://*/*', 'https://*/*', '<all_urls>'],
