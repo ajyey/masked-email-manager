@@ -16,7 +16,8 @@
     "fix:lint": "eslint src --ext .ts,.tsx --fix",
     "dev": "nodemon",
     "semantic-release": "semantic-release",
-    "upgrade-packages": "npx npm-check-updates -u && yarn"
+    "upgrade-packages": "npx npm-check-updates -u && yarn",
+    "update-version": "node utils/update-version.js"
   },
   "dependencies": {
     "react": "^18.2.0",
