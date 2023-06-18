@@ -17,7 +17,7 @@ jobs:
       - name: Installing dependencies
         run: yarn install --frozen-lockfile
       - name: Running linting and tests
-        run: yarn fix
+        run: yarn lint
   release:
     runs-on: ubuntu-latest
     permissions:

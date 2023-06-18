@@ -12,8 +12,9 @@
   "scripts": {
     "build": "run-s fix build:*",
     "build:production": "vite build",
-    "fix": "run-s fix:*",
-    "fix:lint": "eslint src --ext .ts,.tsx --fix",
+    "lint": "run-s lint:*",
+    "lint:ts": "eslint src --ext .ts,.tsx --fix",
+    "lint:html": "prettier --config .prettierrc 'src/**/*.html' --write",
     "dev": "nodemon",
     "semantic-release": "semantic-release",
     "upgrade-packages": "npx npm-check-updates -u && yarn",
