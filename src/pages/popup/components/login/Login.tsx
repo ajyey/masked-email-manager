@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import LoginSubmitButtonComponent from '@pages/popup/components/login/LoginSubmitButton';
 
 export default function LoginComponent() {
+  const [apiToken, setApiToken] = useState('');
+
+  const handleTokenChange = (e: any) => {
+    setApiToken(e.target.value);
+  };
+  const handleSubmit = () => {
+    chrome.storage.sync.set({ fastmail_api_token: apiToken }, () => {
+      console.log('API token saved:', apiToken);
+    });
+  };
   return (
     <div className="flex items-center h-screen w-screen lg:justify-center">
       <div className="h-screen w-screen">
@@ -9,23 +20,27 @@ export default function LoginComponent() {
             Authentication
           </h3>
           <p className="mb-3 text-white text-lg">
-            Fastmail requires an authentication token to be able to access and
-            manage your masked emails.
+            Fastmail requires an API token with the{' '}
+            <span className="font-semibold">masked email</span> scope to be able
+            to access and manage your masked emails.
             <br />
-            You can create your authentication token in your{' '}
+            You can learn more about creating an API token{' '}
             <a
-              href="https://app.fastmail.com/settings/security/integrations"
-              className="text-blue-600 underline"
+              className="text-blue-400"
+              href="https://www.fastmail.help/hc/en-us/articles/5254602856719-API-tokens"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
-              Fastmail settings.
+              here
             </a>
-            <br />
-            This token should be created with the{' '}
-            <span className="font-semibold">masked email</span> scope.
           </p>
-          <form action="#" className="flex flex-col space-y-5">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+            className="flex flex-col space-y-5"
+          >
             <div className="flex flex-col space-y-1">
               <label
                 htmlFor="auth-token"
@@ -37,16 +52,13 @@ export default function LoginComponent() {
                 type="text"
                 id="auth-token"
                 autoFocus
+                value={apiToken}
+                onChange={handleTokenChange}
                 className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
               />
             </div>
             <div>
-              <button
-                type="submit"
-                className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
-              >
-                Submit
-              </button>
+              <LoginSubmitButtonComponent />
             </div>
           </form>
         </div>
