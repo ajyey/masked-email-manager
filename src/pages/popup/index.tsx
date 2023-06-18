@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import '@pages/popup/index.css';
 import '@assets/styles/tailwind.css';
 import Popup from '@pages/popup/Popup';
+import LoginComponent from '@pages/popup/components/login/Login';
 
 function init() {
   const rootContainer = document.querySelector('#__root');

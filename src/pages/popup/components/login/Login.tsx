@@ -2,13 +2,13 @@ import React from 'react';
 
 export default function LoginComponent() {
   return (
-    <div className="flex items-center h-screen w-screen bg-gray-100 lg:justify-center">
-      <div className="flex flex-col overflow-hidden h-screen w-screen bg-white md:flex-row md:flex-1 lg:max-w-screen-md">
-        <div className="p-5 bg-white md:flex-1">
-          <h3 className="my-4 text-2xl font-semibold text-gray-700 text-center">
+    <div className="flex items-center h-screen w-screen lg:justify-center">
+      <div className="h-screen w-screen">
+        <div className="p-5 bg-gray-800 md:flex-1 h-screen w-screen">
+          <h3 className="my-4 text-2xl font-semibold text-white text-center">
             Authentication
           </h3>
-          <p className="mb-3 text-gray-500 text-lg">
+          <p className="mb-3 text-white text-lg">
             Fastmail requires an authentication token to be able to access and
             manage your masked emails.
             <br />
@@ -29,7 +29,7 @@ export default function LoginComponent() {
             <div className="flex flex-col space-y-1">
               <label
                 htmlFor="auth-token"
-                className="text-sm font-semibold text-gray-500"
+                className="text-sm font-semibold text-gray-300"
               >
                 Authentication Token
               </label>
