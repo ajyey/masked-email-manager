@@ -4,7 +4,7 @@ import LoginSubmitButtonComponent from '@pages/popup/components/login/LoginSubmi
 export default function LoginComponent() {
   const [apiToken, setApiToken] = useState('');
 
-  const handleTokenChange = (e: any) => {
+  const handleTokenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setApiToken(e.target.value);
   };
   const handleSubmit = () => {

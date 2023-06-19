@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import LoginComponent from '@pages/popup/components/login/Login';
 import HomeComponent from '@pages/popup/components/home/Home';
 
