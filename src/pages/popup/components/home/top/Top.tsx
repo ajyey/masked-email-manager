@@ -41,9 +41,9 @@ export default function TopComponent() {
               <input
                 type="text"
                 id="simple-search"
-                className="bg-big-stone text-gray-900 text-sm rounded-[5px] w-full pl-10 h-[35px] items-center p-2.5"
+                className="bg-big-stone text-sm text-white rounded-[5px] w-full pl-10 h-[35px] items-center p-2.5"
                 placeholder="Search Masked Emails..."
-                required
+                style={{ caretColor: 'white' }}
               ></input>
             </div>
           </div>
