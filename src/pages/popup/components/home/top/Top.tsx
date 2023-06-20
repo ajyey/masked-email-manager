@@ -4,9 +4,9 @@ import icon from '@assets/img/icon.svg';
 export default function TopComponent() {
   return (
     <section className="flex h-[55px]">
-      <div className="w-full">
-        {/*LOGO*/}
+      <div className="w-full border-b border-b-big-stone">
         <div className="flex">
+          {/*LOGO*/}
           <div className="flex columns-[45px] items-center">
             <img
               src={icon}
