@@ -3,20 +3,20 @@ import icon from '@assets/img/icon.svg';
 
 export default function TopComponent() {
   return (
-    <section className="flex h-[55px]">
+    <section className="flex h-[55px] items-center">
       <div className="w-full border-b border-b-big-stone">
         <div className="flex">
           {/*LOGO*/}
           <div className="flex columns-[45px] items-center">
             <img
               src={icon}
-              className="pointer-events-none h-[30px] w-[45px] p-1"
+              className="pointer-events-none h-[30px] w-[45px] ml-1.5 mr-1 mb-1"
               alt="icon"
             />
           </div>
           {/*SEARCH BAR*/}
           <div className="columns-[375px]">
-            <div className="relative w-full p-1">
+            <div className="relative w-full items-center p-1">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
                   aria-hidden="true"
@@ -35,7 +35,7 @@ export default function TopComponent() {
               <input
                 type="text"
                 id="simple-search"
-                className="bg-big-stone text-gray-900 text-sm rounded-[5px] w-full pl-10 p-2.5"
+                className="bg-big-stone text-gray-900 text-sm rounded-[5px] w-full pl-10 h-[35px] items-center p-2.5"
                 placeholder="Search Masked Emails..."
                 required
               ></input>
@@ -43,10 +43,10 @@ export default function TopComponent() {
           </div>
           {/*NEW EMAIL BUTTON*/}
           <div className="flex columns-[120px] items-center">
-            <div className="relative w-full p-1">
+            <div className="relative w-full p-1 mb-1">
               <button
                 type="button"
-                className="text-white bg-french-blue font-bold rounded-[5px] text-sm p-2.5 text-center inline-flex items-center"
+                className="text-white bg-french-blue font-bold rounded-[5px] text-sm p-2.5 h-[35px] text-center inline-flex items-center"
               >
                 <svg
                   width="16"
@@ -67,10 +67,10 @@ export default function TopComponent() {
             </div>
           </div>
           {/*HAMBURGER*/}
-          <div className="flex items-center p-1.5">
+          <div className="flex h-[35px] items-center ml-1.5 mt-1">
             <svg
-              width="35"
-              height="35"
+              width="30"
+              height="30"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
