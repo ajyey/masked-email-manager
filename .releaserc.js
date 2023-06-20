@@ -1,7 +1,7 @@
 const currentBranch =
   process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
 
-module.exports = {
+export default {
   branches: [
     'main',
     {
