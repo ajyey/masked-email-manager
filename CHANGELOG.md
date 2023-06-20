@@ -1,3 +1,18 @@
+# [1.0.0-beta.5](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2023-06-20)
+
+
+### Bug Fixes
+
+* dynamically add semantic-release chrome plugin ([12481e3](https://github.com/ajyey/masked-email-manager/commit/12481e3e74aa5418c4d088de8489d8cecf6b41a3))
+* top component border added to parent element ([2791548](https://github.com/ajyey/masked-email-manager/commit/2791548ebad1aade383375c182aeac4b94f44eab))
+
+
+### Features
+
+* add loading component ([a8a72f4](https://github.com/ajyey/masked-email-manager/commit/a8a72f4238db4a43c7fbb79665022c61d4f350dd))
+* add MaskedEmailListItem component and update MaskedEmailListPane ([0b3f8e4](https://github.com/ajyey/masked-email-manager/commit/0b3f8e48232800b7c9634d29d709b54db29e6874))
+* remove focus outline from search input ([e385fa7](https://github.com/ajyey/masked-email-manager/commit/e385fa72129337db5d655bbe0b44bf58b739fa10))
+
 # [1.0.0-beta.4](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2023-06-20)
 
 
