@@ -62,12 +62,11 @@ function FilterEmailsDropdown() {
                 onClick={() => selectOption(item.value)}
               >
                 <svg
-                  className="w-4 h-4 mr-2"
+                  className="w-4 h-4 mr-2 stroke-2"
                   aria-hidden="true"
                   fill="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth="2"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -79,9 +78,7 @@ function FilterEmailsDropdown() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth={3}
-                    stroke="currentColor"
-                    className="w-5 h-5 ml-auto stroke-malibu"
+                    className="w-5 h-5 ml-auto stroke-malibu stroke-3"
                   >
                     <path
                       strokeLinecap="round"
