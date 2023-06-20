@@ -1,3 +1,10 @@
+# [1.0.0-beta.4](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2023-06-20)
+
+
+### Features
+
+* add link to GitHub repository in Top component ([24614f4](https://github.com/ajyey/masked-email-manager/commit/24614f4807ad21549b91e189482e8c66b1115dbd))
+
 # [1.0.0-beta.3](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2023-06-20)
 
 
