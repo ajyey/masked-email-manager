@@ -46,7 +46,7 @@ export default function TopComponent() {
             <div className="relative w-full p-1">
               <button
                 type="button"
-                className="text-white bg-mikado-yellow/[.85] font-bold rounded-[5px] text-sm p-2.5 text-center inline-flex items-center"
+                className="text-white bg-french-blue font-bold rounded-[5px] text-sm p-2.5 text-center inline-flex items-center"
               >
                 <svg
                   width="16"
