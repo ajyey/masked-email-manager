@@ -1,3 +1,13 @@
+# [1.0.0-beta.7](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2023-06-20)
+
+
+### Features
+
+* **filter:** add checkmark icon to selected option ([c8fdeac](https://github.com/ajyey/masked-email-manager/commit/c8fdeacc14eccc1d85be227262b6739b4068ebc5))
+* wip - add better dropdown styling ([682b5d9](https://github.com/ajyey/masked-email-manager/commit/682b5d9a91feb11202329b2c0dcce62670433b1a))
+* wip adds initial filter dropdown structure ([b93d30c](https://github.com/ajyey/masked-email-manager/commit/b93d30cc55a3d58cd3f48322a7e35511efedc8d2))
+* wip manually align the filter dropdown to center ([6104f2a](https://github.com/ajyey/masked-email-manager/commit/6104f2aa60b9808f08a798dccf6a104b2b935a7b))
+
 # [1.0.0-beta.6](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2023-06-20)
 
 
