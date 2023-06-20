@@ -10,3 +10,20 @@ body {
 
   position: relative;
 }
+  .scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  /* scroll bar default color */
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 193, 7, 0.8); /* mikado yello with 80% transparency */
+    border-radius: 100vh;
+
+  }
+  /* scrollbar hover */
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #FFC107;
+  }

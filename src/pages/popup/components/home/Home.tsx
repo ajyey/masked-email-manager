@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import TopComponent from '@pages/popup/components/home/top/Top';
-import MaskedEmailListPane from '@pages/popup/components/home/emailListPane/MaskedEmailListPane';
-import MaskedEmailDetailPane from '@pages/popup/components/home/emailListPane/MaskedEmailDetailPane';
+import MaskedEmailListPane from '@pages/popup/components/home/email-list-pane/MaskedEmailListPane';
+import MaskedEmailDetailPane from '@pages/popup/components/home/email-list-pane/MaskedEmailDetailPane';
 import { list, MaskedEmail } from 'fastmail-masked-email';
-import LoadingComponent from '@pages/popup/components/home/emailListPane/Loading';
+import LoadingComponent from '@pages/popup/components/home/email-list-pane/Loading';
+import FilterPane from '@pages/popup/components/home/filter-pane/FilterPane';
 
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
@@ -27,16 +28,17 @@ export default function HomeComponent() {
     <div className="bg-astronaut h-[400px] w-[600px]">
       <TopComponent />
       {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
-      <div className="w-full h-[345px] flex flex-col overflow-y-auto">
+      <div className="w-full h-[345px] flex flex-col">
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">
+            <FilterPane />
             {isLoading ? (
               <LoadingComponent />
             ) : (
               <MaskedEmailListPane maskedEmails={maskedEmails} />
             )}
           </div>
-          <div className="w-7/12 ml-2 mt-2">
+          <div className="columns-[350px]">
             <MaskedEmailDetailPane />
           </div>
         </div>
