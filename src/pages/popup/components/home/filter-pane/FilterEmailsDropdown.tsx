@@ -18,7 +18,7 @@ function FilterEmailsDropdown() {
       <button
         id="dropdownCheckboxButton"
         data-dropdown-toggle="dropdownDefaultCheckbox"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="text-white ml-3.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button"
         onClick={toggleDropdown}
       >
@@ -66,6 +66,23 @@ function FilterEmailsDropdown() {
                 <path d="M5 13l4 4L19 7" />
               </svg>
               <span className="text-sm font-medium">Enabled</span>
+              {/*// Render a checkmark icon when this option is selected*/}
+              {selectedOption === 'Enabled' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                  stroke="currentColor"
+                  className="w-5 h-5 ml-auto stroke-malibu"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
             </li>
             <li
               className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
@@ -84,6 +101,23 @@ function FilterEmailsDropdown() {
                 <path d="M5 13l4 4L19 7" />
               </svg>
               <span className="text-sm font-medium">Disabled</span>
+              {/*// Render a checkmark icon when this option is selected*/}
+              {selectedOption === 'Disabled' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                  stroke="currentColor"
+                  className="w-5 h-5 ml-auto stroke-malibu"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
             </li>
             <li
               className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
@@ -102,6 +136,23 @@ function FilterEmailsDropdown() {
                 <path d="M5 13l4 4L19 7" />
               </svg>
               <span className="text-sm font-medium ">Deleted</span>
+              {/*// Render a checkmark icon when this option is selected*/}
+              {selectedOption === 'Deleted' && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                  stroke="currentColor"
+                  className="w-5 h-5 ml-auto stroke-malibu"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
             </li>
           </ul>
         </div>
