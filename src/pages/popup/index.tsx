@@ -4,7 +4,6 @@ import '@pages/popup/index.css';
 import '@assets/styles/tailwind.css';
 import Popup from '@pages/popup/Popup';
 import { FASTMAIL_API_TOKEN } from '../../../utils/constants';
-import { list, MaskedEmail } from 'fastmail-masked-email';
 
 /**
  * Check if the user is already authenticated and their API key is stored in Chrome storage

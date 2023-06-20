@@ -1,16 +1,9 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import icon from '@assets/img/icon.svg';
+import React, { useState, useEffect } from 'react';
 import TopComponent from '@pages/popup/components/home/top/Top';
 import MaskedEmailListPane from '@pages/popup/components/home/emailListPane/MaskedEmailListPane';
 import MaskedEmailDetailPane from '@pages/popup/components/home/emailListPane/MaskedEmailDetailPane';
 import { list, MaskedEmail } from 'fastmail-masked-email';
-import { FASTMAIL_API_TOKEN } from '../../../../../utils/constants';
-import PopupProps from '@pages/popup/Popup';
 import LoadingComponent from '@pages/popup/components/home/emailListPane/Loading';
-
-interface HomeComponentProps {
-  maskedEmails: MaskedEmail[];
-}
 
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
