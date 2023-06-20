@@ -6,7 +6,6 @@ function FilterEmailsDropdown() {
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-    console.log(isOpen);
   };
 
   const selectOption = (option: string) => {
@@ -15,63 +14,98 @@ function FilterEmailsDropdown() {
   };
 
   return (
-    <div className="relative text-center w-full flex h-full">
+    <div>
       <button
+        id="dropdownCheckboxButton"
+        data-dropdown-toggle="dropdownDefaultCheckbox"
+        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button"
-        className="inline-flex m-auto w-[85%] pt-1  h-3/4 justify-center gap-x-1.5 rounded-md bg-white text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 align-middle"
-        id="menu-button"
-        aria-expanded="true"
-        aria-haspopup="true"
+        onClick={toggleDropdown}
       >
-        Enabled
+        {selectedOption}
         <svg
-          className="-mr-1 h-5 w-5 text-gray-400"
-          viewBox="0 0 20 20"
-          fill="currentColor"
+          className="w-4 h-4 ml-2"
           aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            fillRule="evenodd"
-            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            clipRule="evenodd"
-          />
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M19 9l-7 7-7-7"
+          ></path>
         </svg>
       </button>
-
-      <div
-        className="absolute mt-[30px] w-[85%] rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-        role="menu"
-        aria-orientation="vertical"
-        aria-labelledby="menu-button"
-        style={{ marginLeft: '19px' }}
-      >
-        <div className="py-1 text-center" role="none">
-          <a
-            href="#"
-            className="text-gray-700 block px-4 py-2 text-sm"
-            role="menuitem"
-            id="menu-item-0"
+      {/*Render the dropdown conditionally*/}
+      {isOpen && (
+        <div
+          id="dropdownDefaultCheckbox"
+          className="absolute w-48 rounded-lg text-white"
+        >
+          <ul
+            className="p-3 space-y-3 text-sm bg-big-stone rounded-lg"
+            aria-labelledby="dropdownCheckboxButton"
           >
-            Enabled
-          </a>
-          <a
-            href="#"
-            className="text-gray-700 block px-4 py-2 text-sm"
-            role="menuitem"
-            id="menu-item-1"
-          >
-            Blocked
-          </a>
-          <a
-            href="#"
-            className="text-gray-700 block px-4 py-2 text-sm"
-            role="menuitem"
-            id="menu-item-2"
-          >
-            Deleted
-          </a>
+            <li
+              className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
+              onClick={() => selectOption('Enabled')}
+            >
+              <svg
+                className="w-4 h-4 mr-2"
+                aria-hidden="true"
+                fill="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="text-sm font-medium">Enabled</span>
+            </li>
+            <li
+              className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
+              onClick={() => selectOption('Disabled')}
+            >
+              <svg
+                className="w-4 h-4 mr-2"
+                aria-hidden="true"
+                fill="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="text-sm font-medium">Disabled</span>
+            </li>
+            <li
+              className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
+              onClick={() => selectOption('Deleted')}
+            >
+              <svg
+                className="w-4 h-4 mr-2"
+                aria-hidden="true"
+                fill="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="text-sm font-medium ">Deleted</span>
+            </li>
+          </ul>
         </div>
-      </div>
+      )}
     </div>
   );
 }
