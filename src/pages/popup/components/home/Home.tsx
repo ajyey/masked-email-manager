@@ -30,9 +30,10 @@ export default function HomeComponent() {
   return (
     <div className="bg-astronaut h-[400px] w-[600px]">
       <TopComponent />
-      <div className="w-full">
-        <div className="flex">
-          <div className="w-5/12 bg-gray-400 ml-2 mt-2">
+      {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
+      <div className="w-full h-[345px] flex flex-col">
+        <div className="flex flex-1">
+          <div className="columns-[250px] border-r border-r-big-stone">
             <MaskedEmailListPane maskedEmails={maskedEmails} />
           </div>
           <div className="w-7/12 ml-2 mt-2">
