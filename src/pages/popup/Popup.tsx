@@ -1,6 +1,7 @@
 import React from 'react';
 import LoginComponent from '@pages/popup/components/login/Login';
 import HomeComponent from '@pages/popup/components/home/Home';
+import { MaskedEmail } from 'fastmail-masked-email';
 
 interface PopupProps {
   authenticated: boolean;
