@@ -12,6 +12,12 @@ function FilterEmailsDropdown() {
     setSelectedOption(option);
     setIsOpen(false);
   };
+  // Define the dropdown items with their labels and values
+  const dropdownItems = [
+    { label: 'Enabled', value: 'Enabled' },
+    { label: 'Disabled', value: 'Disabled' },
+    { label: 'Deleted', value: 'Deleted' }
+  ];
 
   return (
     <div>
@@ -49,111 +55,43 @@ function FilterEmailsDropdown() {
             className="p-3 space-y-3 text-sm bg-big-stone rounded-lg"
             aria-labelledby="dropdownCheckboxButton"
           >
-            <li
-              className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
-              onClick={() => selectOption('Enabled')}
-            >
-              <svg
-                className="w-4 h-4 mr-2"
-                aria-hidden="true"
-                fill="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+            {dropdownItems.map((item: any) => (
+              <li
+                key={item.value}
+                className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
+                onClick={() => selectOption(item.value)}
               >
-                <path d="M5 13l4 4L19 7" />
-              </svg>
-              <span className="text-sm font-medium">Enabled</span>
-              {/*// Render a checkmark icon when this option is selected*/}
-              {selectedOption === 'Enabled' && (
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
+                  className="w-4 h-4 mr-2"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   viewBox="0 0 24 24"
-                  strokeWidth={3}
-                  stroke="currentColor"
-                  className="w-5 h-5 ml-auto stroke-malibu"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-              )}
-            </li>
-            <li
-              className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
-              onClick={() => selectOption('Disabled')}
-            >
-              <svg
-                className="w-4 h-4 mr-2"
-                aria-hidden="true"
-                fill="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M5 13l4 4L19 7" />
-              </svg>
-              <span className="text-sm font-medium">Disabled</span>
-              {/*// Render a checkmark icon when this option is selected*/}
-              {selectedOption === 'Disabled' && (
-                <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={3}
-                  stroke="currentColor"
-                  className="w-5 h-5 ml-auto stroke-malibu"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
+                  <path d="M5 13l4 4L19 7" />
                 </svg>
-              )}
-            </li>
-            <li
-              className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
-              onClick={() => selectOption('Deleted')}
-            >
-              <svg
-                className="w-4 h-4 mr-2"
-                aria-hidden="true"
-                fill="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M5 13l4 4L19 7" />
-              </svg>
-              <span className="text-sm font-medium ">Deleted</span>
-              {/*// Render a checkmark icon when this option is selected*/}
-              {selectedOption === 'Deleted' && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={3}
-                  stroke="currentColor"
-                  className="w-5 h-5 ml-auto stroke-malibu"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-              )}
-            </li>
+                <span className="text-sm font-medium">{item.label}</span>
+                {selectedOption === item.value && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={3}
+                    stroke="currentColor"
+                    className="w-5 h-5 ml-auto stroke-malibu"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       )}
