@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LoginSubmitButtonComponent from '@pages/popup/components/login/LoginSubmitButton';
+import { getSession } from 'fastmail-masked-email';
 
 export default function LoginComponent() {
   const [apiToken, setApiToken] = useState('');
@@ -7,10 +8,14 @@ export default function LoginComponent() {
   const handleTokenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setApiToken(e.target.value);
   };
-  const handleSubmit = () => {
-    chrome.storage.sync.set({ fastmail_api_token: apiToken }, () => {
-      console.log('API token saved:', apiToken);
-    });
+  /**
+   * When the user submits the form, store the API token and the fastmail session in Chrome storage
+   */
+  const handleSubmit = async () => {
+    await chrome.storage.sync.set({ fastmail_api_token: apiToken });
+    const session = await getSession(apiToken);
+    //TODO: Handle error if the user enters an invalid API token
+    await chrome.storage.sync.set({ fastmail_session: session });
   };
   return (
     <div className="flex items-center h-screen w-screen lg:justify-center">
