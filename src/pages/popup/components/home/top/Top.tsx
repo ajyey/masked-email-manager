@@ -8,11 +8,17 @@ export default function TopComponent() {
         <div className="flex">
           {/*LOGO*/}
           <div className="flex columns-[45px] items-center">
-            <img
-              src={icon}
-              className="pointer-events-none h-[30px] w-[45px] ml-1.5 mr-1 mb-1"
-              alt="icon"
-            />
+            <a
+              href="https://github.com/ajyey/masked-email-manager"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={icon}
+                className="pointer-events-none h-[30px] w-[45px] ml-1.5 mr-1 mb-1"
+                alt="icon"
+              />
+            </a>
           </div>
           {/*SEARCH BAR*/}
           <div className="columns-[375px]">
