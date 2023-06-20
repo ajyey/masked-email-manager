@@ -1,3 +1,10 @@
+# [1.0.0-beta.6](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2023-06-20)
+
+
+### Features
+
+* add custom scrollbar and fix some layout issues ([4d7b7b7](https://github.com/ajyey/masked-email-manager/commit/4d7b7b70f8ad87637b49d38816a8b6e977bca980))
+
 # [1.0.0-beta.5](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2023-06-20)
 
 
