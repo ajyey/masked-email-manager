@@ -39,19 +39,11 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Building extension
         run: yarn build
-      - name: Set CHROME_TARGET environment variable
-        # if the branch is main, set CHROME_TARGET to default, which will publish to the Chrome Web Store
-        # otherwise, set CHROME_TARGET to local, which will not publish to the Chrome Web Store at all
-        run: |
-         if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then 
-           echo "CHROME_TARGET=default" >> $GITHUB_ENV
-         else
-           echo "CHROME_TARGET=local" >> $GITHUB_ENV
-         fi
       - name: Releasing
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GITHUB_REF: ${{ github.ref }}
         run: npx semantic-release
