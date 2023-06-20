@@ -3,7 +3,10 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'spin-slow': 'spin 20s linear infinite',
+        'spin-slow': 'spin 2s linear infinite',
+        'spin-fast': 'spin 0.5s linear infinite',
+        'spin-default': 'spin 1s linear infinite',
+
       },
       colors: {
         'magnesium': '#B3B3B3',

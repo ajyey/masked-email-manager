@@ -1,6 +1,6 @@
 import React from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
-import MaskedEmailListItem from '@pages/popup/components/home/emails/MaskedEmailListItem';
+import MaskedEmailListItem from '@pages/popup/components/home/emailListPane/MaskedEmailListItem';
 
 interface Props {
   maskedEmails: MaskedEmail[];
