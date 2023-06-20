@@ -13,25 +13,25 @@ interface HomeComponentProps {
 
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
-  // useEffect(() => {
-  //   const fetchMaskedEmails = async () => {
-  //     try {
-  //       const storageData = await chrome.storage.sync.get('fastmail_session');
-  //       const session = storageData.fastmail_session;
-  //       const allMaskedEmails: MaskedEmail[] = await list(session);
-  //       setMaskedEmails(allMaskedEmails);
-  //     } catch (error) {
-  //       console.error('Error fetching masked emails:', error);
-  //     }
-  //   };
-  //
-  //   fetchMaskedEmails();
-  // }, []);
+  useEffect(() => {
+    const fetchMaskedEmails = async () => {
+      try {
+        const storageData = await chrome.storage.sync.get('fastmail_session');
+        const session = storageData.fastmail_session;
+        const allMaskedEmails: MaskedEmail[] = await list(session);
+        setMaskedEmails(allMaskedEmails);
+      } catch (error) {
+        console.error('Error fetching masked emails:', error);
+      }
+    };
+
+    fetchMaskedEmails();
+  }, []);
   return (
     <div className="bg-astronaut h-[400px] w-[600px]">
       <TopComponent />
       {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
-      <div className="w-full h-[345px] flex flex-col">
+      <div className="w-full h-[345px] flex flex-col overflow-y-auto">
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">
             <MaskedEmailListPane maskedEmails={maskedEmails} />

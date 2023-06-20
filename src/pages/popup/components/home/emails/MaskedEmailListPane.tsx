@@ -1,21 +1,24 @@
 import React from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
+import MaskedEmailListItem from '@pages/popup/components/home/emails/MaskedEmailListItem';
 
 interface Props {
   maskedEmails: MaskedEmail[];
 }
 function MaskedEmailListPane({ maskedEmails }: Props) {
-  const emailItems = [];
+  const maskedEmailItems = [];
 
   for (let i = 0; i < maskedEmails.length; i++) {
-    emailItems.push(
-      <li key={i} className="flex items-center space-x-2">
-        {maskedEmails[i].email}
-      </li>
+    maskedEmailItems.push(
+      <MaskedEmailListItem maskedEmail={maskedEmails[i]} />
     );
   }
 
-  return <ul className="flex flex-col space-y-2">{emailItems}</ul>;
+  return (
+    <div className="h-full overflow-y-auto mt-1">
+      <ul className="flex flex-col space-y-2 w-full">{maskedEmailItems}</ul>;
+    </div>
+  );
 }
 
 export default MaskedEmailListPane;
