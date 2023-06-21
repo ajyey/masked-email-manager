@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import EmailList from '@pages/popup/components/home/email-list-pane/EmailList';
-import EmailDetailPane from '@pages/popup/components/home/email-list-pane/EmailDetailPane';
+import EmailList from '@pages/popup/components/home/emails/EmailList';
+import EmailDetailPane from '@pages/popup/components/home/emails/EmailDetailPane';
 import { list, MaskedEmail } from 'fastmail-masked-email';
-import LoadingComponent from '@pages/popup/components/home/email-list-pane/Loading';
-import FilterEmailsDropdown from '@pages/popup/components/home/filter-pane/FilterEmailsDropdown';
-import TopComponent from '@pages/popup/components/home/top-pane/Top';
+import LoadingComponent from '@pages/popup/components/home/emails/Loading';
+import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmailsDropdown';
+import TopComponent from '@pages/popup/components/home/top/Top';
 
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
@@ -34,7 +34,7 @@ export default function HomeComponent() {
         onSearchChange={setSearchQuery}
         onRefresh={refreshMaskedEmails}
       />
-      {/* Make the height 345px since the top-pane bar is 55px (400-55=345)*/}
+      {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
       <div className="w-full h-[345px] flex flex-col">
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">

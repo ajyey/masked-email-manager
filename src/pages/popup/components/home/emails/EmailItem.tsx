@@ -17,7 +17,9 @@ export default function EmailItem({ maskedEmail }: MaskedEmailListItemProps) {
     }
   }, [maskedEmail.email]);
   return (
-    <div className="h-[50px] w-[95%] hover:bg-mikado-yellow/[0.25] rounded-[5px] mx-auto m-auto">
+    // <div className="h-[50px] w-[95%] hover:bg-mikado-yellow/[0.4] rounded-[5px] mx-auto m-auto">
+    // <div className="h-[50px] w-[95%] hover:bg-french-blue/[0.4] rounded-[5px] mx-auto m-auto">
+    <div className="h-[50px] w-[95%] hover:bg-big-stone/[0.4] rounded-[5px] mx-auto m-auto">
       <div className="flex flex-row justify-between">
         <div className="flex flex-col align-middle">
           <div className="text-sm text-white font-bold ml-2">
