@@ -1,3 +1,10 @@
+# [1.0.0-beta.13](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2023-06-21)
+
+
+### Features
+
+* close the dropdown menu when the user clicks anywhere outside of it ([b825322](https://github.com/ajyey/masked-email-manager/commit/b8253229c0d526ec2b500cec833bd5a16d94b2e5))
+
 # [1.0.0-beta.12](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2023-06-21)
 
 
