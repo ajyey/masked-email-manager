@@ -1,6 +1,6 @@
 import React from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
-import MaskedEmailListItem from '@pages/popup/components/home/email-list-pane/MaskedEmailListItem';
+import EmailItem from '@pages/popup/components/home/email-list-pane/EmailItem';
 import Fuse from 'fuse.js';
 
 function isFuseResult(obj: any): obj is Fuse.FuseResult<MaskedEmail> {
@@ -11,7 +11,7 @@ interface Props {
   filter: string;
   searchQuery: string;
 }
-function MaskedEmailListPane({ maskedEmails, filter, searchQuery }: Props) {
+function EmailList({ maskedEmails, filter, searchQuery }: Props) {
   let filteredEmails = maskedEmails;
   if (filter !== 'all') {
     filteredEmails = maskedEmails.filter(
@@ -31,16 +31,11 @@ function MaskedEmailListPane({ maskedEmails, filter, searchQuery }: Props) {
           const maskedEmail: MaskedEmail = isFuseResult(result)
             ? result.item
             : result;
-          return (
-            <MaskedEmailListItem
-              key={maskedEmail.id}
-              maskedEmail={maskedEmail}
-            />
-          );
+          return <EmailItem key={maskedEmail.id} maskedEmail={maskedEmail} />;
         })}
       </ul>
     </div>
   );
 }
 
-export default MaskedEmailListPane;
+export default EmailList;

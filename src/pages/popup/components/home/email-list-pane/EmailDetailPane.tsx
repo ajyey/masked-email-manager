@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function MaskedEmailDetailPane() {
+export default function EmailDetailPane() {
   return <div className="scrollbar"></div>;
 }

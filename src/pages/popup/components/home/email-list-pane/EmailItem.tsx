@@ -5,9 +5,7 @@ interface MaskedEmailListItemProps {
   maskedEmail: MaskedEmail;
 }
 
-export default function MaskedEmailListItem({
-  maskedEmail
-}: MaskedEmailListItemProps) {
+export default function EmailItem({ maskedEmail }: MaskedEmailListItemProps) {
   const truncatedEmail = useMemo(() => {
     const emailLength = maskedEmail.email.length;
     const maxLength = 28;
