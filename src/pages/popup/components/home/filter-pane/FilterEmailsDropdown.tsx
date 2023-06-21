@@ -86,7 +86,7 @@ function FilterEmailsDropdown({
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    className="w-5 h-5 ml-auto stroke-malibu stroke-3"
+                    className="w-4 h-4 ml-auto stroke-malibu stroke-3"
                   >
                     <path
                       strokeLinecap="round"
