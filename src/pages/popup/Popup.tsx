@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LoginComponent from '@pages/popup/components/login/Login';
 import HomeComponent from '@pages/popup/components/home/Home';
 
@@ -7,10 +7,21 @@ interface PopupProps {
 }
 
 export default function Popup({ authenticated }: PopupProps): JSX.Element {
-  const cssClass = authenticated ? 'home-component' : 'login-component';
+  const [isLoggedIn, setIsLoggedIn] = useState(authenticated);
+  const cssClass = isLoggedIn ? 'home-component' : 'login-component';
+  // Callback function to update the isLoggedIn state
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
     <div className={cssClass}>
-      {authenticated ? <HomeComponent /> : <LoginComponent />}
+      {isLoggedIn ? (
+        <HomeComponent />
+      ) : (
+        // Pass the handleLoginSuccess callback to the LoginComponent
+        <LoginComponent onLoginSuccess={handleLoginSuccess} />
+      )}
     </div>
   );
 }

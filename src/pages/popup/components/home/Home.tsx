@@ -19,7 +19,7 @@ export default function HomeComponent() {
     setIsLoading(true);
     try {
       const storageData = await chrome.storage.sync.get('fastmail_session');
-      const session = storageData.fastmail_session;
+      const session = await storageData.fastmail_session;
       const allMaskedEmails: MaskedEmail[] = await list(session);
       setMaskedEmails(allMaskedEmails);
     } catch (error) {

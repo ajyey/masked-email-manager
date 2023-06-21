@@ -3,7 +3,13 @@ import LoginSubmitButtonComponent from '@pages/popup/components/login/LoginSubmi
 import { getSession } from 'fastmail-masked-email';
 import icon from '@assets/img/icon.svg';
 
-export default function LoginComponent() {
+interface LoginComponentProps {
+  onLoginSuccess: () => void;
+}
+
+export default function LoginComponent({
+  onLoginSuccess
+}: LoginComponentProps) {
   const [apiToken, setApiToken] = useState('');
 
   const handleTokenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +23,8 @@ export default function LoginComponent() {
     const session = await getSession(apiToken);
     //TODO: Handle error if the user enters an invalid API token
     await chrome.storage.sync.set({ fastmail_session: session });
+    // Call the onLoginSuccess callback after a successful login
+    onLoginSuccess();
   };
   return (
     <div className="flex items-center h-screen w-screen lg:justify-center bg-astronaut text-white">
