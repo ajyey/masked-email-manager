@@ -64,7 +64,13 @@ export default function LoginComponent({
               </a>
             </p>
           </div>
-          <form className="space-y-2" onSubmit={handleSubmit}>
+          <form
+            className="space-y-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
