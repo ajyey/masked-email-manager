@@ -6,11 +6,12 @@ function FilterEmailsDropdown({
   onFilterChange: (option: string) => void;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Enabled');
+  const [selectedOption, setSelectedOption] = useState('All');
   const dropdownToEmailStateMap: { [key: string]: string } = {
     Enabled: 'enabled',
     Disabled: 'disabled',
-    Deleted: 'deleted'
+    Deleted: 'deleted',
+    All: 'all'
   };
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -22,6 +23,7 @@ function FilterEmailsDropdown({
   };
   // Define the dropdown items with their labels and values
   const dropdownItems = [
+    { label: 'All', value: 'All' },
     { label: 'Enabled', value: 'Enabled' },
     { label: 'Disabled', value: 'Disabled' },
     { label: 'Deleted', value: 'Deleted' }

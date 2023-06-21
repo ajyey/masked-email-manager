@@ -9,7 +9,7 @@ import FilterEmailsDropdown from '@pages/popup/components/home/filter-pane/Filte
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filterOption, setFilterOption] = useState('enabled');
+  const [filterOption, setFilterOption] = useState('all');
 
   useEffect(() => {
     const fetchMaskedEmails = async () => {
