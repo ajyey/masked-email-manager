@@ -12,7 +12,7 @@ export default function HomeComponent() {
   const [isLoading, setIsLoading] = useState(true);
   const [filterOption, setFilterOption] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  // Keep track of the number of filtered emails in the email list
+  // State for keeping track of the count of filtered emails
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
 
   const refreshMaskedEmails = async () => {
