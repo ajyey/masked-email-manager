@@ -154,7 +154,7 @@ function FilterEmailsDropdown({
                 <span className="text-sm font-medium">
                   {dropdownItem.label}
                 </span>
-                {selectedOption === dropdownItem.value && (
+                {selectedOption.value === dropdownItem.value && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
