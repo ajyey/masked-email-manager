@@ -1,3 +1,10 @@
+# [1.0.0-beta.10](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2023-06-21)
+
+
+### Features
+
+* improve filter dropdown UI ([46ce3e7](https://github.com/ajyey/masked-email-manager/commit/46ce3e7d07cdc6f895714edabf99ee7f9639ea06))
+
 # [1.0.0-beta.9](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2023-06-21)
 
 
