@@ -1,3 +1,17 @@
+# [1.0.0-beta.16](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2023-06-21)
+
+
+### Bug Fixes
+
+* css and missing onchange handler for token input ([3d43512](https://github.com/ajyey/masked-email-manager/commit/3d43512dab526002f11b465688619f05ab7468c7))
+* form submission for login component by useing e.prevent default ([340f8a7](https://github.com/ajyey/masked-email-manager/commit/340f8a7a26a522aa11fbe2fa2428232c96f7b14b))
+
+
+### Features
+
+* add ability to login and be navigated to home ([59e0f77](https://github.com/ajyey/masked-email-manager/commit/59e0f775e81977417a81d8fa3c4bfea01cfa80de))
+* wip - make login component better ([c242d73](https://github.com/ajyey/masked-email-manager/commit/c242d735b305483325f0771865febb74ac1eeebc))
+
 # [1.0.0-beta.15](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2023-06-21)
 
 
