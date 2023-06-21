@@ -115,7 +115,7 @@ function FilterEmailsDropdown({
     <div className="relative w-[98%]">
       <button
         id="dropdownButton"
-        className="text-white focus:outline-none font-medium rounded-lg text-sm px-4 py-1 inline-flex items-center w-full hover:bg-french-blue "
+        className="text-white focus:outline-none font-medium rounded-lg text-sm px-4 py-1 inline-flex items-center w-full hover:bg-big-stone/[0.75]"
         type="button"
         onClick={toggleDropdown}
       >
