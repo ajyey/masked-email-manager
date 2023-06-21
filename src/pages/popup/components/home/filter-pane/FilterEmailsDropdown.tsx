@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 
-function FilterEmailsDropdown() {
+function FilterEmailsDropdown({
+  onFilterChange
+}: {
+  onFilterChange: (option: string) => void;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('Enabled');
-
+  const dropdownToEmailStateMap: { [key: string]: string } = {
+    Enabled: 'enabled',
+    Disabled: 'disabled',
+    Deleted: 'deleted'
+  };
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
   const selectOption = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
+    onFilterChange(dropdownToEmailStateMap[option]);
   };
   // Define the dropdown items with their labels and values
   const dropdownItems = [

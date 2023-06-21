@@ -4,11 +4,13 @@ import MaskedEmailListPane from '@pages/popup/components/home/email-list-pane/Ma
 import MaskedEmailDetailPane from '@pages/popup/components/home/email-list-pane/MaskedEmailDetailPane';
 import { list, MaskedEmail } from 'fastmail-masked-email';
 import LoadingComponent from '@pages/popup/components/home/email-list-pane/Loading';
-import FilterPane from '@pages/popup/components/home/filter-pane/FilterPane';
+import FilterEmailsDropdown from '@pages/popup/components/home/filter-pane/FilterEmailsDropdown';
 
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [filterOption, setFilterOption] = useState('enabled');
+
   useEffect(() => {
     const fetchMaskedEmails = async () => {
       try {
@@ -31,11 +33,17 @@ export default function HomeComponent() {
       <div className="w-full h-[345px] flex flex-col">
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">
-            <FilterPane />
+            {/*<FilterPane onFilterChange={setFilterOption()} />*/}
+            <div className="h-[35px] border-b border-b-big-stone">
+              <FilterEmailsDropdown onFilterChange={setFilterOption} />
+            </div>
             {isLoading ? (
               <LoadingComponent />
             ) : (
-              <MaskedEmailListPane maskedEmails={maskedEmails} />
+              <MaskedEmailListPane
+                maskedEmails={maskedEmails}
+                filter={filterOption}
+              />
             )}
           </div>
           <div className="columns-[350px]">

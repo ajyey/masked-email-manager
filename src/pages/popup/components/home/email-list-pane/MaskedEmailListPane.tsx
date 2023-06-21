@@ -4,19 +4,20 @@ import MaskedEmailListItem from '@pages/popup/components/home/email-list-pane/Ma
 
 interface Props {
   maskedEmails: MaskedEmail[];
+  filter: string;
 }
-function MaskedEmailListPane({ maskedEmails }: Props) {
-  const maskedEmailItems = [];
-
-  for (let i = 0; i < maskedEmails.length; i++) {
-    maskedEmailItems.push(
-      <MaskedEmailListItem maskedEmail={maskedEmails[i]} />
-    );
-  }
-
+function MaskedEmailListPane({ maskedEmails, filter }: Props) {
+  const filteredEmails = maskedEmails.filter((email) => email.state === filter);
   return (
     <div className="h-[310px] overflow-y-auto overflow-x-hidden scrollbar pt-2 pb-2">
-      <ul className="flex flex-col space-y-2 w-full">{maskedEmailItems}</ul>
+      <ul className="flex flex-col space-y-2 w-full">
+        {filteredEmails.map((maskedEmail) => (
+          <MaskedEmailListItem
+            key={maskedEmail.email}
+            maskedEmail={maskedEmail}
+          />
+        ))}
+      </ul>
     </div>
   );
 }
