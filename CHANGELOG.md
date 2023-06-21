@@ -1,3 +1,16 @@
+# [1.0.0-beta.15](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2023-06-21)
+
+
+### Bug Fixes
+
+* improve styling for email item ([8f59c40](https://github.com/ajyey/masked-email-manager/commit/8f59c4047067d6867ead98fb603877a19a746c94))
+
+
+### Features
+
+* add EmailCount component and track filtered emails count ([a1aba76](https://github.com/ajyey/masked-email-manager/commit/a1aba76f8e02d677ddc0129d95f0dcd53fafd215))
+* add iconClasses prop to Icon components ([5a1a272](https://github.com/ajyey/masked-email-manager/commit/5a1a272501d8d7042bbd7674e4de9c39a62723c4))
+
 # [1.0.0-beta.14](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2023-06-21)
 
 # [1.0.0-beta.13](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2023-06-21)
