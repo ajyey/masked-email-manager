@@ -5,23 +5,6 @@ function FilterEmailsDropdown({
 }: {
   onFilterChange: (option: string) => void;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('All');
-  const dropdownToEmailStateMap: { [key: string]: string } = {
-    Enabled: 'enabled',
-    Disabled: 'disabled',
-    Deleted: 'deleted',
-    All: 'all'
-  };
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-  const selectOption = (option: string) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-    onFilterChange(dropdownToEmailStateMap[option]);
-  };
-  // Define the dropdown items with their labels, values, and SVGs
   const commonSvgClasses = 'w-5 h-5 mr-2';
   const dropdownItems = [
     {
@@ -105,6 +88,23 @@ function FilterEmailsDropdown({
       )
     }
   ];
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(dropdownItems[0]);
+  const dropdownToEmailStateMap: { [key: string]: string } = {
+    Enabled: 'enabled',
+    Disabled: 'disabled',
+    Deleted: 'deleted',
+    All: 'all'
+  };
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+  const selectOption = (item: any) => {
+    setSelectedOption(item);
+    setIsOpen(false);
+    onFilterChange(dropdownToEmailStateMap[item.value]);
+  };
+  // Define the dropdown items with their labels, values, and SVGs
 
   return (
     <div className="relative w-[98%]">
@@ -115,7 +115,8 @@ function FilterEmailsDropdown({
         type="button"
         onClick={toggleDropdown}
       >
-        {selectedOption}
+        {selectedOption.svg}
+        {selectedOption.value}
         <svg
           className="w-4 h-4 ml-auto"
           aria-hidden="true"
@@ -146,7 +147,7 @@ function FilterEmailsDropdown({
               <li
                 key={item.value}
                 className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
-                onClick={() => selectOption(item.value)}
+                onClick={() => selectOption(item)}
               >
                 {item.svg}
                 <span className="text-sm font-medium">{item.label}</span>
