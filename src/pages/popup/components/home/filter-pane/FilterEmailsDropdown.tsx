@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function FilterEmailsDropdown({
   onFilterChange
@@ -109,10 +109,26 @@ function FilterEmailsDropdown({
     setIsOpen(false); // Close the dropdown menu
     onFilterChange(dropdownToEmailStateMap[dropdownOption.value]); // Update the email state filter
   };
-  // Define the dropdown items with their labels, values, and SVGs
+  // Reference to the dropdown container div, used to detect clicks outside the dropdown
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  // Close the dropdown menu when the user clicks outside of it
+  const handleClickOutside = (event: any) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  // Set up an event listener for clicks outside the dropdown and remove it on component unmount
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="relative w-[98%]">
+    <div ref={dropdownRef} className="relative w-[98%]">
       <button
         id="dropdownButton"
         className="text-white focus:outline-none font-medium rounded-lg text-sm px-4 py-1 inline-flex items-center w-full hover:bg-big-stone/[0.75]"
