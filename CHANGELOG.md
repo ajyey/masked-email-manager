@@ -1,3 +1,14 @@
+# [1.0.0-beta.8](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2023-06-21)
+
+
+### Features
+
+* add "All" option to email filter dropdown ([2d5a3af](https://github.com/ajyey/masked-email-manager/commit/2d5a3afc7a99c1e78d0b949991693ef2e9980d57))
+* add email filtering functionality ([c2d03e0](https://github.com/ajyey/masked-email-manager/commit/c2d03e0e65e9e0064990b164cf83ae8f8863fa9f))
+* add fuzzy search functionality ([b33e89e](https://github.com/ajyey/masked-email-manager/commit/b33e89ef9e272728726eb18db1d451f0ba48f6b6))
+* add search query state and clear button for clearing search bar ([0ab6598](https://github.com/ajyey/masked-email-manager/commit/0ab65988f36c2cf61d531cf1e8d101c7e9fb6a7f))
+* update FilterEmailsDropdown and tailwind.config ([b41c2cc](https://github.com/ajyey/masked-email-manager/commit/b41c2cc64bffa8d3aef9a0bf130fbf510f4df185))
+
 # [1.0.0-beta.7](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2023-06-20)
 
 
