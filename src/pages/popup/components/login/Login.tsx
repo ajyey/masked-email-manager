@@ -31,11 +31,6 @@ export default function LoginComponent({
       <div className="min-h-full flex items-center justify-center py-3 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="text-[16px]">
-            {/*<img*/}
-            {/*  className="mx-auto h-12 w-auto"*/}
-            {/*  src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"*/}
-            {/*  alt="Workflow"*/}
-            {/*/>*/}
             <img
               src={icon}
               className="mx-auto h-24 w-auto pointer-events-none"
