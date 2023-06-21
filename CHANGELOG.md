@@ -1,3 +1,10 @@
+# [1.0.0-beta.9](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2023-06-21)
+
+
+### Features
+
+* add SVG icons to filter dropdown items ([1ada99a](https://github.com/ajyey/masked-email-manager/commit/1ada99a5cc27d00ca6494f2da6e45f665d890c5d))
+
 # [1.0.0-beta.8](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2023-06-21)
 
 
