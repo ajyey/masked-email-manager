@@ -21,7 +21,8 @@ function EmailList({ maskedEmails, filter, searchQuery }: Props) {
   // Use Fuse.js to perform the fuzzy search
   const fuse: Fuse<MaskedEmail> = new Fuse(filteredEmails, {
     keys: ['email', 'description', 'id', 'forDomain'],
-    threshold: 0.3
+    threshold: 0.3,
+    useExtendedSearch: true
   });
   const searchResults = searchQuery ? fuse.search(searchQuery) : filteredEmails;
   return (
