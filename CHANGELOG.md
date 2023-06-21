@@ -1,3 +1,16 @@
+# [1.0.0-beta.11](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2023-06-21)
+
+
+### Bug Fixes
+
+* add checkmark back in for selected dropdown option ([979dcf4](https://github.com/ajyey/masked-email-manager/commit/979dcf49cf555b69b9ebcf38b7a1883950c9d234))
+
+
+### Features
+
+* **filter:** add ability for dropdown icons to be present in the dropdown button ([6b7fd46](https://github.com/ajyey/masked-email-manager/commit/6b7fd46d0e3746855d545d0b433bba9b8dd2e29d))
+* add refresh button to TopComponent for refreshing the list of emails ([9ef99c7](https://github.com/ajyey/masked-email-manager/commit/9ef99c7a1792fc35e2aaa6b586884aa88888917a))
+
 # [1.0.0-beta.10](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2023-06-21)
 
 
