@@ -3,7 +3,7 @@ import { MaskedEmail } from 'fastmail-masked-email';
 import EmailItem from '@pages/popup/components/home/emails/EmailItem';
 import Fuse from 'fuse.js';
 
-function isFuseResult(obj: any): obj is Fuse.FuseResult<MaskedEmail> {
+function isFuseResult(obj: object): obj is Fuse.FuseResult<MaskedEmail> {
   return 'item' in obj;
 }
 interface Props {
