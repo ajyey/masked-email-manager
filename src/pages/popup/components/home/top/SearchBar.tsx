@@ -1,13 +1,22 @@
 // SearchBar.tsx
-import React from 'react';
+import React, { useState } from 'react';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
 }
 
 function SearchBar({ onSearchChange }: Props) {
+  const [searchQuery, setSearchQuery] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSearchChange(e.target.value);
+    const query = e.target.value;
+    setSearchQuery(query);
+    onSearchChange(query);
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+    onSearchChange('');
   };
 
   return (
@@ -34,7 +43,28 @@ function SearchBar({ onSearchChange }: Props) {
         placeholder="Search Masked Emails..."
         style={{ caretColor: 'white' }}
         onChange={handleChange}
+        value={searchQuery}
       ></input>
+      {searchQuery && (
+        <button
+          className="absolute inset-y-0 right-0 flex items-center pr-3"
+          onClick={clearSearch}
+        >
+          <svg
+            aria-hidden="true"
+            className="w-5 h-5 text-gray-500 dark:text-gray-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 9.293l4.146-4.147a.5.5 0 01.708.708L10.707 10l4.147 4.146a.5.5 0 01-.708.708L10 10.707l-4.146 4.147a.5.5 0 01-.708-.708L9.293 10 5.146 5.854a.5.5 0 11.708-.708L10 9.293z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      )}
     </div>
   );
 }
