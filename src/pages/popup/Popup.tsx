@@ -7,5 +7,10 @@ interface PopupProps {
 }
 
 export default function Popup({ authenticated }: PopupProps): JSX.Element {
-  return <div>{authenticated ? <HomeComponent /> : <LoginComponent />}</div>;
+  const cssClass = authenticated ? 'home-component' : 'login-component';
+  return (
+    <div className={cssClass}>
+      {authenticated ? <HomeComponent /> : <LoginComponent />}
+    </div>
+  );
 }

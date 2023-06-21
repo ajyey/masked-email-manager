@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LoginSubmitButtonComponent from '@pages/popup/components/login/LoginSubmitButton';
 import { getSession } from 'fastmail-masked-email';
+import icon from '@assets/img/icon.svg';
 
 export default function LoginComponent() {
   const [apiToken, setApiToken] = useState('');
@@ -18,52 +19,77 @@ export default function LoginComponent() {
     await chrome.storage.sync.set({ fastmail_session: session });
   };
   return (
-    <div className="flex items-center h-screen w-screen lg:justify-center">
-      <div className="h-screen w-screen">
-        <div className="p-5 bg-gray-800 md:flex-1 h-screen w-screen">
-          <h3 className="my-4 text-2xl font-semibold text-white text-center">
-            Authentication
-          </h3>
-          <p className="mb-3 text-white text-lg">
-            Fastmail requires an API token with the{' '}
-            <span className="font-semibold">masked email</span> scope to be able
-            to access and manage your masked emails.
-            <br />
-            You can learn more about creating an API token{' '}
-            <a
-              className="text-blue-400"
-              href="https://www.fastmail.help/hc/en-us/articles/5254602856719-API-tokens"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              here
-            </a>
-          </p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-            className="flex flex-col space-y-5"
-          >
-            <div className="flex flex-col space-y-1">
-              <label
-                htmlFor="auth-token"
-                className="text-sm font-semibold text-gray-300"
+    <div className="flex items-center h-screen w-screen lg:justify-center bg-astronaut text-white">
+      <div className="min-h-full flex items-center justify-center py-3 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8">
+          <div className="text-[16px]">
+            {/*<img*/}
+            {/*  className="mx-auto h-12 w-auto"*/}
+            {/*  src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"*/}
+            {/*  alt="Workflow"*/}
+            {/*/>*/}
+            <img
+              src={icon}
+              className="mx-auto h-24 w-auto pointer-events-none"
+              alt="icon"
+            />
+            <p className="mt-6 text-2xl font-extrabold mb-3 text-center">
+              Masked Email Manager
+            </p>
+            <p className="mb-3">
+              Masked Email Manager requires a Fastmail API token with the{' '}
+              <span className="font-semibold text-mikado-yellow">
+                masked email
+              </span>{' '}
+              scope to be able to access and manage your masked emails. Login
+              with yours below.
+            </p>
+            <p className="mb-3">
+              Learn how to create your API token{' '}
+              <a
+                className="text-malibu hover:text-mikado-yellow font-bold"
+                href="https://www.fastmail.help/hc/en-us/articles/5254602856719-API-tokens"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Authentication Token
-              </label>
-              <input
-                type="text"
-                id="auth-token"
-                autoFocus
-                value={apiToken}
-                onChange={handleTokenChange}
-                className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-              />
+                here.
+              </a>
+            </p>
+          </div>
+          <form className="space-y-2" onSubmit={handleSubmit}>
+            <input type="hidden" name="remember" defaultValue="true" />
+            <div className="rounded-md shadow-sm -space-y-px">
+              <div>
+                <label htmlFor="api-token" className="sr-only">
+                  Fastmail API Token
+                </label>
+                <input
+                  id="api-token"
+                  name="api-token"
+                  type="text"
+                  required
+                  className="appearance-none relative block
+                  w-full px-3 py-2 border border-gray-300
+                  placeholder-gray-500 text-gray-900 rounded-md
+                  focus:outline-none focus:ring-indigo-500
+                  focus:border-indigo-500 focus:z-10 text-[14px]"
+                  placeholder="Token"
+                />
+              </div>
             </div>
+
             <div>
-              <LoginSubmitButtonComponent />
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center
+                py-2 px-4 border border-transparent text-sm font-medium
+                rounded-md text-white bg-indigo-600 hover:bg-indigo-700
+                focus:outline-none focus:ring-2 focus:ring-offset-2
+                focus:ring-indigo-500"
+              >
+                <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
+                Authenticate
+              </button>
             </div>
           </form>
         </div>

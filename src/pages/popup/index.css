@@ -1,6 +1,4 @@
 body {
-  width: 600px;
-  height: 400px;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,20 +8,28 @@ body {
 
   position: relative;
 }
-  .scrollbar::-webkit-scrollbar {
-    width: 5px;
-  }
+.login-component {
+  width: 400px;
+  height: 450px;
+}
 
-  .scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  /* scroll bar default color */
-  .scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 193, 7, 0.8); /* mikado yello with 80% transparency */
-    border-radius: 100vh;
+.home-component {
+  width: 600px;
+  height: 600px;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
 
-  }
-  /* scrollbar hover */
-  .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #FFC107;
-  }
+.scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* scroll bar default color */
+.scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 193, 7, 0.8); /* mikado yello with 80% transparency */
+  border-radius: 100vh;
+}
+/* scrollbar hover */
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #ffc107;
+}
