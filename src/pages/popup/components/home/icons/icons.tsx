@@ -1,17 +1,27 @@
 import React from 'react';
 
+/**
+ * Props for the Icon components
+ */
 interface IconProps {
-  className?: string;
+  iconClasses?: string;
 }
+// classes shared by all icons
+const commonIconClasses = 'w-5 h-5 mr-2';
 
-export const AllIcon: React.FC<IconProps> = ({ className }) => (
+/**
+ * SVG icon for the "All" dropdown filter option
+ * @param iconClasses classes to apply to the icon
+ * https://heroicons.com/
+ */
+export const AllIcon: React.FC<IconProps> = ({ iconClasses }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className}
+    className={`${commonIconClasses} ${iconClasses}`}
   >
     <path
       strokeLinecap="round"
@@ -21,14 +31,19 @@ export const AllIcon: React.FC<IconProps> = ({ className }) => (
   </svg>
 );
 
-export const EnabledIcon: React.FC<IconProps> = ({ className }) => (
+/**
+ * SVG icon for the "Enabled" dropdown filter option
+ * @param iconClasses classes to apply to the icon
+ * https://heroicons.com/
+ */
+export const EnabledIcon: React.FC<IconProps> = ({ iconClasses }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className}
+    className={`${commonIconClasses} ${iconClasses}`}
   >
     <path
       strokeLinecap="round"
@@ -37,15 +52,19 @@ export const EnabledIcon: React.FC<IconProps> = ({ className }) => (
     />
   </svg>
 );
-
-export const DisabledIcon: React.FC<IconProps> = ({ className }) => (
+/**
+ * SVG icon for the "Disabled" dropdown filter option
+ * @param iconClasses classes to apply to the icon
+ * https://heroicons.com/
+ */
+export const DisabledIcon: React.FC<IconProps> = ({ iconClasses }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className}
+    className={`${commonIconClasses} ${iconClasses}`}
   >
     <path
       strokeLinecap="round"
@@ -55,14 +74,19 @@ export const DisabledIcon: React.FC<IconProps> = ({ className }) => (
   </svg>
 );
 
-export const DeletedIcon: React.FC<IconProps> = ({ className }) => (
+/**
+ * SVG icon for the "Deleted" dropdown filter option
+ * @param iconClasses classes to apply to the icon
+ * https://heroicons.com/
+ */
+export const DeletedIcon: React.FC<IconProps> = ({ iconClasses }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={className}
+    className={`${commonIconClasses} ${iconClasses}`}
   >
     <path
       strokeLinecap="round"

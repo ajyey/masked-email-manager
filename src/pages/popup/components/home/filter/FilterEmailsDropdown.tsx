@@ -11,27 +11,26 @@ function FilterEmailsDropdown({
 }: {
   onFilterChange: (option: string) => void;
 }) {
-  const commonSvgClasses = 'w-5 h-5 mr-2';
   const dropdownItems = [
     {
       label: 'All',
       value: 'All',
-      icon: <AllIcon className={`${commonSvgClasses} stroke-mikado-yellow`} />
+      icon: <AllIcon iconClasses={'stroke-mikado-yellow'} />
     },
     {
       label: 'Enabled',
       value: 'Enabled',
-      icon: <EnabledIcon className={`${commonSvgClasses} stroke-eucalyptus`} />
+      icon: <EnabledIcon iconClasses={'stroke-eucalyptus'} />
     },
     {
       label: 'Disabled',
       value: 'Disabled',
-      icon: <DisabledIcon className={`${commonSvgClasses} stroke-magnesium`} />
+      icon: <DisabledIcon iconClasses={'stroke-magnesium'} />
     },
     {
       label: 'Deleted',
       value: 'Deleted',
-      icon: <DeletedIcon className={`${commonSvgClasses} stroke-red-500`} />
+      icon: <DeletedIcon iconClasses={'stroke-red-500'} />
     }
   ];
   // State for the dropdown menu open/close status
