@@ -5,12 +5,15 @@ import { list, MaskedEmail } from 'fastmail-masked-email';
 import LoadingComponent from '@pages/popup/components/home/emails/Loading';
 import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmailsDropdown';
 import TopComponent from '@pages/popup/components/home/top/Top';
+import EmailCount from '@pages/popup/components/home/emails/EmailCount';
 
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterOption, setFilterOption] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  // Keep track of the number of filtered emails in the email list
+  const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
 
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
@@ -41,6 +44,7 @@ export default function HomeComponent() {
             {/*<FilterPane onFilterChange={setFilterOption()} />*/}
             <div className="h-[35px] border-b border-b-big-stone flex items-center justify-center">
               <FilterEmailsDropdown onFilterChange={setFilterOption} />
+              <EmailCount count={filteredEmailsCount} />
             </div>
             {isLoading ? (
               <LoadingComponent />
@@ -49,6 +53,7 @@ export default function HomeComponent() {
                 maskedEmails={maskedEmails}
                 filter={filterOption}
                 searchQuery={searchQuery}
+                onFilteredEmailsCountChange={setFilteredEmailsCount}
               />
             )}
           </div>

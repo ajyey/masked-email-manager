@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
 import EmailItem from '@pages/popup/components/home/emails/EmailItem';
 import Fuse from 'fuse.js';
@@ -10,8 +10,14 @@ interface Props {
   maskedEmails: MaskedEmail[];
   filter: string;
   searchQuery: string;
+  onFilteredEmailsCountChange: (count: number) => void;
 }
-function EmailList({ maskedEmails, filter, searchQuery }: Props) {
+function EmailList({
+  maskedEmails,
+  filter,
+  searchQuery,
+  onFilteredEmailsCountChange
+}: Props) {
   let filteredEmails = maskedEmails;
   if (filter !== 'all') {
     filteredEmails = maskedEmails.filter(
@@ -25,6 +31,10 @@ function EmailList({ maskedEmails, filter, searchQuery }: Props) {
     useExtendedSearch: true
   });
   const searchResults = searchQuery ? fuse.search(searchQuery) : filteredEmails;
+
+  useEffect(() => {
+    onFilteredEmailsCountChange(searchResults.length);
+  }, [searchResults, onFilteredEmailsCountChange]);
   return (
     <div className="h-[310px] overflow-y-auto overflow-x-hidden scrollbar pt-2 pb-2">
       <ul className="flex flex-col space-y-2 w-full">

@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   AllIcon,
+  CheckedDropdownItemIcon,
   DeletedIcon,
   DisabledIcon,
+  DropdownButtonIcon,
   EnabledIcon
 } from '@pages/popup/components/home/icons/icons';
 
@@ -76,27 +78,13 @@ function FilterEmailsDropdown({
     <div ref={dropdownRef} className="relative w-[98%]">
       <button
         id="dropdownButton"
-        className="text-white focus:outline-none font-medium rounded-lg text-sm px-4 py-1 inline-flex items-center w-full hover:bg-big-stone/[0.75]"
+        className="text-white focus:outline-none font-medium rounded-lg text-sm px-4 py-1 inline-flex items-center w-[98%] ml-1 mr-1 hover:bg-big-stone/[0.75]"
         type="button"
         onClick={toggleDropdown}
       >
         {selectedOption.icon}
         {selectedOption.value}
-        <svg
-          className="w-4 h-4 ml-auto"
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          ></path>
-        </svg>
+        <DropdownButtonIcon iconClasses={'w-4 h-4 ml-auto'} />
       </button>
       {/*Render the dropdown conditionally*/}
       {isOpen && (
@@ -104,7 +92,7 @@ function FilterEmailsDropdown({
           id="dropdownOptionsContainer"
           className="absolute top-full w-full mt-1 rounded-lg text-white"
         >
-          <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg">
+          <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg ml-1">
             {dropdownItems.map((dropdownItem: any) => (
               <li
                 key={dropdownItem.value}
@@ -116,18 +104,9 @@ function FilterEmailsDropdown({
                   {dropdownItem.label}
                 </span>
                 {selectedOption.value === dropdownItem.value && (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    className="w-4 h-4 ml-auto stroke-malibu stroke-3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
+                  <CheckedDropdownItemIcon
+                    iconClasses={'w-4 h-4 ml-auto stroke-malibu stroke-3'}
+                  />
                 )}
               </li>
             ))}
