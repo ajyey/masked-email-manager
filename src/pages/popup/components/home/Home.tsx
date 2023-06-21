@@ -35,7 +35,7 @@ export default function HomeComponent() {
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">
             {/*<FilterPane onFilterChange={setFilterOption()} />*/}
-            <div className="h-[35px] border-b border-b-big-stone">
+            <div className="h-[35px] border-b border-b-big-stone flex items-center justify-center">
               <FilterEmailsDropdown onFilterChange={setFilterOption} />
             </div>
             {isLoading ? (

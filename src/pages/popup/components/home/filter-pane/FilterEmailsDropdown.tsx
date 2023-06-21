@@ -107,17 +107,17 @@ function FilterEmailsDropdown({
   ];
 
   return (
-    <div>
+    <div className="relative w-[98%]">
       <button
         id="dropdownCheckboxButton"
         data-dropdown-toggle="dropdownDefaultCheckbox"
-        className="text-white ml-3.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="text-white focus:outline-none font-medium rounded-lg text-sm px-4 py-1 inline-flex items-center w-full hover:bg-french-blue "
         type="button"
         onClick={toggleDropdown}
       >
         {selectedOption}
         <svg
-          className="w-4 h-4 ml-2"
+          className="w-4 h-4 ml-auto"
           aria-hidden="true"
           fill="none"
           stroke="currentColor"
@@ -135,8 +135,8 @@ function FilterEmailsDropdown({
       {/*Render the dropdown conditionally*/}
       {isOpen && (
         <div
-          id="dropdownDefaultCheckbox"
-          className="absolute w-48 rounded-lg text-white"
+          id="dropdownContainer"
+          className="absolute top-full w-full mt-1 rounded-lg text-white"
         >
           <ul
             className="p-1 space-y-1 text-sm bg-big-stone rounded-lg"
