@@ -11,6 +11,7 @@ module.exports = {
         magnesium: '#B3B3B3',
         astronaut: '#3D5277',
         charcoal: '#404040',
+        eucalyptus: '#25AA53',
         'mikado-yellow': '#FFC107',
         'bright-sun': '#FFD038',
         'big-stone': '#333E48',
