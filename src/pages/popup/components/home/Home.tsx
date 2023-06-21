@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import EmailList from '@pages/popup/components/home/emails/EmailList';
 import EmailDetailPane from '@pages/popup/components/home/emails/EmailDetailPane';
 import { list, MaskedEmail } from 'fastmail-masked-email';

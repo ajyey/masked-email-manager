@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import icon from '@assets/img/icon.svg';
 import SearchBar from '@pages/popup/components/home/top/SearchBar';
-import refreshMaskedEmails from '@pages/popup/components/home/Home';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
