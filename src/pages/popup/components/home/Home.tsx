@@ -12,24 +12,28 @@ export default function HomeComponent() {
   const [filterOption, setFilterOption] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    const fetchMaskedEmails = async () => {
-      try {
-        const storageData = await chrome.storage.sync.get('fastmail_session');
-        const session = storageData.fastmail_session;
-        const allMaskedEmails: MaskedEmail[] = await list(session);
-        setMaskedEmails(allMaskedEmails);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching masked emails:', error);
-      }
-    };
+  const refreshMaskedEmails = async () => {
+    setIsLoading(true);
+    try {
+      const storageData = await chrome.storage.sync.get('fastmail_session');
+      const session = storageData.fastmail_session;
+      const allMaskedEmails: MaskedEmail[] = await list(session);
+      setMaskedEmails(allMaskedEmails);
+    } catch (error) {
+      console.error('Error fetching masked emails:', error);
+    }
+    setIsLoading(false);
+  };
 
-    fetchMaskedEmails();
+  useEffect(() => {
+    refreshMaskedEmails();
   }, []);
   return (
     <div className="bg-astronaut h-[400px] w-[600px]">
-      <TopComponent onSearchChange={setSearchQuery} />
+      <TopComponent
+        onSearchChange={setSearchQuery}
+        onRefresh={refreshMaskedEmails}
+      />
       {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
       <div className="w-full h-[345px] flex flex-col">
         <div className="flex flex-1">
