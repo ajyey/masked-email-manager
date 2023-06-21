@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import TopComponent from '@pages/popup/components/home/top/Top';
 import MaskedEmailListPane from '@pages/popup/components/home/email-list-pane/MaskedEmailListPane';
 import MaskedEmailDetailPane from '@pages/popup/components/home/email-list-pane/MaskedEmailDetailPane';
 import { list, MaskedEmail } from 'fastmail-masked-email';
 import LoadingComponent from '@pages/popup/components/home/email-list-pane/Loading';
 import FilterEmailsDropdown from '@pages/popup/components/home/filter-pane/FilterEmailsDropdown';
+import TopComponent from '@pages/popup/components/home/top/Top';
 
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterOption, setFilterOption] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchMaskedEmails = async () => {
@@ -28,7 +29,7 @@ export default function HomeComponent() {
   }, []);
   return (
     <div className="bg-astronaut h-[400px] w-[600px]">
-      <TopComponent />
+      <TopComponent onSearchChange={setSearchQuery} />
       {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
       <div className="w-full h-[345px] flex flex-col">
         <div className="flex flex-1">
@@ -43,6 +44,7 @@ export default function HomeComponent() {
               <MaskedEmailListPane
                 maskedEmails={maskedEmails}
                 filter={filterOption}
+                searchQuery={searchQuery}
               />
             )}
           </div>
