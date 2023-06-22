@@ -10,14 +10,19 @@ interface Props {
   maskedEmails: MaskedEmail[];
   filter: string;
   searchQuery: string;
-  // callback prop to receive the count of filtered emails
   onFilteredEmailsCountChange: (count: number) => void;
+  setSelectedEmailId: (
+    value: ((prevState: string | null) => string | null) | string | null
+  ) => void;
+  selectedEmailId: string | null;
 }
 function EmailList({
   maskedEmails,
   filter,
   searchQuery,
-  onFilteredEmailsCountChange
+  onFilteredEmailsCountChange,
+  setSelectedEmailId,
+  selectedEmailId
 }: Props) {
   let filteredEmails = maskedEmails;
   if (filter !== 'all') {
@@ -32,7 +37,6 @@ function EmailList({
     useExtendedSearch: true
   });
   const searchResults = searchQuery ? fuse.search(searchQuery) : filteredEmails;
-  const [selectedEmailId, setSelectedEmailId] = useState<string | null>(null);
   const handleEmailItemClick = (id: string) => {
     setSelectedEmailId(id);
   };

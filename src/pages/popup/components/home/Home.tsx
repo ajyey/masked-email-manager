@@ -15,6 +15,7 @@ export default function HomeComponent() {
   const [searchQuery, setSearchQuery] = useState('');
   // State for keeping track of the count of filtered emails
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
+  const [selectedEmailId, setSelectedEmailId] = useState<string | null>(null);
 
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
@@ -55,11 +56,13 @@ export default function HomeComponent() {
                 filter={filterOption}
                 searchQuery={searchQuery}
                 onFilteredEmailsCountChange={setFilteredEmailsCount}
+                setSelectedEmailId={setSelectedEmailId}
+                selectedEmailId={selectedEmailId}
               />
             )}
           </div>
           <div className="columns-[350px]">
-            <EmailDetailPane />
+            <EmailDetailPane selectedEmailId={selectedEmailId} />
           </div>
         </div>
       </div>

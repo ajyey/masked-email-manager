@@ -388,4 +388,4 @@ $RECYCLE.BIN/
 
 #generated manifest
 public/manifest.json
-.vite.config.js.timestamp*
+.vite.config.ts.timestamp*
