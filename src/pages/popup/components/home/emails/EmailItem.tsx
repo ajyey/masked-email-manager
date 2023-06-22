@@ -26,6 +26,16 @@ export default function EmailItem({
       return maskedEmail.email;
     }
   }, [maskedEmail.email]);
+  const truncatedDescription = useMemo(() => {
+    const descriptionLength = maskedEmail.description.length;
+    const maxLength = 36;
+
+    if (descriptionLength > maxLength) {
+      return maskedEmail.description.slice(0, maxLength - 3) + '...';
+    } else {
+      return maskedEmail.description;
+    }
+  }, [maskedEmail.description]);
 
   // If the email item is currently selected, use the french-blue background color.
   const backgroundStyle = isSelected
@@ -39,7 +49,7 @@ export default function EmailItem({
       <div className="flex flex-row justify-between">
         <div className="flex flex-col align-middle ml-2 mt-1">
           <div className="text-sm text-white font-bold">{truncatedEmail}</div>
-          <div className="text-xs text-white">{maskedEmail.description}</div>
+          <div className="text-xs text-white">{truncatedDescription}</div>
         </div>
       </div>
     </div>
