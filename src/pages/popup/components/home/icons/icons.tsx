@@ -145,7 +145,7 @@ export const FavoriteIcon: React.FC<IconProps> = ({ iconClasses }) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    className={`${iconClasses}`}
+    className={`${dropdownItemIconClasses} ${iconClasses}`}
   >
     <path
       strokeLinecap="round"

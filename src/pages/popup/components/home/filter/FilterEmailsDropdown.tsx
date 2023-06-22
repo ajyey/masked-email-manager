@@ -5,7 +5,8 @@ import {
   DeletedIcon,
   DisabledIcon,
   DropdownButtonIcon,
-  EnabledIcon
+  EnabledIcon,
+  FavoriteIcon
 } from '@pages/popup/components/home/icons/icons';
 
 function FilterEmailsDropdown({
@@ -33,6 +34,13 @@ function FilterEmailsDropdown({
       label: 'Deleted',
       value: 'Deleted',
       icon: <DeletedIcon iconClasses={'stroke-red-500'} />
+    },
+    {
+      label: 'Favorited',
+      value: 'Favorited',
+      icon: (
+        <FavoriteIcon iconClasses={'fill-mikado-yellow stroke-mikado-yellow'} />
+      )
     }
   ];
   // State for the dropdown menu open/close status
@@ -44,7 +52,8 @@ function FilterEmailsDropdown({
     Enabled: 'enabled',
     Disabled: 'disabled',
     Deleted: 'deleted',
-    All: 'all'
+    All: 'all',
+    Favorited: 'favorited'
   };
   // Toggle the dropdown menu open/close status
   const toggleDropdown = () => {
