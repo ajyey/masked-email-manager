@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
 import EmailItem from '@pages/popup/components/home/emails/EmailItem';
 import Fuse from 'fuse.js';
+import { getFavoriteEmailIds } from '../../../../../../utils/storageUtil';
 
 function isFuseResult(obj: object): obj is Fuse.FuseResult<MaskedEmail> {
   return 'item' in obj;
@@ -24,12 +25,28 @@ function EmailList({
   setSelectedEmailId,
   selectedEmailId
 }: Props) {
-  let filteredEmails = maskedEmails;
-  if (filter !== 'all') {
-    filteredEmails = maskedEmails.filter(
-      (email: MaskedEmail) => email.state === filter
-    );
-  }
+  // Keep track of the filtered emails
+  const [filteredEmails, setFilteredEmails] = useState<MaskedEmail[]>([]);
+  // Filter the emails based on the filter prop
+  useEffect(() => {
+    const applyFilter = async () => {
+      let newFilteredEmails = maskedEmails;
+      if (filter !== 'all' && filter !== 'favorited') {
+        newFilteredEmails = maskedEmails.filter(
+          (email: MaskedEmail) => email.state === filter
+        );
+      }
+      if (filter === 'favorited') {
+        const favoritedEmails = await getFavoriteEmailIds();
+        newFilteredEmails = maskedEmails.filter((email: MaskedEmail) =>
+          favoritedEmails.includes(email.id)
+        );
+      }
+      setFilteredEmails(newFilteredEmails);
+    };
+    applyFilter();
+  }, [maskedEmails, filter]);
+
   // Use Fuse.js to perform the fuzzy search
   const fuse: Fuse<MaskedEmail> = new Fuse(filteredEmails, {
     keys: ['email', 'description', 'id', 'forDomain'],
@@ -48,6 +65,8 @@ function EmailList({
         ? searchResults[0].item.id
         : searchResults[0].id;
       setSelectedEmailId(firstEmailId);
+    } else {
+      setSelectedEmailId(null);
     }
     // Call the onFilteredEmailsCountChange callback with the searchResults length
     onFilteredEmailsCountChange(searchResults.length);

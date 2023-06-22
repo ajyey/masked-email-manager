@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import EditButton from '@pages/popup/components/home/emails/EditButton';
 import FavoriteButton from '@pages/popup/components/home/emails/FavoriteButton';
 import {
-  getFavoriteEmails,
-  setFavoriteEmails
+  getFavoriteEmailIds,
+  setFavoriteEmailIds
 } from '../../../../../../utils/storageUtil';
 
 export default function EmailDetailPane({
@@ -15,20 +15,22 @@ export default function EmailDetailPane({
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
   useEffect(() => {
     if (selectedEmailId) {
-      getFavoriteEmails().then((favoriteEmails) => {
+      getFavoriteEmailIds().then((favoriteEmails) => {
         setIsFavorited(favoriteEmails.includes(selectedEmailId));
       });
+    } else {
+      setIsFavorited(false);
     }
   }, [selectedEmailId]);
   const handleFavoriteButtonClick = async () => {
     if (selectedEmailId) {
-      const favoritedEmailIds = await getFavoriteEmails();
+      const favoritedEmailIds = await getFavoriteEmailIds();
       if (isFavorited) {
         // Remove the email from the favorites list
         const updatedFavorites = favoritedEmailIds.filter(
           (emailId) => emailId !== selectedEmailId
         );
-        await setFavoriteEmails(updatedFavorites);
+        await setFavoriteEmailIds(updatedFavorites);
         setIsFavorited(false);
       } else {
         // Add the email to the favorites list
@@ -36,9 +38,11 @@ export default function EmailDetailPane({
           ...favoritedEmailIds,
           selectedEmailId
         ];
-        await setFavoriteEmails(updatedFavoritedEmailIds);
+        await setFavoriteEmailIds(updatedFavoritedEmailIds);
         setIsFavorited(true);
       }
+    } else {
+      setIsFavorited(false);
     }
   };
   return (
