@@ -11,7 +11,7 @@ import { FASTMAIL_SESSION_KEY } from '../../../../../utils/constants';
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filterOption, setFilterOption] = useState('all');
+  const [filterOption, setFilterOption] = useState('favorited');
   const [searchQuery, setSearchQuery] = useState('');
   // State for keeping track of the count of filtered emails
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);

@@ -16,6 +16,13 @@ function FilterEmailsDropdown({
 }) {
   const dropdownItems = [
     {
+      label: 'Favorited',
+      value: 'Favorited',
+      icon: (
+        <FavoriteIcon iconClasses={'fill-mikado-yellow stroke-mikado-yellow'} />
+      )
+    },
+    {
       label: 'All',
       value: 'All',
       icon: <AllIcon iconClasses={'stroke-mikado-yellow'} />
@@ -34,13 +41,6 @@ function FilterEmailsDropdown({
       label: 'Deleted',
       value: 'Deleted',
       icon: <DeletedIcon iconClasses={'stroke-red-500'} />
-    },
-    {
-      label: 'Favorited',
-      value: 'Favorited',
-      icon: (
-        <FavoriteIcon iconClasses={'fill-mikado-yellow stroke-mikado-yellow'} />
-      )
     }
   ];
   // State for the dropdown menu open/close status
