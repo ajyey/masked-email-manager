@@ -1,3 +1,11 @@
+# [1.0.0-beta.17](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2023-06-22)
+
+
+### Features
+
+* **emails:** add ability to select an email ([66414c1](https://github.com/ajyey/masked-email-manager/commit/66414c1c93ea9847ceb7da62d29fceb601f3053c))
+* add constant for Fastmail session key and only store the session ([a87458c](https://github.com/ajyey/masked-email-manager/commit/a87458cd8e64e5c220084ec986ed320cbeec2ade))
+
 # [1.0.0-beta.16](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2023-06-21)
 
 
