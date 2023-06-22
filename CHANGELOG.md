@@ -1,3 +1,17 @@
+# [1.0.0-beta.18](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2023-06-22)
+
+
+### Bug Fixes
+
+* bug where the favorite icon would appear favorited even when there are no search results ([a28aa56](https://github.com/ajyey/masked-email-manager/commit/a28aa568a74e9a29782922f7ef8df953b4391229))
+
+
+### Features
+
+* add basic favorite email functionality ([c5db78c](https://github.com/ajyey/masked-email-manager/commit/c5db78c3f40e03aee71a87d3dfbe4677bd29a676))
+* add initial dropdown for favorited emails ([8d8d0c1](https://github.com/ajyey/masked-email-manager/commit/8d8d0c1e12a161880b39bfc60ec972f42eaa4799))
+* add initial Edit and Favorite buttons to Email Detail Pane ([540a9dc](https://github.com/ajyey/masked-email-manager/commit/540a9dc4a8ab232f22b8f299d2968dffb8f4db82))
+
 # [1.0.0-beta.17](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2023-06-22)
 
 
