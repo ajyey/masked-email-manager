@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
 import EmailItem from '@pages/popup/components/home/emails/EmailItem';
 import Fuse from 'fuse.js';
@@ -32,8 +32,19 @@ function EmailList({
     useExtendedSearch: true
   });
   const searchResults = searchQuery ? fuse.search(searchQuery) : filteredEmails;
+  const [selectedEmailId, setSelectedEmailId] = useState<string | null>(null);
+  const handleEmailItemClick = (id: string) => {
+    setSelectedEmailId(id);
+  };
 
   useEffect(() => {
+    // Select the first email in the list by default
+    if (searchResults.length > 0) {
+      const firstEmailId = isFuseResult(searchResults[0])
+        ? searchResults[0].item.id
+        : searchResults[0].id;
+      setSelectedEmailId(firstEmailId);
+    }
     // Call the onFilteredEmailsCountChange callback with the searchResults length
     onFilteredEmailsCountChange(searchResults.length);
   }, [searchResults, onFilteredEmailsCountChange]);
@@ -45,7 +56,14 @@ function EmailList({
           const maskedEmail: MaskedEmail = isFuseResult(result)
             ? result.item
             : result;
-          return <EmailItem key={maskedEmail.id} maskedEmail={maskedEmail} />;
+          return (
+            <EmailItem
+              key={maskedEmail.id}
+              maskedEmail={maskedEmail}
+              onClick={handleEmailItemClick}
+              isSelected={maskedEmail.id === selectedEmailId}
+            />
+          );
         })}
       </ul>
     </div>
