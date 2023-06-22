@@ -3,15 +3,15 @@ import { createRoot } from 'react-dom/client';
 import '@pages/popup/index.css';
 import '@assets/styles/tailwind.css';
 import Popup from '@pages/popup/Popup';
-import { FASTMAIL_API_TOKEN } from '../../../utils/constants';
+import { FASTMAIL_SESSION_KEY } from '../../../utils/constants';
 
 /**
  * Check if the user is already authenticated and their API key is stored in Chrome storage
  */
 const getAuthenticationStatus = (): Promise<boolean> => {
   return new Promise((resolve) => {
-    chrome.storage.sync.get(FASTMAIL_API_TOKEN, (result) => {
-      if (result && result.fastmail_api_token) {
+    chrome.storage.sync.get(FASTMAIL_SESSION_KEY, (result) => {
+      if (result && result[FASTMAIL_SESSION_KEY]) {
         resolve(true);
       } else {
         resolve(false);

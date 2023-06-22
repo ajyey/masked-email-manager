@@ -6,6 +6,7 @@ import LoadingComponent from '@pages/popup/components/home/emails/Loading';
 import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmailsDropdown';
 import TopComponent from '@pages/popup/components/home/top/Top';
 import EmailCount from '@pages/popup/components/home/emails/EmailCount';
+import { FASTMAIL_SESSION_KEY } from '../../../../../utils/constants';
 
 export default function HomeComponent() {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
@@ -18,8 +19,8 @@ export default function HomeComponent() {
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
     try {
-      const storageData = await chrome.storage.sync.get('fastmail_session');
-      const session = storageData.fastmail_session;
+      const storageData = await chrome.storage.sync.get(FASTMAIL_SESSION_KEY);
+      const session = storageData[FASTMAIL_SESSION_KEY];
       const allMaskedEmails: MaskedEmail[] = await list(session);
       setMaskedEmails(allMaskedEmails);
     } catch (error) {
