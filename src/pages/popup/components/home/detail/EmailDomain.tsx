@@ -11,7 +11,7 @@ function EmailDomain({ emailDomain }: { emailDomain: string | null }) {
           domain
         </div>
         <div
-          className={`ml-2 font-normal text-detailValue ${domainLabelColor}`}
+          className={`ml-2 mb-1 font-normal text-detailValue ${domainLabelColor}`}
         >
           {domainExists ? emailDomain : 'No domain set'}
         </div>

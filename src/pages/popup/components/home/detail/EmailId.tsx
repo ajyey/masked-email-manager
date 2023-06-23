@@ -8,7 +8,7 @@ function EmailId({ emailId }: { emailId: string | null }) {
         >
           ID
         </div>
-        <div className="ml-2 font-normal text-white text-detailValue">
+        <div className="ml-2 mb-1 font-normal text-white text-detailValue">
           {emailId}
         </div>
       </div>

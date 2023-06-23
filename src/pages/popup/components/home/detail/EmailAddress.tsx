@@ -8,7 +8,7 @@ function EmailAddress({ emailAddress }: { emailAddress: string | null }) {
         >
           email
         </div>
-        <div className="ml-2 font-normal text-white text-detailValue">
+        <div className="ml-2 mb-1 font-normal text-white text-detailValue">
           {emailAddress}
         </div>
       </div>

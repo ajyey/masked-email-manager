@@ -18,7 +18,7 @@ function EmailDescription({
           description
         </div>
         <div
-          className={`ml-2 font-normal text-detailValue ${descriptionLabelColor}`}
+          className={`ml-2 mb-1 font-normal text-detailValue ${descriptionLabelColor}`}
         >
           {descriptionExists ? emailDescription : 'No description set'}
         </div>
