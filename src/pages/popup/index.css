@@ -17,6 +17,18 @@ body {
   width: 600px;
   height: 400px;
 }
+
+/* For Firefox */
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 193, 7, 0.8) transparent;
+}
+
+.scrollbar:hover {
+  scrollbar-color: #ffc107 transparent;
+}
+
+/* For Chrome, Safari, and other WebKit browsers */
 .scrollbar::-webkit-scrollbar {
   width: 5px;
 }
@@ -24,12 +36,13 @@ body {
 .scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
-/* scroll bar default color */
+
 .scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 193, 7, 0.8); /* mikado yello with 80% transparency */
+  background: rgba(255, 193, 7, 0.8); /* mikado yellow with 80% transparency */
   border-radius: 100vh;
 }
-/* scrollbar hover */
+
 .scrollbar::-webkit-scrollbar-thumb:hover {
   background: #ffc107;
 }
+
