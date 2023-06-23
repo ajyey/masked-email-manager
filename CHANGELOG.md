@@ -1,3 +1,10 @@
+# [1.0.0-beta.19](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2023-06-22)
+
+
+### Features
+
+* set favorited to be the default (top) option in the dropdown ([97e7944](https://github.com/ajyey/masked-email-manager/commit/97e79447667cacd8f664c3c954c940d63cc43dfd))
+
 # [1.0.0-beta.18](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2023-06-22)
 
 
