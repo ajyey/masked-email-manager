@@ -1,8 +1,6 @@
 import type { Manifest } from 'webextension-polyfill';
 import pkg from '../package.json';
 
-// Check if
-
 const manifest: Manifest.WebExtensionManifest = {
   manifest_version: 3,
   name: pkg.displayName,
@@ -39,7 +37,7 @@ const manifest: Manifest.WebExtensionManifest = {
   ]
 };
 
-const isFirefox = process.env.MODE === 'firefox';
+const isFirefox = process.env.BROWSER === 'firefox';
 // Firefox does not support background.service_worker, so convert to the firefox compatible background.scripts
 if (isFirefox) {
   const extensionId = 'c48d361c-1173-11ee-be56-0242ac120002';

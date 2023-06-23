@@ -9,5 +9,5 @@
   "ignore": [
     "src/**/*.spec.ts"
   ],
-  "exec": "vite build && npm run update-version"
+  "exec": "vite build && BROWSER=firefox vite build && npm run update-version"
 }
