@@ -382,6 +382,7 @@ $RECYCLE.BIN/
 
 # build
 /dist
+dist-firefox
 
 # etc
 .idea

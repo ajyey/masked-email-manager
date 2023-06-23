@@ -11,7 +11,8 @@
   "type": "module",
   "scripts": {
     "build": "run-s lint build:*",
-    "build:production": "vite build",
+    "build:production:chrome": "vite build",
+    "build:production:firefox": "MODE=firefox vite build",
     "lint": "run-s lint:*",
     "lint:ts": "eslint src --ext .ts,.tsx --fix",
     "lint:html": "prettier --config .prettierrc 'src/**/*.html' --write",

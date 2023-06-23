@@ -54,11 +54,11 @@ const generatePluginsConfig = () => {
   ];
 
   if (currentBranch === 'main') {
-    // Insert before github plugin
+    // Insert before GitHub plugin
     basePlugins.splice(3,0,[
       'semantic-release-chrome',
       {
-        extensionId: 'bckfnibflpdgifdfkfoooidpblaembga',
+        extensionId: 'bckfnibflpdgifdfkfoooidpblaembga', // TODO: replace with actual extension ID
         asset: 'masked-email-manager_v${nextRelease.version}.zip',
       },
     ]);

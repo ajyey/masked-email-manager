@@ -3,6 +3,8 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 import { outputFolderName } from './utils/constants';
+const isFirefox = process.env.MODE === 'firefox';
+const firefoxOutDir = resolve(__dirname, 'dist-firefox');
 import makeManifest from './utils/plugins/make-manifest';
 
 const root = resolve(__dirname, 'src');
@@ -22,7 +24,7 @@ export default defineConfig({
   plugins: [react(), makeManifest()],
   publicDir,
   build: {
-    outDir,
+    outDir: isFirefox ? firefoxOutDir : outDir,
     sourcemap: process.env.__DEV__ === 'true',
     emptyOutDir: false,
     rollupOptions: {
