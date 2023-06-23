@@ -1,12 +1,13 @@
 import { FAVORITE_EMAILS_KEY } from './constants';
+import browser from 'webextension-polyfill';
 
 export const getFavoriteEmailIds = async (): Promise<string[]> => {
-  const data = await chrome.storage.sync.get(FAVORITE_EMAILS_KEY);
+  const data = await browser.storage.sync.get(FAVORITE_EMAILS_KEY);
   return data[FAVORITE_EMAILS_KEY] || [];
 };
 
 export const setFavoriteEmailIds = async (
   emailIds: string[]
 ): Promise<void> => {
-  await chrome.storage.sync.set({ [FAVORITE_EMAILS_KEY]: emailIds });
+  await browser.storage.sync.set({ [FAVORITE_EMAILS_KEY]: emailIds });
 };

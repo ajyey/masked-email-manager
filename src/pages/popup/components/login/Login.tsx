@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import LoginSubmitButtonComponent from '@pages/popup/components/login/LoginSubmitButton';
 import { getSession } from 'fastmail-masked-email';
 import icon from '@assets/img/icon.svg';
 import { FASTMAIL_SESSION_KEY } from '../../../../../utils/constants';
+import browser from 'webextension-polyfill';
 
 interface LoginComponentProps {
   onLoginSuccess: () => void;
@@ -22,7 +22,7 @@ export default function LoginComponent({
   const handleSubmit = async () => {
     const session = await getSession(apiToken);
     //TODO: Handle error if the user enters an invalid API token
-    await chrome.storage.sync.set({ [FASTMAIL_SESSION_KEY]: session });
+    await browser.storage.sync.set({ [FASTMAIL_SESSION_KEY]: session });
     // Call the onLoginSuccess callback after a successful login
     onLoginSuccess();
   };
