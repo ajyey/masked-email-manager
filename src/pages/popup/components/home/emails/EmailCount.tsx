@@ -10,7 +10,9 @@ interface EmailCountProps {
  * @param count The number of emails in the list
  */
 const EmailCount: React.FC<EmailCountProps> = ({ count }) => {
-  return <div className="ml-1 mr-1 text-white font-medium">{count}</div>;
+  return (
+    <div className="ml-1 mr-1 text-white font-medium text-sm">{count}</div>
+  );
 };
 
 export default EmailCount;
