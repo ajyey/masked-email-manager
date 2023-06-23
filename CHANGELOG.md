@@ -1,3 +1,17 @@
+# [1.0.0-beta.20](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2023-06-23)
+
+
+### Bug Fixes
+
+* make email count text small for cross browser consistency ([c994b6d](https://github.com/ajyey/masked-email-manager/commit/c994b6dcabafa4046eb9de9026e0bdf4ab29c2fb))
+
+
+### Features
+
+* add Firefox support to build process ([c7f1201](https://github.com/ajyey/masked-email-manager/commit/c7f1201493cfef3a22853ea5b19b1977241d7d3b))
+* add scrollbar css styling for firefox ([041dc4b](https://github.com/ajyey/masked-email-manager/commit/041dc4b7fd4fcb07cbb31014eb34bb772dec912f))
+* use web extension polyfill in preparation for supporting multiple browsers ([e5b49df](https://github.com/ajyey/masked-email-manager/commit/e5b49df93891a7171ccbf09faf60b33f307c8795))
+
 # [1.0.0-beta.19](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2023-06-22)
 
 
