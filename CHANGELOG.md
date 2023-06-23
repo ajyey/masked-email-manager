@@ -1,3 +1,11 @@
+# [1.0.0-beta.21](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2023-06-23)
+
+
+### Features
+
+* add EmailAddress, EmailDescription, EmailDomain and EmailId components for email detail ([4c00994](https://github.com/ajyey/masked-email-manager/commit/4c009940e558d9add82e58a65de04c03541b5679))
+* add zip command to build script for testing in firefox ([20d19ef](https://github.com/ajyey/masked-email-manager/commit/20d19efda87e7c4ce431bfa7686802aee5da94df))
+
 # [1.0.0-beta.20](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2023-06-23)
 
 
