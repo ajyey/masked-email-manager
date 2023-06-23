@@ -21,7 +21,12 @@ module.exports = {
       },
       strokeWidth: {
         3: '3px'
+      },
+      fontSize: {
+        detailLabel: ['14px'],
+        detailValue: ['16px'],
       }
+
     }
   },
   prefix: '',
