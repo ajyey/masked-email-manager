@@ -1,6 +1,15 @@
-function EmailId({ emailId }: { emailId: string | null }) {
+function EmailId({
+  emailId,
+  isEditing
+}: {
+  emailId: string | null;
+  isEditing: boolean;
+}) {
+  const containerStyle = `bg-astronaut border border-t-0 rounded-b-lg border-big-stone hover:bg-french-blue/[0.4] ${
+    isEditing ? 'bg-big-stone' : 'bg-astronaut hover:bg-french-blue/[0.4]'
+  }`;
   return (
-    <div className="bg-astronaut border border-t-0 rounded-b-lg border-big-stone hover:bg-french-blue/[0.4]">
+    <div className={containerStyle}>
       <div>
         <div
           className="pt-1 ml-2 text-malibu font-normal text-detailLabel"

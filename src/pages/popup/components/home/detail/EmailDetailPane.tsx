@@ -18,6 +18,7 @@ export default function EmailDetailPane({
 }) {
   // Track whether the selected email is favorited
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   useEffect(() => {
     if (selectedEmail) {
       getFavoriteEmailIds().then((favoriteEmails) => {
@@ -50,27 +51,35 @@ export default function EmailDetailPane({
       setIsFavorited(false);
     }
   };
+  const handleEditButtonClick = () => {
+    setIsEditing(true);
+  };
   return (
     <div>
       <div className="h-[35px] border-b border-b-yellow-400 flex items-center justify-end">
-        {/*TODO: dynamically set the isFavorited based on whether the user has fovorited this email*/}
         <FavoriteButton
           isFavorited={isFavorited}
           onClick={handleFavoriteButtonClick}
         />
-        <EditButton />
+        <EditButton onClick={handleEditButtonClick} />
       </div>
       <div className={'mt-4 ml-4 mr-4'}>
         <EmailAddress
           emailAddress={selectedEmail ? selectedEmail.email : null}
+          isEditing={isEditing}
         />
         <EmailDomain
           emailDomain={selectedEmail?.forDomain ? selectedEmail.forDomain : ''}
+          isEditing={isEditing}
         />
         <EmailDescription
           emailDescription={selectedEmail ? selectedEmail.description : null}
+          isEditing={isEditing}
         />
-        <EmailId emailId={selectedEmail ? selectedEmail.id : null} />
+        <EmailId
+          emailId={selectedEmail ? selectedEmail.id : null}
+          isEditing={isEditing}
+        />
       </div>
     </div>
   );
