@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EmailList from '@pages/popup/components/home/emails/EmailList';
-import EmailDetailPane from '@pages/popup/components/home/emails/EmailDetailPane';
+import EmailDetailPane from '@pages/popup/components/home/detail/EmailDetailPane';
 import { list, MaskedEmail } from 'fastmail-masked-email';
 import LoadingComponent from '@pages/popup/components/home/emails/Loading';
 import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmailsDropdown';
@@ -16,7 +16,7 @@ export default function HomeComponent() {
   const [searchQuery, setSearchQuery] = useState('');
   // State for keeping track of the count of filtered emails
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
-  const [selectedEmailId, setSelectedEmailId] = useState<string | null>(null);
+  const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
 
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
@@ -57,13 +57,13 @@ export default function HomeComponent() {
                 filter={filterOption}
                 searchQuery={searchQuery}
                 onFilteredEmailsCountChange={setFilteredEmailsCount}
-                setSelectedEmailId={setSelectedEmailId}
-                selectedEmailId={selectedEmailId}
+                setSelectedEmail={setSelectedEmail}
+                selectedEmail={selectedEmail}
               />
             )}
           </div>
           <div className="columns-[350px]">
-            <EmailDetailPane selectedEmailId={selectedEmailId} />
+            <EmailDetailPane selectedEmail={selectedEmail} />
           </div>
         </div>
       </div>

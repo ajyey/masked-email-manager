@@ -12,18 +12,16 @@ interface Props {
   filter: string;
   searchQuery: string;
   onFilteredEmailsCountChange: (count: number) => void;
-  setSelectedEmailId: (
-    value: ((prevState: string | null) => string | null) | string | null
-  ) => void;
-  selectedEmailId: string | null;
+  setSelectedEmail: (email: MaskedEmail | null) => void;
+  selectedEmail: MaskedEmail | null;
 }
 function EmailList({
   maskedEmails,
   filter,
   searchQuery,
   onFilteredEmailsCountChange,
-  setSelectedEmailId,
-  selectedEmailId
+  setSelectedEmail,
+  selectedEmail
 }: Props) {
   // Keep track of the filtered emails
   const [filteredEmails, setFilteredEmails] = useState<MaskedEmail[]>([]);
@@ -54,19 +52,19 @@ function EmailList({
     useExtendedSearch: true
   });
   const searchResults = searchQuery ? fuse.search(searchQuery) : filteredEmails;
-  const handleEmailItemClick = (id: string) => {
-    setSelectedEmailId(id);
+  const handleEmailItemClick = (email: MaskedEmail) => {
+    setSelectedEmail(email);
   };
 
   useEffect(() => {
     // Select the first email in the list by default
     if (searchResults.length > 0) {
-      const firstEmailId = isFuseResult(searchResults[0])
-        ? searchResults[0].item.id
-        : searchResults[0].id;
-      setSelectedEmailId(firstEmailId);
+      const firstEmail = isFuseResult(searchResults[0])
+        ? searchResults[0].item
+        : searchResults[0];
+      setSelectedEmail(firstEmail);
     } else {
-      setSelectedEmailId(null);
+      setSelectedEmail(null);
     }
     // Call the onFilteredEmailsCountChange callback with the searchResults length
     onFilteredEmailsCountChange(searchResults.length);
@@ -84,7 +82,9 @@ function EmailList({
               key={maskedEmail.id}
               maskedEmail={maskedEmail}
               onClick={handleEmailItemClick}
-              isSelected={maskedEmail.id === selectedEmailId}
+              isSelected={
+                selectedEmail ? maskedEmail.id === selectedEmail.id : false
+              }
             />
           );
         })}

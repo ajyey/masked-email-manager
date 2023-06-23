@@ -3,7 +3,7 @@ import { MaskedEmail } from 'fastmail-masked-email';
 
 interface MaskedEmailListItemProps {
   maskedEmail: MaskedEmail;
-  onClick: (id: string) => void;
+  onClick: (email: MaskedEmail) => void;
   isSelected: boolean;
 }
 
@@ -13,7 +13,7 @@ export default function EmailItem({
   isSelected
 }: MaskedEmailListItemProps) {
   const handleClick = () => {
-    onClick(maskedEmail.id);
+    onClick(maskedEmail);
   };
 
   const truncatedEmail = useMemo(() => {

@@ -1,34 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import EditButton from '@pages/popup/components/home/emails/EditButton';
-import FavoriteButton from '@pages/popup/components/home/emails/FavoriteButton';
+import EditButton from '@pages/popup/components/home/detail/EditButton';
+import FavoriteButton from '@pages/popup/components/home/detail/FavoriteButton';
 import {
   getFavoriteEmailIds,
   setFavoriteEmailIds
 } from '../../../../../../utils/storageUtil';
+import { MaskedEmail } from 'fastmail-masked-email';
 
 export default function EmailDetailPane({
-  selectedEmailId
+  selectedEmail
 }: {
-  selectedEmailId: string | null;
+  selectedEmail: MaskedEmail | null;
 }) {
   // Track whether the selected email is favorited
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
   useEffect(() => {
-    if (selectedEmailId) {
+    if (selectedEmail) {
       getFavoriteEmailIds().then((favoriteEmails) => {
-        setIsFavorited(favoriteEmails.includes(selectedEmailId));
+        setIsFavorited(favoriteEmails.includes(selectedEmail.id));
       });
     } else {
       setIsFavorited(false);
     }
-  }, [selectedEmailId]);
+  }, [selectedEmail]);
   const handleFavoriteButtonClick = async () => {
-    if (selectedEmailId) {
+    if (selectedEmail) {
       const favoritedEmailIds = await getFavoriteEmailIds();
       if (isFavorited) {
         // Remove the email from the favorites list
         const updatedFavorites = favoritedEmailIds.filter(
-          (emailId) => emailId !== selectedEmailId
+          (emailId) => emailId !== selectedEmail.id
         );
         await setFavoriteEmailIds(updatedFavorites);
         setIsFavorited(false);
@@ -36,7 +37,7 @@ export default function EmailDetailPane({
         // Add the email to the favorites list
         const updatedFavoritedEmailIds = [
           ...favoritedEmailIds,
-          selectedEmailId
+          selectedEmail.id
         ];
         await setFavoriteEmailIds(updatedFavoritedEmailIds);
         setIsFavorited(true);
