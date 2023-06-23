@@ -3,7 +3,6 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 import { outputFolderName } from './utils/constants';
-import buildContentScript from './utils/plugins/build-content-script';
 import makeManifest from './utils/plugins/make-manifest';
 
 const root = resolve(__dirname, 'src');
@@ -20,7 +19,7 @@ export default defineConfig({
       '@pages': pagesDir
     }
   },
-  plugins: [react(), makeManifest(), buildContentScript()],
+  plugins: [react(), makeManifest()],
   publicDir,
   build: {
     outDir,
