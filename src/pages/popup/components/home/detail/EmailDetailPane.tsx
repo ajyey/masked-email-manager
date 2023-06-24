@@ -23,6 +23,7 @@ import SaveButton from '@pages/popup/components/home/detail/SaveButton';
 import CancelEditingButton from '@pages/popup/components/home/detail/CancelEditingButton';
 import { CopyIcon } from '@pages/popup/components/home/icons/icons';
 import EmailStateToggle from '@pages/popup/components/home/detail/EmailStateToggle';
+import NoEmailSelected from '@pages/popup/components/home/detail/NoEmailSelected';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -88,6 +89,7 @@ export default function EmailDetailPane({
         );
         await setFavoriteEmailIds(updatedFavorites);
         setIsFavorited(false);
+        // remove the email from the favorites list
       } else {
         // Add the email to the favorites list
         const updatedFavoritedEmailIds = [
@@ -160,59 +162,74 @@ export default function EmailDetailPane({
     emailDomain = selectedEmail.forDomain;
   }
   return (
-    <div>
-      <div className="h-[35px] border-b border-b-big-stone flex items-center justify-end">
-        {/*Only allow the user to toggle the state of the email while not editing*/}
-        {!isEditing && (
-          <EmailStateToggle
-            emailState={selectedEmail?.state}
-            onEmailStateChange={handleEmailStateChange}
-          />
-        )}
-        {isEditing ? (
-          <CancelEditingButton onClick={() => handleSetIsEditing(false)} />
-        ) : (
-          <FavoriteButton
-            isFavorited={isFavorited}
-            onClick={handleFavoriteButtonClick}
-          />
-        )}
-        {isEditing ? (
-          <SaveButton onClick={handleSaveButtonClick} />
-        ) : (
-          <EditButton onClick={handleEditButtonClick} />
-        )}
-      </div>
-      <div className={'mt-4 ml-4 mr-4'}>
-        <EmailAddress
-          emailAddress={selectedEmail ? selectedEmail.email : null}
-          isEditing={isEditing}
-          handleCopyClick={handleCopyClick}
-        />
-        <EmailDomain
-          emailDomain={emailDomain}
-          isEditing={isEditing}
-          onDomainChange={handleDomainChange}
-          handleCopyClick={handleCopyClick}
-        />
-        <EmailDescription
-          emailDescription={emailDescription}
-          isEditing={isEditing}
-          onDescriptionChange={handleDescriptionChange}
-          handleCopyClick={handleCopyClick}
-        />
-        <EmailId
-          emailId={selectedEmail ? selectedEmail.id : null}
-          isEditing={isEditing}
-          handleCopyClick={handleCopyClick}
-        />
-        {/* Tell the user the text was copied to their clipboard*/}
-        {showCopyAlert && (
-          <div className="flex items-center justify-center mt-4">
-            <div className="flex p-1.5 text-sm text-white bg-big-stone/[0.75] rounded-xl  fixed bottom-2">
-              <CopyIcon iconClasses={'flex-shrink-0 inline w-5 h-5 mr-1'} />
-              <div>Copied to clipboard!</div>
+    <div className={'h-full'}>
+      <div className={'items-center justify-center h-full'}>
+        {/* If there is an email selected, show the details, otherwise show the NoEmailSelected component*/}
+        {selectedEmail ? (
+          <>
+            <div className="h-[35px] border-b border-b-big-stone flex items-center justify-end">
+              {/*Only allow the user to toggle the state of the email while not editing*/}
+              {!isEditing && (
+                <EmailStateToggle
+                  emailState={selectedEmail?.state}
+                  onEmailStateChange={handleEmailStateChange}
+                />
+              )}
+              {isEditing ? (
+                <CancelEditingButton
+                  onClick={() => handleSetIsEditing(false)}
+                />
+              ) : (
+                <FavoriteButton
+                  isFavorited={isFavorited}
+                  onClick={handleFavoriteButtonClick}
+                />
+              )}
+              {isEditing ? (
+                <SaveButton onClick={handleSaveButtonClick} />
+              ) : (
+                <EditButton onClick={handleEditButtonClick} />
+              )}
             </div>
+            <div className={'mt-4 ml-4 mr-4'}>
+              <EmailAddress
+                emailAddress={selectedEmail ? selectedEmail.email : null}
+                isEditing={isEditing}
+                handleCopyClick={handleCopyClick}
+              />
+              <EmailDomain
+                emailDomain={emailDomain}
+                isEditing={isEditing}
+                onDomainChange={handleDomainChange}
+                handleCopyClick={handleCopyClick}
+              />
+              <EmailDescription
+                emailDescription={emailDescription}
+                isEditing={isEditing}
+                onDescriptionChange={handleDescriptionChange}
+                handleCopyClick={handleCopyClick}
+              />
+              <EmailId
+                emailId={selectedEmail ? selectedEmail.id : null}
+                isEditing={isEditing}
+                handleCopyClick={handleCopyClick}
+              />
+              {/* Tell the user the text was copied to their clipboard*/}
+              {showCopyAlert && (
+                <div className="flex items-center justify-center mt-4">
+                  <div className="flex p-1.5 text-sm text-white bg-big-stone/[0.75] rounded-xl  fixed bottom-2">
+                    <CopyIcon
+                      iconClasses={'flex-shrink-0 inline w-5 h-5 mr-1'}
+                    />
+                    <div>Copied to clipboard!</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <NoEmailSelected />
           </div>
         )}
       </div>
