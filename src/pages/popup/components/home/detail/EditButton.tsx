@@ -1,6 +1,5 @@
 import React from 'react';
 import { EditIcon } from '@pages/popup/components/home/icons/icons';
-import handleFavoriteButtonClick from '@pages/popup/components/home/detail/EmailDetailPane';
 
 interface EditButtonProps {
   onClick: () => void;

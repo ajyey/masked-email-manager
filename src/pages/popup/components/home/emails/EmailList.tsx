@@ -43,7 +43,7 @@ function EmailList({
       setFilteredEmails(newFilteredEmails);
     };
     applyFilter();
-  }, [maskedEmails, filter]);
+  }, [filter, filteredEmails]);
 
   // Use Fuse.js to perform the fuzzy search
   const fuse: Fuse<MaskedEmail> = new Fuse(filteredEmails, {
