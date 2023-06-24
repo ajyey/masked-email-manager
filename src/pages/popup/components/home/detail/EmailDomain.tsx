@@ -4,10 +4,12 @@ import { EditIcon } from '@pages/popup/components/home/icons/icons';
 
 function EmailDomain({
   emailDomain,
-  isEditing
+  isEditing,
+  onDomainChange
 }: {
   emailDomain: string | null;
   isEditing: boolean;
+  onDomainChange: (newDomain: string) => void;
 }) {
   useEffect(() => {
     setEditedDomain(emailDomain);
@@ -18,6 +20,7 @@ function EmailDomain({
   const editingStyle = isEditing ? 'bg-transparent text-white' : '';
   const handleDomainChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditedDomain(e.target.value);
+    onDomainChange(e.target.value);
   };
   const containerStyle = `border border-t-0 ${
     isEditing

@@ -3,10 +3,12 @@ import { EditIcon } from '@pages/popup/components/home/icons/icons';
 
 function EmailDescription({
   emailDescription,
-  isEditing
+  isEditing,
+  onDescriptionChange
 }: {
   emailDescription: string | null;
   isEditing: boolean;
+  onDescriptionChange: (newDescription: string) => void;
 }) {
   const [editedDescription, setEditedDescription] = useState(emailDescription);
   useEffect(() => {
@@ -14,6 +16,7 @@ function EmailDescription({
   }, [emailDescription]);
   const handlDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditedDescription(e.target.value);
+    onDescriptionChange(e.target.value);
   };
   const descriptionExists =
     emailDescription !== null && emailDescription !== '';

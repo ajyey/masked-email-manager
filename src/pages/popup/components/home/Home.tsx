@@ -31,6 +31,14 @@ export default function HomeComponent() {
     setIsLoading(false);
   };
 
+  const updateEmailInList = (updatedEmail: MaskedEmail) => {
+    setMaskedEmails((prevEmails) =>
+      prevEmails.map((email) =>
+        email.id === updatedEmail.id ? updatedEmail : email
+      )
+    );
+  };
+
   useEffect(() => {
     refreshMaskedEmails();
   }, []);
@@ -44,7 +52,6 @@ export default function HomeComponent() {
       <div className="w-full h-[345px] flex flex-col">
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">
-            {/*<FilterPane onFilterChange={setFilterOption()} />*/}
             <div className="h-[35px] border-b border-b-big-stone flex items-center justify-center">
               <FilterEmailsDropdown onFilterChange={setFilterOption} />
               <EmailCount count={filteredEmailsCount} />
@@ -63,7 +70,10 @@ export default function HomeComponent() {
             )}
           </div>
           <div className="columns-[350px]">
-            <EmailDetailPane selectedEmail={selectedEmail} />
+            <EmailDetailPane
+              selectedEmail={selectedEmail}
+              updateEmailInList={updateEmailInList}
+            />
           </div>
         </div>
       </div>
