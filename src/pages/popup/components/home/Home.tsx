@@ -70,10 +70,14 @@ export default function HomeComponent() {
             )}
           </div>
           <div className="columns-[350px]">
-            <EmailDetailPane
-              selectedEmail={selectedEmail}
-              updateEmailInList={updateEmailInList}
-            />
+            {isLoading ? (
+              <LoadingComponent />
+            ) : (
+              <EmailDetailPane
+                selectedEmail={selectedEmail}
+                updateEmailInList={updateEmailInList}
+              />
+            )}
           </div>
         </div>
       </div>
