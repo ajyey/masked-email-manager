@@ -14,6 +14,7 @@ import EmailDomain from '@pages/popup/components/home/detail/EmailDomain';
 import SaveButton from '@pages/popup/components/home/detail/SaveButton';
 import CancelEditingButton from '@pages/popup/components/home/detail/CancelEditingButton';
 import { CopyIcon } from '@pages/popup/components/home/icons/icons';
+import EmailStateToggle from '@pages/popup/components/home/detail/EmailStateToggle';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -133,6 +134,7 @@ export default function EmailDetailPane({
   return (
     <div>
       <div className="h-[35px] border-b border-b-big-stone flex items-center justify-end">
+        <EmailStateToggle emailState={selectedEmail?.state} />
         {isEditing ? (
           <CancelEditingButton onClick={() => handleSetIsEditing(false)} />
         ) : (

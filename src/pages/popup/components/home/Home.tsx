@@ -38,10 +38,10 @@ export default function HomeComponent() {
       )
     );
   };
-
   useEffect(() => {
     refreshMaskedEmails();
   }, []);
+
   return (
     <div className="bg-astronaut h-[400px] w-[600px]">
       <TopComponent
