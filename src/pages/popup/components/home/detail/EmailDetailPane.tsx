@@ -12,6 +12,7 @@ import EmailDescription from '@pages/popup/components/home/detail/EmailDescripti
 import EmailId from '@pages/popup/components/home/detail/EmailId';
 import EmailDomain from '@pages/popup/components/home/detail/EmailDomain';
 import SaveButton from '@pages/popup/components/home/detail/SaveButton';
+import CancelEditingButton from '@pages/popup/components/home/detail/CancelEditingButton';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -32,6 +33,9 @@ export default function EmailDetailPane({
   const [updatedEmail, setUpdatedEmail] = useState<MaskedEmail | null>(null);
   const handleDescriptionChange = (newDescription: string) => {
     setUpdatedDescription(newDescription);
+  };
+  const handleSetIsEditing = (isEditing: boolean) => {
+    setIsEditing(isEditing);
   };
   const handleDomainChange = (newDomain: string) => {
     setUpdatedDomain(newDomain);
@@ -110,10 +114,14 @@ export default function EmailDetailPane({
   return (
     <div>
       <div className="h-[35px] border-b border-b-yellow-400 flex items-center justify-end">
-        <FavoriteButton
-          isFavorited={isFavorited}
-          onClick={handleFavoriteButtonClick}
-        />
+        {isEditing ? (
+          <CancelEditingButton onClick={() => handleSetIsEditing(false)} />
+        ) : (
+          <FavoriteButton
+            isFavorited={isFavorited}
+            onClick={handleFavoriteButtonClick}
+          />
+        )}
         {isEditing ? (
           <SaveButton onClick={handleSaveButtonClick} />
         ) : (
