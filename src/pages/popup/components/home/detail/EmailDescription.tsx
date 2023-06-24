@@ -20,8 +20,10 @@ function EmailDescription({
     ? 'text-white'
     : 'text-gray-400';
   // Use different styles based on whether we're editing or not
-  const containerStyle = `border border-t-0 border-big-stone ${
-    isEditing ? 'bg-big-stone' : 'bg-astronaut hover:bg-french-blue/[0.4]'
+  const containerStyle = `border border-t-0 ${
+    isEditing
+      ? 'bg-big-stone border-iron/[0.5]'
+      : 'border-big-stone bg-astronaut hover:bg-french-blue/[0.4]'
   }`;
   return (
     <div className={containerStyle}>

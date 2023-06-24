@@ -5,8 +5,10 @@ function EmailAddress({
   emailAddress: string | null;
   isEditing: boolean;
 }) {
-  const containerStyle = `border border-big-stone rounded-b-none rounded rounded-tl-lg rounded-tr-lg hover:bg-french-blue/[0.4] ${
-    isEditing ? 'bg-big-stone' : 'bg-astronaut'
+  const containerStyle = `border rounded-b-none rounded rounded-tl-lg rounded-tr-lg hover:bg-french-blue/[0.4] ${
+    isEditing
+      ? 'bg-big-stone border-iron/[0.5]'
+      : 'border-big-stone bg-astronaut'
   }`;
   return (
     <div className={containerStyle}>

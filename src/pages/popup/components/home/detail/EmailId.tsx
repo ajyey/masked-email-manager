@@ -5,8 +5,10 @@ function EmailId({
   emailId: string | null;
   isEditing: boolean;
 }) {
-  const containerStyle = `bg-astronaut border border-t-0 rounded-b-lg border-big-stone hover:bg-french-blue/[0.4] ${
-    isEditing ? 'bg-big-stone' : 'bg-astronaut hover:bg-french-blue/[0.4]'
+  const containerStyle = `border border-t-0 rounded-b-lg hover:bg-french-blue/[0.4] ${
+    isEditing
+      ? 'bg-big-stone border-iron/[0.5]'
+      : 'border-big-stone bg-astronaut hover:bg-french-blue/[0.4]'
   }`;
   return (
     <div className={containerStyle}>
