@@ -1,3 +1,15 @@
+# [1.0.0-beta.23](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.22...v1.0.0-beta.23) (2023-06-24)
+
+
+### Features
+
+* add support for saving changes to an email's domain and description ([b15433d](https://github.com/ajyey/masked-email-manager/commit/b15433de4cb78634f369b3a5bc53122114ce9ad2))
+* dynamically add edit icon next to editable fields when the user is editing ([68bd194](https://github.com/ajyey/masked-email-manager/commit/68bd19483c891fd84bc984c52a168367ef8b0d06))
+* only select the first email by default in certain situations ([fef3bfc](https://github.com/ajyey/masked-email-manager/commit/fef3bfc6605ee5be66743b51d353b8a7a1a6553e))
+* remove outline when input is active for domain and description ([cd9f36f](https://github.com/ajyey/masked-email-manager/commit/cd9f36f2ae2166c32863baf727597bc8a778440c))
+* show loading component in details section while isLoading ([75488ba](https://github.com/ajyey/masked-email-manager/commit/75488baf549b39bd3ff436dc6feab6eef8b6a1b6))
+* update outline of email details when the user is editing ([8225fdc](https://github.com/ajyey/masked-email-manager/commit/8225fdc6ca2f854203b6afe30f1415a615ebac7a))
+
 # [1.0.0-beta.22](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.21...v1.0.0-beta.22) (2023-06-23)
 
 
