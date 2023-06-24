@@ -2,18 +2,24 @@ import React from 'react';
 import { MaskedEmailState } from 'fastmail-masked-email';
 import {
   StateDisabledIcon,
-  StateEnabledIcon
+  StateEnabledIcon,
+  StateDeletedIcon
 } from '@pages/popup/components/home/detail/StateIcons';
 
 interface EmailStateToggleProps {
   emailState: MaskedEmailState | undefined;
+  onEmailStateChange: (newState: MaskedEmailState) => void;
 }
 
 const EmailStateToggle: React.FC<EmailStateToggleProps> = ({
-  emailState
+  emailState,
+  onEmailStateChange
 }: EmailStateToggleProps) => {
+  const isChecked = emailState === 'enabled';
+  const isDeleted = emailState === 'deleted';
+
   return (
-    <div className={'inline-flex mr-auto ml-4'}>
+    <div className={'inline-flex mr-1'}>
       <label
         htmlFor="AcceptConditions"
         className="relative h-6 w-12 cursor-pointer"
@@ -21,13 +27,26 @@ const EmailStateToggle: React.FC<EmailStateToggleProps> = ({
         <input
           type="checkbox"
           id="AcceptConditions"
+          checked={isChecked}
+          onChange={() =>
+            onEmailStateChange(isChecked ? 'disabled' : 'enabled')
+          }
           className="peer sr-only [&:checked_+_span_svg[data-checked-icon]]:block [&:checked_+_span_svg[data-unchecked-icon]]:hidden"
         />
         <span className="absolute inset-y-0 start-0 z-10 m-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full  bg-white text-gray-400 transition-all peer-checked:start-6 peer-checked:text-green-600">
-          <StateDisabledIcon iconClasses={'w-4 h-4 stroke-2'} />
-          <StateEnabledIcon iconClasses={'hidden h-4 w-4'} />
+          {isDeleted ? (
+            <StateDeletedIcon iconClasses={'w-4 h-4 stroke-2 stroke-red-500'} />
+          ) : isChecked ? (
+            <StateEnabledIcon iconClasses={'h-4 w-4'} />
+          ) : (
+            <StateDisabledIcon iconClasses={'w-4 h-4 stroke-2'} />
+          )}
         </span>
-        <span className="absolute inset-0 rounded-full bg-gray-300 transition peer-checked:bg-green-500"></span>
+        <span
+          className={`absolute inset-0 rounded-full transition ${
+            isDeleted ? 'bg-red-500' : 'bg-gray-300 peer-checked:bg-green-500'
+          }`}
+        ></span>
       </label>
     </div>
   );

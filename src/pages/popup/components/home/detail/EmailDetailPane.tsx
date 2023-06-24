@@ -6,7 +6,13 @@ import {
   getFavoriteEmailIds,
   setFavoriteEmailIds
 } from '../../../../../../utils/storageUtil';
-import { MaskedEmail, Options, Session, update } from 'fastmail-masked-email';
+import {
+  MaskedEmail,
+  MaskedEmailState,
+  Options,
+  Session,
+  update
+} from 'fastmail-masked-email';
 import EmailAddress from '@pages/popup/components/home/detail/EmailAddress';
 import EmailDescription from '@pages/popup/components/home/detail/EmailDescription';
 import EmailId from '@pages/popup/components/home/detail/EmailId';
@@ -96,6 +102,17 @@ export default function EmailDetailPane({
   const handleEditButtonClick = () => {
     setIsEditing(true);
   };
+  const handleEmailStateChange = (newEmailState: MaskedEmailState) => {
+    if (selectedEmail) {
+      // Update the email in the list so that the changes are reflected in the email list pane
+      // For example, if the user is viewing the 'Enabled' emails and they disable an email,
+      // then the email will be reflected (removed in this case) in the list
+      const updatedSelectedEmail = { ...selectedEmail, state: newEmailState };
+      updateEmailInList(updatedSelectedEmail);
+      // Updates the selected email state so that the changes are reflected by the toggle button
+      selectedEmail.state = newEmailState;
+    }
+  };
   const handleSaveButtonClick = async () => {
     if (selectedEmail) {
       // If no edits were made, then just exit edit mode
@@ -134,7 +151,12 @@ export default function EmailDetailPane({
   return (
     <div>
       <div className="h-[35px] border-b border-b-big-stone flex items-center justify-end">
-        {!isEditing && <EmailStateToggle emailState={selectedEmail?.state} />}
+        {!isEditing && (
+          <EmailStateToggle
+            emailState={selectedEmail?.state}
+            onEmailStateChange={handleEmailStateChange}
+          />
+        )}
         {isEditing ? (
           <CancelEditingButton onClick={() => handleSetIsEditing(false)} />
         ) : (
