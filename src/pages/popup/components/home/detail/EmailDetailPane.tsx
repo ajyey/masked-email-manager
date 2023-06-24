@@ -7,6 +7,8 @@ import {
   setFavoriteEmailIds
 } from '../../../../../../utils/storageUtil';
 import {
+  disable,
+  enable,
   MaskedEmail,
   MaskedEmailState,
   Options,
@@ -102,8 +104,17 @@ export default function EmailDetailPane({
   const handleEditButtonClick = () => {
     setIsEditing(true);
   };
-  const handleEmailStateChange = (newEmailState: MaskedEmailState) => {
+  const handleEmailStateChange = async (newEmailState: MaskedEmailState) => {
     if (selectedEmail) {
+      // Make the API call to update the email state
+      const session = await getFastmailSession();
+      if (newEmailState === 'disabled') {
+        console.log('disabling');
+        await disable(selectedEmail.id, session);
+      } else if (newEmailState === 'enabled') {
+        console.log('enabling');
+        await enable(selectedEmail.id, session);
+      }
       // Update the email in the list so that the changes are reflected in the email list pane
       // For example, if the user is viewing the 'Enabled' emails and they disable an email,
       // then the email will be reflected (removed in this case) in the list
