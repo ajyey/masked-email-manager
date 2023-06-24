@@ -14,12 +14,10 @@ const EmailStateToggle: React.FC<EmailStateToggleProps> = ({
 }: EmailStateToggleProps) => {
   return (
     <div className={'inline-flex mr-auto ml-4'}>
-      {' '}
       <label
         htmlFor="AcceptConditions"
         className="relative h-6 w-12 cursor-pointer"
       >
-        {' '}
         <input
           type="checkbox"
           id="AcceptConditions"

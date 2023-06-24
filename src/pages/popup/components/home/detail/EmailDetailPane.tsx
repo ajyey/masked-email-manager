@@ -134,7 +134,7 @@ export default function EmailDetailPane({
   return (
     <div>
       <div className="h-[35px] border-b border-b-big-stone flex items-center justify-end">
-        <EmailStateToggle emailState={selectedEmail?.state} />
+        {!isEditing && <EmailStateToggle emailState={selectedEmail?.state} />}
         {isEditing ? (
           <CancelEditingButton onClick={() => handleSetIsEditing(false)} />
         ) : (
