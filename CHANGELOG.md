@@ -1,3 +1,14 @@
+# [1.0.0-beta.24](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.23...v1.0.0-beta.24) (2023-06-24)
+
+
+### Features
+
+* add cancel button to exit editing mode ([806bd7e](https://github.com/ajyey/masked-email-manager/commit/806bd7e27e128499630e07edb2a0be8ef1321503))
+* add initial email state toggle ([c121cca](https://github.com/ajyey/masked-email-manager/commit/c121cca31f5ce9e55ff31e794e16713f1a3b87cf))
+* add support for copying each email item detail to the clipboard ([09a4751](https://github.com/ajyey/masked-email-manager/commit/09a475133188ac9fb5c9c3689fea077f4c0b020b))
+* only show the enable/disable toggle if the user is not editing ([a710943](https://github.com/ajyey/masked-email-manager/commit/a710943714d95ec5d7b2ff084f6d6a71985d90dc))
+* only update email on save after editing if the user made changes ([89d8900](https://github.com/ajyey/masked-email-manager/commit/89d8900e6d5490515c3ea4c447e9b59d2dd8486e))
+
 # [1.0.0-beta.23](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.22...v1.0.0-beta.23) (2023-06-24)
 
 
