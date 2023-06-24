@@ -37,7 +37,7 @@ function EmailDescription({
         >
           {isEditing ? (
             <input
-              className="bg-transparent text-white w-full"
+              className="bg-transparent text-white w-[98%] focus:outline-none"
               type="text"
               value={editedDescription || ''}
               onChange={handlDescriptionChange}
