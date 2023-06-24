@@ -6,7 +6,7 @@ import {
   getFavoriteEmailIds,
   setFavoriteEmailIds
 } from '../../../../../../utils/storageUtil';
-import { MaskedEmail, Options, update } from 'fastmail-masked-email';
+import { MaskedEmail, Options, Session, update } from 'fastmail-masked-email';
 import EmailAddress from '@pages/popup/components/home/detail/EmailAddress';
 import EmailDescription from '@pages/popup/components/home/detail/EmailDescription';
 import EmailId from '@pages/popup/components/home/detail/EmailId';
@@ -74,7 +74,16 @@ export default function EmailDetailPane({
   };
   const handleSaveButtonClick = async () => {
     if (selectedEmail) {
-      const session = await getFastmailSession();
+      // If no edits were made, then just exit edit mode
+      if (
+        (updatedDescription === selectedEmail.description &&
+          updatedDomain === selectedEmail.forDomain) ||
+        (updatedDescription == null && updatedDomain == null)
+      ) {
+        setIsEditing(false);
+        return;
+      }
+      const session: Session = await getFastmailSession();
       const updateOptions: Options = {};
       if (updatedDescription != null) {
         updateOptions['description'] = updatedDescription;
@@ -86,6 +95,7 @@ export default function EmailDetailPane({
       selectedEmail.description =
         updatedDescription || selectedEmail.description;
       selectedEmail.forDomain = updatedDomain || selectedEmail.forDomain;
+      // Update the email in the list so that the changes are reflected in the email list pane
       updateEmailInList(selectedEmail);
     }
     setIsEditing(false);
