@@ -162,6 +162,7 @@ export default function EmailDetailPane({
   return (
     <div>
       <div className="h-[35px] border-b border-b-big-stone flex items-center justify-end">
+        {/*Only allow the user to toggle the state of the email while not editing*/}
         {!isEditing && (
           <EmailStateToggle
             emailState={selectedEmail?.state}
