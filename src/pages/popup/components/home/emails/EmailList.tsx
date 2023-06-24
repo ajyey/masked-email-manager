@@ -57,16 +57,32 @@ function EmailList({
   };
 
   useEffect(() => {
-    // Select the first email in the list by default
-    if (searchResults.length > 0) {
+    // Check if the currently selectedEmail is present in the searchResults list.
+    const isSelectedEmailInResults = searchResults.some((result) => {
+      const email = isFuseResult(result) ? result.item : result;
+
+      // Return true if the email ID matches the selectedEmail's ID.
+      return email.id === selectedEmail?.id;
+    });
+
+    // Select the first email in the list by default if:
+    // 1. No email is currently selected (selectedEmail is null or undefined).
+    // 2. The selectedEmail is not present in the searchResults list (isSelectedEmailInResults is false).
+    if (
+      searchResults.length > 0 &&
+      (!selectedEmail || !isSelectedEmailInResults)
+    ) {
       const firstEmail = isFuseResult(searchResults[0])
         ? searchResults[0].item
         : searchResults[0];
+
       setSelectedEmail(firstEmail);
-    } else {
+    } else if (searchResults.length === 0) {
       setSelectedEmail(null);
     }
-    // Call the onFilteredEmailsCountChange callback with the searchResults length
+
+    // Call the onFilteredEmailsCountChange callback with the searchResults length.
+    // This can be used by the parent component to update the count of filtered emails.
     onFilteredEmailsCountChange(searchResults.length);
   }, [searchResults, onFilteredEmailsCountChange]);
 
