@@ -13,6 +13,7 @@ import EmailId from '@pages/popup/components/home/detail/EmailId';
 import EmailDomain from '@pages/popup/components/home/detail/EmailDomain';
 import SaveButton from '@pages/popup/components/home/detail/SaveButton';
 import CancelEditingButton from '@pages/popup/components/home/detail/CancelEditingButton';
+import { CopyIcon } from '@pages/popup/components/home/icons/icons';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -24,6 +25,8 @@ export default function EmailDetailPane({
   // Track whether the selected email is favorited
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  // Track whether the user has clicked the copy button for an email detail and we need to show the alert
+  const [showCopyAlert, setShowCopyAlert] = useState<boolean>(false);
   const [updatedDescription, setUpdatedDescription] = useState<string | null>(
     selectedEmail?.description || null
   );
@@ -39,6 +42,22 @@ export default function EmailDetailPane({
   };
   const handleDomainChange = (newDomain: string) => {
     setUpdatedDomain(newDomain);
+  };
+
+  // Show the copy alert for 2 seconds
+  const handleCopyAlert = () => {
+    if (!showCopyAlert) {
+      setShowCopyAlert(true);
+      setTimeout(() => {
+        setShowCopyAlert(false);
+      }, 2000);
+    }
+  };
+  // Copy the text to the clipboard (when the user clicks on email, decsription, id, or domain)
+  // and show the copy alert
+  const handleCopyClick = (textToCopy: string) => {
+    navigator.clipboard.writeText(textToCopy);
+    handleCopyAlert();
   };
 
   useEffect(() => {
@@ -113,7 +132,7 @@ export default function EmailDetailPane({
   }
   return (
     <div>
-      <div className="h-[35px] border-b border-b-yellow-400 flex items-center justify-end">
+      <div className="h-[35px] border-b border-b-big-stone flex items-center justify-end">
         {isEditing ? (
           <CancelEditingButton onClick={() => handleSetIsEditing(false)} />
         ) : (
@@ -132,21 +151,34 @@ export default function EmailDetailPane({
         <EmailAddress
           emailAddress={selectedEmail ? selectedEmail.email : null}
           isEditing={isEditing}
+          handleCopyClick={handleCopyClick}
         />
         <EmailDomain
           emailDomain={emailDomain}
           isEditing={isEditing}
           onDomainChange={handleDomainChange}
+          handleCopyClick={handleCopyClick}
         />
         <EmailDescription
           emailDescription={emailDescription}
           isEditing={isEditing}
           onDescriptionChange={handleDescriptionChange}
+          handleCopyClick={handleCopyClick}
         />
         <EmailId
           emailId={selectedEmail ? selectedEmail.id : null}
           isEditing={isEditing}
+          handleCopyClick={handleCopyClick}
         />
+        {/* Tell the user the text was copied to their clipboard*/}
+        {showCopyAlert && (
+          <div className="flex items-center justify-center mt-4">
+            <div className="flex p-1.5 text-sm text-white bg-big-stone/[0.75] rounded-xl  fixed bottom-2">
+              <CopyIcon iconClasses={'flex-shrink-0 inline w-5 h-5 mr-1'} />
+              <div>Copied to clipboard!</div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

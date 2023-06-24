@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import emailDescription from '@pages/popup/components/home/detail/EmailDescription';
 import { EditIcon } from '@pages/popup/components/home/icons/icons';
+import CopyButton from '@pages/popup/components/home/detail/CopyButton';
 
 function EmailDomain({
   emailDomain,
   isEditing,
-  onDomainChange
+  onDomainChange,
+  handleCopyClick
 }: {
   emailDomain: string | null;
   isEditing: boolean;
   onDomainChange: (newDomain: string) => void;
+  handleCopyClick: (textToCopy: string) => void;
 }) {
   useEffect(() => {
     setEditedDomain(emailDomain);
@@ -22,7 +25,7 @@ function EmailDomain({
     setEditedDomain(e.target.value);
     onDomainChange(e.target.value);
   };
-  const containerStyle = `border border-t-0 ${
+  const containerStyle = `inline-flex w-full border border-t-0 ${
     isEditing
       ? 'bg-big-stone border-iron/[0.5]'
       : 'border-big-stone bg-astronaut hover:bg-french-blue/[0.4]'
@@ -58,6 +61,9 @@ function EmailDomain({
           )}
         </div>
       </div>
+      {!isEditing && (
+        <CopyButton onClick={handleCopyClick} textToCopy={emailDomain} />
+      )}
     </div>
   );
 }

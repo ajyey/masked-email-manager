@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { EditIcon } from '@pages/popup/components/home/icons/icons';
+import CopyButton from '@pages/popup/components/home/detail/CopyButton';
 
 function EmailDescription({
   emailDescription,
   isEditing,
-  onDescriptionChange
+  onDescriptionChange,
+  handleCopyClick
 }: {
   emailDescription: string | null;
   isEditing: boolean;
   onDescriptionChange: (newDescription: string) => void;
+  handleCopyClick: (textToCopy: string) => void;
 }) {
   const [editedDescription, setEditedDescription] = useState(emailDescription);
   useEffect(() => {
     setEditedDescription(emailDescription);
   }, [emailDescription]);
+
   const handlDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditedDescription(e.target.value);
     onDescriptionChange(e.target.value);
@@ -24,7 +28,7 @@ function EmailDescription({
     ? 'text-white'
     : 'text-gray-400';
   // Use different styles based on whether we're editing or not
-  const containerStyle = `border border-t-0 ${
+  const containerStyle = `inline-flex w-full border border-t-0 ${
     isEditing
       ? 'bg-big-stone border-iron/[0.5]'
       : 'border-big-stone bg-astronaut hover:bg-french-blue/[0.4]'
@@ -60,6 +64,9 @@ function EmailDescription({
           )}
         </div>
       </div>
+      {!isEditing && (
+        <CopyButton onClick={handleCopyClick} textToCopy={emailDescription} />
+      )}
     </div>
   );
 }
