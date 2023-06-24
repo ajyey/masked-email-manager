@@ -1,3 +1,11 @@
+# [1.0.0-beta.22](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.21...v1.0.0-beta.22) (2023-06-23)
+
+
+### Features
+
+* add bottom margin to each detail value ([84afd78](https://github.com/ajyey/masked-email-manager/commit/84afd7829fde0082b9853b35c322fcd62577419c))
+* add initial editing functionality to email details ([73f62fc](https://github.com/ajyey/masked-email-manager/commit/73f62fc20d6c89deeed1b97603d4bb9ba574b857))
+
 # [1.0.0-beta.21](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2023-06-23)
 
 
