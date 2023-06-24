@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { EditIcon } from '@pages/popup/components/home/icons/icons';
 
 function EmailDescription({
   emailDescription,
@@ -29,10 +30,15 @@ function EmailDescription({
     <div className={containerStyle}>
       <div>
         <div
-          className="pt-1 ml-2 text-malibu font-normal text-detailLabel"
+          className="pt-1 ml-2 text-malibu font-normal text-detailLabel inline-flex"
           id="emailDescriptionLabel"
         >
           description
+          {isEditing && (
+            <EditIcon
+              iconClasses={'w-[0.75rem] h-[0.75rem] ml-1 stroke-white mt-1'}
+            />
+          )}
         </div>
         <div
           className={`ml-2 mb-1 font-normal text-detailValue ${descriptionLabelColor}`}

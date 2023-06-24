@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import emailDescription from '@pages/popup/components/home/detail/EmailDescription';
+import { EditIcon } from '@pages/popup/components/home/icons/icons';
 
 function EmailDomain({
   emailDomain,
@@ -27,10 +28,15 @@ function EmailDomain({
     <div className={containerStyle}>
       <div>
         <div
-          className="ml-2 text-malibu font-normal text-detailLabel"
+          className="ml-2 text-malibu font-normal text-detailLabel inline-flex"
           id="domainLabel"
         >
           domain
+          {isEditing && (
+            <EditIcon
+              iconClasses={'w-[0.75rem] h-[0.75rem] ml-1 stroke-white mt-1'}
+            />
+          )}
         </div>
         <div
           className={`ml-2 mr-2 mb-1 font-normal text-detailValue ${domainLabelColor}`}
