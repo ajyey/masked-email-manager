@@ -3,7 +3,7 @@
  */
 const NoEmailSelected: React.FC = () => {
   return (
-    <div className="text-xl text-gray-500 h-full flex items-center justify-center">
+    <div className="text-xl text-gray-200 h-full flex items-center justify-center">
       Nothing to see here..
     </div>
   );

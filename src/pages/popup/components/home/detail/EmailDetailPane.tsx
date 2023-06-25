@@ -24,6 +24,8 @@ import CancelEditingButton from '@pages/popup/components/home/detail/CancelEditi
 import { CopyIcon } from '@pages/popup/components/home/icons/icons';
 import EmailStateToggle from '@pages/popup/components/home/detail/EmailStateToggle';
 import NoEmailSelected from '@pages/popup/components/home/detail/NoEmailSelected';
+import LastMessageAt from '@pages/popup/components/home/detail/LastMessageAt';
+import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -163,7 +165,7 @@ export default function EmailDetailPane({
   }
   return (
     <div className={'h-full'}>
-      <div className={'items-center justify-center h-full'}>
+      <div className={'flex flex-col h-full'}>
         {/* If there is an email selected, show the details, otherwise show the NoEmailSelected component*/}
         {selectedEmail ? (
           <>
@@ -223,6 +225,24 @@ export default function EmailDetailPane({
                     />
                     <div>Copied to clipboard!</div>
                   </div>
+                </div>
+              )}
+            </div>
+            <div className="flex items-center justify-center mt-auto mb-4 text-gray-200">
+              {selectedEmail.lastMessageAt && (
+                <div>
+                  <LastMessageAt
+                    lastMessageAt={
+                      selectedEmail ? selectedEmail.lastMessageAt : null
+                    }
+                  />
+                </div>
+              )}
+              {selectedEmail.createdAt && (
+                <div>
+                  <CreatedAt
+                    createdAt={selectedEmail ? selectedEmail.createdAt : null}
+                  />
                 </div>
               )}
             </div>
