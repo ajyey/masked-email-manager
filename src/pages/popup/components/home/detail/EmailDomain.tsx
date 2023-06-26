@@ -32,7 +32,7 @@ function EmailDomain({
   }`;
   return (
     <div className={containerStyle}>
-      <div>
+      <div className={'w-full'}>
         <div
           className="ml-2 text-malibu font-normal text-detailLabel inline-flex"
           id="domainLabel"

@@ -35,7 +35,7 @@ function EmailDescription({
   }`;
   return (
     <div className={containerStyle}>
-      <div>
+      <div className={'w-full'}>
         <div
           className="pt-1 ml-2 text-malibu font-normal text-detailLabel inline-flex"
           id="emailDescriptionLabel"
