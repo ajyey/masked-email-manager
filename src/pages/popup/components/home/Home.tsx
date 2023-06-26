@@ -17,6 +17,8 @@ export default function HomeComponent() {
   // State for keeping track of the count of filtered emails
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
   const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
+  // State for keeping track of whether the user is editing the email or not
+  const [isEditing, setIsEditing] = useState(false);
 
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
@@ -66,6 +68,7 @@ export default function HomeComponent() {
                 onFilteredEmailsCountChange={setFilteredEmailsCount}
                 setSelectedEmail={setSelectedEmail}
                 selectedEmail={selectedEmail}
+                setIsEditing={setIsEditing}
               />
             )}
           </div>
@@ -76,6 +79,8 @@ export default function HomeComponent() {
               <EmailDetailPane
                 selectedEmail={selectedEmail}
                 updateEmailInList={updateEmailInList}
+                isEditing={isEditing}
+                setIsEditing={setIsEditing}
               />
             )}
           </div>

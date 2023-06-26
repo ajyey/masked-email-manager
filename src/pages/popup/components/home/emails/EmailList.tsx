@@ -14,6 +14,7 @@ interface Props {
   onFilteredEmailsCountChange: (count: number) => void;
   setSelectedEmail: (email: MaskedEmail | null) => void;
   selectedEmail: MaskedEmail | null;
+  setIsEditing: (value: ((prevState: boolean) => boolean) | boolean) => void;
 }
 function EmailList({
   maskedEmails,
@@ -21,7 +22,8 @@ function EmailList({
   searchQuery,
   onFilteredEmailsCountChange,
   setSelectedEmail,
-  selectedEmail
+  selectedEmail,
+  setIsEditing
 }: Props) {
   // Keep track of the filtered emails
   const [filteredEmails, setFilteredEmails] = useState<MaskedEmail[]>([]);
@@ -54,6 +56,7 @@ function EmailList({
   const searchResults = searchQuery ? fuse.search(searchQuery) : filteredEmails;
   const handleEmailItemClick = (email: MaskedEmail) => {
     setSelectedEmail(email);
+    setIsEditing(false);
   };
 
   useEffect(() => {

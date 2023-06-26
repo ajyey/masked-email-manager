@@ -30,14 +30,17 @@ import { Toast, toast, Toaster } from 'react-hot-toast';
 
 export default function EmailDetailPane({
   selectedEmail,
-  updateEmailInList
+  updateEmailInList,
+  isEditing,
+  setIsEditing
 }: {
   selectedEmail: MaskedEmail | null;
   updateEmailInList: (updatedEmail: MaskedEmail) => void;
+  isEditing: boolean;
+  setIsEditing: (value: ((prevState: boolean) => boolean) | boolean) => void;
 }) {
   // Track whether the selected email is favorited
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
   // Track whether the user has clicked the copy button for an email detail and we need to show the alert
   const [showCopyAlert, setShowCopyAlert] = useState<boolean>(false);
   const [updatedDescription, setUpdatedDescription] = useState<string | null>(
