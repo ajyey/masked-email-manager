@@ -26,6 +26,7 @@ import EmailStateToggle from '@pages/popup/components/home/detail/EmailStateTogg
 import NoEmailSelected from '@pages/popup/components/home/detail/NoEmailSelected';
 import LastMessageAt from '@pages/popup/components/home/detail/LastMessageAt';
 import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
+import { Toast, toast, Toaster } from 'react-hot-toast';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -56,14 +57,17 @@ export default function EmailDetailPane({
     setUpdatedDomain(newDomain);
   };
 
-  // Show the copy alert for 2 seconds
+  // Show a toast for 2 seconds to let the user know that the email was copied to the clipboard
   const handleCopyAlert = () => {
-    if (!showCopyAlert) {
-      setShowCopyAlert(true);
-      setTimeout(() => {
-        setShowCopyAlert(false);
-      }, 2000);
-    }
+    toast.success('Copied to clipboard!', {
+      duration: 2000,
+      position: 'bottom-center',
+      style: {
+        backgroundColor: '#333E48', // big-stone
+        color: '#FFFFFF' // white
+      },
+      icon: <CopyIcon iconClasses={'w-5 h-5 stroke-1'} />
+    });
   };
   // Copy the text to the clipboard (when the user clicks on email, decsription, id, or domain)
   // and show the copy alert
@@ -216,17 +220,8 @@ export default function EmailDetailPane({
                 isEditing={isEditing}
                 handleCopyClick={handleCopyClick}
               />
-              {/* Tell the user the text was copied to their clipboard*/}
-              {showCopyAlert && (
-                <div className="flex items-center justify-center mt-4">
-                  <div className="flex p-1.5 text-sm text-white bg-big-stone/[0.75] rounded-xl  fixed bottom-2">
-                    <CopyIcon
-                      iconClasses={'flex-shrink-0 inline w-5 h-5 mr-1'}
-                    />
-                    <div>Copied to clipboard!</div>
-                  </div>
-                </div>
-              )}
+              {/* Create a toast to tell the user the text was copied to their clipboard*/}
+              <Toaster />
             </div>
             <div className="flex items-center justify-center mt-auto mb-4 text-gray-200">
               {selectedEmail.lastMessageAt && (
