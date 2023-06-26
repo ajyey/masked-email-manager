@@ -1,3 +1,16 @@
+# [1.0.0-beta.26](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.25...v1.0.0-beta.26) (2023-06-26)
+
+
+### Bug Fixes
+
+* add fixed width for email items ([d467f92](https://github.com/ajyey/masked-email-manager/commit/d467f927593237db30ee95f4adcb6be4684218cb))
+
+
+### Features
+
+* add a no email selected component that shows in the detail pane ([7bf520e](https://github.com/ajyey/masked-email-manager/commit/7bf520eece7b296491c57b6d0b142fe028cc2556))
+* add components for lastMessageAt and createdAt ([b1e3ce7](https://github.com/ajyey/masked-email-manager/commit/b1e3ce7edea4bd3527943c6f5ca722fc74963849))
+
 # [1.0.0-beta.25](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.24...v1.0.0-beta.25) (2023-06-24)
 
 
