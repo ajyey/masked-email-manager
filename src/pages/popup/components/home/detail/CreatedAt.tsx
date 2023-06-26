@@ -8,7 +8,7 @@ interface CreatedAtProps {
 const CreatedAt: React.FC<CreatedAtProps> = ({ createdAt }) => {
   return (
     <div>
-      <span className="font-semibold">Created At:</span>{' '}
+      <span className="font-semibold">Created at:</span>{' '}
       {createdAt ? new Date(createdAt).toLocaleString() : 'N/A'}
     </div>
   );

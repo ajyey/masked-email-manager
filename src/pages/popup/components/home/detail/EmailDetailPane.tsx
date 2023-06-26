@@ -228,7 +228,7 @@ export default function EmailDetailPane({
                 {/* Create a toast to tell the user the text was copied to their clipboard*/}
                 <Toaster />
               </div>
-              <div className="flex items-center justify-center mt-3 mb-3 text-gray-200">
+              <div className="flex items-center justify-center mt-3 mb-3 text-gray-200 flex-col">
                 {selectedEmail.lastMessageAt && (
                   <div>
                     <LastMessageAt

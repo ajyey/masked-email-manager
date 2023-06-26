@@ -6,10 +6,9 @@ interface LastMessageAtProps {
 }
 
 const LastMessageAt: React.FC<LastMessageAtProps> = ({ lastMessageAt }) => {
-  console.log('lastMessageAt', lastMessageAt);
   return (
-    <div className="mr-4">
-      <span className="font-semibold">Last Message At:</span>{' '}
+    <div>
+      <span className="font-semibold">Last message at:</span>{' '}
       {lastMessageAt ? new Date(lastMessageAt).toLocaleString() : 'N/A'}
     </div>
   );
