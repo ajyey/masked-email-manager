@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
 import EmailItem from '@pages/popup/components/home/emails/EmailItem';
 import Fuse from 'fuse.js';
@@ -27,6 +27,22 @@ function EmailList({
 }: Props) {
   // Keep track of the filtered emails
   const [filteredEmails, setFilteredEmails] = useState<MaskedEmail[]>([]);
+  const selectedEmailRef = useRef<HTMLDivElement | null>(null);
+
+  // This effect is triggered when the selectedEmail or filteredEmails change to handle scrolling the currently selected email into view
+  // The email will be scrolled into view when the selectedEmail or filteredEmails change, the latter of which is useful for when the user
+  // switches between the different filter options from the dropdown
+  useEffect(() => {
+    // Check if the selectedEmailRef has a current value
+    if (selectedEmailRef.current) {
+      // If it does, scroll the email list so that the selected email is visible
+      // in the viewport
+      selectedEmailRef.current.scrollIntoView({
+        block: 'center' // Align the selected email with the center of the viewport
+      });
+    }
+  }, [selectedEmail, filteredEmails]);
+
   // Filter the emails based on the filter prop
   useEffect(() => {
     const applyFilter = async () => {
@@ -99,6 +115,9 @@ function EmailList({
           return (
             <EmailItem
               key={maskedEmail.id}
+              ref={
+                maskedEmail.id === selectedEmail?.id ? selectedEmailRef : null
+              }
               maskedEmail={maskedEmail}
               onClick={handleEmailItemClick}
               isSelected={
