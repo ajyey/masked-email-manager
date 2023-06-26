@@ -1,3 +1,12 @@
+# [1.0.0-beta.25](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.24...v1.0.0-beta.25) (2023-06-24)
+
+
+### Features
+
+* add email enable/disable functionality ([0410a6e](https://github.com/ajyey/masked-email-manager/commit/0410a6e34bce0f719a199a186a4a591fd375b24f))
+* add support for setting the toggle based on the email state ([048cd0b](https://github.com/ajyey/masked-email-manager/commit/048cd0bd52866493c6f192dca5decbb9758d6f78))
+* update effect deps so unfavorited emails are removed ([1c6aa4f](https://github.com/ajyey/masked-email-manager/commit/1c6aa4f5ab33c2a11762f443ebf7574dc80132f1))
+
 # [1.0.0-beta.24](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.23...v1.0.0-beta.24) (2023-06-24)
 
 
