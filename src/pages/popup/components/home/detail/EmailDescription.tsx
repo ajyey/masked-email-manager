@@ -35,37 +35,41 @@ function EmailDescription({
   }`;
   return (
     <div className={containerStyle}>
-      <div className={'w-full'}>
-        <div
-          className="pt-1 ml-2 text-malibu font-normal text-detailLabel inline-flex"
-          id="emailDescriptionLabel"
-        >
-          description
-          {isEditing && (
-            <EditIcon
-              iconClasses={'w-[0.75rem] h-[0.75rem] ml-1 stroke-white mt-1'}
-            />
-          )}
-        </div>
-        <div
-          className={`ml-2 mb-1 font-normal text-detailValue ${descriptionLabelColor}`}
-        >
-          {isEditing ? (
-            <input
-              className="bg-transparent text-white w-[98%] focus:outline-none"
-              type="text"
-              value={editedDescription || ''}
-              onChange={handlDescriptionChange}
-            />
-          ) : descriptionExists ? (
-            emailDescription
-          ) : (
-            'No description set'
-          )}
+      <div className="flex flex-grow">
+        <div className="w-full">
+          <div
+            className="pt-1 ml-2 text-malibu font-normal text-detailLabel inline-flex"
+            id="emailDescriptionLabel"
+          >
+            description
+            {isEditing && (
+              <EditIcon
+                iconClasses={'w-[0.75rem] h-[0.75rem] ml-1 stroke-white mt-1'}
+              />
+            )}
+          </div>
+          <div
+            className={`ml-2 mb-1 font-normal text-detailValue ${descriptionLabelColor} break-all`}
+          >
+            {isEditing ? (
+              <input
+                className="bg-transparent text-white w-[98%] focus:outline-none"
+                type="text"
+                value={editedDescription || ''}
+                onChange={handlDescriptionChange}
+              />
+            ) : descriptionExists ? (
+              emailDescription
+            ) : (
+              'No description set'
+            )}
+          </div>
         </div>
       </div>
       {!isEditing && (
-        <CopyButton onClick={handleCopyClick} textToCopy={emailDescription} />
+        <div className="flex items-center align-middle ml-auto">
+          <CopyButton onClick={handleCopyClick} textToCopy={emailDescription} />
+        </div>
       )}
     </div>
   );
