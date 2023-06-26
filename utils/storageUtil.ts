@@ -17,3 +17,7 @@ export const getFastmailSession = async (): Promise<Session> => {
   const data = await browser.storage.sync.get(FASTMAIL_SESSION_KEY);
   return data[FASTMAIL_SESSION_KEY] || {};
 };
+
+export const clearStorage = async (): Promise<void> => {
+  await browser.storage.sync.clear();
+};
