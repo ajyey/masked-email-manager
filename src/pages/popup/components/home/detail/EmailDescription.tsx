@@ -23,6 +23,18 @@ function EmailDescription({
     onDescriptionChange(e.target.value);
   };
 
+  // This useEffect hook is responsible for updating the editedDescription state
+  // whenever the emailDescription prop changes.
+  useEffect(() => {
+    setEditedDescription(emailDescription);
+    // This condition checks if isEditing has changed from true to false.
+    // If so, it resets the editedDescription state to the original emailDescription.
+    // This ensures that when the user clicks the "Cancel" button, the editedDescription
+    // is reset, and the previous changes are discarded.
+    if (!isEditing) {
+      setEditedDescription(emailDescription);
+    }
+  }, [emailDescription, isEditing]);
   const descriptionLabelColor = emailDescription
     ? 'text-white'
     : 'text-gray-400';
