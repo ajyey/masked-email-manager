@@ -22,9 +22,8 @@ function EmailDescription({
     setEditedDescription(e.target.value);
     onDescriptionChange(e.target.value);
   };
-  const descriptionExists =
-    emailDescription !== null && emailDescription !== '';
-  const descriptionLabelColor = descriptionExists
+
+  const descriptionLabelColor = emailDescription
     ? 'text-white'
     : 'text-gray-400';
   // Use different styles based on whether we're editing or not
@@ -59,7 +58,7 @@ function EmailDescription({
                 maxLength={127}
                 onChange={handlDescriptionChange}
               />
-            ) : descriptionExists ? (
+            ) : emailDescription ? (
               emailDescription
             ) : (
               'No description set'
@@ -67,7 +66,7 @@ function EmailDescription({
           </div>
         </div>
       </div>
-      {!isEditing && (
+      {!isEditing && emailDescription && (
         <div className="flex items-center align-middle ml-auto">
           <CopyButton onClick={handleCopyClick} textToCopy={emailDescription} />
         </div>

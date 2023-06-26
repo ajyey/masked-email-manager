@@ -17,8 +17,7 @@ function EmailDomain({
   useEffect(() => {
     setEditedDomain(emailDomain);
   }, [emailDomain]);
-  const domainExists = emailDomain !== null && emailDomain !== '';
-  const domainLabelColor = domainExists ? 'text-white' : 'text-gray-400';
+  const domainLabelColor = emailDomain ? 'text-white' : 'text-gray-400';
   const [editedDomain, setEditedDomain] = useState(emailDomain);
   const editingStyle = isEditing ? 'bg-transparent text-white' : '';
   const handleDomainChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,14 +53,14 @@ function EmailDomain({
               value={editedDomain || ''}
               onChange={handleDomainChange}
             />
-          ) : domainExists ? (
+          ) : emailDomain ? (
             emailDomain
           ) : (
             'No domain set'
           )}
         </div>
       </div>
-      {!isEditing && (
+      {!isEditing && emailDomain && (
         <CopyButton onClick={handleCopyClick} textToCopy={emailDomain} />
       )}
     </div>
