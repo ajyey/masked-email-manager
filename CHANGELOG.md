@@ -1,3 +1,13 @@
+# [1.0.0-beta.28](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.27...v1.0.0-beta.28) (2023-06-26)
+
+
+### Features
+
+* add function for clearing browser sync storage ([aec2d92](https://github.com/ajyey/masked-email-manager/commit/aec2d92d31f9183e445dff7baff6f0d6f9b0f32d))
+* allow for saving empty domain and description when editing ([63ac38e](https://github.com/ajyey/masked-email-manager/commit/63ac38e68d4be8ce880dbf6eba38f0cd991069cc))
+* only allow the user to enter new description up to 127 chars ([bacad1d](https://github.com/ajyey/masked-email-manager/commit/bacad1dc92c609c0fb9cd64ccc23a40c5e40f3bc))
+* update layout so that last message at and created at are underneath eachother ([26510de](https://github.com/ajyey/masked-email-manager/commit/26510de3f5038dbefab258ee8fdfd100b358e1cc))
+
 # [1.0.0-beta.27](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.26...v1.0.0-beta.27) (2023-06-26)
 
 
