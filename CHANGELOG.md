@@ -1,3 +1,20 @@
+# [1.0.0-beta.29](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.28...v1.0.0-beta.29) (2023-06-26)
+
+
+### Bug Fixes
+
+* add truncating for masked email address ([9f0e3d4](https://github.com/ajyey/masked-email-manager/commit/9f0e3d407f2dfa05df5b1379a8a304f2cf5f9521))
+* bug where an edited description would persist even after the user clicked cancel ([3b13410](https://github.com/ajyey/masked-email-manager/commit/3b1341028a8398001ac5c4cc702794ed554ad906))
+* bug where an edited domain would persist even after clicking cancel button ([1a1412b](https://github.com/ajyey/masked-email-manager/commit/1a1412b6ed55c2d9d5088551b39c39722f898a99))
+* lift isEditing state to home component so selecting email sets isEditing to false ([3219767](https://github.com/ajyey/masked-email-manager/commit/321976735ad57ab956ae812639bb3edf9bea259a))
+
+
+### Features
+
+* add createdBy component ([5dee734](https://github.com/ajyey/masked-email-manager/commit/5dee734c52e6736456901bb92700fb00f14ca904))
+* only show copy button for domain and description if they are set ([d658a6b](https://github.com/ajyey/masked-email-manager/commit/d658a6b6e1492150141dffc7babd5f6edfe1e33f))
+* show copy button for email address and id even in editing mode since they cannot be edited ([1731d09](https://github.com/ajyey/masked-email-manager/commit/1731d090ecd43c2cd021422d89d8ebd542af4fd8))
+
 # [1.0.0-beta.28](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.27...v1.0.0-beta.28) (2023-06-26)
 
 
