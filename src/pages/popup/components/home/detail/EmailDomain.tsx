@@ -24,6 +24,19 @@ function EmailDomain({
     setEditedDomain(e.target.value);
     onDomainChange(e.target.value);
   };
+
+  // This useEffect hook is responsible for updating the editedDomain state
+  // whenever the emailDomain prop changes.
+  useEffect(() => {
+    setEditedDomain(emailDomain);
+    // This condition checks if isEditing has changed from true to false.
+    // If so, it resets the editedDomain state to the original emailDomain.
+    // This ensures that when the user clicks the "Cancel" button, the editedDomain
+    // is reset, and the previous changes are discarded.
+    if (!isEditing) {
+      setEditedDomain(emailDomain);
+    }
+  }, [emailDomain, isEditing]);
   const containerStyle = `inline-flex w-full border border-t-0 ${
     isEditing
       ? 'bg-big-stone border-iron/[0.5]'
