@@ -153,8 +153,8 @@ export default function EmailDetailPane({
       }
       await update(selectedEmail.id, session, updateOptions);
       selectedEmail.description =
-        updatedDescription || selectedEmail.description;
-      selectedEmail.forDomain = updatedDomain || selectedEmail.forDomain;
+        updatedDescription ?? selectedEmail.description;
+      selectedEmail.forDomain = updatedDomain ?? selectedEmail.forDomain;
       // Update the email in the list so that the changes are reflected in the email list pane
       updateEmailInList(selectedEmail);
     }
