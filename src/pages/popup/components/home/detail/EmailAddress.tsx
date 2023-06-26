@@ -17,14 +17,14 @@ function EmailAddress({
   }`;
   return (
     <div className={containerStyle}>
-      <div>
+      <div className={'truncate'}>
         <div
           className="mt-1 ml-2 text-malibu font-normal text-detailLabel"
           id="emailLabel"
         >
           email
         </div>
-        <div className="ml-2 mb-1 font-normal text-white text-detailValue">
+        <div className="ml-2 mb-1 font-normal text-white text-detailValue truncate">
           {emailAddress}
         </div>
       </div>
