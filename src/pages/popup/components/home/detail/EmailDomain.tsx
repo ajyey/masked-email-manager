@@ -32,7 +32,7 @@ function EmailDomain({
   }`;
   return (
     <div className={containerStyle}>
-      <div className={'w-full'}>
+      <div className={'w-full truncate'}>
         <div
           className="ml-2 text-malibu font-normal text-detailLabel inline-flex"
           id="domainLabel"
@@ -45,11 +45,11 @@ function EmailDomain({
           )}
         </div>
         <div
-          className={`ml-2 mr-2 mb-1 font-normal text-detailValue ${domainLabelColor}`}
+          className={`ml-2 mr-2 mb-1 font-normal text-detailValue ${domainLabelColor} truncate`}
         >
           {isEditing ? (
             <input
-              className="bg-transparent text-white w-[98%] focus:outline-none"
+              className="bg-transparent text-white w-[98%] focus:outline-none truncate"
               type="text"
               value={editedDomain || ''}
               onChange={handleDomainChange}
