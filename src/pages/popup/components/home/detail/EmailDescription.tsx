@@ -56,6 +56,7 @@ function EmailDescription({
                 className="bg-transparent text-white w-[98%] focus:outline-none"
                 type="text"
                 value={editedDescription || ''}
+                maxLength={127}
                 onChange={handlDescriptionChange}
               />
             ) : descriptionExists ? (
