@@ -69,7 +69,7 @@ export default function HomeComponent() {
               />
             )}
           </div>
-          <div className="columns-[350px]">
+          <div className="columns-[350px] h-[345px]">
             {isLoading ? (
               <LoadingComponent />
             ) : (
