@@ -197,49 +197,55 @@ export default function EmailDetailPane({
                 <EditButton onClick={handleEditButtonClick} />
               )}
             </div>
-            <div className={'mt-4 ml-4 mr-4'}>
-              <EmailAddress
-                emailAddress={selectedEmail ? selectedEmail.email : null}
-                isEditing={isEditing}
-                handleCopyClick={handleCopyClick}
-              />
-              <EmailDomain
-                emailDomain={emailDomain}
-                isEditing={isEditing}
-                onDomainChange={handleDomainChange}
-                handleCopyClick={handleCopyClick}
-              />
-              <EmailDescription
-                emailDescription={emailDescription}
-                isEditing={isEditing}
-                onDescriptionChange={handleDescriptionChange}
-                handleCopyClick={handleCopyClick}
-              />
-              <EmailId
-                emailId={selectedEmail ? selectedEmail.id : null}
-                isEditing={isEditing}
-                handleCopyClick={handleCopyClick}
-              />
-              {/* Create a toast to tell the user the text was copied to their clipboard*/}
-              <Toaster />
-            </div>
-            <div className="flex items-center justify-center mt-auto mb-4 text-gray-200">
-              {selectedEmail.lastMessageAt && (
-                <div>
-                  <LastMessageAt
-                    lastMessageAt={
-                      selectedEmail ? selectedEmail.lastMessageAt : null
-                    }
-                  />
-                </div>
-              )}
-              {selectedEmail.createdAt && (
-                <div>
-                  <CreatedAt
-                    createdAt={selectedEmail ? selectedEmail.createdAt : null}
-                  />
-                </div>
-              )}
+            <div
+              className={
+                'overflow-y-auto scrollbar flex flex-col h-full justify-between'
+              }
+            >
+              <div className={'mt-4 ml-4 mr-4'}>
+                <EmailAddress
+                  emailAddress={selectedEmail ? selectedEmail.email : null}
+                  isEditing={isEditing}
+                  handleCopyClick={handleCopyClick}
+                />
+                <EmailDomain
+                  emailDomain={emailDomain}
+                  isEditing={isEditing}
+                  onDomainChange={handleDomainChange}
+                  handleCopyClick={handleCopyClick}
+                />
+                <EmailDescription
+                  emailDescription={emailDescription}
+                  isEditing={isEditing}
+                  onDescriptionChange={handleDescriptionChange}
+                  handleCopyClick={handleCopyClick}
+                />
+                <EmailId
+                  emailId={selectedEmail ? selectedEmail.id : null}
+                  isEditing={isEditing}
+                  handleCopyClick={handleCopyClick}
+                />
+                {/* Create a toast to tell the user the text was copied to their clipboard*/}
+                <Toaster />
+              </div>
+              <div className="flex items-center justify-center mt-3 mb-3 text-gray-200">
+                {selectedEmail.lastMessageAt && (
+                  <div>
+                    <LastMessageAt
+                      lastMessageAt={
+                        selectedEmail ? selectedEmail.lastMessageAt : null
+                      }
+                    />
+                  </div>
+                )}
+                {selectedEmail.createdAt && (
+                  <div>
+                    <CreatedAt
+                      createdAt={selectedEmail ? selectedEmail.createdAt : null}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </>
         ) : (
