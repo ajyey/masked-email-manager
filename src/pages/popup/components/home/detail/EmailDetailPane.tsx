@@ -73,7 +73,7 @@ export default function EmailDetailPane({
       icon: <CopyIcon iconClasses={'w-5 h-5 stroke-1'} />
     });
   };
-  // Copy the text to the clipboard (when the user clicks on email, decsription, id, or domain)
+  // Copy the text to the clipboard (when the user clicks on email, description, id, or domain)
   // and show the copy alert
   const handleCopyClick = (textToCopy: string) => {
     navigator.clipboard.writeText(textToCopy);
