@@ -1,3 +1,19 @@
+# [1.0.0-beta.27](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.26...v1.0.0-beta.27) (2023-06-26)
+
+
+### Bug Fixes
+
+* add foxed height to email details pane ([685c13a](https://github.com/ajyey/masked-email-manager/commit/685c13a1ba8d9c86f75fc2e496ec360d677b15ce))
+* description and domain width ([3ce7260](https://github.com/ajyey/masked-email-manager/commit/3ce7260ebd3289b940a39bb9229be3b3447a3f38))
+
+
+### Features
+
+* add better handling for length of email description ([c829954](https://github.com/ajyey/masked-email-manager/commit/c8299549350afeac3d42ffcb4c543bfb2119b361))
+* add toast for clipboard copy notification ([d98b783](https://github.com/ajyey/masked-email-manager/commit/d98b783085d39c6b5cd5fbdc2eb1742504fd8624))
+* align created and last message at components to bottom of email details pane ([c9194b2](https://github.com/ajyey/masked-email-manager/commit/c9194b28f92a42ea82b332f18526ea5ee34c8f73))
+* truncate long domains in email details pane ([0d9f1f5](https://github.com/ajyey/masked-email-manager/commit/0d9f1f5ebe185f8d504a597090e46c32798b65d8))
+
 # [1.0.0-beta.26](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.25...v1.0.0-beta.26) (2023-06-26)
 
 
