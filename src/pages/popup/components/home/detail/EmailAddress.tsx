@@ -28,9 +28,7 @@ function EmailAddress({
           {emailAddress}
         </div>
       </div>
-      {!isEditing && (
-        <CopyButton onClick={handleCopyClick} textToCopy={emailAddress} />
-      )}
+      <CopyButton onClick={handleCopyClick} textToCopy={emailAddress} />
     </div>
   );
 }

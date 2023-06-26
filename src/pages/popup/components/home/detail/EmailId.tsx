@@ -28,9 +28,7 @@ function EmailId({
           {emailId}
         </div>
       </div>
-      {!isEditing && (
-        <CopyButton onClick={handleCopyClick} textToCopy={emailId} />
-      )}
+      <CopyButton onClick={handleCopyClick} textToCopy={emailId} />
     </div>
   );
 }
