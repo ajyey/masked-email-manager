@@ -21,13 +21,17 @@ import EmailId from '@pages/popup/components/home/detail/EmailId';
 import EmailDomain from '@pages/popup/components/home/detail/EmailDomain';
 import SaveButton from '@pages/popup/components/home/detail/SaveButton';
 import CancelEditingButton from '@pages/popup/components/home/detail/CancelEditingButton';
-import { CopyIcon } from '@pages/popup/components/home/icons/icons';
+import {
+  CopyIcon,
+  DeletedIcon
+} from '@pages/popup/components/home/icons/icons';
 import EmailStateToggle from '@pages/popup/components/home/detail/EmailStateToggle';
 import NoEmailSelected from '@pages/popup/components/home/detail/NoEmailSelected';
 import LastMessageAt from '@pages/popup/components/home/detail/LastMessageAt';
 import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
 import { toast, Toaster } from 'react-hot-toast';
 import CreatedBy from '@pages/popup/components/home/detail/CreatedBy';
+import DeleteButton from '@pages/popup/components/home/detail/DeleteButton';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -175,12 +179,23 @@ export default function EmailDetailPane({
         {/* If there is an email selected, show the details, otherwise show the NoEmailSelected component*/}
         {selectedEmail ? (
           <>
-            <div className="h-[35px] border-b border-b-big-stone flex items-center justify-end">
+            <div
+              className={`h-[35px] border-b border-b-big-stone flex items-center ${
+                isEditing ? 'justify-end' : 'justify-evenly'
+              }`}
+            >
               {/*Only allow the user to toggle the state of the email while not editing*/}
               {!isEditing && (
                 <EmailStateToggle
                   emailState={selectedEmail?.state}
                   onEmailStateChange={handleEmailStateChange}
+                />
+              )}
+              {!isEditing && (
+                <DeleteButton
+                  onClick={() => {
+                    console.log('implement me');
+                  }}
                 />
               )}
               {isEditing ? (
