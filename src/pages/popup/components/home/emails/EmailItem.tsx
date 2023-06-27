@@ -37,5 +37,5 @@ const EmailItem = React.forwardRef<HTMLDivElement, MaskedEmailListItemProps>(
     );
   }
 );
-
+EmailItem.displayName = 'EmailItem';
 export default EmailItem;

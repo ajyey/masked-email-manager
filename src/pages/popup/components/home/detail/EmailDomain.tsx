@@ -18,7 +18,6 @@ function EmailDomain({
   }, [emailDomain]);
   const domainLabelColor = emailDomain ? 'text-white' : 'text-gray-400';
   const [editedDomain, setEditedDomain] = useState(emailDomain);
-  const editingStyle = isEditing ? 'bg-transparent text-white' : '';
   const handleDomainChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditedDomain(e.target.value);
     onDomainChange(e.target.value);

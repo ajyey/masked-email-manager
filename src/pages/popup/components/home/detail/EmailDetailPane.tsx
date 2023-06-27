@@ -43,14 +43,12 @@ export default function EmailDetailPane({
   // Track whether the selected email is favorited
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
   // Track whether the user has clicked the copy button for an email detail and we need to show the alert
-  const [showCopyAlert, setShowCopyAlert] = useState<boolean>(false);
   const [updatedDescription, setUpdatedDescription] = useState<string | null>(
     selectedEmail?.description || null
   );
   const [updatedDomain, setUpdatedDomain] = useState<string | null>(
     selectedEmail?.forDomain || null
   );
-  const [updatedEmail, setUpdatedEmail] = useState<MaskedEmail | null>(null);
   const handleDescriptionChange = (newDescription: string) => {
     setUpdatedDescription(newDescription);
   };

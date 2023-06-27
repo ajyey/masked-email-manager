@@ -9,12 +9,18 @@ import {
   FavoriteIcon
 } from '@pages/popup/components/home/icons/icons';
 
+interface DropdownItem {
+  label: string;
+  value: string;
+  icon: React.ReactNode;
+}
+
 function FilterEmailsDropdown({
   onFilterChange
 }: {
   onFilterChange: (option: string) => void;
 }) {
-  const dropdownItems = [
+  const dropdownItems: DropdownItem[] = [
     {
       label: 'Favorited',
       value: 'Favorited',
@@ -60,7 +66,7 @@ function FilterEmailsDropdown({
     setIsOpen(!isOpen);
   };
   // Handle the dropdown item selection
-  const selectOption = (dropdownOption: any) => {
+  const selectOption = (dropdownOption: DropdownItem) => {
     setSelectedOption(dropdownOption);
     setIsOpen(false); // Close the dropdown menu
     onFilterChange(dropdownToEmailStateMap[dropdownOption.value]); // Update the email state filter
@@ -102,7 +108,7 @@ function FilterEmailsDropdown({
           className="absolute top-full w-full mt-1 rounded-lg text-white"
         >
           <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg ml-1">
-            {dropdownItems.map((dropdownItem: any) => (
+            {dropdownItems.map((dropdownItem: DropdownItem) => (
               <li
                 key={dropdownItem.value}
                 className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
