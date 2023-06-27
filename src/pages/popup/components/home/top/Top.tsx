@@ -20,7 +20,7 @@ export default function TopComponent({ onSearchChange, onRefresh }: Props) {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   return (
-    <section className="inline-flex h-14 items-center border-b border-big-stone w-full">
+    <section className="inline-flex h-[55px] items-center border-b border-big-stone w-full">
       <div className="w-full">
         <div className="inline-flex">
           {/*LOGO*/}
