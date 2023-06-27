@@ -1,3 +1,19 @@
+# [1.0.0-beta.31](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.30...v1.0.0-beta.31) (2023-06-27)
+
+
+### Bug Fixes
+
+* change top height back to 55px ([551af62](https://github.com/ajyey/masked-email-manager/commit/551af62d6a1dd58ea249c7b1cc9fa1e42c6e7c86))
+
+
+### Features
+
+* add ability to delete an email and a basic modal for confirming ([cd0d888](https://github.com/ajyey/masked-email-manager/commit/cd0d8885c83af14877163dcee1b3e35b8d021ae8))
+* add initial delete button ([a1d1368](https://github.com/ajyey/masked-email-manager/commit/a1d1368ca68f55c983b36a30467a874afb7fce68))
+* add logout icon ([1f92764](https://github.com/ajyey/masked-email-manager/commit/1f92764f4cdd7f58fcae189cb159e590e07594f7))
+* cleans up styling for delete modal ([3ff6576](https://github.com/ajyey/masked-email-manager/commit/3ff6576544580325ac682021836172f4616f513f))
+* only perform scroll to selected email on filter change ([9c194d3](https://github.com/ajyey/masked-email-manager/commit/9c194d31dfc331ad209058d19f6fb9acf4ff4fe1))
+
 # [1.0.0-beta.30](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.29...v1.0.0-beta.30) (2023-06-27)
 
 

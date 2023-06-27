@@ -36,14 +36,14 @@ export default function DeleteConfirmationModal({
             {/*footer*/}
             <div className="flex items-center justify-end p-3 border-t border-solid border-gray-300 rounded-b">
               <button
-                className="bg-red-500 text-white font-bold uppercase text-sm px-3 py-2 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                className="bg-red-500 text-white font-bold uppercase text-sm px-3 py-2 rounded-lg shadow hover:shadow-xl hover:bg-red-600 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
                 onClick={handleDelete}
               >
                 Delete
               </button>
               <button
-                className="text-gray-500 background-transparent font-bold uppercase px-3 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                className="text-gray-500 background-transparent hover:bg-gray-200 hover:shadow-xl rounded-lg font-bold uppercase px-3 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
                 onClick={closeModal}
               >
