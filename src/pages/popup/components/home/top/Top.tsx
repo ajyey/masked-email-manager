@@ -5,11 +5,12 @@ import { LogoutIcon } from '@pages/popup/components/home/icons/icons';
 import handleLogout from '@pages/popup/components/home/Home';
 import SettingsDropdown from '@pages/popup/components/home/top/SettingsDropdown';
 import { setFavoriteEmailIds } from '../../../../../../utils/storageUtil';
+import HomeComponentProps from '@pages/popup/components/home/Home';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
   onRefresh: () => Promise<void>;
-  onLogout: () => Promise<void>;
+  onLogout: () => void;
 }
 
 export default function TopComponent({

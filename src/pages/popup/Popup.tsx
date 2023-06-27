@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LoginComponent from '@pages/popup/components/login/Login';
 import HomeComponent from '@pages/popup/components/home/Home';
+import { clearStorage } from '../../../utils/storageUtil';
 
 interface PopupProps {
   authenticated: boolean;
@@ -13,7 +14,9 @@ export default function Popup({ authenticated }: PopupProps): JSX.Element {
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
   };
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    // Clear sync storage
+    await clearStorage();
     setIsLoggedIn(false);
   };
 

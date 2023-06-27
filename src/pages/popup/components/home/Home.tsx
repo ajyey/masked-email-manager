@@ -24,12 +24,14 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
   // State for keeping track of whether the user is editing the email or not
   const [isEditing, setIsEditing] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  const handleLogout = async () => {
-    // Clear sync storage
-    await clearStorage();
-    // Call the onLogout prop to set the isLoggedIn state to false in Home component
-    onLogout();
+  // Open logout confirmation modal
+  const openLogoutConfirmationModal = () => {
+    setShowLogoutModal(true);
+  };
+  const closeLogoutConfirmationModal = () => {
+    setShowLogoutModal(false);
   };
 
   const refreshMaskedEmails = async () => {
@@ -61,7 +63,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
       <TopComponent
         onSearchChange={setSearchQuery}
         onRefresh={refreshMaskedEmails}
-        onLogout={handleLogout}
+        onLogout={onLogout}
       />
       {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
       <div className="w-full h-[345px] flex flex-col">

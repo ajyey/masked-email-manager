@@ -3,9 +3,10 @@ import {
   LogoutIcon,
   SettingsIcon
 } from '@pages/popup/components/home/icons/icons';
+import Props from '@pages/popup/components/home/top/Top';
 
 interface Props {
-  onLogout: () => Promise<void>;
+  onLogout: () => void;
 }
 
 const SettingsDropdown: React.FC<Props> = ({ onLogout }) => {
