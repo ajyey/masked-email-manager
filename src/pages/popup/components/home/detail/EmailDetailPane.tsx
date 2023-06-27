@@ -26,7 +26,7 @@ import EmailStateToggle from '@pages/popup/components/home/detail/EmailStateTogg
 import NoEmailSelected from '@pages/popup/components/home/detail/NoEmailSelected';
 import LastMessageAt from '@pages/popup/components/home/detail/LastMessageAt';
 import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
-import { Toast, toast, Toaster } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 import CreatedBy from '@pages/popup/components/home/detail/CreatedBy';
 
 export default function EmailDetailPane({

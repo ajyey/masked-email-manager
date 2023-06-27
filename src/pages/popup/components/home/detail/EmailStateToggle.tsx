@@ -1,9 +1,9 @@
 import React from 'react';
 import { MaskedEmailState } from 'fastmail-masked-email';
 import {
+  StateDeletedIcon,
   StateDisabledIcon,
-  StateEnabledIcon,
-  StateDeletedIcon
+  StateEnabledIcon
 } from '@pages/popup/components/home/detail/StateIcons';
 
 interface EmailStateToggleProps {

@@ -1,6 +1,4 @@
 import React from 'react';
-import { FavoriteIcon } from '@pages/popup/components/home/icons/icons';
-import handleFavoriteButtonClick from '@pages/popup/components/home/detail/EmailDetailPane';
 
 interface CancelEditingButtonProps {
   onClick: () => void;

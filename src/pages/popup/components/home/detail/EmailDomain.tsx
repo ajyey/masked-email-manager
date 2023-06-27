@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import emailDescription from '@pages/popup/components/home/detail/EmailDescription';
 import { EditIcon } from '@pages/popup/components/home/icons/icons';
 import CopyButton from '@pages/popup/components/home/detail/CopyButton';
 
