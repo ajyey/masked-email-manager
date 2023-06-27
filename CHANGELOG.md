@@ -1,3 +1,16 @@
+# [1.0.0-beta.30](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.29...v1.0.0-beta.30) (2023-06-27)
+
+
+### Bug Fixes
+
+* add text size for createdAt, lastMessageAt, and createdBy ([70fad7a](https://github.com/ajyey/masked-email-manager/commit/70fad7a73d72c06d64ca45620cd577ebf4b81f7b))
+
+
+### Features
+
+* add better tailwind css for Top ([649b32e](https://github.com/ajyey/masked-email-manager/commit/649b32ef65eb83d1cf5f12a627880630f07fa23c))
+* automatically scroll to the selected email when the user switches between filters ([2a58d6d](https://github.com/ajyey/masked-email-manager/commit/2a58d6d84171838e2e982703a324a4489c7e60cb))
+
 # [1.0.0-beta.29](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.28...v1.0.0-beta.29) (2023-06-26)
 
 
