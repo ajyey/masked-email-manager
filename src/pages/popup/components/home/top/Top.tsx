@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import icon from '@assets/img/icon.svg';
 import SearchBar from '@pages/popup/components/home/top/SearchBar';
+import { LogoutIcon } from '@pages/popup/components/home/icons/icons';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
@@ -23,7 +24,7 @@ export default function TopComponent({ onSearchChange, onRefresh }: Props) {
       <div className="w-full">
         <div className="inline-flex">
           {/*LOGO*/}
-          <div className="flex columns-[45px] items-center">
+          <div className="flex items-center">
             <a
               href="https://github.com/ajyey/masked-email-manager"
               target="_blank"
@@ -67,7 +68,7 @@ export default function TopComponent({ onSearchChange, onRefresh }: Props) {
           </div>
           {/*CREATE EMAIL BUTTON*/}
           <div className="flex columns-[120px] items-center">
-            <div className="relative w-full p-1 mb-1">
+            <div className="relative w-full p-1">
               <button
                 type="button"
                 className="text-white bg-french-blue font-bold rounded-[5px] text-sm p-2.5 h-[35px] text-center inline-flex items-center"
@@ -91,22 +92,8 @@ export default function TopComponent({ onSearchChange, onRefresh }: Props) {
             </div>
           </div>
           {/*HAMBURGER*/}
-          <div className="flex h-[35px] items-center ml-1.5 mt-1">
-            <svg
-              width="30"
-              height="30"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M3.75 6.75H20.25M3.75 12H20.25M3.75 17.25H20.25"
-                stroke="#D8D9D8"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+          <div className="flex items-center">
+            <LogoutIcon iconClasses={'h-6 w-6 stroke-iron ml-2'} />
           </div>
         </div>
       </div>
