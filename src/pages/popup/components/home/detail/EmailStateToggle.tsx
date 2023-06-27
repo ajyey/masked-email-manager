@@ -19,7 +19,7 @@ const EmailStateToggle: React.FC<EmailStateToggleProps> = ({
   const isDeleted = emailState === 'deleted';
 
   return (
-    <div className={'inline-flex mr-1'}>
+    <div className={'inline-flex'}>
       <label
         htmlFor="AcceptConditions"
         className="relative h-6 w-12 cursor-pointer"
