@@ -8,8 +8,13 @@ import TopComponent from '@pages/popup/components/home/top/Top';
 import EmailCount from '@pages/popup/components/home/emails/EmailCount';
 import { FASTMAIL_SESSION_KEY } from '../../../../../utils/constants';
 import browser from 'webextension-polyfill';
+import { clearStorage } from '../../../../../utils/storageUtil';
 
-export default function HomeComponent() {
+interface HomeComponentProps {
+  onLogout: () => void;
+}
+
+export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterOption, setFilterOption] = useState('favorited');
@@ -19,6 +24,13 @@ export default function HomeComponent() {
   const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
   // State for keeping track of whether the user is editing the email or not
   const [isEditing, setIsEditing] = useState(false);
+
+  const handleLogout = async () => {
+    // Clear sync storage
+    await clearStorage();
+    // Call the onLogout prop to set the isLoggedIn state to false in Home component
+    onLogout();
+  };
 
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
@@ -49,6 +61,7 @@ export default function HomeComponent() {
       <TopComponent
         onSearchChange={setSearchQuery}
         onRefresh={refreshMaskedEmails}
+        onLogout={handleLogout}
       />
       {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
       <div className="w-full h-[345px] flex flex-col">

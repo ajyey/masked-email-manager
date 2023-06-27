@@ -2,13 +2,21 @@ import React, { useState } from 'react';
 import icon from '@assets/img/icon.svg';
 import SearchBar from '@pages/popup/components/home/top/SearchBar';
 import { LogoutIcon } from '@pages/popup/components/home/icons/icons';
+import handleLogout from '@pages/popup/components/home/Home';
+import SettingsDropdown from '@pages/popup/components/home/top/SettingsDropdown';
+import { setFavoriteEmailIds } from '../../../../../../utils/storageUtil';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
   onRefresh: () => Promise<void>;
+  onLogout: () => Promise<void>;
 }
 
-export default function TopComponent({ onSearchChange, onRefresh }: Props) {
+export default function TopComponent({
+  onSearchChange,
+  onRefresh,
+  onLogout
+}: Props) {
   // Handler for when the user clicks the refresh button
   // Calls the refreshMaskedEmails function from src/pages/popup/components/home/Home.tsx
   const handleRefresh = async () => {
@@ -18,7 +26,6 @@ export default function TopComponent({ onSearchChange, onRefresh }: Props) {
   };
   // State for the refresh button - keeps track of when we are done fetching the list of emails from the Fastmail API
   const [isRefreshing, setIsRefreshing] = useState(false);
-
   return (
     <section className="inline-flex h-[55px] items-center border-b border-b-big-stone w-full">
       <div className="w-full">
@@ -91,9 +98,9 @@ export default function TopComponent({ onSearchChange, onRefresh }: Props) {
               </button>
             </div>
           </div>
-          {/*HAMBURGER*/}
-          <div className="flex items-center">
-            <LogoutIcon iconClasses={'h-6 w-6 stroke-iron ml-2'} />
+          {/*LOGOUT BUTTON*/}
+          <div className="flex items-center ml-4">
+            <SettingsDropdown onLogout={onLogout} />
           </div>
         </div>
       </div>

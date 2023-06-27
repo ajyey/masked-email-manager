@@ -13,11 +13,14 @@ export default function Popup({ authenticated }: PopupProps): JSX.Element {
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
   };
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
 
   return (
     <div className={cssClass}>
       {isLoggedIn ? (
-        <HomeComponent />
+        <HomeComponent onLogout={handleLogout} />
       ) : (
         // Pass the handleLoginSuccess callback to the LoginComponent
         <LoginComponent onLoginSuccess={handleLoginSuccess} />
