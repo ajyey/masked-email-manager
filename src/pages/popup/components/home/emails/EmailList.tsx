@@ -41,7 +41,7 @@ function EmailList({
         block: 'center' // Align the selected email with the center of the viewport
       });
     }
-  }, [selectedEmail, filteredEmails]);
+  }, [filteredEmails]);
 
   // Filter the emails based on the filter prop
   useEffect(() => {
