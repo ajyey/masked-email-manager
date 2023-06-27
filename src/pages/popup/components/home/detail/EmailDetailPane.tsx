@@ -12,6 +12,7 @@ import {
   MaskedEmail,
   MaskedEmailState,
   Options,
+  remove,
   Session,
   update
 } from 'fastmail-masked-email';
@@ -32,6 +33,7 @@ import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
 import { toast, Toaster } from 'react-hot-toast';
 import CreatedBy from '@pages/popup/components/home/detail/CreatedBy';
 import DeleteButton from '@pages/popup/components/home/detail/DeleteButton';
+import DeleteConfirmationModal from '@pages/popup/components/home/detail/DeleteConfirmationModal';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -44,6 +46,8 @@ export default function EmailDetailPane({
   isEditing: boolean;
   setIsEditing: (value: ((prevState: boolean) => boolean) | boolean) => void;
 }) {
+  // State for delete confirmation modal visibility
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   // Track whether the selected email is favorited
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
   // Track whether the user has clicked the copy button for an email detail and we need to show the alert
@@ -53,6 +57,28 @@ export default function EmailDetailPane({
   const [updatedDomain, setUpdatedDomain] = useState<string | null>(
     selectedEmail?.forDomain || null
   );
+
+  // Open delete confirmation modal
+  const openDeleteConfirmationModal = () => {
+    setShowDeleteModal(true);
+  };
+
+  // Close delete confirmation modal
+  const closeDeleteConfirmationModal = () => {
+    setShowDeleteModal(false);
+  };
+
+  // Handle delete action
+  const handleDelete = async () => {
+    if (selectedEmail) {
+      //TODO: Add better error handling
+      const session = await getFastmailSession();
+      await remove(selectedEmail.id, session);
+      updateEmailInList({ ...selectedEmail, state: 'deleted' }); // Update the email in the email list
+      selectedEmail.state = 'deleted'; // Update the email in the email detail
+      closeDeleteConfirmationModal();
+    }
+  };
   const handleDescriptionChange = (newDescription: string) => {
     setUpdatedDescription(newDescription);
   };
@@ -193,9 +219,16 @@ export default function EmailDetailPane({
               )}
               {!isEditing && (
                 <DeleteButton
-                  onClick={() => {
-                    console.log('implement me');
-                  }}
+                  onClick={openDeleteConfirmationModal}
+                  disabled={selectedEmail.state === 'deleted'} // Disable the delete button if the email is already deleted
+                />
+              )}
+              {/* Delete Confirmation Modal */}
+              {showDeleteModal && (
+                <DeleteConfirmationModal
+                  closeModal={closeDeleteConfirmationModal}
+                  handleDelete={handleDelete}
+                  selectedEmail={selectedEmail}
                 />
               )}
               {isEditing ? (
