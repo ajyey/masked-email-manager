@@ -20,7 +20,7 @@ function SearchBar({ onSearchChange }: Props) {
   };
 
   return (
-    <div className="relative w-full items-center p-1">
+    <div className="relative w-full items-center">
       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
         <svg
           aria-hidden="true"
@@ -39,7 +39,7 @@ function SearchBar({ onSearchChange }: Props) {
       <input
         type="text"
         id="simple-search"
-        className="bg-big-stone text-sm text-white rounded-[5px] w-full pl-10 h-[35px] items-center p-2.5 focus:outline-none"
+        className="bg-big-stone text-sm text-white rounded-[5px] w-full pl-10 h-[30px] items-center p-2.5 focus:outline-none"
         placeholder="Search Masked Emails..."
         style={{ caretColor: 'white' }}
         onChange={handleChange}
