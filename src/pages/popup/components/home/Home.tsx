@@ -24,15 +24,17 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
   // State for keeping track of whether the user is editing the email or not
   const [isEditing, setIsEditing] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [url, setUrl] = useState('');
 
-  // Open logout confirmation modal
-  const openLogoutConfirmationModal = () => {
-    setShowLogoutModal(true);
-  };
-  const closeLogoutConfirmationModal = () => {
-    setShowLogoutModal(false);
-  };
+  useEffect(() => {
+    // Fetch the URL of the active tab
+    browser.tabs
+      .query({ active: true, lastFocusedWindow: true })
+      .then((tabs) => {
+        const activeTabUrl = tabs[0].url;
+        setUrl(activeTabUrl ?? '');
+      });
+  }, []);
 
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
@@ -54,6 +56,9 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
       )
     );
   };
+  const addNewEmailToEmailList = (newEmail: MaskedEmail) => {
+    setMaskedEmails((prevEmails) => [newEmail, ...prevEmails]);
+  };
   useEffect(() => {
     refreshMaskedEmails();
   }, []);
@@ -64,6 +69,10 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
         onSearchChange={setSearchQuery}
         onRefresh={refreshMaskedEmails}
         onLogout={onLogout}
+        addNewEmailToEmailList={addNewEmailToEmailList}
+        setSelectedEmail={setSelectedEmail}
+        activeTabUrl={url}
+        setFilterOption={setFilterOption}
       />
       {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
       <div className="w-full h-[345px] flex flex-col">

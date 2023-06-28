@@ -1,27 +1,46 @@
 import React, { useState } from 'react';
 import icon from '@assets/img/icon.svg';
 import SearchBar from '@pages/popup/components/home/top/SearchBar';
-import { LogoutIcon } from '@pages/popup/components/home/icons/icons';
-import handleLogout from '@pages/popup/components/home/Home';
 import SettingsDropdown from '@pages/popup/components/home/top/SettingsDropdown';
-import { setFavoriteEmailIds } from '../../../../../../utils/storageUtil';
-import HomeComponentProps from '@pages/popup/components/home/Home';
-import DeleteConfirmationModal from '@pages/popup/components/home/detail/DeleteConfirmationModal';
-import LogoutConfirmationModal from '@pages/popup/components/home/detail/LogoutConfirmationModal';
+import LogoutConfirmationModal from '@pages/popup/components/home/detail/modals/LogoutConfirmationModal';
+import CreateEmailModal from '@pages/popup/components/home/detail/modals/CreateEmailModal';
+import { MaskedEmail } from 'fastmail-masked-email';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
   onRefresh: () => Promise<void>;
   onLogout: () => void;
+  addNewEmailToEmailList: (newEmail: MaskedEmail) => void;
+  setSelectedEmail: (
+    value:
+      | ((prevState: MaskedEmail | null) => MaskedEmail | null)
+      | MaskedEmail
+      | null
+  ) => void;
+  activeTabUrl: string;
+  setFilterOption: (value: ((prevState: string) => string) | string) => void;
 }
 
 export default function TopComponent({
   onSearchChange,
   onRefresh,
-  onLogout
+  onLogout,
+  addNewEmailToEmailList,
+  setSelectedEmail,
+  activeTabUrl,
+  setFilterOption
 }: Props) {
   const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] =
     useState(false);
+  // State for Create Email Modal
+  const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);
+
+  const closeCreateEmailModal = () => {
+    setShowCreateEmailModal(false);
+  };
+  const openCreateEmailModal = () => {
+    setShowCreateEmailModal(true);
+  };
   const closeLogoutConfirmationModal = () => {
     setShowLogoutConfirmationModal(false);
   };
@@ -88,6 +107,7 @@ export default function TopComponent({
           <button
             type="button"
             className="text-white bg-french-blue font-semibold rounded-[5px] text-sm p-2 h-[30px] text-center inline-flex items-center justify-center"
+            onClick={openCreateEmailModal}
           >
             <svg
               width="16"
@@ -107,6 +127,16 @@ export default function TopComponent({
           </button>
         </div>
       </div>
+      {/* Create Email Modal */}
+      {showCreateEmailModal && (
+        <CreateEmailModal
+          closeModal={closeCreateEmailModal}
+          activeTabUrl={activeTabUrl}
+          addNewEmailToEmailList={addNewEmailToEmailList}
+          setSelectedEmail={setSelectedEmail}
+          setFilterOption={setFilterOption}
+        />
+      )}
       {/*LOGOUT BUTTON*/}
       <div className="flex items-center ml-1">
         <SettingsDropdown openLogoutModal={openLogoutConfirmationModal} />

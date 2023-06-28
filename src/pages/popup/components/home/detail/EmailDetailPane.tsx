@@ -33,7 +33,7 @@ import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
 import { toast, Toaster } from 'react-hot-toast';
 import CreatedBy from '@pages/popup/components/home/detail/CreatedBy';
 import DeleteButton from '@pages/popup/components/home/detail/DeleteButton';
-import DeleteConfirmationModal from '@pages/popup/components/home/detail/DeleteConfirmationModal';
+import DeleteConfirmationModal from '@pages/popup/components/home/detail/modals/DeleteConfirmationModal';
 
 export default function EmailDetailPane({
   selectedEmail,
