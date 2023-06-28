@@ -55,7 +55,7 @@ export default function DeleteConfirmationModal({
               </button>
             </div>
             {/*Modal body*/}
-            <div className="p-3 space-y-4">
+            <div className="p-4 space-y-4">
               <div className="text-white text-sm">
                 {`Are you sure you want to delete `}
                 <span className="font-semibold text-malibu">
@@ -65,7 +65,7 @@ export default function DeleteConfirmationModal({
               </div>
             </div>
             {/*Modal footer*/}
-            <div className="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <div className="flex items-center justify-end p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
               <button
                 data-modal-hide="defaultModal"
                 type="button"
