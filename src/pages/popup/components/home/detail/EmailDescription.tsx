@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { EditIcon } from '@pages/popup/components/home/icons/icons';
-import CopyButton from '@pages/popup/components/home/detail/CopyButton';
+import CopyButton from '@pages/popup/components/home/detail/buttons/CopyButton';
 
 function EmailDescription({
   emailDescription,
