@@ -20,17 +20,17 @@ export const displayCopySuccessToast = (
 };
 
 export const displayErrorToast = (
-  duration: number,
-  position: ToastPosition,
   message: string,
-  icon: Renderable
+  icon: Renderable,
+  backgroundColor: string,
+  color: string
 ) => {
   toast.error(message, {
     duration: duration,
     position: position,
     style: {
-      backgroundColor: 'red',
-      color: '#FFFFFF' // white
+      backgroundColor: backgroundColor,
+      color: color
     },
     icon: icon
   });
