@@ -42,7 +42,10 @@ const SettingsDropdown: React.FC<Props> = ({ openLogoutModal }) => {
           <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg">
             <li
               className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2 w-full"
-              onClick={openLogoutModal}
+              onClick={() => {
+                setShowDropdown(false);
+                openLogoutModal();
+              }}
             >
               <LogoutIcon
                 iconClasses={'w-5 h-5 stroke-magnesium stroke-2 mr-2'}
