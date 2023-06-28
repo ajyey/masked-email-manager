@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import EditButton from '@pages/popup/components/home/detail/EditButton';
-import FavoriteButton from '@pages/popup/components/home/detail/FavoriteButton';
+import EditButton from '@pages/popup/components/home/detail/buttons/EditButton';
+import FavoriteButton from '@pages/popup/components/home/detail/buttons/FavoriteButton';
 import {
   getFastmailSession,
   getFavoriteEmailIds,
@@ -20,19 +20,19 @@ import EmailAddress from '@pages/popup/components/home/detail/EmailAddress';
 import EmailDescription from '@pages/popup/components/home/detail/EmailDescription';
 import EmailId from '@pages/popup/components/home/detail/EmailId';
 import EmailDomain from '@pages/popup/components/home/detail/EmailDomain';
-import SaveButton from '@pages/popup/components/home/detail/SaveButton';
-import CancelEditingButton from '@pages/popup/components/home/detail/CancelEditingButton';
+import SaveButton from '@pages/popup/components/home/detail/buttons/SaveButton';
+import CancelEditingButton from '@pages/popup/components/home/detail/buttons/CancelEditingButton';
 import {
   CopyIcon,
   DeletedIcon
 } from '@pages/popup/components/home/icons/icons';
-import EmailStateToggle from '@pages/popup/components/home/detail/EmailStateToggle';
+import EmailStateToggle from '@pages/popup/components/home/detail/buttons/EmailStateToggle';
 import NoEmailSelected from '@pages/popup/components/home/detail/NoEmailSelected';
 import LastMessageAt from '@pages/popup/components/home/detail/LastMessageAt';
 import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
 import { toast, Toaster } from 'react-hot-toast';
 import CreatedBy from '@pages/popup/components/home/detail/CreatedBy';
-import DeleteButton from '@pages/popup/components/home/detail/DeleteButton';
+import DeleteButton from '@pages/popup/components/home/detail/buttons/DeleteButton';
 import DeleteConfirmationModal from '@pages/popup/components/home/detail/modals/DeleteConfirmationModal';
 
 export default function EmailDetailPane({
