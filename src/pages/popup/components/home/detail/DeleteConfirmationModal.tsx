@@ -22,7 +22,7 @@ export default function DeleteConfirmationModal({
           <div className=" rounded-lg shadow-lg relative flex flex-col w-full outline-none border-0 bg-white focus:outline-none">
             {/*header*/}
             <div className="flex items-center justify-center p-3 border-b border-solid border-gray-300 rounded-t">
-              <DeletedIcon iconClasses={'w-5 h-5 mr-1 stroke-red-500'} />
+              <DeletedIcon iconClasses={'w-5 h-5 mr-2 stroke-red-500'} />
               <div className="text-lg font-semibold truncate">
                 {`${selectedEmail?.email}`}
               </div>

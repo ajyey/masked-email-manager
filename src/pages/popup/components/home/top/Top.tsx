@@ -6,6 +6,8 @@ import handleLogout from '@pages/popup/components/home/Home';
 import SettingsDropdown from '@pages/popup/components/home/top/SettingsDropdown';
 import { setFavoriteEmailIds } from '../../../../../../utils/storageUtil';
 import HomeComponentProps from '@pages/popup/components/home/Home';
+import DeleteConfirmationModal from '@pages/popup/components/home/detail/DeleteConfirmationModal';
+import LogoutConfirmationModal from '@pages/popup/components/home/detail/LogoutConfirmationModal';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
@@ -18,6 +20,14 @@ export default function TopComponent({
   onRefresh,
   onLogout
 }: Props) {
+  const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] =
+    useState(false);
+  const closeLogoutConfirmationModal = () => {
+    setShowLogoutConfirmationModal(false);
+  };
+  const openLogoutConfirmationModal = () => {
+    setShowLogoutConfirmationModal(true);
+  };
   // Handler for when the user clicks the refresh button
   // Calls the refreshMaskedEmails function from src/pages/popup/components/home/Home.tsx
   const handleRefresh = async () => {
@@ -101,8 +111,15 @@ export default function TopComponent({
           </div>
           {/*LOGOUT BUTTON*/}
           <div className="flex items-center ml-4">
-            <SettingsDropdown onLogout={onLogout} />
+            <SettingsDropdown openLogoutModal={openLogoutConfirmationModal} />
           </div>
+          {/* Logout Confirmation Modal */}
+          {showLogoutConfirmationModal && (
+            <LogoutConfirmationModal
+              closeModal={closeLogoutConfirmationModal}
+              logout={onLogout}
+            />
+          )}
         </div>
       </div>
     </section>
