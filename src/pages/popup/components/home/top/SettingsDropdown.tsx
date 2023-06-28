@@ -39,9 +39,9 @@ const SettingsDropdown: React.FC<Props> = ({ openLogoutModal }) => {
       </button>
       {showDropdown && (
         <div className="absolute right-0 mt-4 w-24 text-white">
-          <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg">
+          <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg mr-1">
             <li
-              className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2 w-full"
+              className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg py-1 px-2 w-full"
               onClick={() => {
                 setShowDropdown(false);
                 openLogoutModal();
