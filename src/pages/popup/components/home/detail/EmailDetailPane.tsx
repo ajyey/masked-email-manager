@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import EditButton from '@pages/popup/components/home/detail/buttons/EditButton';
 import FavoriteButton from '@pages/popup/components/home/detail/buttons/FavoriteButton';
 import {
   getFastmailSession,
@@ -20,8 +19,6 @@ import EmailAddress from '@pages/popup/components/home/detail/EmailAddress';
 import EmailDescription from '@pages/popup/components/home/detail/EmailDescription';
 import EmailId from '@pages/popup/components/home/detail/EmailId';
 import EmailDomain from '@pages/popup/components/home/detail/EmailDomain';
-import SaveButton from '@pages/popup/components/home/detail/buttons/SaveButton';
-import CancelEditingButton from '@pages/popup/components/home/detail/buttons/CancelEditingButton';
 import {
   CopyIcon,
   DeletedIcon
@@ -32,6 +29,9 @@ import LastMessageAt from '@pages/popup/components/home/detail/LastMessageAt';
 import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
 import { toast, Toaster } from 'react-hot-toast';
 import CreatedBy from '@pages/popup/components/home/detail/CreatedBy';
+import SaveButton from '@pages/popup/components/home/detail/buttons/SaveButton';
+import EditButton from '@pages/popup/components/home/detail/buttons/EditButton';
+import CancelEditingButton from '@pages/popup/components/home/detail/buttons/CancelEditingButton';
 import DeleteButton from '@pages/popup/components/home/detail/buttons/DeleteButton';
 import DeleteConfirmationModal from '@pages/popup/components/home/detail/DeleteConfirmationModal';
 
