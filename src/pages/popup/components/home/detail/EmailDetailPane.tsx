@@ -19,21 +19,23 @@ import EmailAddress from '@pages/popup/components/home/detail/EmailAddress';
 import EmailDescription from '@pages/popup/components/home/detail/EmailDescription';
 import EmailId from '@pages/popup/components/home/detail/EmailId';
 import EmailDomain from '@pages/popup/components/home/detail/EmailDomain';
-import {
-  CopyIcon,
-  DeletedIcon
-} from '@pages/popup/components/home/icons/icons';
+import { CopyIcon } from '@pages/popup/components/home/icons/icons';
 import EmailStateToggle from '@pages/popup/components/home/detail/buttons/EmailStateToggle';
 import NoEmailSelected from '@pages/popup/components/home/detail/NoEmailSelected';
 import LastMessageAt from '@pages/popup/components/home/detail/LastMessageAt';
 import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
-import { toast, Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import CreatedBy from '@pages/popup/components/home/detail/CreatedBy';
 import SaveButton from '@pages/popup/components/home/detail/buttons/SaveButton';
 import EditButton from '@pages/popup/components/home/detail/buttons/EditButton';
 import CancelEditingButton from '@pages/popup/components/home/detail/buttons/CancelEditingButton';
 import DeleteButton from '@pages/popup/components/home/detail/buttons/DeleteButton';
 import DeleteConfirmationModal from '@pages/popup/components/home/detail/DeleteConfirmationModal';
+import { displayCopySuccessToast } from '../../../../../../utils/toastUtil';
+import {
+  COLOR_BIG_STONE,
+  COLOR_WHITE
+} from '../../../../../../utils/constants';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -91,15 +93,12 @@ export default function EmailDetailPane({
 
   // Show a toast for 2 seconds to let the user know that the email was copied to the clipboard
   const handleCopyAlert = () => {
-    toast.success('Copied to clipboard!', {
-      duration: 2000,
-      position: 'bottom-center',
-      style: {
-        backgroundColor: '#333E48', // big-stone
-        color: '#FFFFFF' // white
-      },
-      icon: <CopyIcon iconClasses={'w-5 h-5 stroke-1'} />
-    });
+    displayCopySuccessToast(
+      'Copied to clipboard!',
+      <CopyIcon iconClasses={'w-5 h-5 stroke-1'} />,
+      COLOR_BIG_STONE,
+      COLOR_WHITE
+    );
   };
   // Copy the text to the clipboard (when the user clicks on email, description, id, or domain)
   // and show the copy alert
