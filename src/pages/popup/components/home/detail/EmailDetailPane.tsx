@@ -206,7 +206,7 @@ export default function EmailDetailPane({
         {selectedEmail ? (
           <>
             <div
-              className={`h-[35px] border-b border-b-big-stone flex items-center ${
+              className={`h-[35px] py-1 border-b border-b-big-stone flex items-center ${
                 isEditing ? 'justify-end' : 'justify-evenly'
               }`}
             >
