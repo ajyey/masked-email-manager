@@ -1,5 +1,4 @@
 import React from 'react';
-import handleDelete from '@pages/popup/components/home/detail/EmailDetailPane';
 import { MaskedEmail } from 'fastmail-masked-email';
 import { DeletedIcon } from '@pages/popup/components/home/icons/icons';
 

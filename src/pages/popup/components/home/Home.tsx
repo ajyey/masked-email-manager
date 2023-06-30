@@ -6,9 +6,11 @@ import LoadingComponent from '@pages/popup/components/home/emails/Loading';
 import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmailsDropdown';
 import TopComponent from '@pages/popup/components/home/top/Top';
 import EmailCount from '@pages/popup/components/home/emails/EmailCount';
-import { FASTMAIL_SESSION_KEY } from '../../../../../utils/constants';
 import browser from 'webextension-polyfill';
-import { clearStorage } from '../../../../../utils/storageUtil';
+import { getFastmailSession } from '../../../../../utils/storageUtil';
+import CreateEmailModal from '@pages/popup/components/home/detail/modals/CreateEmailModal';
+import LogoutConfirmationModal from '@pages/popup/components/home/detail/modals/LogoutConfirmationModal';
+import { FILTER_OPTIONS } from '@pages/popup/components/home/filter/FilterOption';
 
 interface HomeComponentProps {
   onLogout: () => void;
@@ -17,28 +19,44 @@ interface HomeComponentProps {
 export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filterOption, setFilterOption] = useState('favorited');
+  const [filterOption, setFilterOption] = useState(FILTER_OPTIONS.All); // default the filtered emails to show all
   const [searchQuery, setSearchQuery] = useState('');
-  // State for keeping track of the count of filtered emails
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
   const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
-  // State for keeping track of whether the user is editing the email or not
   const [isEditing, setIsEditing] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [url, setUrl] = useState('');
+  // Modal states
+  const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] =
+    useState(false);
+  const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);
 
-  // Open logout confirmation modal
-  const openLogoutConfirmationModal = () => {
-    setShowLogoutModal(true);
+  const closeCreateEmailModal = () => {
+    setShowCreateEmailModal(false);
+  };
+  const openCreateEmailModal = () => {
+    setShowCreateEmailModal(true);
   };
   const closeLogoutConfirmationModal = () => {
-    setShowLogoutModal(false);
+    setShowLogoutConfirmationModal(false);
   };
+  const openLogoutConfirmationModal = () => {
+    setShowLogoutConfirmationModal(true);
+  };
+
+  useEffect(() => {
+    // Fetch the URL of the active tab
+    browser.tabs
+      .query({ active: true, lastFocusedWindow: true })
+      .then((tabs) => {
+        const activeTabUrl = tabs[0].url;
+        setUrl(activeTabUrl ?? '');
+      });
+  }, []);
 
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
     try {
-      const storageData = await browser.storage.sync.get(FASTMAIL_SESSION_KEY);
-      const session = storageData[FASTMAIL_SESSION_KEY];
+      const session = await getFastmailSession();
       const allMaskedEmails: MaskedEmail[] = await list(session);
       setMaskedEmails(allMaskedEmails);
     } catch (error) {
@@ -54,6 +72,9 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
       )
     );
   };
+  const addNewEmailToEmailList = (newEmail: MaskedEmail) => {
+    setMaskedEmails((prevEmails) => [newEmail, ...prevEmails]);
+  };
   useEffect(() => {
     refreshMaskedEmails();
   }, []);
@@ -64,13 +85,37 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
         onSearchChange={setSearchQuery}
         onRefresh={refreshMaskedEmails}
         onLogout={onLogout}
+        addNewEmailToEmailList={addNewEmailToEmailList}
+        setSelectedEmail={setSelectedEmail}
+        activeTabUrl={url}
+        openLogoutConfirmationModal={openLogoutConfirmationModal}
+        closeLogoutConfirmationModal={closeLogoutConfirmationModal}
+        openCreateEmailModal={openCreateEmailModal}
+        closeCreateEmailModal={closeCreateEmailModal}
       />
-      {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
+      {showLogoutConfirmationModal && (
+        <LogoutConfirmationModal
+          closeModal={closeLogoutConfirmationModal}
+          logout={onLogout}
+        />
+      )}
+      {showCreateEmailModal && (
+        <CreateEmailModal
+          closeModal={closeCreateEmailModal}
+          activeTabUrl={url}
+          addNewEmailToEmailList={addNewEmailToEmailList}
+          setSelectedEmail={setSelectedEmail}
+          setFilterOption={setFilterOption}
+        />
+      )}
       <div className="w-full h-[345px] flex flex-col">
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">
             <div className="h-[35px] border-b border-b-big-stone flex items-center justify-center">
-              <FilterEmailsDropdown onFilterChange={setFilterOption} />
+              <FilterEmailsDropdown
+                setFilterOption={setFilterOption}
+                filterOption={filterOption}
+              />
               <EmailCount count={filteredEmailsCount} />
             </div>
             {isLoading ? (

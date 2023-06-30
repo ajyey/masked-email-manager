@@ -2,7 +2,7 @@ import { Renderable, toast, ToastPosition } from 'react-hot-toast';
 
 const duration = 2000;
 const position: ToastPosition = 'bottom-center';
-export const displayCopySuccessToast = (
+export const displaySuccessToast = (
   message: string,
   icon: Renderable,
   backgroundColor: string,

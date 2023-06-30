@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import '@pages/popup/index.css';
 import '@assets/styles/tailwind.css';
 import Popup from '@pages/popup/Popup';
-import { FASTMAIL_SESSION_KEY } from '../../../utils/constants';
+import { FASTMAIL_SESSION_KEY } from '../../../utils/constants/constants';
 import browser from 'webextension-polyfill';
 
 /**

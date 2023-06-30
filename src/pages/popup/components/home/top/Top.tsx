@@ -1,45 +1,43 @@
 import React, { useState } from 'react';
-import icon from '@assets/img/icon.svg';
 import SearchBar from '@pages/popup/components/home/top/SearchBar';
-import { LogoutIcon } from '@pages/popup/components/home/icons/icons';
-import handleLogout from '@pages/popup/components/home/Home';
 import SettingsDropdown from '@pages/popup/components/home/top/SettingsDropdown';
-import { setFavoriteEmailIds } from '../../../../../../utils/storageUtil';
-import HomeComponentProps from '@pages/popup/components/home/Home';
-import DeleteConfirmationModal from '@pages/popup/components/home/detail/DeleteConfirmationModal';
-import LogoutConfirmationModal from '@pages/popup/components/home/detail/LogoutConfirmationModal';
+import { MaskedEmail } from 'fastmail-masked-email';
+import icon from '@assets/img/icon.svg';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
   onRefresh: () => Promise<void>;
   onLogout: () => void;
+  addNewEmailToEmailList: (newEmail: MaskedEmail) => void;
+  setSelectedEmail: (
+    value:
+      | ((prevState: MaskedEmail | null) => MaskedEmail | null)
+      | MaskedEmail
+      | null
+  ) => void;
+  activeTabUrl: string;
+  openLogoutConfirmationModal: () => void;
+  closeLogoutConfirmationModal: () => void;
+  openCreateEmailModal: () => void;
+  closeCreateEmailModal: () => void;
 }
 
 export default function TopComponent({
   onSearchChange,
   onRefresh,
-  onLogout
+  openLogoutConfirmationModal,
+  openCreateEmailModal
 }: Props) {
-  const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] =
-    useState(false);
-  const closeLogoutConfirmationModal = () => {
-    setShowLogoutConfirmationModal(false);
-  };
-  const openLogoutConfirmationModal = () => {
-    setShowLogoutConfirmationModal(true);
-  };
-  // Handler for when the user clicks the refresh button
-  // Calls the refreshMaskedEmails function from src/pages/popup/components/home/Home.tsx
   const handleRefresh = async () => {
     setIsRefreshing(true);
     await onRefresh();
     setIsRefreshing(false);
   };
-  // State for the refresh button - keeps track of when we are done fetching the list of emails from the Fastmail API
+
   const [isRefreshing, setIsRefreshing] = useState(false);
+
   return (
     <section className="flex h-[55px] items-center border-b border-b-big-stone w-full">
-      {/*LOGO*/}
       <div className="flex items-center mr-2">
         <a
           href="https://github.com/ajyey/masked-email-manager"
@@ -88,6 +86,7 @@ export default function TopComponent({
           <button
             type="button"
             className="text-white bg-french-blue font-semibold rounded-[5px] text-sm p-2 h-[30px] text-center inline-flex items-center justify-center"
+            onClick={openCreateEmailModal}
           >
             <svg
               width="16"
@@ -107,17 +106,9 @@ export default function TopComponent({
           </button>
         </div>
       </div>
-      {/*LOGOUT BUTTON*/}
       <div className="flex items-center ml-1">
         <SettingsDropdown openLogoutModal={openLogoutConfirmationModal} />
       </div>
-      {/* Logout Confirmation Modal */}
-      {showLogoutConfirmationModal && (
-        <LogoutConfirmationModal
-          closeModal={closeLogoutConfirmationModal}
-          logout={onLogout}
-        />
-      )}
     </section>
   );
 }

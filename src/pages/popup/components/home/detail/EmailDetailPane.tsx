@@ -30,12 +30,12 @@ import SaveButton from '@pages/popup/components/home/detail/buttons/SaveButton';
 import EditButton from '@pages/popup/components/home/detail/buttons/EditButton';
 import CancelEditingButton from '@pages/popup/components/home/detail/buttons/CancelEditingButton';
 import DeleteButton from '@pages/popup/components/home/detail/buttons/DeleteButton';
-import DeleteConfirmationModal from '@pages/popup/components/home/detail/DeleteConfirmationModal';
-import { displayCopySuccessToast } from '../../../../../../utils/toastUtil';
+import DeleteConfirmationModal from '@pages/popup/components/home/detail/modals/DeleteConfirmationModal';
+import { displaySuccessToast } from '../../../../../../utils/toastUtil';
 import {
   COLOR_BIG_STONE,
   COLOR_WHITE
-} from '../../../../../../utils/constants';
+} from '../../../../../../utils/constants/colors';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -93,7 +93,7 @@ export default function EmailDetailPane({
 
   // Show a toast for 2 seconds to let the user know that the email was copied to the clipboard
   const handleCopyAlert = () => {
-    displayCopySuccessToast(
+    displaySuccessToast(
       'Copied to clipboard!',
       <CopyIcon iconClasses={'w-5 h-5 stroke-1'} />,
       COLOR_BIG_STONE,
@@ -136,6 +136,10 @@ export default function EmailDetailPane({
         await setFavoriteEmailIds(updatedFavoritedEmailIds);
         setIsFavorited(true);
       }
+      // need this to trigger the applyFilter function in the email list pane
+      // since the useEffect that triggers applyFilter has a dependency on the masked emails list
+      // TODO: come up with a better solution for updating the email list in real time
+      updateEmailInList(selectedEmail);
     } else {
       setIsFavorited(false);
     }
@@ -148,10 +152,8 @@ export default function EmailDetailPane({
       // Make the API call to update the email state
       const session = await getFastmailSession();
       if (newEmailState === 'disabled') {
-        console.log('disabling');
         await disable(selectedEmail.id, session);
       } else if (newEmailState === 'enabled') {
-        console.log('enabling');
         await enable(selectedEmail.id, session);
       }
       // Update the email in the list so that the changes are reflected in the email list pane
