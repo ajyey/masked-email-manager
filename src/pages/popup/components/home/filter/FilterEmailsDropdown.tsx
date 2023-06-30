@@ -1,79 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { DropdownButtonIcon } from '@pages/popup/components/home/icons/icons';
 import {
-  AllIcon,
-  CheckedDropdownItemIcon,
-  DeletedIcon,
-  DisabledIcon,
-  DropdownButtonIcon,
-  EnabledIcon,
-  FavoriteIcon
-} from '@pages/popup/components/home/icons/icons';
-
-interface DropdownItem {
-  label: string;
-  value: string;
-  icon: React.ReactNode;
-}
+  FilterOption,
+  filterDropdownOptions
+} from '@pages/popup/components/home/filter/FilterOption';
 
 function FilterEmailsDropdown({
   onFilterChange
 }: {
   onFilterChange: (option: string) => void;
 }) {
-  const dropdownItems: DropdownItem[] = [
-    {
-      label: 'All',
-      value: 'All',
-      icon: <AllIcon iconClasses={'stroke-mikado-yellow'} />
-    },
-    {
-      label: 'Favorites',
-      value: 'Favorites',
-      icon: (
-        <FavoriteIcon iconClasses={'fill-mikado-yellow stroke-mikado-yellow'} />
-      )
-    },
-    {
-      label: 'Enabled',
-      value: 'Enabled',
-      icon: <EnabledIcon iconClasses={'stroke-eucalyptus'} />
-    },
-    {
-      label: 'Disabled',
-      value: 'Disabled',
-      icon: <DisabledIcon iconClasses={'stroke-magnesium'} />
-    },
-    {
-      label: 'Deleted',
-      value: 'Deleted',
-      icon: <DeletedIcon iconClasses={'stroke-red-500'} />
-    }
-  ];
   // State for the dropdown menu open/close status
   const [isOpen, setIsOpen] = useState(false);
   // State for the currently selected dropdown item
-  const [selectedOption, setSelectedOption] = useState(dropdownItems[0]);
-  // Map the dropdown item values to their fastmail masked email state values
-  const dropdownToEmailStateMap: { [key: string]: string } = {
-    Enabled: 'enabled',
-    Disabled: 'disabled',
-    Deleted: 'deleted',
-    All: 'all',
-    Favorites: 'favorites'
-  };
+  const [selectedOption, setSelectedOption] = useState(
+    filterDropdownOptions[0]
+  );
+
   // Toggle the dropdown menu open/close status
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
   // Handle the dropdown item selection
-  const selectOption = (dropdownOption: DropdownItem) => {
+  const selectOption = (dropdownOption: FilterOption) => {
     setSelectedOption(dropdownOption);
     setIsOpen(false); // Close the dropdown menu
-    onFilterChange(dropdownToEmailStateMap[dropdownOption.value]); // Update the email state filter
+    onFilterChange(dropdownOption.value.toLowerCase()); // Update the email state filter
   };
   // Reference to the dropdown container div, used to detect clicks outside the dropdown
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-
   // Close the dropdown menu when the user clicks outside of it
   const handleClickOutside = (event: any) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -108,22 +63,13 @@ function FilterEmailsDropdown({
           className="absolute top-full w-full mt-1 rounded-lg text-white"
         >
           <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg ml-1">
-            {dropdownItems.map((dropdownItem: DropdownItem) => (
-              <li
-                key={dropdownItem.value}
-                className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
-                onClick={() => selectOption(dropdownItem)}
-              >
-                {dropdownItem.icon}
-                <span className="text-sm font-medium">
-                  {dropdownItem.label}
-                </span>
-                {selectedOption.value === dropdownItem.value && (
-                  <CheckedDropdownItemIcon
-                    iconClasses={'w-4 h-4 ml-auto stroke-malibu stroke-3'}
-                  />
-                )}
-              </li>
+            {filterDropdownOptions.map((filterOption) => (
+              <FilterOption
+                key={filterOption.value}
+                item={filterOption}
+                isSelected={selectedOption.value === filterOption.value}
+                onClick={() => selectOption(filterOption)}
+              />
             ))}
           </ul>
         </div>
