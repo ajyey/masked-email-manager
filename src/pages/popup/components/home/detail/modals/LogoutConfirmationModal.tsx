@@ -56,7 +56,7 @@ export default function LogoutConfirmationModal({
             <div className="flex items-center justify-end p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
               <button
                 type="button"
-                className="text-white bg-french-blue hover:bg-french-blue/[0.75] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="text-white hover:bg-french-blue bg-french-blue/[0.75] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 onClick={logout}
               >
                 Logout
