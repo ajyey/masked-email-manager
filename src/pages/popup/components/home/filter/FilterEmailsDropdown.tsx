@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { DropdownButtonIcon } from '@pages/popup/components/home/icons/icons';
 import {
-  FilterOption,
-  filterDropdownOptions
+  filterDropdownOptions,
+  FilterOption
 } from '@pages/popup/components/home/filter/FilterOption';
 
 function FilterEmailsDropdown({

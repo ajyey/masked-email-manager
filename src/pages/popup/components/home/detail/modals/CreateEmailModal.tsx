@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Session, create, MaskedEmail } from 'fastmail-masked-email';
+import { create, MaskedEmail, Session } from 'fastmail-masked-email';
 import { toast } from 'react-hot-toast';
 import { getFastmailSession } from '../../../../../../../utils/storageUtil';
-import Props from '@pages/popup/components/home/top/Top';
 
 interface CreateEmailModalProps {
   closeModal: () => void;

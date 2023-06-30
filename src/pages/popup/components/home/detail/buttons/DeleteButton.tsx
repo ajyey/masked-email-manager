@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  DeletedIcon,
-  EditIcon
-} from '@pages/popup/components/home/icons/icons';
+import { DeletedIcon } from '@pages/popup/components/home/icons/icons';
 
 interface DeleteButtonProps {
   onClick: () => void;
