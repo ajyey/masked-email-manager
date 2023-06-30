@@ -26,15 +26,8 @@ interface Props {
 export default function TopComponent({
   onSearchChange,
   onRefresh,
-  onLogout,
-  addNewEmailToEmailList,
-  setSelectedEmail,
-  activeTabUrl,
-  setFilterOption,
   openLogoutConfirmationModal,
-  closeLogoutConfirmationModal,
-  openCreateEmailModal,
-  closeCreateEmailModal
+  openCreateEmailModal
 }: Props) {
   const handleRefresh = async () => {
     setIsRefreshing(true);
