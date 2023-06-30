@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { create, MaskedEmail, Session } from 'fastmail-masked-email';
 import { toast } from 'react-hot-toast';
 import { getFastmailSession } from '../../../../../../../utils/storageUtil';
+import {
+  FILTER_OPTIONS,
+  FilterOption
+} from '@pages/popup/components/home/filter/FilterOption';
 
 interface CreateEmailModalProps {
   closeModal: () => void;
   activeTabUrl: string;
   setSelectedEmail: (email: MaskedEmail | null) => void;
   addNewEmailToEmailList: (newEmail: MaskedEmail) => void;
-  setFilterOption: (value: ((prevState: string) => string) | string) => void;
+  setFilterOption: (
+    value: ((prevState: FilterOption) => FilterOption) | FilterOption
+  ) => void;
 }
 
 export default function CreateEmailModal({
@@ -40,8 +46,8 @@ export default function CreateEmailModal({
         });
       }
       closeModal();
-      setFilterOption('all');
-      navigator.clipboard.writeText(newEmail.email);
+      setFilterOption(FILTER_OPTIONS.All);
+      await navigator.clipboard.writeText(newEmail.email);
       addNewEmailToEmailList(newEmail);
       setSelectedEmail(newEmail);
       toast.success('New email created and copied to clipboard!', {

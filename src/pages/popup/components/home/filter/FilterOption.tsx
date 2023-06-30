@@ -14,32 +14,32 @@ export interface FilterOption {
 }
 
 /**
- * Filter options for the dropdown
+ * Filter options for the email filter dropdown
  */
-export const filterDropdownOptions: FilterOption[] = [
-  {
+export const FILTER_OPTIONS: Record<string, FilterOption> = {
+  All: {
     value: 'All',
     icon: <AllIcon iconClasses={'stroke-mikado-yellow'} />
   },
-  {
+  Favorites: {
     value: 'Favorites',
     icon: (
       <FavoriteIcon iconClasses={'fill-mikado-yellow stroke-mikado-yellow'} />
     )
   },
-  {
+  Enabled: {
     value: 'Enabled',
     icon: <EnabledIcon iconClasses={'stroke-eucalyptus'} />
   },
-  {
+  Disabled: {
     value: 'Disabled',
     icon: <DisabledIcon iconClasses={'stroke-magnesium'} />
   },
-  {
+  Deleted: {
     value: 'Deleted',
     icon: <DeletedIcon iconClasses={'stroke-red-500'} />
   }
-];
+};
 
 export const FilterOption = ({
   item,

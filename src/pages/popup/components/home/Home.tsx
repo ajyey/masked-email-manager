@@ -10,6 +10,7 @@ import browser from 'webextension-polyfill';
 import { getFastmailSession } from '../../../../../utils/storageUtil';
 import CreateEmailModal from '@pages/popup/components/home/detail/modals/CreateEmailModal';
 import LogoutConfirmationModal from '@pages/popup/components/home/detail/modals/LogoutConfirmationModal';
+import { FILTER_OPTIONS } from '@pages/popup/components/home/filter/FilterOption';
 
 interface HomeComponentProps {
   onLogout: () => void;
@@ -18,7 +19,7 @@ interface HomeComponentProps {
 export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filterOption, setFilterOption] = useState('all');
+  const [filterOption, setFilterOption] = useState(FILTER_OPTIONS.All); // default the filtered emails to show all
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
   const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
@@ -87,7 +88,6 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
         addNewEmailToEmailList={addNewEmailToEmailList}
         setSelectedEmail={setSelectedEmail}
         activeTabUrl={url}
-        setFilterOption={setFilterOption}
         openLogoutConfirmationModal={openLogoutConfirmationModal}
         closeLogoutConfirmationModal={closeLogoutConfirmationModal}
         openCreateEmailModal={openCreateEmailModal}
@@ -112,7 +112,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">
             <div className="h-[35px] border-b border-b-big-stone flex items-center justify-center">
-              <FilterEmailsDropdown onFilterChange={setFilterOption} />
+              <FilterEmailsDropdown setFilterOption={setFilterOption} />
               <EmailCount count={filteredEmailsCount} />
             </div>
             {isLoading ? (

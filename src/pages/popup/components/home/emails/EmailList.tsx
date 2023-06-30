@@ -3,13 +3,17 @@ import { MaskedEmail } from 'fastmail-masked-email';
 import EmailItem from '@pages/popup/components/home/emails/EmailItem';
 import Fuse from 'fuse.js';
 import { getFavoriteEmailIds } from '../../../../../../utils/storageUtil';
+import {
+  FILTER_OPTIONS,
+  FilterOption
+} from '@pages/popup/components/home/filter/FilterOption';
 
 function isFuseResult(obj: object): obj is Fuse.FuseResult<MaskedEmail> {
   return 'item' in obj;
 }
 interface Props {
   maskedEmails: MaskedEmail[];
-  filter: string;
+  filter: FilterOption;
   searchQuery: string;
   onFilteredEmailsCountChange: (count: number) => void;
   setSelectedEmail: (email: MaskedEmail | null) => void;
@@ -47,12 +51,15 @@ function EmailList({
   useEffect(() => {
     const applyFilter = async () => {
       let newFilteredEmails = maskedEmails;
-      if (filter !== 'all' && filter !== 'favorites') {
+      if (
+        filter !== FILTER_OPTIONS.All &&
+        filter !== FILTER_OPTIONS.Favorites
+      ) {
         newFilteredEmails = maskedEmails.filter(
-          (email: MaskedEmail) => email.state === filter
+          (email: MaskedEmail) => email.state === filter.value.toLowerCase()
         );
       }
-      if (filter === 'favorites') {
+      if (filter === FILTER_OPTIONS.Favorites) {
         const favoritedEmails = await getFavoriteEmailIds();
         newFilteredEmails = maskedEmails.filter((email: MaskedEmail) =>
           favoritedEmails.includes(email.id)

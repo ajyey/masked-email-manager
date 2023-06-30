@@ -1,31 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { DropdownButtonIcon } from '@pages/popup/components/home/icons/icons';
 import {
-  filterDropdownOptions,
+  FILTER_OPTIONS,
   FilterOption
 } from '@pages/popup/components/home/filter/FilterOption';
 
-function FilterEmailsDropdown({
-  onFilterChange
-}: {
-  onFilterChange: (option: string) => void;
-}) {
+interface FilterEmailsDropdownProps {
+  setFilterOption: (
+    value: ((prevState: FilterOption) => FilterOption) | FilterOption
+  ) => void;
+}
+
+function FilterEmailsDropdown({ setFilterOption }: FilterEmailsDropdownProps) {
   // State for the dropdown menu open/close status
   const [isOpen, setIsOpen] = useState(false);
   // State for the currently selected dropdown item
-  const [selectedOption, setSelectedOption] = useState(
-    filterDropdownOptions[0]
-  );
+  const [selectedOption, setSelectedOption] = useState(FILTER_OPTIONS.All);
 
   // Toggle the dropdown menu open/close status
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
   // Handle the dropdown item selection
-  const selectOption = (dropdownOption: FilterOption) => {
-    setSelectedOption(dropdownOption);
+  const selectOption = (filterOptionToSelect: FilterOption) => {
+    setSelectedOption(filterOptionToSelect);
     setIsOpen(false); // Close the dropdown menu
-    onFilterChange(dropdownOption.value.toLowerCase()); // Update the email state filter
+    // Update the email state filter so the email list is reflects the selected filter
+    setFilterOption(filterOptionToSelect);
   };
   // Reference to the dropdown container div, used to detect clicks outside the dropdown
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -63,14 +64,18 @@ function FilterEmailsDropdown({
           className="absolute top-full w-full mt-1 rounded-lg text-white"
         >
           <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg ml-1">
-            {filterDropdownOptions.map((filterOption) => (
-              <FilterOption
-                key={filterOption.value}
-                item={filterOption}
-                isSelected={selectedOption.value === filterOption.value}
-                onClick={() => selectOption(filterOption)}
-              />
-            ))}
+            {Object.keys(FILTER_OPTIONS).map((option) => {
+              const key = option as keyof typeof FILTER_OPTIONS;
+              const filterOption = FILTER_OPTIONS[key];
+              return (
+                <FilterOption
+                  key={filterOption.value}
+                  item={filterOption}
+                  isSelected={selectedOption.value === filterOption.value}
+                  onClick={() => selectOption(filterOption)}
+                />
+              );
+            })}
           </ul>
         </div>
       )}

@@ -16,7 +16,6 @@ interface Props {
       | null
   ) => void;
   activeTabUrl: string;
-  setFilterOption: (value: ((prevState: string) => string) | string) => void;
   openLogoutConfirmationModal: () => void;
   closeLogoutConfirmationModal: () => void;
   openCreateEmailModal: () => void;
