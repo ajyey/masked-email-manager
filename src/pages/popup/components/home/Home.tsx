@@ -44,13 +44,23 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   };
 
   useEffect(() => {
-    // Fetch the URL of the active tab
-    browser.tabs
-      .query({ active: true, lastFocusedWindow: true })
-      .then((tabs) => {
+    // Declare the async function
+    const fetchActiveTabUrl = async () => {
+      // Fetch the URL of the active tab
+      const tabs = await browser.tabs.query({
+        active: true,
+        lastFocusedWindow: true
+      });
+
+      // Check if tabs exist
+      if (tabs.length > 0) {
         const activeTabUrl = tabs[0].url;
         setUrl(activeTabUrl ?? '');
-      });
+      }
+    };
+
+    // Call the async function
+    fetchActiveTabUrl();
   }, []);
 
   const refreshMaskedEmails = async () => {
