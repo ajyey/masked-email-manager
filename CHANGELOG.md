@@ -17,7 +17,6 @@
 * add better looking delete confirmation modal ([c990322](https://github.com/ajyey/masked-email-manager/commit/c99032262b09ec7b750a990ede32ba6d8fd5cfc9))
 * automatically navigate to the newly created email in the Enabled filter ([10369ab](https://github.com/ajyey/masked-email-manager/commit/10369ab9b01bc184e29148d17966835c8551a267))
 * update logout modal styling ([8e0c400](https://github.com/ajyey/masked-email-manager/commit/8e0c40039e8f10879cc0973049574acb42b520fc))
-* wip add initial create email functionality ([1d7fd21](https://github.com/ajyey/masked-email-manager/commit/1d7fd213034ea3dfc38109e3cabc3d5f3d2321e5))
 
 # [1.0.0-beta.32](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.31...v1.0.0-beta.32) (2023-06-28)
 
