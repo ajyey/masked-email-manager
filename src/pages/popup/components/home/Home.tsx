@@ -9,6 +9,8 @@ import EmailCount from '@pages/popup/components/home/emails/EmailCount';
 import { FASTMAIL_SESSION_KEY } from '../../../../../utils/constants';
 import browser from 'webextension-polyfill';
 import { clearStorage } from '../../../../../utils/storageUtil';
+import CreateEmailModal from '@pages/popup/components/home/detail/modals/CreateEmailModal';
+import LogoutConfirmationModal from '@pages/popup/components/home/detail/modals/LogoutConfirmationModal';
 
 interface HomeComponentProps {
   onLogout: () => void;
@@ -25,6 +27,22 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   // State for keeping track of whether the user is editing the email or not
   const [isEditing, setIsEditing] = useState(false);
   const [url, setUrl] = useState('');
+  const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] =
+    useState(false);
+  const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);
+
+  const closeCreateEmailModal = () => {
+    setShowCreateEmailModal(false);
+  };
+  const openCreateEmailModal = () => {
+    setShowCreateEmailModal(true);
+  };
+  const closeLogoutConfirmationModal = () => {
+    setShowLogoutConfirmationModal(false);
+  };
+  const openLogoutConfirmationModal = () => {
+    setShowLogoutConfirmationModal(true);
+  };
 
   useEffect(() => {
     // Fetch the URL of the active tab
@@ -73,8 +91,26 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
         setSelectedEmail={setSelectedEmail}
         activeTabUrl={url}
         setFilterOption={setFilterOption}
+        openLogoutConfirmationModal={openLogoutConfirmationModal}
+        closeLogoutConfirmationModal={closeLogoutConfirmationModal}
+        openCreateEmailModal={openCreateEmailModal}
+        closeCreateEmailModal={closeCreateEmailModal}
       />
-      {/* Make the height 345px since the top bar is 55px (400-55=345)*/}
+      {showLogoutConfirmationModal && (
+        <LogoutConfirmationModal
+          closeModal={closeLogoutConfirmationModal}
+          logout={onLogout}
+        />
+      )}
+      {showCreateEmailModal && (
+        <CreateEmailModal
+          closeModal={closeCreateEmailModal}
+          activeTabUrl={url}
+          addNewEmailToEmailList={addNewEmailToEmailList}
+          setSelectedEmail={setSelectedEmail}
+          setFilterOption={setFilterOption}
+        />
+      )}
       <div className="w-full h-[345px] flex flex-col">
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">

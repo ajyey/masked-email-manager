@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import icon from '@assets/img/icon.svg';
 import SearchBar from '@pages/popup/components/home/top/SearchBar';
 import SettingsDropdown from '@pages/popup/components/home/top/SettingsDropdown';
-import LogoutConfirmationModal from '@pages/popup/components/home/detail/modals/LogoutConfirmationModal';
-import CreateEmailModal from '@pages/popup/components/home/detail/modals/CreateEmailModal';
 import { MaskedEmail } from 'fastmail-masked-email';
+import icon from '@assets/img/icon.svg';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
@@ -19,6 +17,10 @@ interface Props {
   ) => void;
   activeTabUrl: string;
   setFilterOption: (value: ((prevState: string) => string) | string) => void;
+  openLogoutConfirmationModal: () => void;
+  closeLogoutConfirmationModal: () => void;
+  openCreateEmailModal: () => void;
+  closeCreateEmailModal: () => void;
 }
 
 export default function TopComponent({
@@ -28,37 +30,22 @@ export default function TopComponent({
   addNewEmailToEmailList,
   setSelectedEmail,
   activeTabUrl,
-  setFilterOption
+  setFilterOption,
+  openLogoutConfirmationModal,
+  closeLogoutConfirmationModal,
+  openCreateEmailModal,
+  closeCreateEmailModal
 }: Props) {
-  const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] =
-    useState(false);
-  // State for Create Email Modal
-  const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);
-
-  const closeCreateEmailModal = () => {
-    setShowCreateEmailModal(false);
-  };
-  const openCreateEmailModal = () => {
-    setShowCreateEmailModal(true);
-  };
-  const closeLogoutConfirmationModal = () => {
-    setShowLogoutConfirmationModal(false);
-  };
-  const openLogoutConfirmationModal = () => {
-    setShowLogoutConfirmationModal(true);
-  };
-  // Handler for when the user clicks the refresh button
-  // Calls the refreshMaskedEmails function from src/pages/popup/components/home/Home.tsx
   const handleRefresh = async () => {
     setIsRefreshing(true);
     await onRefresh();
     setIsRefreshing(false);
   };
-  // State for the refresh button - keeps track of when we are done fetching the list of emails from the Fastmail API
+
   const [isRefreshing, setIsRefreshing] = useState(false);
+
   return (
     <section className="flex h-[55px] items-center border-b border-b-big-stone w-full">
-      {/*LOGO*/}
       <div className="flex items-center mr-2">
         <a
           href="https://github.com/ajyey/masked-email-manager"
@@ -127,27 +114,9 @@ export default function TopComponent({
           </button>
         </div>
       </div>
-      {/* Create Email Modal */}
-      {showCreateEmailModal && (
-        <CreateEmailModal
-          closeModal={closeCreateEmailModal}
-          activeTabUrl={activeTabUrl}
-          addNewEmailToEmailList={addNewEmailToEmailList}
-          setSelectedEmail={setSelectedEmail}
-          setFilterOption={setFilterOption}
-        />
-      )}
-      {/*LOGOUT BUTTON*/}
       <div className="flex items-center ml-1">
         <SettingsDropdown openLogoutModal={openLogoutConfirmationModal} />
       </div>
-      {/* Logout Confirmation Modal */}
-      {showLogoutConfirmationModal && (
-        <LogoutConfirmationModal
-          closeModal={closeLogoutConfirmationModal}
-          logout={onLogout}
-        />
-      )}
     </section>
   );
 }
