@@ -1,3 +1,24 @@
+# [1.0.0-beta.33](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.32...v1.0.0-beta.33) (2023-06-30)
+
+
+### Bug Fixes
+
+* add back functionality for keeping email list updated when changing the state of an email ([100a5c7](https://github.com/ajyey/masked-email-manager/commit/100a5c70697ce9ebb4cd2f60733b6759917656d8))
+* dependency in useEffect ([8b2028e](https://github.com/ajyey/masked-email-manager/commit/8b2028e14885e076e4fe0a80303bf098c5b962c2))
+* imports ([23bea32](https://github.com/ajyey/masked-email-manager/commit/23bea32ed87a072c1c51933e735eed54e0194aba))
+* manually add domain and description to newly created email ([c29621b](https://github.com/ajyey/masked-email-manager/commit/c29621b0a9dc19e11c2a7a80cf334c060a76919e))
+* misaligned email detail buttons ([7ceb023](https://github.com/ajyey/masked-email-manager/commit/7ceb0231673081d7f3dde8173a3a693770b49a9e))
+* remove dependency on filteredEmails for filtering emails ([efe26be](https://github.com/ajyey/masked-email-manager/commit/efe26bec416c625452b4b0d107c22f9351963747))
+* updating the email list when an email is favorited/unfavorited ([a018557](https://github.com/ajyey/masked-email-manager/commit/a018557d415938ae6e43f15997a8d274de95f7c1))
+
+
+### Features
+
+* add better looking delete confirmation modal ([c990322](https://github.com/ajyey/masked-email-manager/commit/c99032262b09ec7b750a990ede32ba6d8fd5cfc9))
+* automatically navigate to the newly created email in the Enabled filter ([10369ab](https://github.com/ajyey/masked-email-manager/commit/10369ab9b01bc184e29148d17966835c8551a267))
+* update logout modal styling ([8e0c400](https://github.com/ajyey/masked-email-manager/commit/8e0c40039e8f10879cc0973049574acb42b520fc))
+* wip add initial create email functionality ([1d7fd21](https://github.com/ajyey/masked-email-manager/commit/1d7fd213034ea3dfc38109e3cabc3d5f3d2321e5))
+
 # [1.0.0-beta.32](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.31...v1.0.0-beta.32) (2023-06-28)
 
 
