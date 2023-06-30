@@ -104,6 +104,7 @@ function EmailList({
   };
 
   useEffect(() => {
+    console.log(searchResults);
     // Check if the currently selectedEmail is present in the searchResults list.
     const isSelectedEmailInResults = searchResults.some((result) => {
       const email = isFuseResult(result) ? result.item : result;
@@ -131,7 +132,7 @@ function EmailList({
     // Call the onFilteredEmailsCountChange callback with the searchResults length.
     // This can be used by the parent component to update the count of filtered emails.
     onFilteredEmailsCountChange(searchResults.length);
-  }, [searchResults, onFilteredEmailsCountChange]);
+  }, [searchResults]);
 
   return (
     <div className="h-[310px] overflow-y-auto overflow-x-hidden scrollbar pt-2 pb-2">
