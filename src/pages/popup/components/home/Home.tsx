@@ -6,9 +6,8 @@ import LoadingComponent from '@pages/popup/components/home/emails/Loading';
 import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmailsDropdown';
 import TopComponent from '@pages/popup/components/home/top/Top';
 import EmailCount from '@pages/popup/components/home/emails/EmailCount';
-import { FASTMAIL_SESSION_KEY } from '../../../../../utils/constants';
 import browser from 'webextension-polyfill';
-import { clearStorage } from '../../../../../utils/storageUtil';
+import { getFastmailSession } from '../../../../../utils/storageUtil';
 import CreateEmailModal from '@pages/popup/components/home/detail/modals/CreateEmailModal';
 import LogoutConfirmationModal from '@pages/popup/components/home/detail/modals/LogoutConfirmationModal';
 
@@ -57,8 +56,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
     try {
-      const storageData = await browser.storage.sync.get(FASTMAIL_SESSION_KEY);
-      const session = storageData[FASTMAIL_SESSION_KEY];
+      const session = await getFastmailSession();
       const allMaskedEmails: MaskedEmail[] = await list(session);
       setMaskedEmails(allMaskedEmails);
     } catch (error) {
