@@ -1,3 +1,19 @@
+# [1.0.0-beta.32](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.31...v1.0.0-beta.32) (2023-06-28)
+
+
+### Bug Fixes
+
+* close settings dropdown when logout confirmation modal opens ([023d8d0](https://github.com/ajyey/masked-email-manager/commit/023d8d0f76717c20dd90bf6930f38d4703d4e7cf))
+* styling for logout confirmation modal ([b6e817d](https://github.com/ajyey/masked-email-manager/commit/b6e817dfc4bddfadac5e79a1fc20cda7d337816f))
+* update max width of delete confirmation modal ([42342b9](https://github.com/ajyey/masked-email-manager/commit/42342b90b10727b09be5c09cd56e814993984a56))
+
+
+### Features
+
+* add initial logout functionality in new settings dropdown ([043feba](https://github.com/ajyey/masked-email-manager/commit/043febad9c74e282b25df409a3b670e43b56d9be))
+* add logo component to top and remove unnecessary css ([b7a15d0](https://github.com/ajyey/masked-email-manager/commit/b7a15d0b4d6c8723b1839369b554ca0ef70e2768))
+* tmprove search bar and settings dropdown UI ([ad1412e](https://github.com/ajyey/masked-email-manager/commit/ad1412ec2a9fd263ed2e3d9f8d7e53c9125e7c7d))
+
 # [1.0.0-beta.31](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.30...v1.0.0-beta.31) (2023-06-27)
 
 
