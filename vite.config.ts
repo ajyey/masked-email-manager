@@ -2,7 +2,7 @@ import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
-import { outputFolderName } from './utils/constants';
+import { outputFolderName } from './utils/constants/constants';
 const isFirefox = process.env.BROWSER === 'firefox';
 const firefoxOutDir = resolve(__dirname, 'dist-firefox');
 import makeManifest from './utils/plugins/make-manifest';

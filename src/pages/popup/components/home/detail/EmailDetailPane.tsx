@@ -35,7 +35,7 @@ import { displayCopySuccessToast } from '../../../../../../utils/toastUtil';
 import {
   COLOR_BIG_STONE,
   COLOR_WHITE
-} from '../../../../../../utils/constants';
+} from '../../../../../../utils/constants/colors';
 
 export default function EmailDetailPane({
   selectedEmail,

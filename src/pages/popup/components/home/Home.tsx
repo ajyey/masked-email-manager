@@ -20,12 +20,11 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [filterOption, setFilterOption] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  // State for keeping track of the count of filtered emails
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
   const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
-  // State for keeping track of whether the user is editing the email or not
   const [isEditing, setIsEditing] = useState(false);
   const [url, setUrl] = useState('');
+  // Modal states
   const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] =
     useState(false);
   const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);

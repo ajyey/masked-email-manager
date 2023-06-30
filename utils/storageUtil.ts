@@ -1,4 +1,7 @@
-import { FASTMAIL_SESSION_KEY, FAVORITE_EMAILS_KEY } from './constants';
+import {
+  FASTMAIL_SESSION_KEY,
+  FAVORITE_EMAILS_KEY
+} from './constants/constants';
 import browser from 'webextension-polyfill';
 import { Session } from 'fastmail-masked-email';
 

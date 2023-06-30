@@ -1,7 +1,3 @@
-export const outputFolderName = 'dist';
-export const FASTMAIL_SESSION_KEY = 'fastmail_session';
-export const FAVORITE_EMAILS_KEY = 'favorite_emails';
-
 // Colors
 export const COLOR_MAGNESIUM = '#B3B3B3';
 export const COLOR_ASTRONAUT = '#3D5277';

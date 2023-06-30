@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getSession } from 'fastmail-masked-email';
 import icon from '@assets/img/icon.svg';
-import { FASTMAIL_SESSION_KEY } from '../../../../../utils/constants';
+import { FASTMAIL_SESSION_KEY } from '../../../../../utils/constants/constants';
 import browser from 'webextension-polyfill';
 
 interface LoginComponentProps {
