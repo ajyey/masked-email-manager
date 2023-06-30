@@ -52,7 +52,7 @@ export default function CreateEmailModal({
         });
       }
       closeModal();
-      setFilterOption(FILTER_OPTIONS.All);
+      setFilterOption(FILTER_OPTIONS.Enabled);
       await navigator.clipboard.writeText(newEmail.email);
       addNewEmailToEmailList(newEmailWithDomainAndDescription);
       setSelectedEmail(newEmailWithDomainAndDescription);

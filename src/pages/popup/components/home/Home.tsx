@@ -112,7 +112,10 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
         <div className="flex flex-1">
           <div className="columns-[250px] border-r border-r-big-stone">
             <div className="h-[35px] border-b border-b-big-stone flex items-center justify-center">
-              <FilterEmailsDropdown setFilterOption={setFilterOption} />
+              <FilterEmailsDropdown
+                setFilterOption={setFilterOption}
+                filterOption={filterOption}
+              />
               <EmailCount count={filteredEmailsCount} />
             </div>
             {isLoading ? (

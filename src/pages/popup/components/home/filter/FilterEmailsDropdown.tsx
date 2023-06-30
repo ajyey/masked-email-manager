@@ -9,25 +9,28 @@ interface FilterEmailsDropdownProps {
   setFilterOption: (
     value: ((prevState: FilterOption) => FilterOption) | FilterOption
   ) => void;
+  filterOption: FilterOption;
 }
 
-function FilterEmailsDropdown({ setFilterOption }: FilterEmailsDropdownProps) {
+function FilterEmailsDropdown({
+  setFilterOption,
+  filterOption
+}: FilterEmailsDropdownProps) {
   // State for the dropdown menu open/close status
   const [isOpen, setIsOpen] = useState(false);
   // State for the currently selected dropdown item
-  const [selectedOption, setSelectedOption] = useState(FILTER_OPTIONS.All);
+  const [selectedOption, setSelectedOption] = useState(filterOption);
 
   // Toggle the dropdown menu open/close status
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  // Handle the dropdown item selection
-  const selectOption = (filterOptionToSelect: FilterOption) => {
-    setSelectedOption(filterOptionToSelect);
-    setIsOpen(false); // Close the dropdown menu
-    // Update the email state filter so the email list is reflects the selected filter
-    setFilterOption(filterOptionToSelect);
-  };
+  // Set the selected dropdown item to the current filter option when the filter option changes
+  useEffect(() => {
+    setSelectedOption(filterOption);
+    setIsOpen(false);
+  }, [filterOption]);
+
   // Reference to the dropdown container div, used to detect clicks outside the dropdown
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   // Close the dropdown menu when the user clicks outside of it
@@ -72,7 +75,7 @@ function FilterEmailsDropdown({ setFilterOption }: FilterEmailsDropdownProps) {
                   key={filterOption.value}
                   item={filterOption}
                   isSelected={selectedOption.value === filterOption.value}
-                  onClick={() => selectOption(filterOption)}
+                  onClick={() => setFilterOption(filterOption)}
                 />
               );
             })}
