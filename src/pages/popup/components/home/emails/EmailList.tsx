@@ -47,12 +47,12 @@ function EmailList({
   useEffect(() => {
     const applyFilter = async () => {
       let newFilteredEmails = maskedEmails;
-      if (filter !== 'all' && filter !== 'favorited') {
+      if (filter !== 'all' && filter !== 'favorites') {
         newFilteredEmails = maskedEmails.filter(
           (email: MaskedEmail) => email.state === filter
         );
       }
-      if (filter === 'favorited') {
+      if (filter === 'favorites') {
         const favoritedEmails = await getFavoriteEmailIds();
         newFilteredEmails = maskedEmails.filter((email: MaskedEmail) =>
           favoritedEmails.includes(email.id)

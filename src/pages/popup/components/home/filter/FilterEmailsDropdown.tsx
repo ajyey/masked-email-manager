@@ -27,8 +27,8 @@ function FilterEmailsDropdown({
       icon: <AllIcon iconClasses={'stroke-mikado-yellow'} />
     },
     {
-      label: 'Favorited',
-      value: 'Favorited',
+      label: 'Favorites',
+      value: 'Favorites',
       icon: (
         <FavoriteIcon iconClasses={'fill-mikado-yellow stroke-mikado-yellow'} />
       )
@@ -59,7 +59,7 @@ function FilterEmailsDropdown({
     Disabled: 'disabled',
     Deleted: 'deleted',
     All: 'all',
-    Favorited: 'favorited'
+    Favorites: 'favorites'
   };
   // Toggle the dropdown menu open/close status
   const toggleDropdown = () => {
