@@ -136,6 +136,10 @@ export default function EmailDetailPane({
         await setFavoriteEmailIds(updatedFavoritedEmailIds);
         setIsFavorited(true);
       }
+      // need this to trigger the applyFilter function in the email list pane
+      // since the useEffect that triggers applyFilter has a dependency on the masked emails list
+      // TODO: come up with a better solution for updating the email list in real time
+      updateEmailInList(selectedEmail);
     } else {
       setIsFavorited(false);
     }
