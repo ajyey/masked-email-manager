@@ -104,7 +104,6 @@ function EmailList({
   };
 
   useEffect(() => {
-    console.log(searchResults);
     // Check if the currently selectedEmail is present in the searchResults list.
     const isSelectedEmailInResults = searchResults.some((result) => {
       const email = isFuseResult(result) ? result.item : result;

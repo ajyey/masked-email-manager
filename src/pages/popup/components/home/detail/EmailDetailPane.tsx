@@ -31,7 +31,7 @@ import EditButton from '@pages/popup/components/home/detail/buttons/EditButton';
 import CancelEditingButton from '@pages/popup/components/home/detail/buttons/CancelEditingButton';
 import DeleteButton from '@pages/popup/components/home/detail/buttons/DeleteButton';
 import DeleteConfirmationModal from '@pages/popup/components/home/detail/modals/DeleteConfirmationModal';
-import { displayCopySuccessToast } from '../../../../../../utils/toastUtil';
+import { displaySuccessToast } from '../../../../../../utils/toastUtil';
 import {
   COLOR_BIG_STONE,
   COLOR_WHITE
@@ -93,7 +93,7 @@ export default function EmailDetailPane({
 
   // Show a toast for 2 seconds to let the user know that the email was copied to the clipboard
   const handleCopyAlert = () => {
-    displayCopySuccessToast(
+    displaySuccessToast(
       'Copied to clipboard!',
       <CopyIcon iconClasses={'w-5 h-5 stroke-1'} />,
       COLOR_BIG_STONE,
@@ -152,10 +152,8 @@ export default function EmailDetailPane({
       // Make the API call to update the email state
       const session = await getFastmailSession();
       if (newEmailState === 'disabled') {
-        console.log('disabling');
         await disable(selectedEmail.id, session);
       } else if (newEmailState === 'enabled') {
-        console.log('enabling');
         await enable(selectedEmail.id, session);
       }
       // Update the email in the list so that the changes are reflected in the email list pane

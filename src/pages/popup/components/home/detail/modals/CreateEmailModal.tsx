@@ -35,6 +35,12 @@ export default function CreateEmailModal({
         description: description,
         state: 'enabled'
       });
+      // The API response from Fastmail for some reason doesnt return a newly created email's forDomain and description... haha
+      const newEmailWithDomainAndDescription = {
+        ...newEmail,
+        description: description,
+        forDomain: domain
+      };
       if (!newEmail.email) {
         toast.error('An error occurred while creating your email!', {
           duration: 2000,
@@ -48,16 +54,19 @@ export default function CreateEmailModal({
       closeModal();
       setFilterOption(FILTER_OPTIONS.All);
       await navigator.clipboard.writeText(newEmail.email);
-      addNewEmailToEmailList(newEmail);
-      setSelectedEmail(newEmail);
-      toast.success('New email created and copied to clipboard!', {
-        duration: 2000,
-        position: 'bottom-center',
-        style: {
-          backgroundColor: '#333E48', // big-stone
-          color: '#FFFFFF' // white
+      addNewEmailToEmailList(newEmailWithDomainAndDescription);
+      setSelectedEmail(newEmailWithDomainAndDescription);
+      toast.success(
+        `New email ${newEmail.email} created and copied to clipboard!`,
+        {
+          duration: 3000,
+          position: 'bottom-center',
+          style: {
+            backgroundColor: '#333E48', // big-stone
+            color: '#FFFFFF' // white
+          }
         }
-      });
+      );
     } catch (error) {
       console.error('Error creating new email:', error);
     }
