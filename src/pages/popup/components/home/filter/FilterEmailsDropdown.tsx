@@ -22,16 +22,16 @@ function FilterEmailsDropdown({
 }) {
   const dropdownItems: DropdownItem[] = [
     {
+      label: 'All',
+      value: 'All',
+      icon: <AllIcon iconClasses={'stroke-mikado-yellow'} />
+    },
+    {
       label: 'Favorited',
       value: 'Favorited',
       icon: (
         <FavoriteIcon iconClasses={'fill-mikado-yellow stroke-mikado-yellow'} />
       )
-    },
-    {
-      label: 'All',
-      value: 'All',
-      icon: <AllIcon iconClasses={'stroke-mikado-yellow'} />
     },
     {
       label: 'Enabled',

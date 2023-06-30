@@ -19,7 +19,7 @@ interface HomeComponentProps {
 export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filterOption, setFilterOption] = useState('favorited');
+  const [filterOption, setFilterOption] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   // State for keeping track of the count of filtered emails
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
