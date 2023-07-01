@@ -40,7 +40,7 @@ const generatePluginsConfig = () => {
     [
       '@semantic-release/github',
       {
-        assets: ['masked-email-manager_v${nextRelease.version}.zip'],
+        assets: ['masked-email-manager_v${nextRelease.version}_chrome.zip'],
       },
     ],
     [
@@ -59,7 +59,7 @@ const generatePluginsConfig = () => {
       'semantic-release-chrome',
       {
         extensionId: 'bckfnibflpdgifdfkfoooidpblaembga', // TODO: replace with actual extension ID
-        asset: 'masked-email-manager_v${nextRelease.version}.zip',
+        asset: 'masked-email-manager_v${nextRelease.version}_chrome.zip',
       },
     ]);
   }
