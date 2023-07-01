@@ -22,7 +22,7 @@ const manifest: Manifest.WebExtensionManifest = {
     '48': 'icon48.png',
     '128': 'icon128.png'
   },
-  permissions: ['activeTab', 'storage', 'tabs'],
+  permissions: ['storage', 'tabs'],
   devtools_page: 'src/pages/devtools/index.html',
   web_accessible_resources: [
     {
