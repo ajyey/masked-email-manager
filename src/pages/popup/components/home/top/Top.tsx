@@ -38,7 +38,7 @@ export default function TopComponent({
 
   return (
     <section className="flex h-[55px] items-center border-b border-b-big-stone w-full">
-      <div className="flex items-center mr-2">
+      <div className="flex items-center mr-1">
         <a
           href="https://github.com/ajyey/masked-email-manager"
           target="_blank"
