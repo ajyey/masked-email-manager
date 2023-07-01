@@ -1,3 +1,10 @@
+# [1.0.0-beta.35](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.34...v1.0.0-beta.35) (2023-07-01)
+
+
+### Bug Fixes
+
+* right margin between logo and search bar ([7604068](https://github.com/ajyey/masked-email-manager/commit/76040688ad0325a358876a87e6959298233ed765))
+
 # [1.0.0-beta.34](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.33...v1.0.0-beta.34) (2023-07-01)
 
 
