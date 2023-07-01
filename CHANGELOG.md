@@ -1,3 +1,12 @@
+# [1.0.0-beta.34](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.33...v1.0.0-beta.34) (2023-07-01)
+
+
+### Features
+
+* **manifest:** add 'tabs' permission ([a33bd9b](https://github.com/ajyey/masked-email-manager/commit/a33bd9b01d5565c14ba3508d4e8194388f834c7c))
+* add more consistent styling for modal buttons ([a1b8386](https://github.com/ajyey/masked-email-manager/commit/a1b83867ed47325bd5f7d8bb98857690c85b9c4a))
+* add very basic error handling for an invalid api token ([5bcc8c4](https://github.com/ajyey/masked-email-manager/commit/5bcc8c48c97dd91c697ea1c0cae1aedb6f4ac9a2))
+
 # [1.0.0-beta.33](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.32...v1.0.0-beta.33) (2023-06-30)
 
 
