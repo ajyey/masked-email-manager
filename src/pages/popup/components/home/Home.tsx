@@ -51,7 +51,6 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
         active: true,
         lastFocusedWindow: true
       });
-
       // Check if tabs exist
       if (tabs.length > 0) {
         const activeTabUrl = tabs[0].url;

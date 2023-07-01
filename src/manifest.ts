@@ -9,10 +9,6 @@ const manifest: Manifest.WebExtensionManifest = {
   options_ui: {
     page: 'src/pages/options/index.html'
   },
-  background: {
-    service_worker: 'src/pages/background/index.js',
-    type: 'module'
-  },
   action: {
     default_popup: 'src/pages/popup/index.html',
     default_icon: 'icon34.png'
@@ -23,7 +19,6 @@ const manifest: Manifest.WebExtensionManifest = {
     '128': 'icon128.png'
   },
   permissions: ['storage', 'tabs'],
-  devtools_page: 'src/pages/devtools/index.html',
   web_accessible_resources: [
     {
       resources: [
@@ -41,9 +36,6 @@ const isFirefox = process.env.BROWSER === 'firefox';
 // Firefox does not support background.service_worker, so convert to the firefox compatible background.scripts
 if (isFirefox) {
   const extensionId = 'c48d361c-1173-11ee-be56-0242ac120002';
-  manifest.background = {
-    scripts: ['src/pages/background/index.js']
-  };
   manifest.browser_specific_settings = {
     gecko: {
       id: `{${extensionId}}`
