@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getSession } from 'fastmail-masked-email';
 import icon from '@assets/img/icon.svg';
 import { setFastmailSession } from '../../../../../utils/storageUtil';
+import { toast, Toaster } from 'react-hot-toast';
 
 interface LoginComponentProps {
   onLoginSuccess: () => void;
@@ -19,11 +20,16 @@ export default function LoginComponent({
    * When the user submits the form, store the API token and the fastmail session in Chrome storage
    */
   const handleSubmit = async () => {
-    const session = await getSession(apiToken);
-    //TODO: Handle error if the user enters an invalid API token
-    await setFastmailSession(session);
-    // Call the onLoginSuccess callback after a successful login
-    onLoginSuccess();
+    try {
+      const session = await getSession(apiToken);
+      await setFastmailSession(session);
+      onLoginSuccess();
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        'An error occurred while getting your session with that API token!'
+      );
+    }
   };
   return (
     <div className="flex items-center h-screen w-screen lg:justify-center bg-astronaut text-white">
@@ -102,6 +108,7 @@ export default function LoginComponent({
               </button>
             </div>
           </form>
+          <Toaster />
         </div>
       </div>
     </div>
