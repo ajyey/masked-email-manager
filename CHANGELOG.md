@@ -1,3 +1,10 @@
+# [1.0.0-beta.36](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.35...v1.0.0-beta.36) (2023-07-03)
+
+
+### Bug Fixes
+
+* release workflow ([5e44710](https://github.com/ajyey/masked-email-manager/commit/5e44710e36fce3265daa95da833086bf43a417d5))
+
 # [1.0.0-beta.35](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.34...v1.0.0-beta.35) (2023-07-01)
 
 
