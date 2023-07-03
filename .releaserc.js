@@ -9,7 +9,6 @@ const generatePluginsConfig = () => {
       {
         preset: 'angular',
         releaseRules: [
-          { type: 'docs', scope: 'readme', release: 'patch' },
           { type: 'chore', scope: 'deps', release: 'patch' },
           { type: 'refactor', release: 'patch' },
           { type: 'refactor', scope: 'types', release: 'minor' },
