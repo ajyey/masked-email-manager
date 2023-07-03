@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/ajyey/masked-email-manager/compare/v1.0.0...v1.0.1) (2023-07-03)
+
+
+### Bug Fixes
+
+* package.json version ([5343b11](https://github.com/ajyey/masked-email-manager/commit/5343b11e5d9b47769413302e2cdd329424f936fe))
+
 # [1.0.0-beta.36](https://github.com/ajyey/masked-email-manager/compare/v1.0.0-beta.35...v1.0.0-beta.36) (2023-07-03)
 
 
