@@ -21,6 +21,6 @@ export default function makeManifest(): PluginOption {
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
 
       colorLog(`Manifest file copy complete: ${manifestPath}`, 'success');
-    },
+    }
   };
 }

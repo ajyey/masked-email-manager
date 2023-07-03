@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from '@assets/img/logo.svg';
+import React, { useState } from 'react';
+import LoginComponent from '@pages/popup/components/login/Login';
+import HomeComponent from '@pages/popup/components/home/Home';
+import { clearStorage } from '../../../utils/storageUtil';
 
-export default function Popup(): JSX.Element {
+interface PopupProps {
+  authenticated: boolean;
+}
+
+export default function Popup({ authenticated }: PopupProps): JSX.Element {
+  const [isLoggedIn, setIsLoggedIn] = useState(authenticated);
+  const cssClass = isLoggedIn ? 'home-component' : 'login-component';
+  // Callback function to update the isLoggedIn state
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+  const handleLogout = async () => {
+    // Clear sync storage
+    await clearStorage();
+    setIsLoggedIn(false);
+  };
+
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 text-center h-full p-3 bg-gray-800">
-      <header className="flex flex-col items-center justify-center text-white">
-        <img src={logo} className="h-36 pointer-events-none animate-spin-slow" alt="logo" />
-        <p>
-          Edit <code>src/pages/popup/Popup.jsx</code> and save to reload.
-        </p>
-        <a
-          className="text-blue-400"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-        <p>Popup styled with TailwindCSS!</p>
-      </header>
+    <div className={cssClass}>
+      {isLoggedIn ? (
+        <HomeComponent onLogout={handleLogout} />
+      ) : (
+        // Pass the handleLoginSuccess callback to the LoginComponent
+        <LoginComponent onLoginSuccess={handleLoginSuccess} />
+      )}
     </div>
   );
 }

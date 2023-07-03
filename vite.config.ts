@@ -2,9 +2,11 @@ import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
-import { outputFolderName } from './utils/constants';
-import buildContentScript from './utils/plugins/build-content-script';
+import { outputFolderName } from './utils/constants/constants';
 import makeManifest from './utils/plugins/make-manifest';
+
+const isFirefox = process.env.BROWSER === 'firefox';
+const firefoxOutDir = resolve(__dirname, 'dist-firefox');
 
 const root = resolve(__dirname, 'src');
 const pagesDir = resolve(root, 'pages');
@@ -20,19 +22,15 @@ export default defineConfig({
       '@pages': pagesDir
     }
   },
-  plugins: [react(), makeManifest(), buildContentScript()],
+  plugins: [react(), makeManifest()],
   publicDir,
   build: {
-    outDir,
+    outDir: isFirefox ? firefoxOutDir : outDir,
     sourcemap: process.env.__DEV__ === 'true',
     emptyOutDir: false,
     rollupOptions: {
       input: {
-        devtools: resolve(pagesDir, 'devtools', 'index.html'),
-        panel: resolve(pagesDir, 'panel', 'index.html'),
-        background: resolve(pagesDir, 'background', 'index.ts'),
         popup: resolve(pagesDir, 'popup', 'index.html'),
-        newtab: resolve(pagesDir, 'newtab', 'index.html'),
         options: resolve(pagesDir, 'options', 'index.html')
       },
       output: {
