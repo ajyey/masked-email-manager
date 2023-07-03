@@ -3,7 +3,7 @@ const currentBranch =
   process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
 
 const generatePluginsConfig = () => {
-  const basePlugins = [
+  return [
     [
       '@semantic-release/commit-analyzer',
       {
@@ -14,57 +14,58 @@ const generatePluginsConfig = () => {
           { type: 'refactor', release: 'patch' },
           { type: 'refactor', scope: 'types', release: 'minor' },
           { type: 'feat', scope: 'major', release: 'major' },
-          { scope: 'no-release', release: false },
-        ],
-      },
+          { scope: 'no-release', release: false }
+        ]
+      }
     ],
     [
       '@semantic-release/release-notes-generator',
       {
         preset: 'angular',
         parserOpts: {
-          noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
+          noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING']
         },
         writerOpts: {
-          commitsSort: ['subject', 'scope'],
-        },
-      },
+          commitsSort: ['subject', 'scope']
+        }
+      }
     ],
     '@semantic-release/changelog',
     [
       '@semantic-release/npm',
       {
-        npmPublish: false,
-      },
+        npmPublish: false
+      }
+    ],
+    [
+      'semantic-release-chrome',
+      {
+        extensionId: 'bckfnibflpdgifdfkfoooidpblaembga',
+        asset: 'masked-email-manager_v${nextRelease.version}_chrome.zip',
+        target: currentBranch === 'main' ? 'default' : 'local' // only publish to chrome store on main branch
+      }
     ],
     [
       '@semantic-release/github',
       {
-        assets: ['masked-email-manager_v${nextRelease.version}_chrome.zip'],
-      },
+        assets: [
+          {
+            path: 'masked-email-manager_*_chrome.zip',
+            name: 'masked-email-manager_v${nextRelease.version}_chrome.zip',
+            label: 'Chrome Extension v${nextRelease.version}'
+          }
+        ]
+      }
     ],
     [
       '@semantic-release/git',
       {
         assets: ['package.json', 'CHANGELOG.md'],
         message:
-          'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
-      },
-    ],
+          'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
+      }
+    ]
   ];
-
-  if (currentBranch === 'main') {
-    // Insert before GitHub plugin
-    basePlugins.splice(3,0,[
-      'semantic-release-chrome',
-      {
-        extensionId: 'bckfnibflpdgifdfkfoooidpblaembga', // TODO: replace with actual extension ID
-        asset: 'masked-email-manager_v${nextRelease.version}_chrome.zip',
-      },
-    ]);
-  }
-
-  return basePlugins;
 };
 
 export default {

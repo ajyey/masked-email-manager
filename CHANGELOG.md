@@ -1,3 +1,19 @@
+# [1.1.0-beta.1](https://github.com/ajyey/masked-email-manager/compare/v1.0.2-beta.2...v1.1.0-beta.1) (2023-07-03)
+
+
+### Features
+
+* add status circle to each email item based on the email state ([7a3140c](https://github.com/ajyey/masked-email-manager/commit/7a3140c08c9cbd9eada0ac1176bee437ce591d29))
+
+## [1.0.2-beta.2](https://github.com/ajyey/masked-email-manager/compare/v1.0.2-beta.1...v1.0.2-beta.2) (2023-07-03)
+
+
+### Bug Fixes
+
+* release config ([99fae80](https://github.com/ajyey/masked-email-manager/commit/99fae809f32047713f8f8f1f0c530bdb24d2ced6))
+
+## [1.0.2-beta.1](https://github.com/ajyey/masked-email-manager/compare/v1.0.1...v1.0.2-beta.1) (2023-07-03)
+
 ## [1.0.1](https://github.com/ajyey/masked-email-manager/compare/v1.0.0...v1.0.1) (2023-07-03)
 
 
