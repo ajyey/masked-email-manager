@@ -1,3 +1,5 @@
+## [1.0.2-beta.1](https://github.com/ajyey/masked-email-manager/compare/v1.0.1...v1.0.2-beta.1) (2023-07-03)
+
 ## [1.0.1](https://github.com/ajyey/masked-email-manager/compare/v1.0.0...v1.0.1) (2023-07-03)
 
 
