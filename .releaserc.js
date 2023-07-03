@@ -50,8 +50,9 @@ const generatePluginsConfig = () => {
       {
         assets: [
           {
-            path: 'masked-email-manager_v${nextRelease.version}_chrome.zip',
-            label: 'Chrome Extension'
+            path: 'masked-email-manager_*_chrome.zip',
+            name: 'masked-email-manager_v${nextRelease.version}_chrome.zip',
+            label: 'Chrome Extension v${nextRelease.version}'
           }
         ]
       }
