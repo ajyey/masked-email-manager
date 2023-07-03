@@ -2,7 +2,7 @@
   "name": "masked-email-manager",
   "displayName": "Masked Email Manager",
   "description": "A web extension to manage your Fastmail masked emails",
-  "version": "1.0.2-beta.2",
+  "version": "1.1.0-beta.1",
   "license": "MIT",
   "repository": {
     "type": "git",
