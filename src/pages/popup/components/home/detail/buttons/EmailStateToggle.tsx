@@ -44,7 +44,7 @@ const EmailStateToggle: React.FC<EmailStateToggleProps> = ({
         </span>
         <span
           className={`absolute inset-0 rounded-full transition ${
-            isDeleted ? 'bg-red-500' : 'bg-gray-300 peer-checked:bg-green-500'
+            isDeleted ? 'bg-red-500' : 'bg-gray-400 peer-checked:bg-green-500'
           }`}
         ></span>
       </label>

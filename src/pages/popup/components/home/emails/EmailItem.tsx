@@ -17,6 +17,20 @@ const EmailItem = React.forwardRef<HTMLDivElement, MaskedEmailListItemProps>(
     const backgroundStyle = isSelected
       ? 'bg-french-blue'
       : 'hover:bg-big-stone/[0.4]';
+
+    // Determine the color of the status circle based on the email status.
+    let statusColor: string;
+    switch (maskedEmail.state) {
+      case 'disabled':
+        statusColor = 'bg-gray-400';
+        break;
+      case 'enabled':
+        statusColor = 'bg-green-400';
+        break;
+      default:
+        statusColor = 'bg-red-400';
+    }
+
     return (
       <div
         ref={ref}
@@ -31,6 +45,9 @@ const EmailItem = React.forwardRef<HTMLDivElement, MaskedEmailListItemProps>(
             <div className="text-xs text-white truncate">
               {maskedEmail.description}
             </div>
+          </div>
+          <div className={`flex flex-col`}>
+            <div className={`w-2 h-2 rounded-full ${statusColor}`}></div>
           </div>
         </div>
       </div>
