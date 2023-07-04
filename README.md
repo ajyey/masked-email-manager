@@ -41,13 +41,14 @@ Manage your
 </p>
 
 
-Masked Email Manager is a Chromium web extension that allows you to manage your [Fastmail Masked Emails](https://www.fastmail.help/hc/en-us/articles/4406536368911-Masked-Email).
+Masked Email Manager is a web extension that allows you to manage your [Fastmail Masked Emails](https://www.fastmail.help/hc/en-us/articles/4406536368911-Masked-Email).
 
 ![](docs/images/readme-screenshot.png)
 
 # Installation
-Install Masked Email Manager from the 
-[Chrome Web Store](https://chrome.google.com/webstore/detail/masked-email-manager/bckfnibflpdgifdfkfoooidpblaembga)
+Install Masked Email Manager using
+[Chrome Web Store](https://chrome.google.com/webstore/detail/masked-email-manager/bckfnibflpdgifdfkfoooidpblaembga) or
+[Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/masked-email-manager/)
 
 # Features
 - Create new Masked Emails
@@ -68,4 +69,4 @@ Install Masked Email Manager from the
 - Favorite your most used emails and filter by favorites
 
 
-Check out the [wiki](https://github.com/ajyey/masked-email-manager/wiki) for more details on how to use Masked Email Manager and its features
+Check out the (soon to be updated) [wiki](https://github.com/ajyey/masked-email-manager/wiki) for more details on how to use Masked Email Manager and its features
