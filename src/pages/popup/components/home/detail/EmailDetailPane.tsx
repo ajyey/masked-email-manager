@@ -6,14 +6,14 @@ import {
   setFavoriteEmailIds
 } from '../../../../../../utils/storageUtil';
 import {
-  disable,
-  enable,
+  deleteEmail,
+  disableEmail,
+  enableEmail,
   MaskedEmail,
   MaskedEmailState,
   Options,
-  remove,
   Session,
-  update
+  updateEmail
 } from 'fastmail-masked-email';
 import EmailAddress from '@pages/popup/components/home/detail/EmailAddress';
 import EmailDescription from '@pages/popup/components/home/detail/EmailDescription';
@@ -75,7 +75,7 @@ export default function EmailDetailPane({
     if (selectedEmail) {
       //TODO: Add better error handling
       const session = await getFastmailSession();
-      await remove(selectedEmail.id, session);
+      await deleteEmail(selectedEmail.id, session);
       updateEmailInList({ ...selectedEmail, state: 'deleted' }); // Update the email in the email list
       selectedEmail.state = 'deleted'; // Update the email in the email detail
       closeDeleteConfirmationModal();
@@ -152,9 +152,9 @@ export default function EmailDetailPane({
       // Make the API call to update the email state
       const session = await getFastmailSession();
       if (newEmailState === 'disabled') {
-        await disable(selectedEmail.id, session);
+        await disableEmail(selectedEmail.id, session);
       } else if (newEmailState === 'enabled') {
-        await enable(selectedEmail.id, session);
+        await enableEmail(selectedEmail.id, session);
       }
       // Update the email in the list so that the changes are reflected in the email list pane
       // For example, if the user is viewing the 'Enabled' emails and they disable an email,
@@ -184,7 +184,7 @@ export default function EmailDetailPane({
       if (updatedDomain != null) {
         updateOptions['forDomain'] = updatedDomain;
       }
-      await update(selectedEmail.id, session, updateOptions);
+      await updateEmail(selectedEmail.id, session, updateOptions);
       selectedEmail.description =
         updatedDescription ?? selectedEmail.description;
       selectedEmail.forDomain = updatedDomain ?? selectedEmail.forDomain;

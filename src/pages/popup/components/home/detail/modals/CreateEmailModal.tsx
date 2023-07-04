@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { create, MaskedEmail, Session } from 'fastmail-masked-email';
+import { createEmail, MaskedEmail, Session } from 'fastmail-masked-email';
 import { toast } from 'react-hot-toast';
 import { getFastmailSession } from '../../../../../../../utils/storageUtil';
 import {
@@ -30,7 +30,7 @@ export default function CreateEmailModal({
   const handleCreate = async () => {
     const session: Session = await getFastmailSession();
     try {
-      const newEmail = await create(session, {
+      const newEmail = await createEmail(session, {
         forDomain: domain,
         description: description,
         state: 'enabled'
