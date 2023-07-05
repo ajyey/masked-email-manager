@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/ajyey/masked-email-manager/compare/v1.1.1...v1.1.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* fixes incorrect function call to get all masked emails ([3e002d7](https://github.com/ajyey/masked-email-manager/commit/3e002d78a16c635d5be580f2ed332c4fdc407760))
+
 ## [1.1.1](https://github.com/ajyey/masked-email-manager/compare/v1.1.0...v1.1.1) (2023-07-04)
 
 ## [1.1.1-beta.1](https://github.com/ajyey/masked-email-manager/compare/v1.1.0...v1.1.1-beta.1) (2023-07-04)
