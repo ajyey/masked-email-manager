@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/ajyey/masked-email-manager/compare/v1.1.2...v1.2.0) (2023-07-12)
+
+
+### Features
+
+* add ability to permanently delete emails that have not yet received any mail ([c6350f7](https://github.com/ajyey/masked-email-manager/commit/c6350f7c05e227cc12fd7427228997002131dc80))
+
 # [1.2.0-beta.1](https://github.com/ajyey/masked-email-manager/compare/v1.1.2...v1.2.0-beta.1) (2023-07-12)
 
 
