@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EmailList from '@pages/popup/components/home/emails/EmailList';
 import EmailDetailPane from '@pages/popup/components/home/detail/EmailDetailPane';
-import { list, MaskedEmail } from 'fastmail-masked-email';
+import { getAllEmails, MaskedEmail } from 'fastmail-masked-email';
 import LoadingComponent from '@pages/popup/components/home/emails/Loading';
 import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmailsDropdown';
 import TopComponent from '@pages/popup/components/home/top/Top';
@@ -66,7 +66,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
     setIsLoading(true);
     try {
       const session = await getFastmailSession();
-      const allMaskedEmails: MaskedEmail[] = await list(session);
+      const allMaskedEmails: MaskedEmail[] = await getAllEmails(session);
       setMaskedEmails(allMaskedEmails);
     } catch (error) {
       console.error('Error fetching masked emails:', error);

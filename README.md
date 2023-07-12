@@ -24,11 +24,11 @@ Manage your
   <a href="https://github.com/ajyey/masked-email-manager">
     <img alt="npm latest version" src="https://img.shields.io/github/package-json/v/ajyey/masked-email-manager">
   </a>
-  <a href="https://github.com/ajyey/fastmail-masked-email/issues?q=is%3Aopen+is%3Aissue">
-    <img alt="open issues" src="https://img.shields.io/github/issues-raw/ajyey/fastmail-masked-email">
+  <a href="https://github.com/ajyey/masked-email-manager/issues?q=is%3Aopen+is%3Aissue">
+    <img alt="open issues" src="https://img.shields.io/github/issues-raw/ajyey/masked-email-manager">
   </a>
-  <a href="https://github.com/ajyey/fastmail-masked-email/blob/master/LICENSE">
-    <img alt="license" src="https://img.shields.io/github/license/ajyey/fastmail-masked-email">
+  <a href="https://github.com/ajyey/masked-email-manager/blob/master/LICENSE">
+    <img alt="license" src="https://img.shields.io/github/license/ajyey/masked-email-manager">
   </a>
 </p>
 <p align="center">
