@@ -12,6 +12,7 @@ import {
   MaskedEmail,
   MaskedEmailState,
   Options,
+  permanentlyDeleteEmail,
   Session,
   updateEmail
 } from 'fastmail-masked-email';
@@ -30,26 +31,32 @@ import SaveButton from '@pages/popup/components/home/detail/buttons/SaveButton';
 import EditButton from '@pages/popup/components/home/detail/buttons/EditButton';
 import CancelEditingButton from '@pages/popup/components/home/detail/buttons/CancelEditingButton';
 import DeleteButton from '@pages/popup/components/home/detail/buttons/DeleteButton';
-import DeleteConfirmationModal from '@pages/popup/components/home/detail/modals/DeleteConfirmationModal';
 import { displaySuccessToast } from '../../../../../../utils/toastUtil';
 import {
   COLOR_BIG_STONE,
   COLOR_WHITE
 } from '../../../../../../utils/constants/colors';
+import PermanentlyDeleteButton from '@pages/popup/components/home/detail/buttons/PermanentlyDeleteButton';
+import PermanentDeleteConfirmationModal from '@pages/popup/components/home/detail/modals/PermanentDeleteConfirmationModal';
 
 export default function EmailDetailPane({
   selectedEmail,
   updateEmailInList,
   isEditing,
-  setIsEditing
+  setIsEditing,
+  removeEmailFromEmailList
 }: {
   selectedEmail: MaskedEmail | null;
   updateEmailInList: (updatedEmail: MaskedEmail) => void;
   isEditing: boolean;
   setIsEditing: (value: ((prevState: boolean) => boolean) | boolean) => void;
+  removeEmailFromEmailList: (emailToRemove: MaskedEmail) => void;
 }) {
-  // State for delete confirmation modal visibility
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  // State for permanent delete confirmation modal visibility
+  const [
+    showPermanentDeleteConfirmationModal,
+    setShowPermanentDeleteConfirmationModal
+  ] = useState(false);
   // Track whether the selected email is favorited
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
   // Track whether the user has clicked the copy button for an email detail and we need to show the alert
@@ -60,14 +67,12 @@ export default function EmailDetailPane({
     selectedEmail?.forDomain || null
   );
 
-  // Open delete confirmation modal
-  const openDeleteConfirmationModal = () => {
-    setShowDeleteModal(true);
+  const openPermanentDeleteConfirmationModal = () => {
+    setShowPermanentDeleteConfirmationModal(true);
   };
 
-  // Close delete confirmation modal
-  const closeDeleteConfirmationModal = () => {
-    setShowDeleteModal(false);
+  const closePermanentDeleteConfirmationModal = () => {
+    setShowPermanentDeleteConfirmationModal(false);
   };
 
   // Handle delete action
@@ -78,7 +83,16 @@ export default function EmailDetailPane({
       await deleteEmail(selectedEmail.id, session);
       updateEmailInList({ ...selectedEmail, state: 'deleted' }); // Update the email in the email list
       selectedEmail.state = 'deleted'; // Update the email in the email detail
-      closeDeleteConfirmationModal();
+      closePermanentDeleteConfirmationModal();
+    }
+  };
+  const handlePermanentDelete = async () => {
+    if (selectedEmail) {
+      const session = await getFastmailSession();
+      //TODO: Add better error handling here
+      await permanentlyDeleteEmail(selectedEmail.id, session);
+      removeEmailFromEmailList(selectedEmail);
+      closePermanentDeleteConfirmationModal();
     }
   };
   const handleDescriptionChange = (newDescription: string) => {
@@ -220,15 +234,15 @@ export default function EmailDetailPane({
               )}
               {!isEditing && (
                 <DeleteButton
-                  onClick={openDeleteConfirmationModal}
+                  onClick={handleDelete}
                   disabled={selectedEmail.state === 'deleted'} // Disable the delete button if the email is already deleted
                 />
               )}
-              {/* Delete Confirmation Modal */}
-              {showDeleteModal && (
-                <DeleteConfirmationModal
-                  closeModal={closeDeleteConfirmationModal}
-                  handleDelete={handleDelete}
+              {/* Permanent Delete Confirmation Modal */}
+              {showPermanentDeleteConfirmationModal && (
+                <PermanentDeleteConfirmationModal
+                  closeModal={closePermanentDeleteConfirmationModal}
+                  handlePermanentDelete={handlePermanentDelete} //TODO:
                   selectedEmail={selectedEmail}
                 />
               )}
@@ -279,7 +293,14 @@ export default function EmailDetailPane({
                 {/* Create a toast to tell the user the text was copied to their clipboard*/}
                 <Toaster />
               </div>
-              <div className="flex items-center justify-center mt-3 mb-3 text-gray-200 flex-col text-xs">
+              {selectedEmail &&
+                selectedEmail.lastMessageAt === null &&
+                selectedEmail.state === 'deleted' && (
+                  <PermanentlyDeleteButton
+                    onClick={openPermanentDeleteConfirmationModal}
+                  />
+                )}
+              <div className="flex items-center justify-center mt-2 mb-3 text-gray-200 flex-col text-xs">
                 {selectedEmail.lastMessageAt && (
                   <div>
                     <LastMessageAt
