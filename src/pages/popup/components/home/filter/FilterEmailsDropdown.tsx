@@ -34,8 +34,11 @@ function FilterEmailsDropdown({
   // Reference to the dropdown container div, used to detect clicks outside the dropdown
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   // Close the dropdown menu when the user clicks outside of it
-  const handleClickOutside = (event: any) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setIsOpen(false);
     }
   };
