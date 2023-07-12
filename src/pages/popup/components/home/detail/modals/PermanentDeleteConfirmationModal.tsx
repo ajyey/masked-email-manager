@@ -1,6 +1,6 @@
 import React from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
-import { DeletedIcon } from '@pages/popup/components/home/icons/icons';
+import { WarningIcon } from '@pages/popup/components/home/icons/icons';
 
 interface PermanentDeleteConfirmationModalProps {
   closeModal: () => void;
@@ -26,7 +26,9 @@ export default function PermanentDeleteConfirmationModal({
             {/*Modal header*/}
             <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-                <DeletedIcon iconClasses={'w-5 h-5 mr-2 stroke-red-500'} />
+                <WarningIcon
+                  iconClasses={'w-5 h-5 mr-2 stroke-red-500 stroke-2'}
+                />
                 <div className="text-lg font-semibold truncate">
                   Permanently Delete Email
                 </div>

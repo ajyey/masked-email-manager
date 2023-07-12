@@ -31,13 +31,13 @@ import SaveButton from '@pages/popup/components/home/detail/buttons/SaveButton';
 import EditButton from '@pages/popup/components/home/detail/buttons/EditButton';
 import CancelEditingButton from '@pages/popup/components/home/detail/buttons/CancelEditingButton';
 import DeleteButton from '@pages/popup/components/home/detail/buttons/DeleteButton';
-import PermanentDeleteConfirmationModal from '@pages/popup/components/home/detail/modals/PermanentDeleteConfirmationModal';
 import { displaySuccessToast } from '../../../../../../utils/toastUtil';
 import {
   COLOR_BIG_STONE,
   COLOR_WHITE
 } from '../../../../../../utils/constants/colors';
 import PermanentlyDeleteButton from '@pages/popup/components/home/detail/buttons/PermanentlyDeleteButton';
+import PermanentDeleteConfirmationModal from '@pages/popup/components/home/detail/modals/PermanentDeleteConfirmationModal';
 
 export default function EmailDetailPane({
   selectedEmail,
