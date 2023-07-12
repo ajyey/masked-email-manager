@@ -84,6 +84,12 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const addNewEmailToEmailList = (newEmail: MaskedEmail) => {
     setMaskedEmails((prevEmails) => [newEmail, ...prevEmails]);
   };
+  const removeEmailFromEmailList = (emailToRemove: MaskedEmail) => {
+    setMaskedEmails((prevEmails) =>
+      prevEmails.filter((email) => email.id !== emailToRemove.id)
+    );
+  };
+
   useEffect(() => {
     refreshMaskedEmails();
   }, []);
@@ -148,6 +154,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
               <EmailDetailPane
                 selectedEmail={selectedEmail}
                 updateEmailInList={updateEmailInList}
+                removeEmailFromEmailList={removeEmailFromEmailList}
                 isEditing={isEditing}
                 setIsEditing={setIsEditing}
               />

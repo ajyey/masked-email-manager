@@ -2,17 +2,17 @@ import React from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
 import { DeletedIcon } from '@pages/popup/components/home/icons/icons';
 
-interface DeleteConfirmationModalProps {
+interface PermanentDeleteConfirmationModalProps {
   closeModal: () => void;
-  handleDelete: () => Promise<void>;
+  handlePermanentDelete: () => Promise<void>;
   selectedEmail: MaskedEmail | null;
 }
 
-export default function DeleteConfirmationModal({
+export default function PermanentDeleteConfirmationModal({
   closeModal,
-  handleDelete,
+  handlePermanentDelete,
   selectedEmail
-}: DeleteConfirmationModalProps) {
+}: PermanentDeleteConfirmationModalProps) {
   return (
     <>
       <div
@@ -28,7 +28,7 @@ export default function DeleteConfirmationModal({
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
                 <DeletedIcon iconClasses={'w-5 h-5 mr-2 stroke-red-500'} />
                 <div className="text-lg font-semibold truncate">
-                  Delete Email
+                  Permanently Delete Email
                 </div>
               </h3>
               <button
@@ -56,7 +56,7 @@ export default function DeleteConfirmationModal({
             {/*Modal body*/}
             <div className="p-4 space-y-4">
               <div className="text-white text-sm">
-                {`Are you sure you want to delete `}
+                {`Are you sure you want to permanently delete `}
                 <span className="font-semibold text-malibu">
                   {selectedEmail?.email}
                 </span>
@@ -69,7 +69,7 @@ export default function DeleteConfirmationModal({
                 data-modal-hide="defaultModal"
                 type="button"
                 className="text-white hover:bg-red-600 bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                onClick={handleDelete}
+                onClick={handlePermanentDelete}
               >
                 Delete
               </button>
