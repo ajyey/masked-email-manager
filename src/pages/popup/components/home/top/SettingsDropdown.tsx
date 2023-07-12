@@ -3,7 +3,6 @@ import {
   LogoutIcon,
   SettingsIcon
 } from '@pages/popup/components/home/icons/icons';
-import Props from '@pages/popup/components/home/top/Top';
 
 interface Props {
   openLogoutModal: () => void;
