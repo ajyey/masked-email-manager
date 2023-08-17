@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/ajyey/masked-email-manager/compare/v1.2.2...v1.3.0) (2023-08-17)
+
+
+### Features
+
+* **dropdown:** Remember selected filter ([bf339af](https://github.com/ajyey/masked-email-manager/commit/bf339af68622b1bf2158b7d2fe31b19e98e74fd8))
+
 ## [1.2.2](https://github.com/ajyey/masked-email-manager/compare/v1.2.1...v1.2.2) (2023-07-15)
 
 ## [1.2.1](https://github.com/ajyey/masked-email-manager/compare/v1.2.0...v1.2.1) (2023-07-12)
