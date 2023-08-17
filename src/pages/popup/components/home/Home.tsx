@@ -7,10 +7,17 @@ import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmai
 import TopComponent from '@pages/popup/components/home/top/Top';
 import EmailCount from '@pages/popup/components/home/emails/EmailCount';
 import browser from 'webextension-polyfill';
-import { getFastmailSession } from '../../../../../utils/storageUtil';
+import {
+  getFastmailSession,
+  getDefaultFilter,
+  setDefaultFilter
+} from '../../../../../utils/storageUtil';
 import CreateEmailModal from '@pages/popup/components/home/detail/modals/CreateEmailModal';
 import LogoutConfirmationModal from '@pages/popup/components/home/detail/modals/LogoutConfirmationModal';
-import { FILTER_OPTIONS } from '@pages/popup/components/home/filter/FilterOption';
+import {
+  FILTER_OPTIONS,
+  FilterOption
+} from '@pages/popup/components/home/filter/FilterOption';
 
 interface HomeComponentProps {
   onLogout: () => void;
@@ -43,6 +50,21 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
     setShowLogoutConfirmationModal(true);
   };
 
+  const setFilterOptionAndRemember = (
+    value: ((prevState: FilterOption) => FilterOption) | FilterOption
+  ) => {
+    if (typeof value == 'function') {
+      setFilterOption((prevState) => {
+        const newValue = value(prevState);
+        setDefaultFilter(newValue);
+        return newValue;
+      });
+    } else {
+      setFilterOption(value);
+      setDefaultFilter(value);
+    }
+  };
+
   useEffect(() => {
     // Declare the async function
     const fetchActiveTabUrl = async () => {
@@ -58,8 +80,14 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
       }
     };
 
+    const fetchDefaultFilter = async () => {
+      const filter = await getDefaultFilter();
+      setFilterOption(filter);
+    };
+
     // Call the async function
     fetchActiveTabUrl();
+    fetchDefaultFilter();
   }, []);
 
   const refreshMaskedEmails = async () => {
@@ -128,7 +156,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
           <div className="columns-[250px] border-r border-r-big-stone">
             <div className="h-[35px] border-b border-b-big-stone flex items-center justify-center">
               <FilterEmailsDropdown
-                setFilterOption={setFilterOption}
+                setFilterOption={setFilterOptionAndRemember}
                 filterOption={filterOption}
               />
               <EmailCount count={filteredEmailsCount} />
