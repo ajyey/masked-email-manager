@@ -2742,10 +2742,10 @@ fastest-levenshtein@^1.0.16:
   resolved "https://registry.yarnpkg.com/fastest-levenshtein/-/fastest-levenshtein-1.0.16.tgz#210e61b6ff181de91ea9b3d1b84fdedd47e034e5"
   integrity sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==
 
-fastmail-masked-email@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/fastmail-masked-email/-/fastmail-masked-email-2.0.1.tgz#4a7eee2474f6c473fda459d0b10ec7ad8b9eb709"
-  integrity sha512-/slavKRwhIisLWhukpIaGlQCgeaMPUOWxGDCyHEAxvTDzOzJZkyN0ZgIQvLiLa4oJifYxMWwZ3XrOIu7I66gqA==
+fastmail-masked-email@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/fastmail-masked-email/-/fastmail-masked-email-2.1.0.tgz#113da3500f3ce398a0bab9c4ad7693d8889e22dc"
+  integrity sha512-Up9uJGnAvXq+sfuOwGDVdp9BEsPbwpw+jlZfExMj563cGUUxs3cei7bWIeJr8HDQNnkGEo7lbZX01n1HLkh9dw==
   dependencies:
     axios "^1.4.0"
     debug "^4.3.4"
