@@ -52,6 +52,7 @@ const generatePluginsConfig = () => {
     [
       'semantic-release-firefox-add-on',
       {
+        extensionId: '{c48d361c-1173-11ee-be56-0242ac120002}',
         targetXpi: 'masked-email-manager_v${nextRelease.version}_firefox.xpi',
         sourceDir: 'dist-firefox',
         channel: currentBranch === 'main' ? 'listed' : 'unlisted', // only publish to firefox store on main branch
