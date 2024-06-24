@@ -1,0 +1,33 @@
+diff --git a/node_modules/semantic-release-firefox-add-on/src/constants.js b/node_modules/semantic-release-firefox-add-on/src/constants.js
+index c5dea36..2e34ade 100644
+--- a/node_modules/semantic-release-firefox-add-on/src/constants.js
++++ b/node_modules/semantic-release-firefox-add-on/src/constants.js
+@@ -11,8 +11,6 @@ const defaultOptions = {
+ }
+ 
+ const requiredOptions = {
+-    extensionId:
+-        'Omitting this would create a new extension instead of a new version.',
+     targetXpi:
+         'Omitting this would leave the xpi file unnamed when it is returned from mozilla.',
+ }
+diff --git a/node_modules/semantic-release-firefox-add-on/src/publish.js b/node_modules/semantic-release-firefox-add-on/src/publish.js
+index ad0f63d..6c3ce35 100644
+--- a/node_modules/semantic-release-firefox-add-on/src/publish.js
++++ b/node_modules/semantic-release-firefox-add-on/src/publish.js
+@@ -16,7 +16,6 @@ const publish = async options => {
+     // the console which will lead to the validation page which should contain
+     // detailed reasons why the extension was rejected
+     const {
+-        extensionId,
+         artifactsDir,
+         channel,
+         sourceDir,
+@@ -46,7 +45,6 @@ const publish = async options => {
+             apiSecret: FIREFOX_SECRET_KEY,
+             artifactsDir,
+             channel,
+-            id: extensionId,
+             sourceDir,
+         },
+         { signAddon },

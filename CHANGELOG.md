@@ -1,3 +1,9 @@
+## [1.3.9-beta.3](https://github.com/ajyey/masked-email-manager/compare/v1.3.9-beta.2...v1.3.9-beta.3) (2024-06-24)
+
+## [1.3.9-beta.2](https://github.com/ajyey/masked-email-manager/compare/v1.3.9-beta.1...v1.3.9-beta.2) (2024-06-24)
+
+## [1.3.9-beta.1](https://github.com/ajyey/masked-email-manager/compare/v1.3.8...v1.3.9-beta.1) (2024-06-24)
+
 ## [1.3.8](https://github.com/ajyey/masked-email-manager/compare/v1.3.7...v1.3.8) (2024-06-24)
 
 ## [1.3.7](https://github.com/ajyey/masked-email-manager/compare/v1.3.6...v1.3.7) (2024-06-15)
