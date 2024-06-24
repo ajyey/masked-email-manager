@@ -1,4 +1,3 @@
-// .releaserc.js
 const currentBranch =
   process.env.GITHUB_REF && process.env.GITHUB_REF.replace('refs/heads/', '');
 
@@ -9,11 +8,17 @@ const generatePluginsConfig = () => {
       {
         preset: 'angular',
         releaseRules: [
+          { scope: 'no-release', release: false },
+          { type: 'build', scope: 'major', release: 'major' },
+          { type: 'build', scope: 'minor', release: 'minor' },
+          { type: 'build', scope: 'patch', release: 'patch' },
           { type: 'chore', scope: 'deps', release: 'patch' },
+          { type: 'feat', scope: 'major', release: 'major' },
           { type: 'refactor', release: 'patch' },
           { type: 'refactor', scope: 'types', release: 'minor' },
-          { type: 'feat', scope: 'major', release: 'major' },
-          { scope: 'no-release', release: false }
+          { type: 'release', scope: 'major', release: 'major' },
+          { type: 'release', scope: 'minor', release: 'minor' },
+          { type: 'release', scope: 'patch', release: 'patch' }
         ]
       }
     ],
@@ -45,6 +50,16 @@ const generatePluginsConfig = () => {
       }
     ],
     [
+      'semantic-release-firefox-add-on',
+      {
+        extensionId: '{c48d361c-1173-11ee-be56-0242ac120002}',
+        targetXpi: 'masked-email-manager_v${nextRelease.version}_firefox.xpi',
+        sourceDir: 'dist-firefox',
+        channel: currentBranch === 'main' ? 'listed' : 'unlisted', // only publish to firefox store on main branch
+        artifactsDir: 'artifacts'
+      }
+    ],
+    [
       '@semantic-release/github',
       {
         assets: [
@@ -52,6 +67,11 @@ const generatePluginsConfig = () => {
             path: 'masked-email-manager_*_chrome.zip',
             name: 'masked-email-manager_v${nextRelease.version}_chrome.zip',
             label: 'Chrome Extension v${nextRelease.version}'
+          },
+          {
+            path: 'artifacts/masked-email-manager_v${nextRelease.version}_firefox.xpi',
+            name: 'masked-email-manager_v${nextRelease.version}_firefox.xpi',
+            label: 'Firefox Add-on v${nextRelease.version}'
           }
         ]
       }

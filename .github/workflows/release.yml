@@ -46,4 +46,6 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           GITHUB_REF: ${{ github.ref }}
+          FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+          FIREFOX_SECRET_KEY: ${{ secrets.FIREFOX_SECRET_KEY }}
         run: npx semantic-release
