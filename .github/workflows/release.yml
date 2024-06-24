@@ -37,6 +37,9 @@ jobs:
           cache: 'yarn'
       - name: Installing dependencies
         run: yarn install --frozen-lockfile
+      - name: Verify patch application
+        run: |
+          grep -q "extensionId:" node_modules/semantic-release-firefox-add-on/src/constants.js || echo "Patch applied successfully"
       - name: Building extension
         run: yarn build
       - name: Releasing
