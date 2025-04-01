@@ -13,7 +13,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({
   return (
     <div className="flex items-center align-middle ml-auto">
       <button
-        className="focus:outline-none inline-flex"
+        className="focus:outline-hidden inline-flex"
         onClick={(e) => {
           e.stopPropagation();
           if (textToCopy) {

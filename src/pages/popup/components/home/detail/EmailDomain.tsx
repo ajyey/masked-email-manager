@@ -59,7 +59,7 @@ function EmailDomain({
         >
           {isEditing ? (
             <input
-              className="bg-transparent text-white w-[98%] focus:outline-none truncate"
+              className="bg-transparent text-white w-[98%] focus:outline-hidden truncate"
               type="text"
               value={editedDomain || ''}
               onChange={handleDomainChange}

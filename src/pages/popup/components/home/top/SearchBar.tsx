@@ -39,7 +39,7 @@ function SearchBar({ onSearchChange }: Props) {
       <input
         type="text"
         id="simple-search"
-        className="bg-big-stone text-sm text-white rounded-[5px] w-full pl-10 h-[30px] items-center p-2.5 focus:outline-none"
+        className="bg-big-stone text-sm text-white rounded-[5px] w-full pl-10 h-[30px] items-center p-2.5 focus:outline-hidden"
         placeholder="Search Masked Emails..."
         style={{ caretColor: 'white' }}
         onChange={handleChange}

@@ -72,7 +72,7 @@ export default function LoginComponent({
             }}
           >
             <input type="hidden" name="remember" defaultValue="true" />
-            <div className="rounded-md shadow-sm -space-y-px">
+            <div className="rounded-md shadow-xs -space-y-px">
               <div>
                 <label htmlFor="api-token" className="sr-only">
                   Fastmail API Token
@@ -87,7 +87,7 @@ export default function LoginComponent({
                   className="appearance-none relative block
                   w-full px-3 py-2 border border-gray-300
                   placeholder-gray-500 text-gray-900 rounded-md
-                  focus:outline-none focus:ring-indigo-500
+                  focus:outline-hidden focus:ring-indigo-500
                   focus:border-indigo-500 focus:z-10 text-[14px]"
                   placeholder="Token"
                 />
@@ -100,7 +100,7 @@ export default function LoginComponent({
                 className="group relative w-full flex justify-center
                 py-2 px-4 border border-transparent text-sm font-medium
                 rounded-md text-white bg-indigo-600 hover:bg-indigo-700
-                focus:outline-none focus:ring-2 focus:ring-offset-2
+                focus:outline-hidden focus:ring-2 focus:ring-offset-2
                 focus:ring-indigo-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
