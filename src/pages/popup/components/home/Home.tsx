@@ -31,6 +31,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
   const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [host, setHost] = useState('');
   const [url, setUrl] = useState('');
   // Modal states
   const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] =
@@ -76,6 +77,10 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
       // Check if tabs exist
       if (tabs.length > 0) {
         const activeTabUrl = tabs[0].url;
+        const hostname = activeTabUrl
+          ? new URL(activeTabUrl).hostname.split('.').slice(-2, -1)[0]
+          : '';
+        setHost(hostname);
         setUrl(activeTabUrl ?? '');
       }
     };
@@ -95,7 +100,11 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
     try {
       const session = await getFastmailSession();
       const allMaskedEmails: MaskedEmail[] = await getAllEmails(session);
-      setMaskedEmails(allMaskedEmails);
+      const sortedEmails = allMaskedEmails.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+      setMaskedEmails(sortedEmails);
     } catch (error) {
       console.error('Error fetching masked emails:', error);
     }
@@ -145,6 +154,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
       {showCreateEmailModal && (
         <CreateEmailModal
           closeModal={closeCreateEmailModal}
+          activeTabHost={host}
           activeTabUrl={url}
           addNewEmailToEmailList={addNewEmailToEmailList}
           setSelectedEmail={setSelectedEmail}

@@ -10,6 +10,7 @@ import {
 interface CreateEmailModalProps {
   closeModal: () => void;
   activeTabUrl: string;
+  activeTabHost: string;
   setSelectedEmail: (email: MaskedEmail | null) => void;
   addNewEmailToEmailList: (newEmail: MaskedEmail) => void;
   setFilterOption: (
@@ -20,10 +21,12 @@ interface CreateEmailModalProps {
 export default function CreateEmailModal({
   closeModal,
   activeTabUrl,
+  activeTabHost,
   setSelectedEmail,
   addNewEmailToEmailList,
   setFilterOption
 }: CreateEmailModalProps) {
+  const [prefix, setPrefix] = useState(activeTabHost);
   const [domain, setDomain] = useState(activeTabUrl);
   const [description, setDescription] = useState('');
 
@@ -33,13 +36,15 @@ export default function CreateEmailModal({
       const newEmail = await createEmail(session, {
         forDomain: domain,
         description: description,
-        state: 'enabled'
+        state: 'enabled',
+        emailPrefix: prefix
       });
       // The API response from Fastmail for some reason doesnt return a newly created email's forDomain and description... haha
       const newEmailWithDomainAndDescription = {
         ...newEmail,
         description: description,
-        forDomain: domain
+        forDomain: domain,
+        emailPrefix: prefix
       };
       if (!newEmail.email) {
         toast.error('An error occurred while creating your email!', {
@@ -106,6 +111,13 @@ export default function CreateEmailModal({
             </div>
             {/*Modal body*/}
             <div className="p-3 space-y-4">
+              <input
+                type="text"
+                className="w-full px-3 py-2 text-white text-sm bg-gray-600 rounded-md focus:bg-gray-500 outline-none"
+                placeholder="Prefix"
+                value={prefix}
+                onChange={(e) => setPrefix(e.target.value)}
+              />
               <input
                 type="text"
                 className="w-full px-3 py-2 text-white text-sm bg-gray-600 rounded-md focus:bg-gray-500 outline-none"
