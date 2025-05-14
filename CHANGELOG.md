@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/ajyey/masked-email-manager/compare/v1.3.18...v1.4.0) (2025-05-14)
+
+
+### Features
+
+* adds ability to navigate to masked email in fastmail ([085dd4b](https://github.com/ajyey/masked-email-manager/commit/085dd4bd069cbea7f1da64afa9348ea0303d2ddd))
+
 ## [1.3.18](https://github.com/ajyey/masked-email-manager/compare/v1.3.17...v1.3.18) (2025-04-03)
 
 ## [1.3.17](https://github.com/ajyey/masked-email-manager/compare/v1.3.16...v1.3.17) (2025-04-01)
