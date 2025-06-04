@@ -59,7 +59,7 @@ export default function TopComponent({
       <div className="flex items-center justify-center mr-2">
         <button
           type="button"
-          className="text-white focus:outline-none"
+          className="text-white focus:outline-hidden"
           onClick={handleRefresh}
         >
           <svg

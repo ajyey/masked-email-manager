@@ -1,3 +1,41 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --animate-spin-slow: spin 2s linear infinite;
+  --animate-spin-fast: spin 0.5s linear infinite;
+  --animate-spin-default: spin 1s linear infinite;
+
+  --color-magnesium: #b3b3b3;
+  --color-astronaut: #3d5277;
+  --color-charcoal: #404040;
+  --color-eucalyptus: #25aa53;
+  --color-mikado-yellow: #ffc107;
+  --color-bright-sun: #ffd038;
+  --color-big-stone: #333e48;
+  --color-french-blue: #0067b9;
+  --color-malibu: #7cc1f4;
+  --color-iron: #d8d9d8;
+
+  --stroke-width-3: 3px;
+
+  --text-detail-label: 14px;
+  --text-detail-value: 16px;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}

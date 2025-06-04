@@ -46,7 +46,7 @@ function EmailDescription({
   }`;
   return (
     <div className={containerStyle}>
-      <div className="flex flex-grow">
+      <div className="flex grow">
         <div className="w-full">
           <div
             className="pt-1 ml-2 text-malibu font-normal text-detailLabel inline-flex"
@@ -64,7 +64,7 @@ function EmailDescription({
           >
             {isEditing ? (
               <input
-                className="bg-transparent text-white w-[98%] focus:outline-none"
+                className="bg-transparent text-white w-[98%] focus:outline-hidden"
                 type="text"
                 value={editedDescription || ''}
                 maxLength={127}

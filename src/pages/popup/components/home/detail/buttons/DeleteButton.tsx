@@ -11,7 +11,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({
   disabled
 }: DeleteButtonProps) => {
   const baseClasses =
-    'text-white inline-flex focus:outline-none font-medium rounded-lg text-sm px-2 py-1 items-center';
+    'text-white inline-flex focus:outline-hidden font-medium rounded-lg text-sm px-2 py-1 items-center';
   const enabledClasses = 'hover:bg-big-stone/[0.5]';
   const disabledClasses = 'bg-big-stone/[0.3] cursor-not-allowed';
 

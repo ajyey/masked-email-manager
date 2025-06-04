@@ -38,7 +38,7 @@ const SettingsDropdown: React.FC<SettingsDropdownProps> = ({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button onClick={toggleDropdown} className="focus:outline-none ">
+      <button onClick={toggleDropdown} className="focus:outline-hidden ">
         <SettingsIcon iconClasses={'h-6 w-6 stroke-iron stroke-2'} />
       </button>
       {showDropdown && (
