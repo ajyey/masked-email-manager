@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { createEmail, MaskedEmail, Session } from 'fastmail-masked-email';
+import { MaskedEmail, MaskedEmailService } from 'fastmail-masked-email';
 import { toast } from 'react-hot-toast';
-import { getFastmailSession } from '../../../../../../../utils/storageUtil';
 import {
   FILTER_OPTIONS,
   FilterOption
 } from '@pages/popup/components/home/filter/FilterOption';
+import { useAuth } from '@src/contexts/AuthContext';
 
 interface CreateEmailModalProps {
   closeModal: () => void;
@@ -24,13 +24,14 @@ export default function CreateEmailModal({
   addNewEmailToEmailList,
   setFilterOption
 }: CreateEmailModalProps) {
+  const { getService } = useAuth();
   const [domain, setDomain] = useState(activeTabUrl);
   const [description, setDescription] = useState('');
 
   const handleCreate = async () => {
-    const session: Session = await getFastmailSession();
     try {
-      const newEmail = await createEmail(session, {
+      const service: MaskedEmailService = await getService();
+      const newEmail = await service.createEmail({
         forDomain: domain,
         description: description,
         state: 'enabled'
