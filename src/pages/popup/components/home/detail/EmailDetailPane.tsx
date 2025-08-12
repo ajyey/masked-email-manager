@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import FavoriteButton from '@pages/popup/components/home/detail/buttons/FavoriteButton';
 import {
-  getFastmailSession,
   getFavoriteEmailIds,
   setFavoriteEmailIds
 } from '../../../../../../utils/storageUtil';
 import {
-  deleteEmail,
-  disableEmail,
-  enableEmail,
   MaskedEmail,
+  MaskedEmailService,
   MaskedEmailState,
-  Options,
-  permanentlyDeleteEmail,
-  Session,
-  updateEmail
+  Options
 } from 'fastmail-masked-email';
 import EmailAddress from '@pages/popup/components/home/detail/EmailAddress';
 import EmailDescription from '@pages/popup/components/home/detail/EmailDescription';
@@ -38,6 +32,8 @@ import {
 } from '../../../../../../utils/constants/colors';
 import PermanentlyDeleteButton from '@pages/popup/components/home/detail/buttons/PermanentlyDeleteButton';
 import PermanentDeleteConfirmationModal from '@pages/popup/components/home/detail/modals/PermanentDeleteConfirmationModal';
+import { useAuth } from '@src/contexts/AuthContext';
+import { getMaskedEmailService } from '@src/service';
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -52,6 +48,7 @@ export default function EmailDetailPane({
   setIsEditing: (value: ((prevState: boolean) => boolean) | boolean) => void;
   removeEmailFromEmailList: (emailToRemove: MaskedEmail) => void;
 }) {
+  const { getService } = useAuth();
   // State for permanent delete confirmation modal visibility
   const [
     showPermanentDeleteConfirmationModal,
@@ -79,8 +76,8 @@ export default function EmailDetailPane({
   const handleDelete = async () => {
     if (selectedEmail) {
       //TODO: Add better error handling
-      const session = await getFastmailSession();
-      await deleteEmail(selectedEmail.id, session);
+      const service: MaskedEmailService = await getService();
+      await service.deleteEmail(selectedEmail.id);
       updateEmailInList({ ...selectedEmail, state: 'deleted' }); // Update the email in the email list
       selectedEmail.state = 'deleted'; // Update the email in the email detail
       closePermanentDeleteConfirmationModal();
@@ -88,9 +85,9 @@ export default function EmailDetailPane({
   };
   const handlePermanentDelete = async () => {
     if (selectedEmail) {
-      const session = await getFastmailSession();
+      const service: MaskedEmailService = await getService();
       //TODO: Add better error handling here
-      await permanentlyDeleteEmail(selectedEmail.id, session);
+      await service.permanentlyDeleteEmail(selectedEmail.id);
       removeEmailFromEmailList(selectedEmail);
       closePermanentDeleteConfirmationModal();
     }
@@ -164,11 +161,11 @@ export default function EmailDetailPane({
   const handleEmailStateChange = async (newEmailState: MaskedEmailState) => {
     if (selectedEmail) {
       // Make the API call to update the email state
-      const session = await getFastmailSession();
+      const service: MaskedEmailService = await getMaskedEmailService();
       if (newEmailState === 'disabled') {
-        await disableEmail(selectedEmail.id, session);
+        await service.disableEmail(selectedEmail.id);
       } else if (newEmailState === 'enabled') {
-        await enableEmail(selectedEmail.id, session);
+        await service.enableEmail(selectedEmail.id);
       }
       // Update the email in the list so that the changes are reflected in the email list pane
       // For example, if the user is viewing the 'Enabled' emails and they disable an email,
@@ -190,7 +187,7 @@ export default function EmailDetailPane({
         setIsEditing(false);
         return;
       }
-      const session: Session = await getFastmailSession();
+      const service: MaskedEmailService = await getService();
       const updateOptions: Options = {};
       if (updatedDescription != null) {
         updateOptions['description'] = updatedDescription;
@@ -198,7 +195,7 @@ export default function EmailDetailPane({
       if (updatedDomain != null) {
         updateOptions['forDomain'] = updatedDomain;
       }
-      await updateEmail(selectedEmail.id, session, updateOptions);
+      await service.updateEmail(selectedEmail.id, updateOptions);
       selectedEmail.description =
         updatedDescription ?? selectedEmail.description;
       selectedEmail.forDomain = updatedDomain ?? selectedEmail.forDomain;

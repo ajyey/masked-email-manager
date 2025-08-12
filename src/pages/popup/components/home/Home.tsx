@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import EmailList from '@pages/popup/components/home/emails/EmailList';
 import EmailDetailPane from '@pages/popup/components/home/detail/EmailDetailPane';
-import { getAllEmails, MaskedEmail } from 'fastmail-masked-email';
+import { MaskedEmail } from 'fastmail-masked-email';
 import LoadingComponent from '@pages/popup/components/home/emails/Loading';
 import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmailsDropdown';
 import TopComponent from '@pages/popup/components/home/top/Top';
 import EmailCount from '@pages/popup/components/home/emails/EmailCount';
 import browser from 'webextension-polyfill';
 import {
-  getFastmailSession,
   getDefaultFilter,
   setDefaultFilter
 } from '../../../../../utils/storageUtil';
@@ -18,12 +17,14 @@ import {
   FILTER_OPTIONS,
   FilterOption
 } from '@pages/popup/components/home/filter/FilterOption';
+import { useAuth } from '@src/contexts/AuthContext';
 
 interface HomeComponentProps {
   onLogout: () => void;
 }
 
 export default function HomeComponent({ onLogout }: HomeComponentProps) {
+  const { getService } = useAuth();
   const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterOption, setFilterOption] = useState(FILTER_OPTIONS.All); // default the filtered emails to show all
@@ -93,8 +94,8 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const refreshMaskedEmails = async () => {
     setIsLoading(true);
     try {
-      const session = await getFastmailSession();
-      const allMaskedEmails: MaskedEmail[] = await getAllEmails(session);
+      const service = await getService();
+      const allMaskedEmails: MaskedEmail[] = await service.getAllEmails();
       setMaskedEmails(allMaskedEmails);
     } catch (error) {
       console.error('Error fetching masked emails:', error);
