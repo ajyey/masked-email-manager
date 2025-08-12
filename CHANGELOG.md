@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/ajyey/masked-email-manager/compare/v1.4.0...v1.5.0) (2025-08-12)
+
+
+### Features
+
+* updates to new fastmail lib and adds auth context ([8874d56](https://github.com/ajyey/masked-email-manager/commit/8874d569965079705a86299d977198f4d8a49016))
+
 # [1.4.0](https://github.com/ajyey/masked-email-manager/compare/v1.3.18...v1.4.0) (2025-05-14)
 
 
