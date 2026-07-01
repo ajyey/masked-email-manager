@@ -32,6 +32,21 @@ export default function CreateEmailModal({
   const [description, setDescription] = useState('');
 
   const handleCreate = async () => {
+    // Fastmail requires the prefix to be <= 64 chars of a-z, 0-9 and _ only.
+    if (prefix && !/^[a-z0-9_]{1,64}$/.test(prefix)) {
+      toast.error(
+        'Prefix must be 64 characters or fewer and only contain lowercase letters, numbers, and underscores (a-z, 0-9, _).',
+        {
+          duration: 4000,
+          position: 'bottom-center',
+          style: {
+            backgroundColor: 'red',
+            color: '#FFFFFF'
+          }
+        }
+      );
+      return;
+    }
     try {
       const service: MaskedEmailService = await getService();
       const newEmail = await service.createEmail({
