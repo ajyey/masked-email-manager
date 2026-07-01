@@ -1,31 +1,30 @@
-import React, { useState } from 'react';
+import React, { JSX } from 'react';
 import LoginComponent from '@pages/popup/components/login/Login';
 import HomeComponent from '@pages/popup/components/home/Home';
-import { clearStorage } from '../../../utils/storageUtil';
+import { useAuth } from '@src/contexts/AuthContext';
 
-interface PopupProps {
-  authenticated: boolean;
-}
+export default function Popup(): JSX.Element {
+  const { isAuthenticated, login, logout, loading } = useAuth();
 
-export default function Popup({ authenticated }: PopupProps): JSX.Element {
-  const [isLoggedIn, setIsLoggedIn] = useState(authenticated);
-  const cssClass = isLoggedIn ? 'home-component' : 'login-component';
-  // Callback function to update the isLoggedIn state
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-  };
-  const handleLogout = async () => {
-    // Clear sync storage
-    await clearStorage();
-    setIsLoggedIn(false);
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen w-screen bg-astronaut text-white">
+        <div>Loading...</div>
+      </div>
+    );
+  }
+
+  const cssClass = isAuthenticated ? 'home-component' : 'login-component';
+
+  const handleLoginSuccess = async (apiToken: string) => {
+    await login(apiToken);
   };
 
   return (
     <div className={cssClass}>
-      {isLoggedIn ? (
-        <HomeComponent onLogout={handleLogout} />
+      {isAuthenticated ? (
+        <HomeComponent onLogout={logout} />
       ) : (
-        // Pass the handleLoginSuccess callback to the LoginComponent
         <LoginComponent onLoginSuccess={handleLoginSuccess} />
       )}
     </div>

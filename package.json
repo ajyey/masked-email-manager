@@ -2,7 +2,7 @@
   "name": "masked-email-manager",
   "displayName": "Masked Email Manager",
   "description": "A web extension to manage your Fastmail masked emails",
-  "version": "1.4.0",
+  "version": "1.7.3",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "fastmail-masked-email": "^2.1.11",
+    "fastmail-masked-email": "3.0.0",
     "fuse.js": "^7.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

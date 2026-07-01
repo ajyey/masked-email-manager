@@ -8,11 +8,11 @@ jobs:
     lint:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - name: Use Node.js 22
-              uses: actions/setup-node@v4
+            - uses: actions/checkout@v5
+            - name: Use Node.js 24
+              uses: actions/setup-node@v6
               with:
-                  node-version: 22
+                  node-version: 24
                   cache: 'yarn'
             - name: Installing dependencies
               run: yarn install --frozen-lockfile
@@ -27,13 +27,13 @@ jobs:
             id-token: write # to enable use of OIDC for npm provenance
         needs: lint
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
               with:
                   persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-            - name: Use Node.js 22
-              uses: actions/setup-node@v4
+            - name: Use Node.js 24
+              uses: actions/setup-node@v6
               with:
-                  node-version: 22
+                  node-version: 24
                   cache: 'yarn'
             - name: Installing dependencies
               run: yarn install --frozen-lockfile

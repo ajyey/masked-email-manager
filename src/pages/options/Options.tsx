@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import '@pages/options/Options.css';
 
 export default function Options(): JSX.Element {

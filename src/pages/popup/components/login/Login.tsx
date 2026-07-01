@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { getSession } from 'fastmail-masked-email';
 import icon from '@assets/img/icon.svg';
-import { setFastmailSession } from '../../../../../utils/storageUtil';
 import { toast, Toaster } from 'react-hot-toast';
 
 interface LoginComponentProps {
-  onLoginSuccess: () => void;
+  onLoginSuccess: (apiToken: string) => Promise<void>;
 }
 
 export default function LoginComponent({
@@ -17,13 +15,11 @@ export default function LoginComponent({
     setApiToken(e.target.value);
   };
   /**
-   * When the user submits the form, store the API token and the fastmail session in Chrome storage
+   * When the user submits the form, authenticate using the auth context
    */
   const handleSubmit = async () => {
     try {
-      const session = await getSession(apiToken);
-      await setFastmailSession(session);
-      onLoginSuccess();
+      await onLoginSuccess(apiToken);
     } catch (error) {
       console.error(error);
       toast.error(
