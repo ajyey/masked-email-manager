@@ -15,7 +15,7 @@ jobs:
                   node-version: 24
                   cache: 'yarn'
             - name: Installing dependencies
-              run: yarn install --frozen-lockfile
+              run: yarn install
             - name: Running linting and tests
               run: yarn lint
     release:
@@ -36,7 +36,7 @@ jobs:
                   node-version: 24
                   cache: 'yarn'
             - name: Installing dependencies
-              run: yarn install --frozen-lockfile
+              run: yarn install
             - name: Verify patch application
               run: |
                   grep -q "extensionId:" node_modules/semantic-release-firefox-add-on/src/constants.js || echo "Patch applied successfully"
