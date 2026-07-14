@@ -1,3 +1,12 @@
+## [1.7.4](https://github.com/ajyey/masked-email-manager/compare/v1.7.3...v1.7.4) (2026-07-14)
+
+
+### Bug Fixes
+
+* dont use frozen lockfile ([910b514](https://github.com/ajyey/masked-email-manager/commit/910b514b124b787c6456018bd801219ce4eae8b6))
+* point to beta of fastmail-masked-email fixing session issue ([acb56ca](https://github.com/ajyey/masked-email-manager/commit/acb56ca0b6580e5fa937521a625311aeaea6d1de))
+* point to latest stable fastmail-masked-email version ([49e1543](https://github.com/ajyey/masked-email-manager/commit/49e1543fc3997db0c3ecb33d20a934a69f31b194))
+
 ## [1.7.3](https://github.com/ajyey/masked-email-manager/compare/v1.7.2...v1.7.3) (2026-06-29)
 
 ## [1.7.2](https://github.com/ajyey/masked-email-manager/compare/v1.7.1...v1.7.2) (2025-09-25)
