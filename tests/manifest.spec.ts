@@ -29,6 +29,13 @@ describe('extension manifest', () => {
     expect(manifest.options_ui?.page).toBe('src/pages/options/index.html');
   });
 
+  it('limits tab access to explicit user interaction', async () => {
+    const manifest = await loadManifest();
+
+    expect(manifest.permissions).toContain('activeTab');
+    expect(manifest.permissions).not.toContain('tabs');
+  });
+
   it('omits Firefox metadata from the Chrome manifest', async () => {
     const manifest = await loadManifest();
     expect(manifest.browser_specific_settings).toBeUndefined();

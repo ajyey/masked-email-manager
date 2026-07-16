@@ -18,7 +18,7 @@ const manifest: Manifest.WebExtensionManifest = {
     '48': 'icon48.png',
     '128': 'icon128.png'
   },
-  permissions: ['storage', 'tabs'],
+  permissions: ['storage', 'activeTab'],
   web_accessible_resources: [
     {
       resources: [
