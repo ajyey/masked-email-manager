@@ -1,5 +1,9 @@
 # End-to-End Testing Suite Plan
 
+> Implementation status: Phases 1-17 are complete or have a documented browser
+> boundary. See [End-to-End Testing Improvements](e2e-testing-implementation.md)
+> for the implemented architecture, coverage, CI integration, and manual checks.
+
 ## Purpose
 
 Build a deterministic, comprehensive end-to-end suite for Masked Email Manager. The suite must exercise the real production Chrome extension bundle, extension storage, popup UI, and the real `fastmail-masked-email` client without contacting Fastmail or requiring secrets.
