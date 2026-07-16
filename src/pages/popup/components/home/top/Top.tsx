@@ -18,8 +18,11 @@ export default function TopComponent({
 }: Props) {
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await onRefresh();
-    setIsRefreshing(false);
+    try {
+      await onRefresh();
+    } finally {
+      setIsRefreshing(false);
+    }
   };
 
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -49,6 +52,7 @@ export default function TopComponent({
           type="button"
           className="text-white focus:outline-hidden"
           onClick={handleRefresh}
+          disabled={isRefreshing}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

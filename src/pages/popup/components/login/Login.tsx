@@ -10,6 +10,7 @@ export default function LoginComponent({
   onLoginSuccess
 }: LoginComponentProps) {
   const [apiToken, setApiToken] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleTokenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setApiToken(e.target.value);
@@ -18,6 +19,7 @@ export default function LoginComponent({
    * When the user submits the form, authenticate using the auth context
    */
   const handleSubmit = async () => {
+    setIsSubmitting(true);
     try {
       await onLoginSuccess(apiToken);
     } catch (error) {
@@ -25,6 +27,8 @@ export default function LoginComponent({
       toast.error(
         'An error occurred while getting your session with that API token!'
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return (
@@ -93,6 +97,7 @@ export default function LoginComponent({
             <div>
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="group relative w-full flex justify-center
                 py-2 px-4 border border-transparent text-sm font-medium
                 rounded-md text-white bg-indigo-600 hover:bg-indigo-700
@@ -100,7 +105,7 @@ export default function LoginComponent({
                 focus:ring-indigo-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
-                Authenticate
+                {isSubmitting ? 'Authenticating...' : 'Authenticate'}
               </button>
             </div>
           </form>

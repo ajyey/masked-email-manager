@@ -7,6 +7,7 @@ import FilterEmailsDropdown from '@pages/popup/components/home/filter/FilterEmai
 import TopComponent from '@pages/popup/components/home/top/Top';
 import EmailCount from '@pages/popup/components/home/emails/EmailCount';
 import browser from 'webextension-polyfill';
+import { Toaster } from 'react-hot-toast';
 import {
   getDefaultFilter,
   setDefaultFilter
@@ -98,6 +99,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
 
   return (
     <div className="bg-astronaut h-[400px] w-[600px]">
+      <Toaster />
       <TopComponent
         onSearchChange={setSearchQuery}
         onRefresh={refreshMaskedEmails}

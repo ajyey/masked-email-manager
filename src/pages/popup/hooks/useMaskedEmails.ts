@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
+import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@src/contexts/AuthContext';
 
@@ -15,6 +16,7 @@ export default function useMaskedEmails() {
       setMaskedEmails(await service.getAllEmails());
     } catch (error) {
       console.error('Error fetching masked emails:', error);
+      toast.error('Unable to load masked emails. Please try again.');
     } finally {
       setIsLoading(false);
     }

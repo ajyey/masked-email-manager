@@ -27,8 +27,11 @@ export default function CreateEmailModal({
   const { getService } = useAuth();
   const [domain, setDomain] = useState(activeTabUrl);
   const [description, setDescription] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
 
   const handleCreate = async () => {
+    let shouldClose = false;
+    setIsCreating(true);
     try {
       const service: MaskedEmailService = await getService();
       const newEmail = await service.createEmail({
@@ -43,33 +46,28 @@ export default function CreateEmailModal({
         forDomain: domain
       };
       if (!newEmail.email) {
-        toast.error('An error occurred while creating your email!', {
-          duration: 2000,
-          position: 'bottom-center',
-          style: {
-            backgroundColor: 'red', // big-stone
-            color: '#FFFFFF' // white
-          }
-        });
+        throw new Error('Fastmail returned an email without an address');
       }
-      closeModal();
       setFilterOption(FILTER_OPTIONS.Enabled);
-      await navigator.clipboard.writeText(newEmail.email);
       addNewEmailToEmailList(newEmailWithDomainAndDescription);
       setSelectedEmail(newEmailWithDomainAndDescription);
-      toast.success(
-        `New email ${newEmail.email} created and copied to clipboard!`,
-        {
-          duration: 3000,
-          position: 'bottom-center',
-          style: {
-            backgroundColor: '#333E48', // big-stone
-            color: '#FFFFFF' // white
-          }
-        }
-      );
+      try {
+        await navigator.clipboard.writeText(newEmail.email);
+        toast.success(
+          `New email ${newEmail.email} created and copied to clipboard!`
+        );
+      } catch (error) {
+        console.error('Error copying new email:', error);
+        toast.success(`New email ${newEmail.email} created!`);
+        toast.error('The address could not be copied to the clipboard.');
+      }
+      shouldClose = true;
     } catch (error) {
       console.error('Error creating new email:', error);
+      toast.error('Unable to create a masked email. Please try again.');
+    } finally {
+      setIsCreating(false);
+      if (shouldClose) closeModal();
     }
   };
 
@@ -128,13 +126,15 @@ export default function CreateEmailModal({
                 type="button"
                 className="text-white hover:bg-french-blue bg-french-blue/[0.75] focus:ring-4 focus:outline-hidden focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 onClick={handleCreate}
+                disabled={isCreating}
               >
-                Create
+                {isCreating ? 'Creating...' : 'Create'}
               </button>
               <button
                 type="button"
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-hidden focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                 onClick={closeModal}
+                disabled={isCreating}
               >
                 Cancel
               </button>
