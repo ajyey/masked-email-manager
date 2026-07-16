@@ -8,6 +8,10 @@
     "type": "git",
     "url": "https://github.com/ajyey/masked-email-manager.git"
   },
+  "packageManager": "yarn@4.17.1",
+  "engines": {
+    "node": "24.x"
+  },
   "type": "module",
   "scripts": {
     "build": "run-s lint build:*:*",

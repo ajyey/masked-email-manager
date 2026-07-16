@@ -14,8 +14,10 @@ jobs:
               with:
                   node-version: 24
                   cache: 'yarn'
+            - name: Enable Corepack
+              run: corepack enable
             - name: Installing dependencies
-              run: yarn install
+              run: yarn install --immutable
             - name: Running linting and tests
               run: yarn lint
     release:
@@ -35,8 +37,10 @@ jobs:
               with:
                   node-version: 24
                   cache: 'yarn'
+            - name: Enable Corepack
+              run: corepack enable
             - name: Installing dependencies
-              run: yarn install
+              run: yarn install --immutable
             - name: Verify patch application
               run: |
                   grep -q "extensionId:" node_modules/semantic-release-firefox-add-on/src/constants.js || echo "Patch applied successfully"
