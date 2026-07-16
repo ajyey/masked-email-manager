@@ -25,6 +25,76 @@ export class PopupPage {
       .click();
   }
 
+  async createEmail({
+    domain,
+    description
+  }: {
+    domain: string;
+    description: string;
+  }) {
+    await this.page
+      .getByRole('button', { name: 'Create', exact: true })
+      .click();
+    const dialog = this.page.getByRole('dialog', { name: 'Create Email' });
+    await dialog
+      .getByRole('textbox', { name: 'Domain', exact: true })
+      .fill(domain);
+    await dialog
+      .getByRole('textbox', { name: 'Description', exact: true })
+      .fill(description);
+    await dialog.getByRole('button', { name: 'Create', exact: true }).click();
+  }
+
+  async selectEmail(address: string, state: string) {
+    await this.emailOption(address, state).click();
+  }
+
+  async editSelectedEmail({
+    domain,
+    description
+  }: {
+    domain: string;
+    description: string;
+  }) {
+    await this.page.getByRole('button', { name: 'Edit', exact: true }).click();
+    await this.page
+      .getByRole('textbox', { name: 'domain', exact: true })
+      .fill(domain);
+    await this.page
+      .getByRole('textbox', { name: 'description', exact: true })
+      .fill(description);
+    await this.page.getByRole('button', { name: 'Save', exact: true }).click();
+  }
+
+  async setSelectedEmailEnabled(enabled: boolean) {
+    const stateToggle = this.page.getByRole('checkbox', {
+      name: 'Masked email enabled'
+    });
+    if ((await stateToggle.isChecked()) !== enabled) {
+      await this.page.locator('label[for="masked-email-state"]').click();
+    }
+  }
+
+  async favoriteSelectedEmail() {
+    await this.page.getByRole('button', { name: 'Add to favorites' }).click();
+  }
+
+  async softDeleteSelectedEmail() {
+    await this.page
+      .getByRole('button', { name: 'Delete', exact: true })
+      .click();
+  }
+
+  async permanentlyDeleteSelectedEmail() {
+    await this.page
+      .getByRole('button', { name: 'Permanently Delete', exact: true })
+      .click();
+    await this.page
+      .getByRole('dialog', { name: 'Permanently Delete Email' })
+      .getByRole('button', { name: 'Permanently delete', exact: true })
+      .click();
+  }
+
   async search(query: string) {
     await this.page
       .getByRole('textbox', { name: 'Search masked emails' })
@@ -63,6 +133,10 @@ export class PopupPage {
     return this.page.getByLabel(
       `${count} masked ${count === 1 ? 'email' : 'emails'}`
     );
+  }
+
+  detail(labelId: 'domainLabel' | 'emailDescriptionLabel' | 'emailIdLabel') {
+    return this.page.locator(`#${labelId}`).locator('..');
   }
 
   emailOption(address: string, state: string) {
