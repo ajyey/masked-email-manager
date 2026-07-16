@@ -27,10 +27,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "dev": "nodemon",
+    "dev": "run-p dev:chrome dev:firefox",
+    "dev:chrome": "__DEV__=true vite build --watch",
+    "dev:firefox": "__DEV__=true BROWSER=firefox vite build --watch",
     "semantic-release": "semantic-release",
     "upgrade-packages": "npx npm-check-updates -u && yarn",
-    "update-version": "node utils/update-version.js",
     "postinstall": "patch-package"
   },
   "dependencies": {
@@ -66,7 +67,6 @@
     "fs-extra": "^11.3.0",
     "globals": "^17.7.0",
     "husky": "^9.1.7",
-    "nodemon": "^3.1.9",
     "npm-run-all": "^4.1.5",
     "patch-package": "^8.0.0",
     "postcss": "^8.5.3",

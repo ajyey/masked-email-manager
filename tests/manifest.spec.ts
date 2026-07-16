@@ -29,6 +29,15 @@ describe('extension manifest', () => {
     expect(manifest.options_ui?.page).toBe('src/pages/options/index.html');
   });
 
+  it('normalizes prerelease versions for browser manifests', async () => {
+    const { sanitizeManifestVersion } = await import('../src/manifest');
+
+    expect(sanitizeManifestVersion('2.4.0-beta.3')).toBe('2.4.0');
+    expect(() => sanitizeManifestVersion('beta')).toThrow(
+      'Invalid extension version: beta'
+    );
+  });
+
   it('limits tab access to explicit user interaction', async () => {
     const manifest = await loadManifest();
 
