@@ -1,25 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import SearchBar from '@pages/popup/components/home/top/SearchBar';
 import SettingsDropdown from '@pages/popup/components/home/top/SettingsDropdown';
-import { MaskedEmail } from 'fastmail-masked-email';
 import icon from '@assets/img/icon.svg';
 
 interface Props {
   onSearchChange: (searchQuery: string) => void;
   onRefresh: () => Promise<void>;
-  onLogout: () => void;
-  addNewEmailToEmailList: (newEmail: MaskedEmail) => void;
-  setSelectedEmail: (
-    value:
-      | ((prevState: MaskedEmail | null) => MaskedEmail | null)
-      | MaskedEmail
-      | null
-  ) => void;
-  activeTabUrl: string;
   openLogoutConfirmationModal: () => void;
-  closeLogoutConfirmationModal: () => void;
   openCreateEmailModal: () => void;
-  closeCreateEmailModal: () => void;
 }
 
 export default function TopComponent({
@@ -30,8 +18,11 @@ export default function TopComponent({
 }: Props) {
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    await onRefresh();
-    setIsRefreshing(false);
+    try {
+      await onRefresh();
+    } finally {
+      setIsRefreshing(false);
+    }
   };
 
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -61,6 +52,8 @@ export default function TopComponent({
           type="button"
           className="text-white focus:outline-hidden"
           onClick={handleRefresh}
+          disabled={isRefreshing}
+          aria-label="Refresh masked emails"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

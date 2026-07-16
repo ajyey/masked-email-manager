@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
 import EmailItem from '@pages/popup/components/home/emails/EmailItem';
 import Fuse from 'fuse.js';
@@ -131,7 +131,12 @@ function EmailList({
     // Call the onFilteredEmailsCountChange callback with the searchResults length.
     // This can be used by the parent component to update the count of filtered emails.
     onFilteredEmailsCountChange(searchResults.length);
-  }, [searchResults]);
+  }, [
+    onFilteredEmailsCountChange,
+    searchResults,
+    selectedEmail,
+    setSelectedEmail
+  ]);
 
   return (
     <div className="h-[310px] overflow-y-auto overflow-x-hidden scrollbar pt-2 pb-2">

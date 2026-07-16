@@ -1,14 +1,19 @@
 import type { Manifest } from 'webextension-polyfill';
 import pkg from '../package.json';
 
+export function sanitizeManifestVersion(version: string): string {
+  const sanitizedVersion = version.match(/^\d+\.\d+\.\d+/)?.[0];
+  if (!sanitizedVersion) {
+    throw new Error(`Invalid extension version: ${version}`);
+  }
+  return sanitizedVersion;
+}
+
 const manifest: Manifest.WebExtensionManifest = {
   manifest_version: 3,
   name: pkg.displayName,
-  version: pkg.version,
+  version: sanitizeManifestVersion(pkg.version),
   description: pkg.description,
-  options_ui: {
-    page: 'src/pages/options/index.html'
-  },
   action: {
     default_popup: 'src/pages/popup/index.html',
     default_icon: 'icon34.png'
@@ -18,7 +23,7 @@ const manifest: Manifest.WebExtensionManifest = {
     '48': 'icon48.png',
     '128': 'icon128.png'
   },
-  permissions: ['storage', 'tabs'],
+  permissions: ['storage', 'activeTab'],
   web_accessible_resources: [
     {
       resources: [

@@ -3,9 +3,10 @@ name: release
 on:
     push:
         branches: ['main', 'develop']
+    pull_request:
 
 jobs:
-    lint:
+    quality:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v5
@@ -13,19 +14,21 @@ jobs:
               uses: actions/setup-node@v6
               with:
                   node-version: 24
-                  cache: 'yarn'
+            - name: Enable Corepack
+              run: corepack enable
             - name: Installing dependencies
-              run: yarn install
-            - name: Running linting and tests
-              run: yarn lint
+              run: yarn install --immutable
+            - name: Run quality checks
+              run: yarn check
     release:
+        if: github.event_name == 'push'
         runs-on: ubuntu-latest
         permissions:
             contents: write # to be able to publish a GitHub release
             issues: write # to be able to comment on released issues
             pull-requests: write # to be able to comment on released pull requests
             id-token: write # to enable use of OIDC for npm provenance
-        needs: lint
+        needs: quality
         steps:
             - uses: actions/checkout@v5
               with:
@@ -34,9 +37,10 @@ jobs:
               uses: actions/setup-node@v6
               with:
                   node-version: 24
-                  cache: 'yarn'
+            - name: Enable Corepack
+              run: corepack enable
             - name: Installing dependencies
-              run: yarn install
+              run: yarn install --immutable
             - name: Verify patch application
               run: |
                   grep -q "extensionId:" node_modules/semantic-release-firefox-add-on/src/constants.js || echo "Patch applied successfully"

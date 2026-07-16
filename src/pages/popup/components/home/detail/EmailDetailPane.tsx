@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FavoriteButton from '@pages/popup/components/home/detail/buttons/FavoriteButton';
 import {
   getFavoriteEmailIds,
@@ -19,7 +19,7 @@ import EmailStateToggle from '@pages/popup/components/home/detail/buttons/EmailS
 import NoEmailSelected from '@pages/popup/components/home/detail/NoEmailSelected';
 import LastMessageAt from '@pages/popup/components/home/detail/LastMessageAt';
 import CreatedAt from '@pages/popup/components/home/detail/CreatedAt';
-import { Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import CreatedBy from '@pages/popup/components/home/detail/CreatedBy';
 import SaveButton from '@pages/popup/components/home/detail/buttons/SaveButton';
 import EditButton from '@pages/popup/components/home/detail/buttons/EditButton';
@@ -34,6 +34,11 @@ import PermanentlyDeleteButton from '@pages/popup/components/home/detail/buttons
 import PermanentDeleteConfirmationModal from '@pages/popup/components/home/detail/modals/PermanentDeleteConfirmationModal';
 import { useAuth } from '@src/contexts/AuthContext';
 import { getMaskedEmailService } from '@src/service';
+
+function reportOperationError(action: string, error: unknown) {
+  console.error(`Unable to ${action}:`, error);
+  toast.error(`Unable to ${action}. Please try again.`);
+}
 
 export default function EmailDetailPane({
   selectedEmail,
@@ -75,21 +80,27 @@ export default function EmailDetailPane({
   // Handle delete action
   const handleDelete = async () => {
     if (selectedEmail) {
-      //TODO: Add better error handling
-      const service: MaskedEmailService = await getService();
-      await service.deleteEmail(selectedEmail.id);
-      updateEmailInList({ ...selectedEmail, state: 'deleted' }); // Update the email in the email list
-      selectedEmail.state = 'deleted'; // Update the email in the email detail
-      closePermanentDeleteConfirmationModal();
+      try {
+        const service: MaskedEmailService = await getService();
+        await service.deleteEmail(selectedEmail.id);
+        updateEmailInList({ ...selectedEmail, state: 'deleted' });
+        selectedEmail.state = 'deleted';
+        closePermanentDeleteConfirmationModal();
+      } catch (error) {
+        reportOperationError('delete this masked email', error);
+      }
     }
   };
   const handlePermanentDelete = async () => {
     if (selectedEmail) {
-      const service: MaskedEmailService = await getService();
-      //TODO: Add better error handling here
-      await service.permanentlyDeleteEmail(selectedEmail.id);
-      removeEmailFromEmailList(selectedEmail);
-      closePermanentDeleteConfirmationModal();
+      try {
+        const service: MaskedEmailService = await getService();
+        await service.permanentlyDeleteEmail(selectedEmail.id);
+        removeEmailFromEmailList(selectedEmail);
+        closePermanentDeleteConfirmationModal();
+      } catch (error) {
+        reportOperationError('permanently delete this masked email', error);
+      }
     }
   };
   const handleDescriptionChange = (newDescription: string) => {
@@ -113,44 +124,50 @@ export default function EmailDetailPane({
   };
   // Copy the text to the clipboard (when the user clicks on email, description, id, or domain)
   // and show the copy alert
-  const handleCopyClick = (textToCopy: string) => {
-    navigator.clipboard.writeText(textToCopy);
-    handleCopyAlert();
+  const handleCopyClick = async (textToCopy: string) => {
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      handleCopyAlert();
+    } catch (error) {
+      reportOperationError('copy to the clipboard', error);
+    }
   };
 
   useEffect(() => {
     if (selectedEmail) {
-      getFavoriteEmailIds().then((favoriteEmails) => {
-        setIsFavorited(favoriteEmails.includes(selectedEmail.id));
-      });
+      getFavoriteEmailIds()
+        .then((favoriteEmails) => {
+          setIsFavorited(favoriteEmails.includes(selectedEmail.id));
+        })
+        .catch((error) => {
+          reportOperationError('load favorites', error);
+        });
     } else {
       setIsFavorited(false);
     }
   }, [selectedEmail]);
   const handleFavoriteButtonClick = async () => {
     if (selectedEmail) {
-      const favoritedEmailIds = await getFavoriteEmailIds();
-      if (isFavorited) {
-        // Remove the email from the favorites list
-        const updatedFavorites = favoritedEmailIds.filter(
-          (emailId) => emailId !== selectedEmail.id
-        );
-        await setFavoriteEmailIds(updatedFavorites);
-        setIsFavorited(false);
-        // remove the email from the favorites list
-      } else {
-        // Add the email to the favorites list
-        const updatedFavoritedEmailIds = [
-          ...favoritedEmailIds,
-          selectedEmail.id
-        ];
-        await setFavoriteEmailIds(updatedFavoritedEmailIds);
-        setIsFavorited(true);
+      try {
+        const favoritedEmailIds = await getFavoriteEmailIds();
+        if (isFavorited) {
+          const updatedFavorites = favoritedEmailIds.filter(
+            (emailId) => emailId !== selectedEmail.id
+          );
+          await setFavoriteEmailIds(updatedFavorites);
+          setIsFavorited(false);
+        } else {
+          const updatedFavoritedEmailIds = [
+            ...favoritedEmailIds,
+            selectedEmail.id
+          ];
+          await setFavoriteEmailIds(updatedFavoritedEmailIds);
+          setIsFavorited(true);
+        }
+        updateEmailInList(selectedEmail);
+      } catch (error) {
+        reportOperationError('update favorites', error);
       }
-      // need this to trigger the applyFilter function in the email list pane
-      // since the useEffect that triggers applyFilter has a dependency on the masked emails list
-      // TODO: come up with a better solution for updating the email list in real time
-      updateEmailInList(selectedEmail);
     } else {
       setIsFavorited(false);
     }
@@ -160,20 +177,19 @@ export default function EmailDetailPane({
   };
   const handleEmailStateChange = async (newEmailState: MaskedEmailState) => {
     if (selectedEmail) {
-      // Make the API call to update the email state
-      const service: MaskedEmailService = await getMaskedEmailService();
-      if (newEmailState === 'disabled') {
-        await service.disableEmail(selectedEmail.id);
-      } else if (newEmailState === 'enabled') {
-        await service.enableEmail(selectedEmail.id);
+      try {
+        const service: MaskedEmailService = await getMaskedEmailService();
+        if (newEmailState === 'disabled') {
+          await service.disableEmail(selectedEmail.id);
+        } else if (newEmailState === 'enabled') {
+          await service.enableEmail(selectedEmail.id);
+        }
+        const updatedSelectedEmail = { ...selectedEmail, state: newEmailState };
+        updateEmailInList(updatedSelectedEmail);
+        selectedEmail.state = newEmailState;
+      } catch (error) {
+        reportOperationError('change the masked email state', error);
       }
-      // Update the email in the list so that the changes are reflected in the email list pane
-      // For example, if the user is viewing the 'Enabled' emails and they disable an email,
-      // then the email will be reflected (removed in this case) in the list
-      const updatedSelectedEmail = { ...selectedEmail, state: newEmailState };
-      updateEmailInList(updatedSelectedEmail);
-      // Updates the selected email state so that the changes are reflected by the toggle button
-      selectedEmail.state = newEmailState;
     }
   };
   const handleSaveButtonClick = async () => {
@@ -187,22 +203,25 @@ export default function EmailDetailPane({
         setIsEditing(false);
         return;
       }
-      const service: MaskedEmailService = await getService();
-      const updateOptions: Options = {};
-      if (updatedDescription != null) {
-        updateOptions['description'] = updatedDescription;
+      try {
+        const service: MaskedEmailService = await getService();
+        const updateOptions: Options = {};
+        if (updatedDescription != null) {
+          updateOptions['description'] = updatedDescription;
+        }
+        if (updatedDomain != null) {
+          updateOptions['forDomain'] = updatedDomain;
+        }
+        await service.updateEmail(selectedEmail.id, updateOptions);
+        selectedEmail.description =
+          updatedDescription ?? selectedEmail.description;
+        selectedEmail.forDomain = updatedDomain ?? selectedEmail.forDomain;
+        updateEmailInList(selectedEmail);
+        setIsEditing(false);
+      } catch (error) {
+        reportOperationError('save changes to this masked email', error);
       }
-      if (updatedDomain != null) {
-        updateOptions['forDomain'] = updatedDomain;
-      }
-      await service.updateEmail(selectedEmail.id, updateOptions);
-      selectedEmail.description =
-        updatedDescription ?? selectedEmail.description;
-      selectedEmail.forDomain = updatedDomain ?? selectedEmail.forDomain;
-      // Update the email in the list so that the changes are reflected in the email list pane
-      updateEmailInList(selectedEmail);
     }
-    setIsEditing(false);
   };
 
   let emailDescription: string | null = null;
@@ -288,7 +307,6 @@ export default function EmailDetailPane({
                   handleCopyClick={handleCopyClick}
                 />
                 {/* Create a toast to tell the user the text was copied to their clipboard*/}
-                <Toaster />
               </div>
               {selectedEmail &&
                 selectedEmail.lastMessageAt === null &&

@@ -1,5 +1,4 @@
 import CopyButton from '@pages/popup/components/home/detail/buttons/CopyButton';
-import React from 'react';
 
 function EmailId({
   emailId,

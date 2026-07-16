@@ -1,4 +1,4 @@
-import React, { JSX } from 'react';
+import type { JSX } from 'react';
 import LoginComponent from '@pages/popup/components/login/Login';
 import HomeComponent from '@pages/popup/components/home/Home';
 import { useAuth } from '@src/contexts/AuthContext';
