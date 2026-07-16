@@ -1,3 +1,17 @@
+## [1.7.5](https://github.com/ajyey/masked-email-manager/compare/v1.7.4...v1.7.5) (2026-07-16)
+
+
+### Bug Fixes
+
+* clean extension build outputs ([f0cce66](https://github.com/ajyey/masked-email-manager/commit/f0cce6682f2012a31c31e859cfaa7935788854d3))
+* emit manifests directly to build outputs ([79b721b](https://github.com/ajyey/masked-email-manager/commit/79b721b85ac53f9dfb8b542cf7793fbd8eeebfea))
+* limit tab access to active tab ([097876a](https://github.com/ajyey/masked-email-manager/commit/097876a7afda54d0297568c5cb2addc8bf79c3d7))
+* preserve preferences on logout ([dd5bece](https://github.com/ajyey/masked-email-manager/commit/dd5becef98d55c98c73f7ffb2169576174de0725))
+* remove placeholder options page ([1adea37](https://github.com/ajyey/masked-email-manager/commit/1adea37ae47f892974b8da7d8c6e52abb3a5d328))
+* surface async operation failures ([ed1ce55](https://github.com/ajyey/masked-email-manager/commit/ed1ce559c3395ea699dbeb2486c9c5294c531b4b))
+* validate stored authentication token ([eaf3f3c](https://github.com/ajyey/masked-email-manager/commit/eaf3f3c816aea7546a51b98b81f6d2f52b169936))
+* verify production build artifacts ([87c5816](https://github.com/ajyey/masked-email-manager/commit/87c58169c08e5c15ac262e1f6d95e5a7798b6633))
+
 ## [1.7.4](https://github.com/ajyey/masked-email-manager/compare/v1.7.3...v1.7.4) (2026-07-14)
 
 

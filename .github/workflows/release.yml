@@ -19,8 +19,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-          cache: yarn
-          cache-dependency-path: yarn.lock
       - name: Enable Corepack
         run: corepack enable
       - name: Install dependencies
@@ -37,8 +35,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-          cache: yarn
-          cache-dependency-path: yarn.lock
       - name: Enable Corepack
         run: corepack enable
       - name: Install dependencies
@@ -76,8 +72,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-          cache: yarn
-          cache-dependency-path: yarn.lock
       - name: Enable Corepack
         run: corepack enable
       - name: Install dependencies
