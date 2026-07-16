@@ -32,6 +32,7 @@ export class FastmailMock {
   private setFailures = new Map<FastmailOperation, SetFailure[]>();
   private recordedCalls: RecordedCall[] = [];
   private createCounter = 0;
+  private createsWithoutEmail = 0;
 
   constructor(private context: BrowserContext) {}
 
@@ -71,6 +72,10 @@ export class FastmailMock {
     const failures = this.setFailures.get(operation) ?? [];
     failures.push({ type: 'serverFail', description });
     this.setFailures.set(operation, failures);
+  }
+
+  omitEmailFromNextCreate() {
+    this.createsWithoutEmail += 1;
   }
 
   calls(operation: FastmailOperation) {
@@ -249,6 +254,9 @@ export class FastmailMock {
     };
     this.emails.set(id, createdEmail);
 
+    const omitEmail = this.createsWithoutEmail > 0;
+    if (omitEmail) this.createsWithoutEmail -= 1;
+
     return {
       accountId,
       oldState: 'e2e-email-state',
@@ -256,7 +264,7 @@ export class FastmailMock {
       created: {
         [creationId]: {
           id,
-          email,
+          ...(!omitEmail && { email }),
           url: null,
           createdAt: createdEmail.createdAt,
           lastMessageAt: null,
