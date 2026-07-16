@@ -45,5 +45,9 @@ export default tseslint.config(
       react: { version: 'detect' }
     }
   },
+  {
+    files: ['tests/e2e/fixtures/test.ts'],
+    rules: { 'no-empty-pattern': 'off' }
+  },
   prettier
 );
