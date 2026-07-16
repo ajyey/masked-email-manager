@@ -67,6 +67,7 @@
     "@types/react-dom": "^19.1.1",
     "@types/webextension-polyfill": "^0.12.3",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "chrome-webstore-upload": "^6.0.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
