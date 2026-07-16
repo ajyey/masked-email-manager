@@ -22,5 +22,11 @@
       "@pages/*": ["src/pages/*"]
     }
   },
-  "include": ["src", "tests", "utils", "vite.config.ts"],
+  "include": [
+    "src",
+    "tests",
+    "utils",
+    "playwright.config.ts",
+    "vite.config.ts"
+  ],
 }

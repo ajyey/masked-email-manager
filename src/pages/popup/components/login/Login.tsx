@@ -41,9 +41,9 @@ export default function LoginComponent({
               className="mx-auto h-24 w-auto pointer-events-none"
               alt="icon"
             />
-            <p className="mt-6 text-2xl font-extrabold mb-3 text-center">
+            <h1 className="mt-6 text-2xl font-extrabold mb-3 text-center">
               Masked Email Manager
-            </p>
+            </h1>
             <p className="mb-3">
               Masked Email Manager requires a Fastmail API token with the{' '}
               <span className="font-semibold text-mikado-yellow">

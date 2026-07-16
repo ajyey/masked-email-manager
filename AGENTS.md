@@ -6,6 +6,7 @@
 - Use Node 24, as pinned by `.nvmrc`, `package.json`, and CI.
 - `yarn lint` is read-only; use `yarn lint:fix` to rewrite TypeScript and HTML files.
 - Use `yarn test` for the Vitest suite, `yarn typecheck` for a focused type check, or `yarn check` for the CI-equivalent lint, typecheck, tests, and both production builds.
+- Install the pinned E2E browser once with `yarn test:e2e:install`; `yarn test:e2e` builds and loads the unpacked Chrome extension in Playwright. E2E is intentionally not part of `yarn check`.
 - Build one target with `yarn build:production:chrome` or `yarn build:production:firefox`. Outputs are `dist/` and `dist-firefox/`, respectively.
 - Run `yarn verify:build` after focused builds when both output directories exist; `yarn build` runs it automatically.
 - `yarn dev` runs parallel Vite watch builds for Chrome and Firefox; it does not package ZIP/XPI artifacts or reload installed extensions.
