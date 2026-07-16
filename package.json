@@ -17,13 +17,15 @@
     "build": "run-s build:production:chrome build:production:firefox",
     "build:production:chrome": "vite build",
     "build:production:firefox": "BROWSER=firefox vite build",
-    "check": "run-s lint typecheck build",
+    "check": "run-s lint typecheck test build",
     "lint": "run-s lint:ts lint:html",
-    "lint:ts": "eslint src utils vite.config.ts --ext .ts,.tsx",
+    "lint:ts": "eslint src utils tests vite.config.ts --ext .ts,.tsx",
     "lint:html": "prettier --config .prettierrc 'src/**/*.html' --check",
     "lint:fix": "run-s lint:fix:ts lint:fix:html",
-    "lint:fix:ts": "eslint src utils vite.config.ts --ext .ts,.tsx --fix",
+    "lint:fix:ts": "eslint src utils tests vite.config.ts --ext .ts,.tsx --fix",
     "lint:fix:html": "prettier --config .prettierrc 'src/**/*.html' --write",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "dev": "nodemon",
     "semantic-release": "semantic-release",
@@ -82,6 +84,7 @@
     "tailwindcss": "^4.1.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
-    "vite": "^6.2.4"
+    "vite": "^6.2.4",
+    "vitest": "^4.1.10"
   }
 }

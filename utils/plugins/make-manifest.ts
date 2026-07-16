@@ -11,6 +11,7 @@ const outDir = resolve(__dirname, '..', '..', 'public');
 export default function makeManifest(): PluginOption {
   return {
     name: 'make-manifest',
+    apply: 'build',
     buildEnd() {
       if (!fs.existsSync(outDir)) {
         fs.mkdirSync(outDir);
