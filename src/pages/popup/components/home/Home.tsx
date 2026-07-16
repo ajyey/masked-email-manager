@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import EmailList from '@pages/popup/components/home/emails/EmailList';
 import EmailDetailPane from '@pages/popup/components/home/detail/EmailDetailPane';
 import { MaskedEmail } from 'fastmail-masked-email';
@@ -17,16 +17,21 @@ import {
   FILTER_OPTIONS,
   FilterOption
 } from '@pages/popup/components/home/filter/FilterOption';
-import { useAuth } from '@src/contexts/AuthContext';
+import useMaskedEmails from '@pages/popup/hooks/useMaskedEmails';
 
 interface HomeComponentProps {
   onLogout: () => void;
 }
 
 export default function HomeComponent({ onLogout }: HomeComponentProps) {
-  const { getService } = useAuth();
-  const [maskedEmails, setMaskedEmails] = useState<MaskedEmail[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    maskedEmails,
+    isLoading,
+    refreshMaskedEmails,
+    updateEmailInList,
+    addNewEmailToEmailList,
+    removeEmailFromEmailList
+  } = useMaskedEmails();
   const [filterOption, setFilterOption] = useState(FILTER_OPTIONS.All); // default the filtered emails to show all
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
@@ -91,51 +96,13 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
     fetchDefaultFilter();
   }, []);
 
-  const refreshMaskedEmails = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const service = await getService();
-      const allMaskedEmails: MaskedEmail[] = await service.getAllEmails();
-      setMaskedEmails(allMaskedEmails);
-    } catch (error) {
-      console.error('Error fetching masked emails:', error);
-    }
-    setIsLoading(false);
-  }, [getService]);
-
-  const updateEmailInList = (updatedEmail: MaskedEmail) => {
-    setMaskedEmails((prevEmails) =>
-      prevEmails.map((email) =>
-        email.id === updatedEmail.id ? updatedEmail : email
-      )
-    );
-  };
-  const addNewEmailToEmailList = (newEmail: MaskedEmail) => {
-    setMaskedEmails((prevEmails) => [newEmail, ...prevEmails]);
-  };
-  const removeEmailFromEmailList = (emailToRemove: MaskedEmail) => {
-    setMaskedEmails((prevEmails) =>
-      prevEmails.filter((email) => email.id !== emailToRemove.id)
-    );
-  };
-
-  useEffect(() => {
-    refreshMaskedEmails();
-  }, [refreshMaskedEmails]);
-
   return (
     <div className="bg-astronaut h-[400px] w-[600px]">
       <TopComponent
         onSearchChange={setSearchQuery}
         onRefresh={refreshMaskedEmails}
-        onLogout={onLogout}
-        addNewEmailToEmailList={addNewEmailToEmailList}
-        setSelectedEmail={setSelectedEmail}
-        activeTabUrl={url}
         openLogoutConfirmationModal={openLogoutConfirmationModal}
-        closeLogoutConfirmationModal={closeLogoutConfirmationModal}
         openCreateEmailModal={openCreateEmailModal}
-        closeCreateEmailModal={closeCreateEmailModal}
       />
       {showLogoutConfirmationModal && (
         <LogoutConfirmationModal
