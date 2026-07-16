@@ -29,6 +29,7 @@ test('loads the unpacked extension popup', async () => {
       `chrome-extension://${extensionId}/src/pages/popup/index.html`
     );
 
+    await expect(popup.getByTestId('login-view')).toBeVisible();
     await expect(
       popup.getByRole('heading', { name: 'Masked Email Manager' })
     ).toBeVisible();

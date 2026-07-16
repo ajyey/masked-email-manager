@@ -39,6 +39,7 @@ function SearchBar({ onSearchChange }: Props) {
       <input
         type="text"
         id="simple-search"
+        aria-label="Search masked emails"
         className="bg-big-stone text-sm text-white rounded-[5px] w-full pl-10 h-[30px] items-center p-2.5 focus:outline-hidden"
         placeholder="Search Masked Emails..."
         style={{ caretColor: 'white' }}
@@ -47,8 +48,10 @@ function SearchBar({ onSearchChange }: Props) {
       ></input>
       {searchQuery && (
         <button
+          type="button"
           className="absolute inset-y-0 right-0 flex items-center pr-3"
           onClick={clearSearch}
+          aria-label="Clear search"
         >
           <svg
             aria-hidden="true"

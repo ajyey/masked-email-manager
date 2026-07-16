@@ -31,7 +31,7 @@ function EmailList({
 }: Props) {
   // Keep track of the filtered emails
   const [filteredEmails, setFilteredEmails] = useState<MaskedEmail[]>([]);
-  const selectedEmailRef = useRef<HTMLDivElement | null>(null);
+  const selectedEmailRef = useRef<HTMLLIElement | null>(null);
 
   // This effect is triggered when the selectedEmail or filteredEmails change to handle scrolling the currently selected email into view
   // The email will be scrolled into view when the selectedEmail or filteredEmails change, the latter of which is useful for when the user
@@ -140,7 +140,11 @@ function EmailList({
 
   return (
     <div className="h-[310px] overflow-y-auto overflow-x-hidden scrollbar pt-2 pb-2">
-      <ul className="flex flex-col space-y-2 w-full">
+      <ul
+        className="flex flex-col space-y-2 w-full"
+        role="listbox"
+        aria-label="Masked emails"
+      >
         {searchResults.map((result) => {
           const maskedEmail: MaskedEmail = isFuseResult(result)
             ? result.item

@@ -58,6 +58,10 @@ function FilterEmailsDropdown({
         className="text-white focus:outline-hidden font-medium rounded-lg text-sm px-4 py-1 inline-flex items-center w-[98%] ml-1 mr-1 hover:bg-big-stone/[0.75]"
         type="button"
         onClick={toggleDropdown}
+        aria-label={`Filter masked emails: ${selectedOption.value}`}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls="filter-options"
       >
         {selectedOption.icon}
         {selectedOption.value}
@@ -66,10 +70,15 @@ function FilterEmailsDropdown({
       {/*Render the dropdown conditionally*/}
       {isOpen && (
         <div
-          id="dropdownOptionsContainer"
+          id="filter-options-container"
           className="absolute top-full w-full mt-1 rounded-lg text-white"
         >
-          <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg ml-1">
+          <ul
+            id="filter-options"
+            role="listbox"
+            aria-label="Masked email filter"
+            className="p-1 space-y-1 text-sm bg-big-stone rounded-lg ml-1"
+          >
             {Object.keys(FILTER_OPTIONS).map((option) => {
               const key = option as keyof typeof FILTER_OPTIONS;
               const filterOption = FILTER_OPTIONS[key];

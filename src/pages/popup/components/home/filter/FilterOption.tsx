@@ -51,8 +51,17 @@ export const FilterOption = ({
   onClick: () => void;
 }) => (
   <li
+    role="option"
+    aria-selected={isSelected}
+    tabIndex={0}
     className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg p-2"
     onClick={onClick}
+    onKeyDown={(event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        onClick();
+      }
+    }}
   >
     {item.icon}
     <span className="text-sm font-medium">{item.value}</span>
