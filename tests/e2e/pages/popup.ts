@@ -16,6 +16,15 @@ export class PopupPage {
     await expect(this.page.getByTestId('home-view')).toBeVisible();
   }
 
+  async logout() {
+    await this.page.getByRole('button', { name: 'Settings' }).click();
+    await this.page.getByRole('menuitem', { name: 'Logout' }).click();
+    await this.page
+      .getByRole('dialog', { name: 'Logout' })
+      .getByRole('button', { name: 'Logout', exact: true })
+      .click();
+  }
+
   emailOption(address: string, state: string) {
     return this.page.getByRole('option', {
       name: `${address}, ${state}`

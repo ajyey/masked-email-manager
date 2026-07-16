@@ -78,3 +78,46 @@ test('restores authentication from synchronized storage after reload', async ({
   ).toBeVisible();
   expect(fastmail.calls('session')).toHaveLength(2);
 });
+
+test('clears an invalid stored token and returns to login', async ({
+  extension,
+  popup,
+  popupPage
+}) => {
+  await extension.setStorage(popup, {
+    fastmail_api_token: 'invalid-stored-token',
+    fastmail_session: { accountId: 'stale-account' }
+  });
+  extension.expectConsoleError(
+    /Failed to load resource: the server responded with a status of 401/
+  );
+
+  await popup.reload();
+  await popupPage.expectLogin();
+
+  const storage = await extension.getStorage(popup);
+  expect(storage.fastmail_api_token).toBeUndefined();
+  expect(storage.fastmail_session).toBeUndefined();
+});
+
+test('logout removes authentication and preserves preferences', async ({
+  extension,
+  popup,
+  popupPage
+}) => {
+  await popupPage.login();
+  await popupPage.expectHome();
+  await extension.setStorage(popup, {
+    favorite_emails: ['enabled-favorite'],
+    default_filter: 'Favorites'
+  });
+
+  await popupPage.logout();
+  await popupPage.expectLogin();
+
+  const storage = await extension.getStorage(popup);
+  expect(storage.fastmail_api_token).toBeUndefined();
+  expect(storage.fastmail_session).toBeUndefined();
+  expect(storage.favorite_emails).toEqual(['enabled-favorite']);
+  expect(storage.default_filter).toBe('Favorites');
+});
