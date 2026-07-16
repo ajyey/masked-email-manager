@@ -9,6 +9,8 @@ import { resolve } from 'node:path';
 export class ExtensionHarness {
   private consoleErrors: string[] = [];
   private pageErrors: string[] = [];
+  private failedRequests: string[] = [];
+  private unexpectedRequests: string[] = [];
   private expectedConsoleErrors: RegExp[] = [];
 
   private constructor(
@@ -28,11 +30,24 @@ export class ExtensionHarness {
     );
     const context = await chromium.launchPersistentContext('', {
       channel: 'chromium',
-      headless: true,
+      headless: process.env.E2E_HEADED !== '1',
       args: [
         `--disable-extensions-except=${extensionPath}`,
         `--load-extension=${extensionPath}`
       ]
+    });
+    await context.addInitScript(() => {
+      let clipboardValue = '';
+      Object.defineProperty(navigator, 'clipboard', {
+        configurable: true,
+        value: {
+          readText: () => Promise.resolve(clipboardValue),
+          writeText: (value: string) => {
+            clipboardValue = value;
+            return Promise.resolve();
+          }
+        }
+      });
     });
 
     const extensionsPage = await context.newPage();
@@ -74,6 +89,10 @@ export class ExtensionHarness {
     await page.evaluate((items) => chrome.storage.sync.set(items), values);
   }
 
+  async readClipboard(page: Page) {
+    return page.evaluate(() => navigator.clipboard.readText());
+  }
+
   expectConsoleError(pattern: RegExp) {
     this.expectedConsoleErrors.push(pattern);
   }
@@ -95,6 +114,11 @@ export class ExtensionHarness {
     ).toEqual([]);
     expect(unexpectedErrors, 'Unexpected popup console errors').toEqual([]);
     expect(this.pageErrors, 'Unexpected popup page errors').toEqual([]);
+    expect(this.failedRequests, 'Unexpected failed popup requests').toEqual([]);
+    expect(
+      this.unexpectedRequests,
+      'Unexpected external popup requests'
+    ).toEqual([]);
   }
 
   async close() {
@@ -106,5 +130,21 @@ export class ExtensionHarness {
       if (message.type() === 'error') this.consoleErrors.push(message.text());
     });
     page.on('pageerror', (error) => this.pageErrors.push(error.message));
+    page.on('requestfailed', (request) => {
+      this.failedRequests.push(
+        `${request.method()} ${request.url()}: ${request.failure()?.errorText}`
+      );
+    });
+    page.on('request', (request) => {
+      const url = request.url();
+      if (
+        !url.startsWith(this.origin) &&
+        !url.startsWith('https://api.fastmail.com/') &&
+        !url.startsWith('data:') &&
+        !url.startsWith('blob:')
+      ) {
+        this.unexpectedRequests.push(`${request.method()} ${url}`);
+      }
+    });
   }
 }
