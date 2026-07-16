@@ -14,9 +14,6 @@ const manifest: Manifest.WebExtensionManifest = {
   name: pkg.displayName,
   version: sanitizeManifestVersion(pkg.version),
   description: pkg.description,
-  options_ui: {
-    page: 'src/pages/options/index.html'
-  },
   action: {
     default_popup: 'src/pages/popup/index.html',
     default_icon: 'icon34.png'

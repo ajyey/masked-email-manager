@@ -51,6 +51,10 @@ async function verifyOutput({ directory, firefox }) {
       !manifest.permissions.includes('tabs'),
     `${outputName}: unexpected extension permissions`
   );
+  assert(
+    manifest.options_ui === undefined,
+    `${outputName}: unexpected options page declaration`
+  );
 
   const manifestGeckoId = manifest.browser_specific_settings?.gecko?.id;
   assert(
@@ -60,14 +64,12 @@ async function verifyOutput({ directory, firefox }) {
 
   const requiredFiles = new Set([
     manifest.action?.default_popup,
-    manifest.options_ui?.page,
     manifest.action?.default_icon,
     ...Object.values(manifest.icons ?? {}),
     ...(manifest.web_accessible_resources ?? []).flatMap(
       ({ resources }) => resources
     ),
-    'src/pages/popup/index.js',
-    'src/pages/options/index.js'
+    'src/pages/popup/index.js'
   ]);
 
   for (const file of requiredFiles) {
@@ -79,6 +81,10 @@ async function verifyOutput({ directory, firefox }) {
   }
 
   const outputFiles = await readdir(outputPath, { recursive: true });
+  assert(
+    !outputFiles.some((file) => file.includes('pages/options')),
+    `${outputName}: unexpected options page bundle`
+  );
   const unexpectedFiles = outputFiles.filter((file) =>
     /\.(map|zip|xpi)$/.test(file)
   );

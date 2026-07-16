@@ -12,7 +12,7 @@
 
 ## Extension Structure
 
-- Vite's root is `src/` and it has two HTML entrypoints: `src/pages/popup/index.html` and `src/pages/options/index.html`. The popup is the real application; the options page is currently only a placeholder.
+- Vite's root is `src/`; the extension application entrypoint is `src/pages/popup/index.html`.
 - `src/contexts/AuthContext.tsx` owns login state. `src/service.ts` lazily initializes the `fastmail-masked-email` client, while `utils/storageUtil.ts` persists the API token, session, favorites, and default filter in `browser.storage.sync`.
 - Import aliases are shared by `tsconfig.json` and `vite.config.ts`: `@src`, `@assets`, and `@pages`.
 

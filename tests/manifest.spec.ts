@@ -22,11 +22,11 @@ describe('extension manifest', () => {
     vi.resetModules();
   });
 
-  it('uses the popup and options build entrypoints', async () => {
+  it('uses the popup entrypoint without a placeholder options page', async () => {
     const manifest = await loadManifest();
 
     expect(manifest.action?.default_popup).toBe('src/pages/popup/index.html');
-    expect(manifest.options_ui?.page).toBe('src/pages/options/index.html');
+    expect(manifest.options_ui).toBeUndefined();
   });
 
   it('normalizes prerelease versions for browser manifests', async () => {
