@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FavoriteButton from '@pages/popup/components/home/detail/buttons/FavoriteButton';
 import {
   getFavoriteEmailIds,

@@ -1,4 +1,3 @@
-import React from 'react';
 import { MaskedEmail } from 'fastmail-masked-email';
 import { WarningIcon } from '@pages/popup/components/home/icons/icons';
 

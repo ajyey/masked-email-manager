@@ -1,4 +1,3 @@
-import React from 'react';
 import { LogoutIcon } from '@pages/popup/components/home/icons/icons';
 
 interface LogoutConfirmationModalProps {

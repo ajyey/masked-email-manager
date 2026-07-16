@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import SearchBar from '@pages/popup/components/home/top/SearchBar';
 import SettingsDropdown from '@pages/popup/components/home/top/SettingsDropdown';
 import { MaskedEmail } from 'fastmail-masked-email';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MaskedEmail, MaskedEmailService } from 'fastmail-masked-email';
 import { toast } from 'react-hot-toast';
 import {

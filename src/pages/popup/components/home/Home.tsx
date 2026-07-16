@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import EmailList from '@pages/popup/components/home/emails/EmailList';
 import EmailDetailPane from '@pages/popup/components/home/detail/EmailDetailPane';
 import { MaskedEmail } from 'fastmail-masked-email';
@@ -91,7 +91,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
     fetchDefaultFilter();
   }, []);
 
-  const refreshMaskedEmails = async () => {
+  const refreshMaskedEmails = useCallback(async () => {
     setIsLoading(true);
     try {
       const service = await getService();
@@ -101,7 +101,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
       console.error('Error fetching masked emails:', error);
     }
     setIsLoading(false);
-  };
+  }, [getService]);
 
   const updateEmailInList = (updatedEmail: MaskedEmail) => {
     setMaskedEmails((prevEmails) =>
@@ -121,7 +121,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
 
   useEffect(() => {
     refreshMaskedEmails();
-  }, []);
+  }, [refreshMaskedEmails]);
 
   return (
     <div className="bg-astronaut h-[400px] w-[600px]">

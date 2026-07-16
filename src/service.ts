@@ -50,7 +50,7 @@ export async function getMaskedEmailService(): Promise<MaskedEmailService> {
       maskedEmailService = new MaskedEmailService(storedApiToken);
       await maskedEmailService.initialize();
       return maskedEmailService;
-    } catch (error) {
+    } catch {
       // If token is invalid, clear stored session
       await clearAuthenticationState();
       throw new Error('Stored API token is invalid. Please login again.');
