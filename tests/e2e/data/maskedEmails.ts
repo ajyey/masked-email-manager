@@ -13,8 +13,8 @@ export const maskedEmails = {
     id: 'enabled-alpha',
     email: 'alpha@masked.example',
     state: 'enabled',
-    forDomain: 'https://alpha.example',
-    description: 'Alpha account'
+    forDomain: 'https://primary.example',
+    description: 'Primary account'
   },
   enabledFavorite: {
     ...baseEmail,
@@ -48,6 +48,30 @@ export const maskedEmails = {
     forDomain: 'https://protected.example',
     description: 'Protected account',
     lastMessageAt: '2026-01-02T12:00:00Z'
+  },
+  searchDomain: {
+    ...baseEmail,
+    id: 'search-domain',
+    email: 'domain-search@masked.example',
+    state: 'enabled',
+    forDomain: 'https://unique-domain.test',
+    description: 'Domain search account'
+  },
+  searchDescription: {
+    ...baseEmail,
+    id: 'search-description',
+    email: 'description-search@masked.example',
+    state: 'disabled',
+    forDomain: 'https://description.example',
+    description: 'Unique ledger description'
+  },
+  searchId: {
+    ...baseEmail,
+    id: 'search-id-needle',
+    email: 'id-search@masked.example',
+    state: 'enabled',
+    forDomain: 'https://id.example',
+    description: 'ID search account'
   }
 } satisfies Record<string, E2EMaskedEmail>;
 

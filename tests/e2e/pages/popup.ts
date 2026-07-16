@@ -25,6 +25,46 @@ export class PopupPage {
       .click();
   }
 
+  async search(query: string) {
+    await this.page
+      .getByRole('textbox', { name: 'Search masked emails' })
+      .fill(query);
+  }
+
+  async clearSearch() {
+    await this.page.getByRole('button', { name: 'Clear search' }).click();
+  }
+
+  async selectFilter(filter: string) {
+    await this.page
+      .getByRole('button', { name: /Filter masked emails:/ })
+      .click();
+    await this.page
+      .getByRole('listbox', { name: 'Masked email filter' })
+      .getByRole('option', { name: filter, exact: true })
+      .click();
+  }
+
+  emailList() {
+    return this.page.getByRole('listbox', { name: 'Masked emails' });
+  }
+
+  emailOptions() {
+    return this.emailList().getByRole('option');
+  }
+
+  filterButton(filter: string) {
+    return this.page.getByRole('button', {
+      name: `Filter masked emails: ${filter}`
+    });
+  }
+
+  emailCount(count: number) {
+    return this.page.getByLabel(
+      `${count} masked ${count === 1 ? 'email' : 'emails'}`
+    );
+  }
+
   emailOption(address: string, state: string) {
     return this.page.getByRole('option', {
       name: `${address}, ${state}`
