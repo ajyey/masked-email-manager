@@ -16,6 +16,11 @@ interface Failure {
   body: string;
 }
 
+interface SetFailure {
+  type: string;
+  description: string;
+}
+
 const accountId = 'e2e-account';
 const coreCapability = 'urn:ietf:params:jmap:core';
 const maskedEmailCapability = 'https://www.fastmail.com/dev/maskedemail';
@@ -24,6 +29,7 @@ export class FastmailMock {
   private emails = new Map<string, E2EMaskedEmail>();
   private failures = new Map<FastmailOperation, Failure[]>();
   private delays = new Map<FastmailOperation, Promise<void>[]>();
+  private setFailures = new Map<FastmailOperation, SetFailure[]>();
   private recordedCalls: RecordedCall[] = [];
   private createCounter = 0;
 
@@ -56,6 +62,15 @@ export class FastmailMock {
     delays.push(delay);
     this.delays.set(operation, delays);
     return release;
+  }
+
+  failNextSet(
+    operation: Exclude<FastmailOperation, 'session' | 'get'>,
+    description = 'E2E operation failure'
+  ) {
+    const failures = this.setFailures.get(operation) ?? [];
+    failures.push({ type: 'serverFail', description });
+    this.setFailures.set(operation, failures);
   }
 
   calls(operation: FastmailOperation) {
@@ -185,6 +200,21 @@ export class FastmailMock {
       return;
     }
 
+    const setFailure = this.takeSetFailure(operation);
+    if (setFailure) {
+      await this.fulfillJson(route, {
+        methodResponses: [
+          [
+            'MaskedEmail/set',
+            this.createSetFailureResponse(operation, arguments_, setFailure),
+            callId
+          ]
+        ],
+        sessionState: 'e2e-session-state'
+      });
+      return;
+    }
+
     const response =
       operation === 'create'
         ? this.createEmail(arguments_)
@@ -297,6 +327,34 @@ export class FastmailMock {
     const delays = this.delays.get(operation);
     const delay = delays?.shift();
     if (delay) await delay;
+  }
+
+  private takeSetFailure(operation: FastmailOperation) {
+    const failures = this.setFailures.get(operation);
+    return failures?.shift();
+  }
+
+  private createSetFailureResponse(
+    operation: FastmailOperation,
+    arguments_: Record<string, unknown>,
+    failure: SetFailure
+  ) {
+    const failureKey =
+      operation === 'create'
+        ? 'notCreated'
+        : operation === 'update'
+          ? 'notUpdated'
+          : 'notDestroyed';
+    const ids =
+      operation === 'destroy'
+        ? (arguments_.destroy as string[])
+        : Object.keys(arguments_[operation] as Record<string, unknown>);
+    return {
+      accountId,
+      oldState: 'e2e-email-state',
+      newState: 'e2e-email-state',
+      [failureKey]: Object.fromEntries(ids.map((id) => [id, failure]))
+    };
   }
 
   private async fulfillJson(route: Route, body: unknown) {
