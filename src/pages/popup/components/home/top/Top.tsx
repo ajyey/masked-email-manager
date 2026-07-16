@@ -53,6 +53,7 @@ export default function TopComponent({
           className="text-white focus:outline-hidden"
           onClick={handleRefresh}
           disabled={isRefreshing}
+          aria-label="Refresh masked emails"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
