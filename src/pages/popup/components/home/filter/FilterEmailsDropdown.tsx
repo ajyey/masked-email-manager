@@ -71,7 +71,7 @@ function FilterEmailsDropdown({
       {isOpen && (
         <div
           id="filter-options-container"
-          className="absolute top-full w-full mt-1 rounded-lg text-white"
+          className="absolute z-10 top-full w-full mt-1 rounded-lg text-white"
         >
           <ul
             id="filter-options"
