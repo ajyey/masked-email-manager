@@ -27,11 +27,10 @@ export default defineConfig({
   build: {
     outDir: isFirefox ? firefoxOutDir : outDir,
     sourcemap: process.env.__DEV__ === 'true',
-    emptyOutDir: false,
+    emptyOutDir: true,
     rollupOptions: {
       input: {
-        popup: resolve(pagesDir, 'popup', 'index.html'),
-        options: resolve(pagesDir, 'options', 'index.html')
+        popup: resolve(pagesDir, 'popup', 'index.html')
       },
       output: {
         entryFileNames: (chunk) => `src/pages/${chunk.name}/index.js`

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const LoadingComponent = () => (
   <div className="flex justify-center items-center h-[310px] align-middle">
     <div role="loading-status">

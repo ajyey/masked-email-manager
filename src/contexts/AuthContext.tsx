@@ -1,9 +1,9 @@
-import React, {
+import {
   createContext,
   useContext,
   useState,
   useEffect,
-  ReactNode
+  type ReactNode
 } from 'react';
 import { MaskedEmailService } from 'fastmail-masked-email';
 import {
@@ -12,7 +12,6 @@ import {
   clearAuthenticationState,
   isUserAuthenticated
 } from '@src/service';
-import { clearStorage } from '../../utils/storageUtil';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -59,7 +58,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const logout = async () => {
-    await clearStorage();
     await clearAuthenticationState();
     setIsAuthenticated(false);
   };

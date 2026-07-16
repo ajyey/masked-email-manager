@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { DropdownButtonIcon } from '@pages/popup/components/home/icons/icons';
 import {
   FILTER_OPTIONS,
