@@ -4,8 +4,8 @@
 
 - Use Yarn 4 (`yarn.lock` format); `yarn install` also applies the checked-in `patch-package` patch required by the Firefox release plugin.
 - Use Node 24, as pinned by `.nvmrc`, `package.json`, and CI.
-- `yarn lint` is not read-only: ESLint runs with `--fix` on `src/**/*.ts(x)` and Prettier rewrites `src/**/*.html`. Inspect its diff.
-- There is no test suite or `test` script. Use `yarn tsc --noEmit` for a non-mutating type check, then `yarn build` for the CI-equivalent lint plus both production builds.
+- `yarn lint` is read-only; use `yarn lint:fix` to rewrite TypeScript and HTML files.
+- There is no test suite or `test` script. Use `yarn typecheck` for a focused type check or `yarn check` for the CI-equivalent lint, typecheck, and both production builds.
 - Build one target with `yarn build:production:chrome` or `yarn build:production:firefox`. Outputs are `dist/` and `dist-firefox/`, respectively.
 - `yarn dev` is a Nodemon packaging loop, not a Vite dev server: each change builds Chrome and Firefox, normalizes manifest versions, and creates `dist-firefox/dist.zip`.
 

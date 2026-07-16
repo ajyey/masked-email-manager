@@ -12,7 +12,11 @@ import {
 
 export const getFavoriteEmailIds = async (): Promise<string[]> => {
   const data = await browser.storage.sync.get(FAVORITE_EMAILS_KEY);
-  return data[FAVORITE_EMAILS_KEY] || [];
+  const favoriteEmailIds = data[FAVORITE_EMAILS_KEY];
+  return Array.isArray(favoriteEmailIds) &&
+    favoriteEmailIds.every((emailId) => typeof emailId === 'string')
+    ? favoriteEmailIds
+    : [];
 };
 
 export const setFavoriteEmailIds = async (
@@ -24,7 +28,7 @@ export const setFavoriteEmailIds = async (
 export const getApiToken = async (): Promise<string | null> => {
   const data = await browser.storage.sync.get(FASTMAIL_API_TOKEN_KEY);
   const token = data[FASTMAIL_API_TOKEN_KEY];
-  return token && token.trim() !== '' ? token : null;
+  return typeof token === 'string' && token.trim() !== '' ? token : null;
 };
 
 export const setApiToken = async (apiToken: string): Promise<void> => {
@@ -33,7 +37,8 @@ export const setApiToken = async (apiToken: string): Promise<void> => {
 
 export const getSession = async (): Promise<object | null> => {
   const data = await browser.storage.sync.get(FASTMAIL_SESSION_KEY);
-  return data[FASTMAIL_SESSION_KEY] || null;
+  const session = data[FASTMAIL_SESSION_KEY];
+  return typeof session === 'object' && session !== null ? session : null;
 };
 
 export const setSession = async (session: object): Promise<void> => {
@@ -42,8 +47,10 @@ export const setSession = async (session: object): Promise<void> => {
 
 export const getDefaultFilter = async (): Promise<FilterOption> => {
   const data = await browser.storage.sync.get(DEFAULT_FILTER_KEY);
-  const value = data[DEFAULT_FILTER_KEY] || 'All';
-  return FILTER_OPTIONS[value] || FILTER_OPTIONS.All;
+  const value = data[DEFAULT_FILTER_KEY];
+  return typeof value === 'string'
+    ? FILTER_OPTIONS[value] || FILTER_OPTIONS.All
+    : FILTER_OPTIONS.All;
 };
 
 export const setDefaultFilter = async (filter: FilterOption): Promise<void> => {

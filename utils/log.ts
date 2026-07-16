@@ -44,5 +44,5 @@ const COLORS = {
   BgBlue: '\x1b[44m',
   BgMagenta: '\x1b[45m',
   BgCyan: '\x1b[46m',
-  BgWhite: '\x1b[47m',
+  BgWhite: '\x1b[47m'
 } as const;
