@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ['dist/**', 'dist-firefox/**', 'public/manifest.json']
+    ignores: ['dist/**', 'dist-firefox/**']
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
