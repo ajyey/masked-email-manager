@@ -56,7 +56,3 @@ export const getDefaultFilter = async (): Promise<FilterOption> => {
 export const setDefaultFilter = async (filter: FilterOption): Promise<void> => {
   await browser.storage.sync.set({ [DEFAULT_FILTER_KEY]: filter.value });
 };
-
-export const clearStorage = async (): Promise<void> => {
-  await browser.storage.sync.clear();
-};

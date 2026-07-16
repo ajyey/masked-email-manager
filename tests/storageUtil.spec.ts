@@ -8,7 +8,6 @@ import {
 } from '../utils/constants/constants';
 
 const storage = vi.hoisted(() => ({
-  clear: vi.fn<() => Promise<void>>(),
   get: vi.fn<(key: string) => Promise<Record<string, unknown>>>(),
   set: vi.fn<(items: Record<string, unknown>) => Promise<void>>()
 }));
@@ -18,7 +17,6 @@ vi.mock('webextension-polyfill', () => ({
 }));
 
 import {
-  clearStorage,
   getApiToken,
   getDefaultFilter,
   getFavoriteEmailIds,
@@ -35,7 +33,6 @@ describe('storage utilities', () => {
     vi.resetAllMocks();
     storage.get.mockResolvedValue({});
     storage.set.mockResolvedValue();
-    storage.clear.mockResolvedValue();
   });
 
   it('reads favorite email IDs and rejects malformed values', async () => {
@@ -101,10 +98,5 @@ describe('storage utilities', () => {
     expect(storage.set).toHaveBeenNthCalledWith(4, {
       [DEFAULT_FILTER_KEY]: 'Enabled'
     });
-  });
-
-  it('clears synchronized storage', async () => {
-    await clearStorage();
-    expect(storage.clear).toHaveBeenCalledOnce();
   });
 });
