@@ -9,6 +9,7 @@ import { resolve } from 'node:path';
 export class ExtensionHarness {
   private consoleErrors: string[] = [];
   private pageErrors: string[] = [];
+  private expectedConsoleErrors: RegExp[] = [];
 
   private constructor(
     readonly context: BrowserContext,
@@ -73,8 +74,26 @@ export class ExtensionHarness {
     await page.evaluate((items) => chrome.storage.sync.set(items), values);
   }
 
+  expectConsoleError(pattern: RegExp) {
+    this.expectedConsoleErrors.push(pattern);
+  }
+
   assertNoUnexpectedErrors() {
-    expect(this.consoleErrors, 'Unexpected popup console errors').toEqual([]);
+    const unexpectedErrors = [...this.consoleErrors];
+    const missingErrors: string[] = [];
+    for (const pattern of this.expectedConsoleErrors) {
+      const index = unexpectedErrors.findIndex((error) => pattern.test(error));
+      if (index === -1) {
+        missingErrors.push(pattern.toString());
+      } else {
+        unexpectedErrors.splice(index, 1);
+      }
+    }
+    expect(
+      missingErrors,
+      'Expected popup console errors were not logged'
+    ).toEqual([]);
+    expect(unexpectedErrors, 'Unexpected popup console errors').toEqual([]);
     expect(this.pageErrors, 'Unexpected popup page errors').toEqual([]);
   }
 

@@ -2,11 +2,13 @@ import { test as base, expect, type Page } from '@playwright/test';
 
 import { ExtensionHarness } from './extension';
 import { FastmailMock } from './fastmail';
+import { PopupPage } from '../pages/popup';
 
 interface E2EFixtures {
   extension: ExtensionHarness;
   fastmail: FastmailMock;
   popup: Page;
+  popupPage: PopupPage;
 }
 
 export const test = base.extend<E2EFixtures>({
@@ -28,6 +30,9 @@ export const test = base.extend<E2EFixtures>({
     const popup = await extension.openPopup();
     await provide(popup);
     await popup.close();
+  },
+  popupPage: async ({ popup }, provide) => {
+    await provide(new PopupPage(popup));
   }
 });
 

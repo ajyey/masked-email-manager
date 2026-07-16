@@ -23,6 +23,7 @@ const maskedEmailCapability = 'https://www.fastmail.com/dev/maskedemail';
 export class FastmailMock {
   private emails = new Map<string, E2EMaskedEmail>();
   private failures = new Map<FastmailOperation, Failure[]>();
+  private delays = new Map<FastmailOperation, Promise<void>[]>();
   private recordedCalls: RecordedCall[] = [];
   private createCounter = 0;
 
@@ -44,6 +45,17 @@ export class FastmailMock {
     const failures = this.failures.get(operation) ?? [];
     failures.push({ status, body });
     this.failures.set(operation, failures);
+  }
+
+  delayNext(operation: FastmailOperation) {
+    let release!: () => void;
+    const delay = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const delays = this.delays.get(operation) ?? [];
+    delays.push(delay);
+    this.delays.set(operation, delays);
+    return release;
   }
 
   calls(operation: FastmailOperation) {
@@ -82,6 +94,7 @@ export class FastmailMock {
   private async handleSession(route: Route, request: Request) {
     const token = this.getToken(request);
     this.recordedCalls.push({ operation: 'session', token });
+    await this.waitForDelay('session');
 
     const failure = this.takeFailure('session');
     if (failure || token !== 'valid-e2e-token') {
@@ -131,6 +144,7 @@ export class FastmailMock {
     const operation = this.getOperation(method, arguments_);
     const token = this.getToken(request);
     this.recordedCalls.push({ operation, body, token });
+    await this.waitForDelay(operation);
 
     if (token !== 'valid-e2e-token') {
       await this.fulfillFailure(route, { status: 401, body: 'Unauthorized' });
@@ -277,6 +291,12 @@ export class FastmailMock {
   private takeFailure(operation: FastmailOperation) {
     const failures = this.failures.get(operation);
     return failures?.shift();
+  }
+
+  private async waitForDelay(operation: FastmailOperation) {
+    const delays = this.delays.get(operation);
+    const delay = delays?.shift();
+    if (delay) await delay;
   }
 
   private async fulfillJson(route: Route, body: unknown) {
