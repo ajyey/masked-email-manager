@@ -76,3 +76,20 @@ Check out the (soon to be updated) [wiki](https://github.com/ajyey/masked-email-
 See [End-to-End Testing Improvements](docs/e2e-testing-implementation.md) for
 local commands, test architecture, CI behavior, browser strategies, and the
 manual Chrome and Firefox release checks.
+
+To run the local-only extension suite against a real Fastmail account, provide
+an API token with masked email JMAP access:
+
+```bash
+JMAP_TOKEN='your-fastmail-api-token' yarn test:e2e:live
+```
+
+To watch the live test run in Chromium:
+
+```bash
+JMAP_TOKEN='your-fastmail-api-token' E2E_HEADED=1 yarn test:e2e:live
+```
+
+This test creates, updates, and deletes a uniquely marked masked email. It is
+blocked in CI and attempts to clean up its records even when a test fails. See
+the E2E guide above for headed mode, artifact, and cleanup details.

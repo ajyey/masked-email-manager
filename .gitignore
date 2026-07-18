@@ -381,6 +381,7 @@ $RECYCLE.BIN/
 /coverage
 /playwright-report
 /test-results
+/test-results-live
 
 # build
 /dist
