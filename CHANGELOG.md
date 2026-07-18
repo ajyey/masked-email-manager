@@ -1,3 +1,12 @@
+## [1.7.7](https://github.com/ajyey/masked-email-manager/compare/v1.7.6...v1.7.7) (2026-07-18)
+
+
+### Bug Fixes
+
+* add back google publisher id ([d18c678](https://github.com/ajyey/masked-email-manager/commit/d18c67825b9983a94645a9088375dd0f9a7c5b3c))
+* keep filter menu above email list ([a0ce991](https://github.com/ajyey/masked-email-manager/commit/a0ce991df38d4a960f3e59c6570edea99218d752))
+* preserve newly created email selection ([b5ce4c1](https://github.com/ajyey/masked-email-manager/commit/b5ce4c1e006ff0a508349cba899ecd858ae1d6c9))
+
 ## [1.7.6](https://github.com/ajyey/masked-email-manager/compare/v1.7.5...v1.7.6) (2026-07-16)
 
 
