@@ -29,9 +29,16 @@ function EmailList({
   selectedEmail,
   setIsEditing
 }: Props) {
-  // Keep track of the filtered emails
-  const [filteredEmails, setFilteredEmails] = useState<MaskedEmail[]>([]);
-  const selectedEmailRef = useRef<HTMLDivElement | null>(null);
+  const [favoriteEmails, setFavoriteEmails] = useState<MaskedEmail[]>([]);
+  const selectedEmailRef = useRef<HTMLLIElement | null>(null);
+  const filteredEmails =
+    filter === FILTER_OPTIONS.Favorites
+      ? favoriteEmails
+      : filter === FILTER_OPTIONS.All
+        ? maskedEmails
+        : maskedEmails.filter(
+            (email: MaskedEmail) => email.state === filter.value.toLowerCase()
+          );
 
   // This effect is triggered when the selectedEmail or filteredEmails change to handle scrolling the currently selected email into view
   // The email will be scrolled into view when the selectedEmail or filteredEmails change, the latter of which is useful for when the user
@@ -47,48 +54,18 @@ function EmailList({
     }
   }, [filteredEmails]);
 
-  // Filter the emails based on the filter prop
   useEffect(() => {
-    // Helper function to filter emails based on the filter option
-    const filterEmails = (filterOption: FilterOption): MaskedEmail[] => {
-      switch (filterOption) {
-        case FILTER_OPTIONS.All:
-        case FILTER_OPTIONS.Favorites:
-          // If the filter is 'All' or 'Favorites', return all emails
-          return maskedEmails;
-        default:
-          // Otherwise, filter emails based on the state
-          return maskedEmails.filter(
-            (email: MaskedEmail) =>
-              email.state === filterOption.value.toLowerCase()
-          );
-      }
-    };
-
-    // Helper function to filter emails that are marked as favorites
-    const filterFavoriteEmails = async () => {
-      const favoritedEmails = await getFavoriteEmailIds();
-      // Filter emails that are in the list of favorited emails
-      return maskedEmails.filter((email: MaskedEmail) =>
-        favoritedEmails.includes(email.id)
-      );
-    };
-
-    // Main function to apply the filter
-    const applyFilter = async () => {
-      // If the filter is 'Favorites', filter the favorited emails
-      // Otherwise, filter emails based on the filter option
-      const newFilteredEmails =
-        filter === FILTER_OPTIONS.Favorites
-          ? await filterFavoriteEmails()
-          : filterEmails(filter);
-
-      // Update the state with the new filtered emails
-      setFilteredEmails(newFilteredEmails);
-    };
-
-    // Call the main function to apply the filter
-    applyFilter();
+    if (filter === FILTER_OPTIONS.Favorites) {
+      const filterFavoriteEmails = async () => {
+        const favoritedEmails = await getFavoriteEmailIds();
+        setFavoriteEmails(
+          maskedEmails.filter((email: MaskedEmail) =>
+            favoritedEmails.includes(email.id)
+          )
+        );
+      };
+      void filterFavoriteEmails();
+    }
   }, [filter, maskedEmails]);
 
   // Use Fuse.js to perform the fuzzy search
@@ -140,7 +117,11 @@ function EmailList({
 
   return (
     <div className="h-[310px] overflow-y-auto overflow-x-hidden scrollbar pt-2 pb-2">
-      <ul className="flex flex-col space-y-2 w-full">
+      <ul
+        className="flex flex-col space-y-2 w-full"
+        role="listbox"
+        aria-label="Masked emails"
+      >
         {searchResults.map((result) => {
           const maskedEmail: MaskedEmail = isFuseResult(result)
             ? result.item

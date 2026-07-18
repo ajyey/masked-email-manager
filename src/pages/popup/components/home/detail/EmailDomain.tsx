@@ -43,9 +43,10 @@ function EmailDomain({
   return (
     <div className={containerStyle}>
       <div className={'w-full truncate'}>
-        <div
+        <label
           className="ml-2 text-malibu font-normal text-detailLabel inline-flex"
           id="domainLabel"
+          htmlFor="masked-email-domain"
         >
           domain
           {isEditing && (
@@ -53,7 +54,7 @@ function EmailDomain({
               iconClasses={'w-[0.75rem] h-[0.75rem] ml-1 stroke-white mt-1'}
             />
           )}
-        </div>
+        </label>
         <div
           className={`ml-2 mr-2 mb-1 font-normal text-detailValue ${domainLabelColor} truncate`}
         >
@@ -61,6 +62,7 @@ function EmailDomain({
             <input
               className="bg-transparent text-white w-[98%] focus:outline-hidden truncate"
               type="text"
+              id="masked-email-domain"
               value={editedDomain || ''}
               onChange={handleDomainChange}
             />
@@ -72,7 +74,11 @@ function EmailDomain({
         </div>
       </div>
       {!isEditing && emailDomain && (
-        <CopyButton onClick={handleCopyClick} textToCopy={emailDomain} />
+        <CopyButton
+          onClick={handleCopyClick}
+          textToCopy={emailDomain}
+          label="Copy domain"
+        />
       )}
     </div>
   );

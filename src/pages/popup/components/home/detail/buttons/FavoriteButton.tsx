@@ -12,11 +12,14 @@ const FavoriteButton: React.FC<Props> = ({ isFavorited, onClick }) => {
     : 'w-4 h-4 mr-1 stroke-mikado-yellow fill-none';
   return (
     <button
+      type="button"
       className="text-white focus:outline-hidden inline-flex font-medium rounded-lg text-sm px-2 py-1 items-center hover:bg-big-stone/[0.5]"
       onClick={onClick}
+      aria-pressed={isFavorited}
+      aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
     >
       <FavoriteIcon iconClasses={iconClasses} />
-      Favorite
+      {isFavorited ? 'Favorited' : 'Favorite'}
     </button>
   );
 };

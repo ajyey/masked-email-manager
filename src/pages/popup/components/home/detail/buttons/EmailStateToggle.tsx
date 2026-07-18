@@ -21,13 +21,16 @@ const EmailStateToggle: React.FC<EmailStateToggleProps> = ({
   return (
     <div className={'inline-flex'}>
       <label
-        htmlFor="AcceptConditions"
+        htmlFor="masked-email-state"
         className="relative h-6 w-12 cursor-pointer"
       >
+        <span className="sr-only">Masked email enabled</span>
         <input
           type="checkbox"
-          id="AcceptConditions"
+          id="masked-email-state"
+          aria-label="Masked email enabled"
           checked={isChecked}
+          disabled={isDeleted}
           onChange={() =>
             onEmailStateChange(isChecked ? 'disabled' : 'enabled')
           }

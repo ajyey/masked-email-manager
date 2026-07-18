@@ -63,7 +63,11 @@ describe('CreateEmailModal', () => {
 
   it('adds, selects, copies, and closes after successful creation', async () => {
     const props = renderModal();
-    fireEvent.change(screen.getByPlaceholderText('Description'), {
+    expect(screen.getByRole('dialog', { name: 'Create Email' })).toBeTruthy();
+    expect((screen.getByLabelText('Domain') as HTMLInputElement).value).toBe(
+      'https://example.com'
+    );
+    fireEvent.change(screen.getByLabelText('Description'), {
       target: { value: 'Example account' }
     });
     fireEvent.click(screen.getByRole('button', { name: 'Create' }));

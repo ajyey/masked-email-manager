@@ -70,3 +70,9 @@ Install Masked Email Manager using
 
 
 Check out the (soon to be updated) [wiki](https://github.com/ajyey/masked-email-manager/wiki) for more details on how to use Masked Email Manager and its features
+
+# Development and testing
+
+See [End-to-End Testing Improvements](docs/e2e-testing-implementation.md) for
+local commands, test architecture, CI behavior, browser strategies, and the
+manual Chrome and Firefox release checks.

@@ -8,8 +8,12 @@ export default function Popup(): JSX.Element {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen w-screen bg-astronaut text-white">
-        <div>Loading...</div>
+      <div
+        className="flex items-center justify-center h-screen w-screen bg-astronaut text-white"
+        role="status"
+        data-testid="auth-loading"
+      >
+        <div>Loading authentication...</div>
       </div>
     );
   }
@@ -21,7 +25,10 @@ export default function Popup(): JSX.Element {
   };
 
   return (
-    <div className={cssClass}>
+    <div
+      className={cssClass}
+      data-testid={isAuthenticated ? 'home-view' : 'login-view'}
+    >
       {isAuthenticated ? (
         <HomeComponent onLogout={logout} />
       ) : (
