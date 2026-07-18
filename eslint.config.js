@@ -46,7 +46,7 @@ export default tseslint.config(
     }
   },
   {
-    files: ['tests/e2e/fixtures/test.ts'],
+    files: ['tests/e2e/fixtures/test.ts', 'tests/live/fixtures/test.ts'],
     rules: { 'no-empty-pattern': 'off' }
   },
   prettier

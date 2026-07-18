@@ -37,6 +37,29 @@ The normal E2E command builds Chrome first. It intentionally remains separate
 from `yarn check` because browser installation and execution are a distinct CI
 concern.
 
+## Local Live Fastmail Test
+
+An opt-in local suite exercises the production extension against the real
+Fastmail JMAP service. It is separate from normal E2E discovery and is blocked
+when the `CI` environment variable is present.
+
+```bash
+JMAP_TOKEN='your-fastmail-api-token' yarn test:e2e:live
+```
+
+The token must grant access to Fastmail's masked email JMAP capability.
+Set `E2E_HEADED=1` as well to watch the browser. The test authenticates through
+the popup, creates a uniquely marked masked email, edits it, disables and
+enables it, favorites it, soft-deletes it, permanently deletes it, and logs
+out. Server state is verified through direct JMAP requests after each mutation.
+
+The suite removes stale records carrying the dedicated live-test description
+marker before it starts and performs best-effort cleanup in `finally`. Do not
+send mail to an address while the test is running because Fastmail may then
+prevent permanent deletion. Playwright traces and screenshots follow the
+normal local policy and can contain the supplied token or authenticated state;
+keep those artifacts on the local machine.
+
 ## Test Architecture
 
 ### Installed Extension Harness

@@ -30,6 +30,7 @@
     "test:e2e:run": "playwright test",
     "test:e2e:headed": "E2E_HEADED=1 playwright test",
     "test:e2e:debug": "E2E_HEADED=1 PWDEBUG=1 playwright test",
+    "test:e2e:live": "E2E_LIVE_JMAP=1 run-s build:production:chrome test:e2e:run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "dev": "run-p dev:chrome dev:firefox",
