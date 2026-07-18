@@ -18,6 +18,8 @@ interface JmapResponse<T> {
   methodResponses: [string, T, string][];
 }
 
+// Keep verification independent from the client used by the extension so the
+// test can detect client integration regressions and still clean up failures.
 export class LiveFastmail {
   private constructor(
     private readonly token: string,
@@ -103,6 +105,7 @@ export class LiveFastmail {
     const body = (await response.json()) as JmapResponse<T>;
     const methodResponse = body.methodResponses?.[0];
     if (!methodResponse) throw new Error('Fastmail returned no JMAP response.');
+    // JMAP method errors are returned inside successful HTTP responses.
     if (methodResponse[0] === 'error') {
       const error = methodResponse[1] as {
         description?: string;

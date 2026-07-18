@@ -50,8 +50,9 @@ JMAP_TOKEN='your-fastmail-api-token' yarn test:e2e:live
 The token must grant access to Fastmail's masked email JMAP capability.
 Set `E2E_HEADED=1` as well to watch the browser. The test authenticates through
 the popup, creates a uniquely marked masked email, edits it, disables and
-enables it, favorites it, soft-deletes it, permanently deletes it, and logs
-out. Server state is verified through direct JMAP requests after each mutation.
+enables it, verifies it through search, favorites it, soft-deletes it,
+permanently deletes it, and logs out. Server state is verified through direct
+JMAP requests after each mutation.
 
 The suite removes stale records carrying the dedicated live-test description
 marker before it starts and performs best-effort cleanup in `finally`. Do not

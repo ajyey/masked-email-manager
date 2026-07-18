@@ -13,6 +13,7 @@ async function findEmail(
 async function removeEmail(fastmail: LiveFastmail, id: string) {
   const email = await findEmail(fastmail, (candidate) => candidate.id === id);
   if (!email) return;
+  // Fastmail only permits permanent destruction after an address is deleted.
   if (email.state !== 'deleted') {
     await fastmail.updateEmail(id, { state: 'deleted' });
   }
@@ -22,6 +23,7 @@ async function removeEmail(fastmail: LiveFastmail, id: string) {
 async function removeStaleLiveEmails(fastmail: LiveFastmail) {
   const emails = await fastmail.getAllEmails();
   for (const email of emails) {
+    // The reserved marker scopes cleanup to records created by this suite.
     if (email.description.startsWith(liveMarker)) {
       await removeEmail(fastmail, email.id);
     }
@@ -73,6 +75,21 @@ test('manages a masked email against live Fastmail JMAP', async ({
       popupPage.emailOption(createdEmail.email, 'enabled')
     ).toHaveAttribute('aria-selected', 'true');
 
+    // Searching the full address can fuzzy-match every address sharing its
+    // domain, so use the generated local part to target this record.
+    const addressQuery = createdEmail.email.split('@')[0];
+    await popupPage.search(addressQuery);
+    await expect(
+      popup.getByRole('textbox', { name: 'Search masked emails' })
+    ).toHaveValue(addressQuery);
+    await expect(
+      popupPage.emailOption(createdEmail.email, 'enabled')
+    ).toBeVisible();
+    await expect(
+      popupPage.emailOption(createdEmail.email, 'enabled')
+    ).toHaveAttribute('aria-selected', 'true');
+    await popupPage.clearSearch();
+
     await popupPage.editSelectedEmail({
       domain: updatedDomain,
       description: updatedDescription
@@ -123,11 +140,13 @@ test('manages a masked email against live Fastmail JMAP', async ({
     await expect
       .poll(async () => findEmail(fastmail, (email) => email.id === createdId))
       .toBeUndefined();
+    // Successful deletion prevents the finally block from repeating it.
     createdId = undefined;
 
     await popupPage.logout();
     await popupPage.expectLogin();
   } finally {
+    // Clean up the server record if any assertion fails after creation.
     if (createdId) await removeEmail(fastmail, createdId);
   }
 });
