@@ -3858,6 +3858,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"buffer-crc32@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "buffer-crc32@npm:1.0.0"
+  checksum: 10c0/8b86e161cee4bb48d5fa622cbae4c18f25e4857e5203b89e23de59e627ab26beb82d9d7999f2b8de02580165f61f83f997beaf02980cdf06affd175b651921ab
+  languageName: node
+  linkType: hard
+
 "buffer-equal-constant-time@npm:^1.0.1":
   version: 1.0.1
   resolution: "buffer-equal-constant-time@npm:1.0.1"
@@ -4191,6 +4198,16 @@ __metadata:
   dependencies:
     got: "npm:^11.8.2"
   checksum: 10c0/21515402f3abd1319bd8a8c4fec1159bab073a7bef8e78b7dafab8ea5ef1e44a4d9f4b1d2012718b5501b8b3cd5c645cea17c5507ae9663a3f3fda9e0f3de06a
+  languageName: node
+  linkType: hard
+
+"chrome-webstore-upload@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "chrome-webstore-upload@npm:6.0.0"
+  dependencies:
+    junk: "npm:^4.0.1"
+    yazl: "npm:^3.3.1"
+  checksum: 10c0/3c190f603645f930c4fefa78058c56ad9df6b1e907468dd718ef4382b3557efd1b2ff7041c04a02a42ca95c4f5ccd08efa4d480ca02a0db6c930b8021a13f72f
   languageName: node
   linkType: hard
 
@@ -8703,6 +8720,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"junk@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "junk@npm:4.0.1"
+  checksum: 10c0/091117a5dcf65b19a3e4b8506d95d6ab152b5b5fe6f10e8998de950b0f9d689f14d9b63bb07863b8c86c18511fd1b9a21e9a16e686246436558338ed2e8a4548
+  languageName: node
+  linkType: hard
+
 "just-diff-apply@npm:^5.2.0":
   version: 5.5.0
   resolution: "just-diff-apply@npm:5.5.0"
@@ -9547,6 +9571,7 @@ __metadata:
     "@types/react-dom": "npm:^19.1.1"
     "@types/webextension-polyfill": "npm:^0.12.3"
     "@vitejs/plugin-react-swc": "npm:^3.8.1"
+    chrome-webstore-upload: "npm:^6.0.0"
     eslint: "npm:^9.39.2"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-react: "npm:^7.37.5"
@@ -14978,6 +15003,15 @@ __metadata:
     buffer-crc32: "npm:~0.2.3"
     fd-slicer: "npm:~1.1.0"
   checksum: 10c0/f265002af7541b9ec3589a27f5fb8f11cf348b53cc15e2751272e3c062cd73f3e715bc72d43257de71bbaecae446c3f1b14af7559e8ab0261625375541816422
+  languageName: node
+  linkType: hard
+
+"yazl@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "yazl@npm:3.3.1"
+  dependencies:
+    buffer-crc32: "npm:^1.0.0"
+  checksum: 10c0/8290dffd8afc4ea32459c0ce5d7e22af250515aa0170f289cbc896530d3cd40c5be4788b5e3e7aa5cd21889778071f424e1824faadbd257dbd5ff80fb60d1fa6
   languageName: node
   linkType: hard
 

@@ -1,3 +1,10 @@
+## [1.7.6](https://github.com/ajyey/masked-email-manager/compare/v1.7.5...v1.7.6) (2026-07-16)
+
+
+### Bug Fixes
+
+* publish Chrome releases through Web Store API v2 ([812c3c0](https://github.com/ajyey/masked-email-manager/commit/812c3c016c4366f3910cfb238b78db89ec2db1db))
+
 ## [1.7.5](https://github.com/ajyey/masked-email-manager/compare/v1.7.4...v1.7.5) (2026-07-16)
 
 

@@ -46,9 +46,11 @@ const generatePluginsConfig = () => {
       {
         extensionId: 'bckfnibflpdgifdfkfoooidpblaembga',
         asset: 'masked-email-manager_v${nextRelease.version}_chrome.zip',
-        target: currentBranch === 'main' ? 'default' : 'local' // only publish to chrome store on main branch
+        // This plugin prepares the ZIP; publishing uses the current Web Store v2 API below.
+        target: 'local'
       }
     ],
+    './utils/plugins/publish-chrome.js',
     [
       'semantic-release-firefox-add-on',
       {
