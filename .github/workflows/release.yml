@@ -88,6 +88,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_PUBLISHER_ID: ${{ secrets.GOOGLE_PUBLISHER_ID }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           GITHUB_REF: ${{ github.ref }}
           FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
