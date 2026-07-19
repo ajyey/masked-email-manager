@@ -1,54 +1,96 @@
 name: release
 
 on:
-    push:
-        branches: ['main', 'develop']
+  push:
+    branches: ['main', 'develop']
+  pull_request:
+    branches: ['main', 'develop']
+
+permissions:
+  contents: read
 
 jobs:
-    lint:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v5
-            - name: Use Node.js 24
-              uses: actions/setup-node@v6
-              with:
-                  node-version: 24
-                  cache: 'yarn'
-            - name: Installing dependencies
-              run: yarn install --frozen-lockfile
-            - name: Running linting and tests
-              run: yarn lint
-    release:
-        runs-on: ubuntu-latest
-        permissions:
-            contents: write # to be able to publish a GitHub release
-            issues: write # to be able to comment on released issues
-            pull-requests: write # to be able to comment on released pull requests
-            id-token: write # to enable use of OIDC for npm provenance
-        needs: lint
-        steps:
-            - uses: actions/checkout@v5
-              with:
-                  persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-            - name: Use Node.js 24
-              uses: actions/setup-node@v6
-              with:
-                  node-version: 24
-                  cache: 'yarn'
-            - name: Installing dependencies
-              run: yarn install --frozen-lockfile
-            - name: Verify patch application
-              run: |
-                  grep -q "extensionId:" node_modules/semantic-release-firefox-add-on/src/constants.js || echo "Patch applied successfully"
-            - name: Building extension
-              run: yarn build
-            - name: Releasing
-              env:
-                  GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
-                  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-                  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-                  GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
-                  GITHUB_REF: ${{ github.ref }}
-                  FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
-                  FIREFOX_SECRET_KEY: ${{ secrets.FIREFOX_SECRET_KEY }}
-              run: npx semantic-release
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Run quality checks
+        run: yarn check
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Install Playwright Chromium
+        run: yarn playwright install --with-deps chromium
+      - name: Run extension E2E tests
+        run: yarn test:e2e
+      - name: Upload E2E failure artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-failure-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  release:
+    if: github.event_name == 'push'
+    needs: [quality, e2e]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Verify Firefox release patch
+        run: |
+          test -f node_modules/semantic-release-firefox-add-on/src/constants.js
+          ! grep -q "extensionId:" node_modules/semantic-release-firefox-add-on/src/constants.js
+          ! grep -q "id: extensionId" node_modules/semantic-release-firefox-add-on/src/publish.js
+      - name: Build extension
+        run: yarn build
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_PUBLISHER_ID: ${{ secrets.GOOGLE_PUBLISHER_ID }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GITHUB_REF: ${{ github.ref }}
+          FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+          FIREFOX_SECRET_KEY: ${{ secrets.FIREFOX_SECRET_KEY }}
+        run: yarn semantic-release

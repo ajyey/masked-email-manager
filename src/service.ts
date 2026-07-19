@@ -1,10 +1,5 @@
 import { MaskedEmailService } from 'fastmail-masked-email';
-import {
-  getApiToken,
-  setApiToken,
-  getSession,
-  setSession
-} from '../utils/storageUtil';
+import { getApiToken, setApiToken, setSession } from '../utils/storageUtil';
 import browser from 'webextension-polyfill';
 import {
   FASTMAIL_SESSION_KEY,
@@ -31,9 +26,12 @@ export async function setMaskedEmailService(apiToken: string) {
 }
 
 export async function isUserAuthenticated(): Promise<boolean> {
-  const session = await getSession();
-  // Check if session exists and is not an empty object
-  return session !== null && Object.keys(session).length > 0;
+  try {
+    await getMaskedEmailService();
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export async function getMaskedEmailService(): Promise<MaskedEmailService> {
@@ -41,8 +39,6 @@ export async function getMaskedEmailService(): Promise<MaskedEmailService> {
   if (maskedEmailService) {
     return maskedEmailService;
   }
-  console.log('creating new service');
-
   // If no service but we have a stored API token, create it
   const storedApiToken = await getApiToken();
   if (storedApiToken) {
@@ -50,13 +46,14 @@ export async function getMaskedEmailService(): Promise<MaskedEmailService> {
       maskedEmailService = new MaskedEmailService(storedApiToken);
       await maskedEmailService.initialize();
       return maskedEmailService;
-    } catch (error) {
+    } catch {
       // If token is invalid, clear stored session
       await clearAuthenticationState();
       throw new Error('Stored API token is invalid. Please login again.');
     }
   }
 
+  await clearAuthenticationState();
   throw new Error('User is not authenticated. Please login first.');
 }
 

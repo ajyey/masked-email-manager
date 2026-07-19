@@ -1,4 +1,3 @@
-import React from 'react';
 import { LogoutIcon } from '@pages/popup/components/home/icons/icons';
 
 interface LogoutConfirmationModalProps {
@@ -12,13 +11,22 @@ export default function LogoutConfirmationModal({
 }: LogoutConfirmationModalProps) {
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0">
+      <div
+        className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="logout-title"
+        data-testid="logout-dialog"
+      >
         <div className="relative w-full max-w-md">
           {/*Modal content*/}
           <div className="relative bg-big-stone rounded-lg shadow-sm">
             {/*Modal header*/}
             <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+              <h3
+                id="logout-title"
+                className="text-xl font-semibold text-gray-900 dark:text-white flex items-center"
+              >
                 <LogoutIcon iconClasses={'w-5 h-5 mr-2 stroke-magnesium'} />
                 <div className="text-lg font-semibold truncate">Logout</div>
               </h3>
@@ -26,6 +34,7 @@ export default function LogoutConfirmationModal({
                 type="button"
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 onClick={closeModal}
+                aria-label="Close logout dialog"
               >
                 <svg
                   aria-hidden="true"
@@ -40,7 +49,6 @@ export default function LogoutConfirmationModal({
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span className="sr-only">Close modal</span>
               </button>
             </div>
             {/*Modal body*/}
@@ -48,8 +56,8 @@ export default function LogoutConfirmationModal({
               <div className="text-white text-sm">
                 Are you sure you want to logout?
                 <br />
-                You will lose your favorites and need to login with your API key
-                again.
+                You will need to login with your API key again. Your favorites
+                and filter preference will be preserved.
               </div>
             </div>
             {/*Modal footer*/}

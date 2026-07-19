@@ -1,8 +1,7 @@
-import React from 'react';
-
 const LoadingComponent = () => (
   <div className="flex justify-center items-center h-[310px] align-middle">
-    <div role="loading-status">
+    <div role="status" aria-label="Loading masked emails">
+      <span className="sr-only">Loading masked emails</span>
       <svg
         aria-hidden="true"
         className="w-8 h-8 text-iron animate-spin-fast fill-mikado-yellow"

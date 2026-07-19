@@ -1,5 +1,4 @@
 import CopyButton from '@pages/popup/components/home/detail/buttons/CopyButton';
-import React from 'react';
 
 function EmailId({
   emailId,
@@ -20,7 +19,7 @@ function EmailId({
       <div>
         <div
           className="pt-1 ml-2 text-malibu font-normal text-detailLabel"
-          id="emailDescriptionLabel"
+          id="emailIdLabel"
         >
           ID
         </div>
@@ -28,7 +27,11 @@ function EmailId({
           {emailId}
         </div>
       </div>
-      <CopyButton onClick={handleCopyClick} textToCopy={emailId} />
+      <CopyButton
+        onClick={handleCopyClick}
+        textToCopy={emailId}
+        label="Copy email ID"
+      />
     </div>
   );
 }

@@ -11,7 +11,13 @@ interface EmailCountProps {
  */
 const EmailCount: React.FC<EmailCountProps> = ({ count }) => {
   return (
-    <div className="ml-1 mr-1 text-white font-medium text-sm">{count}</div>
+    <output
+      className="ml-1 mr-1 text-white font-medium text-sm"
+      aria-live="polite"
+      aria-label={`${count} masked ${count === 1 ? 'email' : 'emails'}`}
+    >
+      {count}
+    </output>
   );
 };
 

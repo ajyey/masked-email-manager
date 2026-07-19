@@ -48,9 +48,10 @@ function EmailDescription({
     <div className={containerStyle}>
       <div className="flex grow">
         <div className="w-full">
-          <div
+          <label
             className="pt-1 ml-2 text-malibu font-normal text-detailLabel inline-flex"
             id="emailDescriptionLabel"
+            htmlFor="masked-email-description"
           >
             description
             {isEditing && (
@@ -58,7 +59,7 @@ function EmailDescription({
                 iconClasses={'w-[0.75rem] h-[0.75rem] ml-1 stroke-white mt-1'}
               />
             )}
-          </div>
+          </label>
           <div
             className={`ml-2 mb-1 font-normal text-detailValue ${descriptionLabelColor} break-all`}
           >
@@ -66,6 +67,7 @@ function EmailDescription({
               <input
                 className="bg-transparent text-white w-[98%] focus:outline-hidden"
                 type="text"
+                id="masked-email-description"
                 value={editedDescription || ''}
                 maxLength={127}
                 onChange={handlDescriptionChange}
@@ -80,7 +82,11 @@ function EmailDescription({
       </div>
       {!isEditing && emailDescription && (
         <div className="flex items-center align-middle ml-auto">
-          <CopyButton onClick={handleCopyClick} textToCopy={emailDescription} />
+          <CopyButton
+            onClick={handleCopyClick}
+            textToCopy={emailDescription}
+            label="Copy description"
+          />
         </div>
       )}
     </div>

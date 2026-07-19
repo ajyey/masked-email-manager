@@ -1,5 +1,4 @@
 import CopyButton from '@pages/popup/components/home/detail/buttons/CopyButton';
-import React from 'react';
 
 function EmailAddress({
   emailAddress,
@@ -28,7 +27,11 @@ function EmailAddress({
           {emailAddress}
         </div>
       </div>
-      <CopyButton onClick={handleCopyClick} textToCopy={emailAddress} />
+      <CopyButton
+        onClick={handleCopyClick}
+        textToCopy={emailAddress}
+        label="Copy email address"
+      />
     </div>
   );
 }

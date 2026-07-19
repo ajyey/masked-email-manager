@@ -1,3 +1,42 @@
+## [1.7.7](https://github.com/ajyey/masked-email-manager/compare/v1.7.6...v1.7.7) (2026-07-18)
+
+
+### Bug Fixes
+
+* add back google publisher id ([d18c678](https://github.com/ajyey/masked-email-manager/commit/d18c67825b9983a94645a9088375dd0f9a7c5b3c))
+* keep filter menu above email list ([a0ce991](https://github.com/ajyey/masked-email-manager/commit/a0ce991df38d4a960f3e59c6570edea99218d752))
+* preserve newly created email selection ([b5ce4c1](https://github.com/ajyey/masked-email-manager/commit/b5ce4c1e006ff0a508349cba899ecd858ae1d6c9))
+
+## [1.7.6](https://github.com/ajyey/masked-email-manager/compare/v1.7.5...v1.7.6) (2026-07-16)
+
+
+### Bug Fixes
+
+* publish Chrome releases through Web Store API v2 ([812c3c0](https://github.com/ajyey/masked-email-manager/commit/812c3c016c4366f3910cfb238b78db89ec2db1db))
+
+## [1.7.5](https://github.com/ajyey/masked-email-manager/compare/v1.7.4...v1.7.5) (2026-07-16)
+
+
+### Bug Fixes
+
+* clean extension build outputs ([f0cce66](https://github.com/ajyey/masked-email-manager/commit/f0cce6682f2012a31c31e859cfaa7935788854d3))
+* emit manifests directly to build outputs ([79b721b](https://github.com/ajyey/masked-email-manager/commit/79b721b85ac53f9dfb8b542cf7793fbd8eeebfea))
+* limit tab access to active tab ([097876a](https://github.com/ajyey/masked-email-manager/commit/097876a7afda54d0297568c5cb2addc8bf79c3d7))
+* preserve preferences on logout ([dd5bece](https://github.com/ajyey/masked-email-manager/commit/dd5becef98d55c98c73f7ffb2169576174de0725))
+* remove placeholder options page ([1adea37](https://github.com/ajyey/masked-email-manager/commit/1adea37ae47f892974b8da7d8c6e52abb3a5d328))
+* surface async operation failures ([ed1ce55](https://github.com/ajyey/masked-email-manager/commit/ed1ce559c3395ea699dbeb2486c9c5294c531b4b))
+* validate stored authentication token ([eaf3f3c](https://github.com/ajyey/masked-email-manager/commit/eaf3f3c816aea7546a51b98b81f6d2f52b169936))
+* verify production build artifacts ([87c5816](https://github.com/ajyey/masked-email-manager/commit/87c58169c08e5c15ac262e1f6d95e5a7798b6633))
+
+## [1.7.4](https://github.com/ajyey/masked-email-manager/compare/v1.7.3...v1.7.4) (2026-07-14)
+
+
+### Bug Fixes
+
+* dont use frozen lockfile ([910b514](https://github.com/ajyey/masked-email-manager/commit/910b514b124b787c6456018bd801219ce4eae8b6))
+* point to beta of fastmail-masked-email fixing session issue ([acb56ca](https://github.com/ajyey/masked-email-manager/commit/acb56ca0b6580e5fa937521a625311aeaea6d1de))
+* point to latest stable fastmail-masked-email version ([49e1543](https://github.com/ajyey/masked-email-manager/commit/49e1543fc3997db0c3ecb33d20a934a69f31b194))
+
 ## [1.7.3](https://github.com/ajyey/masked-email-manager/compare/v1.7.2...v1.7.3) (2026-06-29)
 
 ## [1.7.2](https://github.com/ajyey/masked-email-manager/compare/v1.7.1...v1.7.2) (2025-09-25)

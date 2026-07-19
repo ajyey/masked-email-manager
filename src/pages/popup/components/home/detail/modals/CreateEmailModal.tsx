@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MaskedEmail, MaskedEmailService } from 'fastmail-masked-email';
 import { toast } from 'react-hot-toast';
 import {
@@ -10,7 +10,7 @@ import { useAuth } from '@src/contexts/AuthContext';
 interface CreateEmailModalProps {
   closeModal: () => void;
   activeTabUrl: string;
-  activeTabHost: string;
+  activeTabHost?: string;
   setSelectedEmail: (email: MaskedEmail | null) => void;
   addNewEmailToEmailList: (newEmail: MaskedEmail) => void;
   setFilterOption: (
@@ -27,9 +27,10 @@ export default function CreateEmailModal({
   setFilterOption
 }: CreateEmailModalProps) {
   const { getService } = useAuth();
-  const [prefix, setPrefix] = useState(activeTabHost);
+  const [prefix, setPrefix] = useState(activeTabHost ?? '');
   const [domain, setDomain] = useState(activeTabUrl);
   const [description, setDescription] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
 
   const handleCreate = async () => {
     // Fastmail requires the prefix to be <= 64 chars of a-z, 0-9 and _ only.
@@ -47,67 +48,76 @@ export default function CreateEmailModal({
       );
       return;
     }
+    let shouldClose = false;
+    setIsCreating(true);
     try {
       const service: MaskedEmailService = await getService();
+      const emailPrefix = prefix || undefined;
       const newEmail = await service.createEmail({
         forDomain: domain,
         description: description,
         state: 'enabled',
-        emailPrefix: prefix
+        emailPrefix
       });
       // The API response from Fastmail for some reason doesnt return a newly created email's forDomain and description... haha
       const newEmailWithDomainAndDescription = {
         ...newEmail,
         description: description,
         forDomain: domain,
-        emailPrefix: prefix
+        emailPrefix
       };
       if (!newEmail.email) {
-        toast.error('An error occurred while creating your email!', {
-          duration: 2000,
-          position: 'bottom-center',
-          style: {
-            backgroundColor: 'red', // big-stone
-            color: '#FFFFFF' // white
-          }
-        });
+        throw new Error('Fastmail returned an email without an address');
       }
-      closeModal();
       setFilterOption(FILTER_OPTIONS.Enabled);
-      await navigator.clipboard.writeText(newEmail.email);
       addNewEmailToEmailList(newEmailWithDomainAndDescription);
       setSelectedEmail(newEmailWithDomainAndDescription);
-      toast.success(
-        `New email ${newEmail.email} created and copied to clipboard!`,
-        {
-          duration: 3000,
-          position: 'bottom-center',
-          style: {
-            backgroundColor: '#333E48', // big-stone
-            color: '#FFFFFF' // white
-          }
-        }
-      );
+      try {
+        await navigator.clipboard.writeText(newEmail.email);
+        toast.success(
+          `New email ${newEmail.email} created and copied to clipboard!`
+        );
+      } catch (error) {
+        console.error('Error copying new email:', error);
+        toast.success(`New email ${newEmail.email} created!`);
+        toast.error('The address could not be copied to the clipboard.');
+      }
+      shouldClose = true;
     } catch (error) {
       console.error('Error creating new email:', error);
+      toast.error('Unable to create a masked email. Please try again.');
+    } finally {
+      setIsCreating(false);
+      if (shouldClose) closeModal();
     }
   };
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0">
+      <div
+        className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="create-email-title"
+        data-testid="create-email-dialog"
+      >
         <div className="relative w-full max-w-md">
           {/*Modal content*/}
           <div className="relative bg-big-stone rounded-lg shadow-sm">
             {/*Modal header*/}
             <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h3
+                id="create-email-title"
+                className="text-xl font-semibold text-gray-900 dark:text-white"
+              >
                 Create Email
               </h3>
               <button
                 type="button"
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 onClick={closeModal}
+                disabled={isCreating}
+                aria-label="Close create email dialog"
               >
                 <svg
                   aria-hidden="true"
@@ -122,32 +132,49 @@ export default function CreateEmailModal({
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span className="sr-only">Close modal</span>
               </button>
             </div>
             {/*Modal body*/}
             <div className="p-3 space-y-4">
-              <input
-                type="text"
-                className="w-full px-3 py-2 text-white text-sm bg-gray-600 rounded-md focus:bg-gray-500 outline-none"
-                placeholder="Prefix"
-                value={prefix}
-                onChange={(e) => setPrefix(e.target.value)}
-              />
-              <input
-                type="text"
-                className="w-full px-3 py-2 text-white text-sm bg-gray-600 rounded-md focus:bg-gray-500 outline-hidden"
-                placeholder="Domain"
-                value={domain}
-                onChange={(e) => setDomain(e.target.value)}
-              />
-              <textarea
-                className="w-full px-3 py-2 text-white text-sm bg-gray-600 rounded-md focus:bg-gray-500 outline-hidden resize-none"
-                placeholder="Description"
-                maxLength={127}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
+              <div>
+                <label htmlFor="new-email-prefix" className="sr-only">
+                  Prefix
+                </label>
+                <input
+                  id="new-email-prefix"
+                  type="text"
+                  className="w-full px-3 py-2 text-white text-sm bg-gray-600 rounded-md focus:bg-gray-500 outline-hidden"
+                  placeholder="Prefix"
+                  value={prefix}
+                  onChange={(e) => setPrefix(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="new-email-domain" className="sr-only">
+                  Domain
+                </label>
+                <input
+                  id="new-email-domain"
+                  type="text"
+                  className="w-full px-3 py-2 text-white text-sm bg-gray-600 rounded-md focus:bg-gray-500 outline-hidden"
+                  placeholder="Domain"
+                  value={domain}
+                  onChange={(e) => setDomain(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="new-email-description" className="sr-only">
+                  Description
+                </label>
+                <textarea
+                  id="new-email-description"
+                  className="w-full px-3 py-2 text-white text-sm bg-gray-600 rounded-md focus:bg-gray-500 outline-hidden resize-none"
+                  placeholder="Description"
+                  maxLength={127}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
             </div>
             {/*Modal footer*/}
             <div className="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -155,13 +182,15 @@ export default function CreateEmailModal({
                 type="button"
                 className="text-white hover:bg-french-blue bg-french-blue/[0.75] focus:ring-4 focus:outline-hidden focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 onClick={handleCreate}
+                disabled={isCreating}
               >
-                Create
+                {isCreating ? 'Creating...' : 'Create'}
               </button>
               <button
                 type="button"
                 className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-hidden focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                 onClick={closeModal}
+                disabled={isCreating}
               >
                 Cancel
               </button>

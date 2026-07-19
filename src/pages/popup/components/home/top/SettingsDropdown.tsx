@@ -38,23 +38,39 @@ const SettingsDropdown: React.FC<SettingsDropdownProps> = ({
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button onClick={toggleDropdown} className="focus:outline-hidden ">
+      <button
+        type="button"
+        onClick={toggleDropdown}
+        className="focus:outline-hidden "
+        aria-label="Settings"
+        aria-haspopup="menu"
+        aria-expanded={showDropdown}
+        aria-controls="settings-menu"
+      >
         <SettingsIcon iconClasses={'h-6 w-6 stroke-iron stroke-2'} />
       </button>
       {showDropdown && (
         <div className="absolute right-0 mt-4 w-24 text-white">
-          <ul className="p-1 space-y-1 text-sm bg-big-stone rounded-lg mr-1">
-            <li
-              className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg py-1 px-2 w-full"
-              onClick={() => {
-                setShowDropdown(false);
-                openLogoutModal();
-              }}
-            >
-              <LogoutIcon
-                iconClasses={'w-5 h-5 stroke-magnesium stroke-2 mr-2'}
-              />
-              <span className="text-sm font-medium">Logout</span>
+          <ul
+            id="settings-menu"
+            role="menu"
+            className="p-1 space-y-1 text-sm bg-big-stone rounded-lg mr-1"
+          >
+            <li role="none">
+              <button
+                type="button"
+                role="menuitem"
+                className="flex items-center cursor-pointer hover:bg-french-blue/[0.8] rounded-lg py-1 px-2 w-full"
+                onClick={() => {
+                  setShowDropdown(false);
+                  openLogoutModal();
+                }}
+              >
+                <LogoutIcon
+                  iconClasses={'w-5 h-5 stroke-magnesium stroke-2 mr-2'}
+                />
+                <span className="text-sm font-medium">Logout</span>
+              </button>
             </li>
           </ul>
         </div>
