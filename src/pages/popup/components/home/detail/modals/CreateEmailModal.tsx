@@ -10,6 +10,7 @@ import { useAuth } from '@src/contexts/AuthContext';
 interface CreateEmailModalProps {
   closeModal: () => void;
   activeTabUrl: string;
+  activeTabHost?: string;
   setSelectedEmail: (email: MaskedEmail | null) => void;
   addNewEmailToEmailList: (newEmail: MaskedEmail) => void;
   setFilterOption: (
@@ -20,30 +21,50 @@ interface CreateEmailModalProps {
 export default function CreateEmailModal({
   closeModal,
   activeTabUrl,
+  activeTabHost,
   setSelectedEmail,
   addNewEmailToEmailList,
   setFilterOption
 }: CreateEmailModalProps) {
   const { getService } = useAuth();
+  const [prefix, setPrefix] = useState(activeTabHost ?? '');
   const [domain, setDomain] = useState(activeTabUrl);
   const [description, setDescription] = useState('');
   const [isCreating, setIsCreating] = useState(false);
 
   const handleCreate = async () => {
+    // Fastmail requires the prefix to be <= 64 chars of a-z, 0-9 and _ only.
+    if (prefix && !/^[a-z0-9_]{1,64}$/.test(prefix)) {
+      toast.error(
+        'Prefix must be 64 characters or fewer and only contain lowercase letters, numbers, and underscores (a-z, 0-9, _).',
+        {
+          duration: 4000,
+          position: 'bottom-center',
+          style: {
+            backgroundColor: 'red',
+            color: '#FFFFFF'
+          }
+        }
+      );
+      return;
+    }
     let shouldClose = false;
     setIsCreating(true);
     try {
       const service: MaskedEmailService = await getService();
+      const emailPrefix = prefix || undefined;
       const newEmail = await service.createEmail({
         forDomain: domain,
         description: description,
-        state: 'enabled'
+        state: 'enabled',
+        emailPrefix
       });
       // The API response from Fastmail for some reason doesnt return a newly created email's forDomain and description... haha
       const newEmailWithDomainAndDescription = {
         ...newEmail,
         description: description,
-        forDomain: domain
+        forDomain: domain,
+        emailPrefix
       };
       if (!newEmail.email) {
         throw new Error('Fastmail returned an email without an address');
@@ -115,6 +136,19 @@ export default function CreateEmailModal({
             </div>
             {/*Modal body*/}
             <div className="p-3 space-y-4">
+              <div>
+                <label htmlFor="new-email-prefix" className="sr-only">
+                  Prefix
+                </label>
+                <input
+                  id="new-email-prefix"
+                  type="text"
+                  className="w-full px-3 py-2 text-white text-sm bg-gray-600 rounded-md focus:bg-gray-500 outline-hidden"
+                  placeholder="Prefix"
+                  value={prefix}
+                  onChange={(e) => setPrefix(e.target.value)}
+                />
+              </div>
               <div>
                 <label htmlFor="new-email-domain" className="sr-only">
                   Domain
