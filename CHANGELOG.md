@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/ajyey/masked-email-manager/compare/v1.7.7...v1.8.0) (2026-11-10)
+
+
+### Features
+
+* Adds email prefix and sorts all emails by created date ([#165](https://github.com/ajyey/masked-email-manager/issues/165)) ([0a04708](https://github.com/ajyey/masked-email-manager/commit/0a0470823c37134256fc8425e235fb6c18d4fced))
+
 ## [1.7.7](https://github.com/ajyey/masked-email-manager/compare/v1.7.6...v1.7.7) (2026-07-18)
 
 
