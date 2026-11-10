@@ -13,7 +13,12 @@ export default function useMaskedEmails() {
     setIsLoading(true);
     try {
       const service = await getService();
-      setMaskedEmails(await service.getAllEmails());
+      const allMaskedEmails: MaskedEmail[] = await service.getAllEmails();
+      const sortedEmails = allMaskedEmails.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+      setMaskedEmails(sortedEmails);
     } catch (error) {
       console.error('Error fetching masked emails:', error);
       toast.error('Unable to load masked emails. Please try again.');

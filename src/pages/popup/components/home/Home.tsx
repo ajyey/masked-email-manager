@@ -38,6 +38,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
   const [filteredEmailsCount, setFilteredEmailsCount] = useState(0);
   const [selectedEmail, setSelectedEmail] = useState<MaskedEmail | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [host, setHost] = useState('');
   const [url, setUrl] = useState('');
   // Modal states
   const [showLogoutConfirmationModal, setShowLogoutConfirmationModal] =
@@ -83,6 +84,10 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
       // Check if tabs exist
       if (tabs.length > 0) {
         const activeTabUrl = tabs[0].url;
+        const hostname = activeTabUrl
+          ? new URL(activeTabUrl).hostname.split('.').slice(-2, -1)[0]
+          : '';
+        setHost(hostname);
         setUrl(activeTabUrl ?? '');
       }
     };
@@ -115,6 +120,7 @@ export default function HomeComponent({ onLogout }: HomeComponentProps) {
       {showCreateEmailModal && (
         <CreateEmailModal
           closeModal={closeCreateEmailModal}
+          activeTabHost={host}
           activeTabUrl={url}
           addNewEmailToEmailList={addNewEmailToEmailList}
           setSelectedEmail={setSelectedEmail}
